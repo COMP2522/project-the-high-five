@@ -55,11 +55,13 @@ Cheryl's Individual Pitch
 Develop the Window class in which the game is played on and render the image depending on the game state (PLAYING, PAUSED, MENU).
 Save Player information to a database to retrieve when the same Player is selected.
 Write game data to the database (current level, number of towers, current score, creeps killed)
-
-Link to my diagram:
-https://lucid.app/lucidchart/3c9cd7cd-8612-4432-92c6-f70b56f7127a/edit?viewport_loc=-898%2C-682%2C2466%2C1172%2C0_0&invitationId=inv_9125c3b1-e3f1-408a-96c3-a11f92cc0aa2
+Link to my diagram: https://lucid.app/lucidchart/3c9cd7cd-8612-4432-92c6-f70b56f7127a/edit?viewport_loc=-898%2C-682%2C2466%2C1172%2C0_0&invitationId=inv_9125c3b1-e3f1-408a-96c3-a11f92cc0aa2
 
 
 Gursidh's Individual Pitch
 Create a Tower class that implements a Tower Manager superclass. The Tower Manager will handle all the Tower objects. In addition, Tower will also implement the abstract class Sprite which also implements Collidable. Will also be creating the UI Manager class alongside Victor which is connected to Window. 
 Link to my individual UML: https://lucid.app/lucidchart/66d6bb77-2ee2-492b-8749-46daf81ce463/edit?invitationId=inv_56290ed1-47ee-4efd-a527-bb2c8e1baaca&page=0_0#
+
+Victor's Individual Pitch
+Create a Enemy class that implements a Enemy Manager superclass. The Enemy Manager will manage all the Enemy objects and store them in an array. Also, Enemy will implement abstract class Sprite, as well as the interfaces Collidable and Movable. Finally, create an UI Manager class alongside Gursidh. 
+Link to my individual UML: https://lucid.app/lucidchart/dceae253-d48a-4638-9fd2-3562ea5fa071/edit?beaconFlowId=D28BF4163CD052FB&invitationId=inv_97bfffd1-b9fa-49f5-b9ee-047342d68bb4&page=0_0#
