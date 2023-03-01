@@ -4,7 +4,7 @@ import java.awt.Color;
 import processing.core.PVector;
 
 
-public class Sprite {
+public abstract class Sprite {
   private PVector position;
   private PVector direction;
   private float size;
