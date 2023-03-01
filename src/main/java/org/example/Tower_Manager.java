@@ -8,5 +8,6 @@ import java.util.ArrayList;
  */
 public abstract class Tower_Manager {
 
+  // list of tower objects
   private ArrayList<Tower> towers;
 }
