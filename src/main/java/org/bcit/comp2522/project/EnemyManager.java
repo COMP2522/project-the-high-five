@@ -1,9 +1,9 @@
-package org.example;
+package org.bcit.comp2522.project;
 
 import java.awt.*;
 import java.lang.Math;
 import java.util.ArrayList;
-import processing.core.PApplet;
+
 import processing.core.PVector;
 
 /**

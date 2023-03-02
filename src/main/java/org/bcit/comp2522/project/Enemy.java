@@ -1,6 +1,7 @@
-package org.example;
+package org.bcit.comp2522.project;
 
 import java.awt.*;
+
 import processing.core.PVector;
 
 /**
