@@ -3,9 +3,9 @@ package org.bcit.comp2522.project;
 
 public abstract class Sprite implements Drawable {
 
-  private final float xpos;
-  private final float ypos;
-  private final Window window;
+  protected final float xpos;
+  protected final float ypos;
+  protected final Window window;
 
   public Sprite(float xpos, float ypos, Window window) {
     this.xpos = xpos;
