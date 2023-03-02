@@ -1,4 +1,4 @@
-package org.example;
+package org.bcit.comp2522.project;
 
 import java.util.ArrayList;
 
