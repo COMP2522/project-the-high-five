@@ -1,4 +1,4 @@
-package org.example;
+package org.bcit.comp2522.project;
 
 /**
  * This class represents the towers in the game
