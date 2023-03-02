@@ -33,7 +33,7 @@ public class Enemy extends Sprite {
 
   public void draw() {
     window.pushStyle();
-    window.fill(this.color.getRed(), this.color.getGreen(), this.colorBlue());
+    window.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
     window.ellipse(this.xpos, this.ypos, size, size);
     window.popStyle();
   }
