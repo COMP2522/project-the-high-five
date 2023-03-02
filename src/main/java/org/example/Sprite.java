@@ -3,6 +3,7 @@ package org.example;
 
 public abstract class Sprite {
 
+
   private final float xpos;
   private final float ypos;
   private final Window window;
