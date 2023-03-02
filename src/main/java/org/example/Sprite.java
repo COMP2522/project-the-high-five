@@ -1,8 +1,7 @@
 package org.example;
 
 
-public abstract class Sprite {
-
+public abstract class Sprite implements Drawable {
 
   private final float xpos;
   private final float ypos;
@@ -13,7 +12,6 @@ public abstract class Sprite {
     this.ypos = ypos;
     this.window = window;
   }
-
 
   /**
    * Draws the elements in the window.
