@@ -1,42 +1,27 @@
 package org.example;
 
-import java.awt.Color;
-import processing.core.PVector;
-
 
 public abstract class Sprite {
-  private PVector position;
-  private PVector direction;
-  private float size;
-  private final float speed;
-  private final Color color;
+
+
+  private final float xpos;
+  private final float ypos;
   private final Window window;
 
-  public Sprite(PVector position, PVector direction, float size,
-                float speed, Color color, Window window) {
-    this.position = position;
-    this.direction = direction;
-    this.size = size;
-    this.speed = speed;
+  public Sprite(float xpos, float ypos, Window window) {
+    this.xpos = xpos;
+    this.ypos = ypos;
     this.window = window;
-    this.color = color;
   }
 
-  public Window getWindow() {
-    return window;
-  }
-
-  public Color getColor() {
-    return color;
-  }
 
   /**
    * Draws the elements in the window.
    */
   public void draw() {
+    float size = 50;
     window.pushStyle();
-    window.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
-    window.ellipse(this.position.x, this.position.y, size, size);
+    window.ellipse(xpos, ypos, size, size);
     window.popStyle();
   }
 }
