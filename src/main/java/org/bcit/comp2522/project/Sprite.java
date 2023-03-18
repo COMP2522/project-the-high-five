@@ -4,8 +4,8 @@ package org.bcit.comp2522.project;
 public abstract class Sprite {
 
 
-  private final float xpos;
-  private final float ypos;
+  private float xpos;
+  private float ypos;
   protected final Window window;
 
   public Sprite(float xpos, float ypos, Window window) {
@@ -14,6 +14,21 @@ public abstract class Sprite {
     this.window = window;
   }
 
+  public float getXpos() {
+    return xpos;
+  }
+
+  public float getYpos() {
+    return ypos;
+  }
+
+  public void setXpos(float x) {
+    xpos = x;
+  }
+
+  public void setYpos(float y) {
+    ypos = y;
+  }
 
   /**
    * Draws the elements in the window.
