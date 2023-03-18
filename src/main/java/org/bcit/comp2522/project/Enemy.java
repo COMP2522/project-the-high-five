@@ -1,41 +1,20 @@
 package org.bcit.comp2522.project;
 
 import java.awt.*;
+import processing.core.PVector;
 
 /**
  * Class that specifies what attributes enemies should contain.
  *
  * @author Victor Vasconcellos
- * @version 2023
+ * @version 1.0
  */
 public class Enemy extends Sprite {
-  int health;
-  int speed;
-
-  /**
-   * Enemy constructor.
-   *
-   * @param xpos float x-position
-   * @param ypos float y-position
-   * @param window window
-   * @param health int health
-   * @param speed int speed
-   */
-  public Enemy(float xpos, float ypos, Window window, int health, int speed) {
-    super(xpos, ypos, window);
-    this.health = health;
-    this.speed = speed;
+  public Enemy(Color color, int size, PVector position, int health, int speed, Window window) {
+    super(color, size, position, health, speed, xpos, window);
   }
 
-  int size = 5;
+  public void collide() {
 
-  Color color = new Color(255, 0, 0);
-
-  public void draw() {
-    window.pushStyle();
-    window.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
-    window.ellipse(this.xpos, this.ypos, size, size);
-    window.popStyle();
   }
-
 }

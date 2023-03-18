@@ -1,10 +1,11 @@
 package org.bcit.comp2522.project;
 
 
-public abstract class Sprite implements Drawable {
+public abstract class Sprite {
 
-  protected float xpos;
-  protected float ypos;
+
+  private final float xpos;
+  private final float ypos;
   protected final Window window;
 
   public Sprite(float xpos, float ypos, Window window) {
@@ -13,21 +14,6 @@ public abstract class Sprite implements Drawable {
     this.window = window;
   }
 
-  public float getXpos() {
-    return xpos;
-  }
-
-  public float getYpos() {
-    return ypos;
-  }
-
-  public void setXpos(float x) {
-    xpos = x;
-  }
-
-  public void setYpos(float y) {
-    ypos = y;
-  }
 
   /**
    * Draws the elements in the window.
