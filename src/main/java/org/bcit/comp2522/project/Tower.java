@@ -3,7 +3,7 @@ package org.bcit.comp2522.project;
 /**
  * This class represents the towers in the game
  * Contains attributes and methods each tower
- * object should have
+ * object should have.
  * @author gursidhsandhu
  * @version 2023
  */
