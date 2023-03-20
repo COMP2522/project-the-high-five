@@ -10,8 +10,8 @@ import processing.core.PVector;
  * @version 1.0
  */
 public class Enemy extends Sprite {
-  public Enemy(Color color, int size, PVector position, int health, int speed, Window window) {
-    super(color, size, position, health, speed, xpos, window);
+  public Enemy(float xpos, float ypos, Window window) {
+    super(xpos, ypos, window);
   }
 
   public void collide() {
