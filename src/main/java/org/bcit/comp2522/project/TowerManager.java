@@ -3,7 +3,7 @@ package org.bcit.comp2522.project;
 import java.util.ArrayList;
 
 /**
- * This class manages the tower class
+ * This class manages the tower class.
  * @author gursidhsandhu
  */
 public class TowerManager {
