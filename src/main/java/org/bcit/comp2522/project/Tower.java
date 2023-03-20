@@ -7,7 +7,7 @@ package org.bcit.comp2522.project;
  * @author gursidhsandhu
  * @version 2023
  */
-public class Tower extends Sprite{
+public class Tower extends Sprite implements Collidable{
 // methods unique to this class
 
   /**
@@ -27,4 +27,9 @@ public class Tower extends Sprite{
   public void draw(){}
 
   public void collide(){}
+
+  @Override
+  public boolean collide(Collidable other) {
+    return false;
+  }
 }

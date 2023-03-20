@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author gursidhsandhu
  * @version 2023
  */
-public abstract class TowerManager extends Tower {
+public class TowerManager {
 
   // list of tower objects
   private ArrayList<Tower> towers;
@@ -15,6 +15,6 @@ public abstract class TowerManager extends Tower {
   int numbOfTowers;
 
   public TowerManager(float xpos, float ypos, Window window) {
-    super(xpos, ypos, window);
+    super();
   }
 }
