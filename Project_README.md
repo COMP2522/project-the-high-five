@@ -48,13 +48,14 @@ Week 6
 
 
 Aric's Individual Pitch 
-Create the abstract class Sprite, Bullet and BulletManager classes, in addition to the Movable, Collidable, and Drawable interfaces that my classes will use. 
+Create the abstract class Sprite, Bullet and BulletManager classes, in addition to the Movable, Collidable, and Drawable interfaces that my classes will use. Will also create the User Interface for the game. 
 Link to my individual UML: https://lucid.app/lucidchart/6374c9c3-ae59-4825-8218-2a28836e6774/edit?viewport_loc=-618%2C-560%2C2976%2C1618%2C0_0&invitationId=inv_78f664df-33f0-49ea-b901-db3ade92b6a6
 
 Cheryl's Individual Pitch
 Develop the Window class in which the game is played on and render the image depending on the game state (PLAYING, PAUSED, MENU).
 Save Player information to a database to retrieve when the same Player is selected.
 Write game data to the database (current level, number of towers, current score, creeps killed)
+Retrieve data from database to load game progress.
 Link to my diagram: https://lucid.app/lucidchart/3c9cd7cd-8612-4432-92c6-f70b56f7127a/edit?viewport_loc=-898%2C-682%2C2466%2C1172%2C0_0&invitationId=inv_9125c3b1-e3f1-408a-96c3-a11f92cc0aa2
 
 
@@ -65,3 +66,6 @@ Link to my individual UML: https://lucid.app/lucidchart/66d6bb77-2ee2-492b-8749-
 Victor's Individual Pitch
 Create a Enemy class that implements a Enemy Manager superclass. The Enemy Manager will manage all the Enemy objects and store them in an array. Also, Enemy will implement abstract class Sprite, as well as the interfaces Collidable and Movable. Finally, create an UI Manager class alongside Gursidh. 
 Link to my individual UML: https://lucid.app/lucidchart/dceae253-d48a-4638-9fd2-3562ea5fa071/edit?beaconFlowId=D28BF4163CD052FB&invitationId=inv_97bfffd1-b9fa-49f5-b9ee-047342d68bb4&page=0_0#
+
+In Class Check:
+Cheryl's parts are approved and we should be able to keep re-writing data to the database as the player keeps playing the game. Gursidh and Victor should split the collidable interface, as well as working on their own classes, because Enemy and Tower will be the classes that implement this interface the most. Aric should continue his tasks but should be in charge of UI manager instead of Gursidh and Victor splitting it. Quan's tasks are approved as well.
