@@ -48,7 +48,7 @@ Week 6
 
 
 Aric's Individual Pitch 
-Create the abstract class Sprite, Bullet and BulletManager classes, in addition to the Movable, Collidable, and Drawable interfaces that my classes will use. 
+Create the abstract class Sprite, Bullet and BulletManager classes, in addition to the Movable, Collidable, and Drawable interfaces that my classes will use. Will also create the User Interface for the game. 
 Link to my individual UML: https://lucid.app/lucidchart/6374c9c3-ae59-4825-8218-2a28836e6774/edit?viewport_loc=-618%2C-560%2C2976%2C1618%2C0_0&invitationId=inv_78f664df-33f0-49ea-b901-db3ade92b6a6
 
 Cheryl's Individual Pitch
