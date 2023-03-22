@@ -14,8 +14,8 @@ public class Bullet extends Sprite {
     }
 
     public void draw() {
-//        window.fill(255, 0, 0);
-//        window.ellipse(xpos, ypos, 10, 10);
+        window.fill(255, 0, 0);
+        window.ellipse(20, 20, 10, 10);
     }
 
 }
