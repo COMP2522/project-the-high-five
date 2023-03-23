@@ -5,6 +5,9 @@ import processing.core.PApplet;
 
 public class Window extends PApplet {
   Enemy testEnemy;
+
+  Bullet testBullet;
+
   Path path;
   public void setup() {
     this.init();
@@ -13,7 +16,7 @@ public class Window extends PApplet {
   public void init(){
     path = new Path(this);
     testEnemy = new Enemy(0,180,this);
-
+    testBullet = new Bullet(0,200,this);
 
   }
   public void draw() {
@@ -21,6 +24,7 @@ public class Window extends PApplet {
     path.draw();
     testEnemy.update();
     testEnemy.draw();
+    testBullet.draw();
   }
   public void settings() {
     size(640,360);
