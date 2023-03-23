@@ -1,56 +1,96 @@
 package org.bcit.comp2522.project;
 
+import java.util.Random;
+
 /**
- * Class that specifies what attributes enemies should contain.
+ * The Enemy class extends the Sprite class and implements the Collidable interface to specify
+ * attributes for enemies in a game. An Enemy has health, x and y velocities, and follows a Path.
+ * Enemies can collide with other Collidable objects.
  *
  * @author Victor Vasconcellos
  * @version 1.0
  */
-public class Enemy extends Sprite implements Collidable{
+public class Enemy extends Sprite implements Collidable {
   private int health;
   private int vx;
   private int vy;
-  private final int originalVX;
-  private final int originalVY;
+  private final int originalVx;
+  private final int originalVy;
   private final Path path;
+
+  /**
+   * Constructor for creating a new Enemy.
+   *
+   * @param xpos the x-coordinate of the Enemy
+   * @param ypos the y-coordinate of the Enemy
+   * @param window the Window that the Enemy is in
+   * @param health the health of the Enemy
+   * @param vx the x-velocity of the Enemy
+   * @param vy the y-velocity of the Enemy
+   */
   public Enemy(float xpos, float ypos, Window window, int health, int vx, int vy) {
     super(xpos, ypos, window);
     this.health = health;
     this.vx = vx;
     this.vy = vy;
-    originalVX = vx;
-    originalVY = vy;
+    originalVx = vx;
+    originalVy = vy;
     path = window.path;
   }
 
-//  Enemy boss = new Enemy(0, 180, window, 100, 1f, 1f);
-//  Enemy regular = new Enemy(0, 180, window, 50, 3, 3);
-//  Enemy fast = new Enemy(0, 180, window, 25, 5, 5);
+  /**
+   * Generate a new Enemy with random attributes.
+   * The Enemy can be a boss, regular or fast enemy.
+   */
+  public void generateRandomEnemy() {
+    // Create a new instance of the Random class
+    Random rand = new Random();
 
-  public void update(){
+    // Generate a random number between 1 and 3
+    int randomNum = rand.nextInt(3) + 1;
+
+    if (randomNum == 1) {
+      // boss
+      //Enemy enemy = new Enemy(0, 180, window, 100, 1, 1);
+    }
+
+    if (randomNum == 2) {
+      // regular
+      //Enemy enemy = new Enemy(0, 180, window, 50, 2, 2);
+    }
+
+    if (randomNum == 3) {
+      //fast
+      //Enemy enemy = new Enemy(0, 180, window, 25, 4, 4);
+    }
+  }
+
+  /**
+   * Updates the position of the Enemy.
+   * The Enemy follows the Path, changing its velocity as necessary to move towards the next
+   * Node on the Path.
+   */
+  public void update() {
     Node current = path.getHead();
     while (current != null) {
       if (getXpos() == current.getXpos() && getYpos() == current.getYpos()) {
         if (current.next != null) {
-          // go right
           if (current.next.getXpos() > current.getXpos()) {
-            vx = originalVX;
+            // go right
+            vx = originalVx;
             vy = 0;
-          }
-          // go left
-          else if (current.next.getXpos() < current.getXpos()) {
-            vx = originalVX * -1;
+          } else if (current.next.getXpos() < current.getXpos()) {
+            // go left
+            vx = originalVx * -1;
             vy = 0;
-          }
-          // go down
-          else if (current.next.getYpos() > current.getYpos()) {
+          } else if (current.next.getYpos() > current.getYpos()) {
+            // go down
             vx = 0;
-            vy = originalVY;
-          }
-          // go up
-          else if (current.next.getYpos() < current.getYpos()) {
+            vy = originalVy;
+          } else if (current.next.getYpos() < current.getYpos()) {
+            // go up
             vx = 0;
-            vy = originalVY * -1;
+            vy = originalVy * -1;
           }
         }
       }
@@ -59,6 +99,13 @@ public class Enemy extends Sprite implements Collidable{
     setXpos(getXpos() + vx);
     setYpos(getYpos() + vy);
   }
+
+  /**
+   * Determines if the Enemy has collided with another Collidable object.
+   *
+   * @param other the Collidable object that the Enemy may have collided with
+   * @return true if the Enemy has collided with the other Collidable object, false otherwise
+   */
   @Override
   public boolean collide(Collidable other) {
     if (other instanceof Bullet) {
@@ -70,10 +117,10 @@ public class Enemy extends Sprite implements Collidable{
     return false;
   }
 
-//  public void die() {
-//    if (health <= 0) {
-//      window.removeEnemy(this);
-//    }
-//  }
+  //  public void die() {
+  //    if (health <= 0) {
+  //      window.removeEnemy(this);
+  //    }
+  //  }
 
 }

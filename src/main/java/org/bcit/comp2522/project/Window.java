@@ -7,10 +7,9 @@ public class Window extends PApplet {
   Enemy testEnemy1;
   Enemy testEnemy2;
   Enemy testEnemy3;
-
   Bullet testBullet;
-
   Path path;
+
   public void setup() {
     this.init();
   }
@@ -19,7 +18,7 @@ public class Window extends PApplet {
     path = new Path(this);
     testEnemy1 = new Enemy(0,180,this, 100, 1,1);
     testEnemy2 = new Enemy(0,180,this, 100, 2,2);
-    testEnemy3 = new Enemy(0,180,this, 100, 3,3);
+    testEnemy3 = new Enemy(0,180,this, 100, 4,4);
     testBullet = new Bullet(0,200,this);
 
   }
