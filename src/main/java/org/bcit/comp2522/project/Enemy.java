@@ -8,12 +8,12 @@ package org.bcit.comp2522.project;
  */
 public class Enemy extends Sprite implements Collidable{
   private int health;
-  private float vx;
-  private float vy;
-  float originalVX = vx;
-  float originalVY = vy;
-  private Path path;
-  public Enemy(float xpos, float ypos, Window window, int health, float vx, float vy) {
+  private int vx;
+  private int vy;
+  private final int originalVX;
+  private final int originalVY;
+  private final Path path;
+  public Enemy(float xpos, float ypos, Window window, int health, int vx, int vy) {
     super(xpos, ypos, window);
     this.health = health;
     this.vx = vx;
@@ -68,6 +68,12 @@ public class Enemy extends Sprite implements Collidable{
       }
     }
     return false;
+  }
+
+  public void die() {
+    if (health <= 0) {
+      window.removeEnemy(this);
+    }
   }
 
 }

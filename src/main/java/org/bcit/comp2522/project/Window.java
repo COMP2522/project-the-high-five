@@ -4,7 +4,7 @@ import processing.core.PApplet;
 
 
 public class Window extends PApplet {
-  Enemy testEnemy;
+  Enemy testEnemy1;
   Enemy testEnemy2;
   Enemy testEnemy3;
 
@@ -17,19 +17,19 @@ public class Window extends PApplet {
 
   public void init(){
     path = new Path(this);
-    testEnemy = new Enemy(0,180,this, 100, 1f,1f);
-    testEnemy2 = new Enemy(0,180,this, 100, 2f,2f);
-    testEnemy3 = new Enemy(0,180,this, 100, 3.25f,3.25f);
+    testEnemy1 = new Enemy(0,180,this, 100, 1,1);
+    testEnemy2 = new Enemy(0,180,this, 100, 2,2);
+    testEnemy3 = new Enemy(0,180,this, 100, 3,3);
     testBullet = new Bullet(0,200,this);
 
   }
   public void draw() {
     background(0);
     path.draw();
-    testEnemy.update();
+    testEnemy1.update();
     testEnemy2.update();
     testEnemy3.update();
-    testEnemy.draw();
+    testEnemy1.draw();
     testEnemy2.draw();
     testEnemy3.draw();
     testBullet.draw();
@@ -43,5 +43,4 @@ public class Window extends PApplet {
     Window tdGame = new Window();
     PApplet.runSketch(appletArgs, tdGame);
   }
-
 }
