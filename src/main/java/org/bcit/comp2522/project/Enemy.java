@@ -1,8 +1,5 @@
 package org.bcit.comp2522.project;
 
-import java.awt.*;
-import processing.core.PVector;
-
 /**
  * Class that specifies what attributes enemies should contain.
  *
@@ -10,42 +7,50 @@ import processing.core.PVector;
  * @version 1.0
  */
 public class Enemy extends Sprite implements Collidable{
-
-  int vx;
-  int vy;
-  Path path;
-  public Enemy(float xpos, float ypos, Window window) {
+  private int health;
+  private float vx;
+  private float vy;
+  float originalVX = vx;
+  float originalVY = vy;
+  private Path path;
+  public Enemy(float xpos, float ypos, Window window, int health, float vx, float vy) {
     super(xpos, ypos, window);
-    vx = 10;
-    vy = 10;
+    this.health = health;
+    this.vx = vx;
+    this.vy = vy;
+    originalVX = vx;
+    originalVY = vy;
     path = window.path;
   }
 
-//  public void draw() {
-//    float size = 50;
-//    window.pushStyle();
-//    window.fill(255, 0, 0);
-//    window.ellipse(getXpos(), getYpos(), size, size);
-//    window.popStyle();
-//  }
+//  Enemy boss = new Enemy(0, 180, window, 100, 1f, 1f);
+//  Enemy regular = new Enemy(0, 180, window, 50, 3, 3);
+//  Enemy fast = new Enemy(0, 180, window, 25, 5, 5);
 
   public void update(){
     Node current = path.getHead();
     while (current != null) {
       if (getXpos() == current.getXpos() && getYpos() == current.getYpos()) {
         if (current.next != null) {
+          // go right
           if (current.next.getXpos() > current.getXpos()) {
-            vx = 10;
+            vx = originalVX;
             vy = 0;
-          } else if (current.next.getXpos() < current.getXpos()) {
-            vx = -10;
+          }
+          // go left
+          else if (current.next.getXpos() < current.getXpos()) {
+            vx = originalVX * -1;
             vy = 0;
-          } else if (current.next.getYpos() > current.getYpos()) {
+          }
+          // go down
+          else if (current.next.getYpos() > current.getYpos()) {
             vx = 0;
-            vy = 10;
-          } else if (current.next.getYpos() < current.getYpos()) {
+            vy = originalVY;
+          }
+          // go up
+          else if (current.next.getYpos() < current.getYpos()) {
             vx = 0;
-            vy = -10;
+            vy = originalVY * -1;
           }
         }
       }
@@ -58,9 +63,11 @@ public class Enemy extends Sprite implements Collidable{
   public boolean collide(Collidable other) {
     if (other instanceof Bullet) {
       if (this.getXpos() == other.getXpos() && this.getYpos() == other.getYpos()) {
+        health -= 1;
         return true;
       }
     }
     return false;
   }
+
 }
