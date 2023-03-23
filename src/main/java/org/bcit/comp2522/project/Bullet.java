@@ -7,7 +7,7 @@ package org.bcit.comp2522.project;
  * @author Aric Or
  * @version 1.0
  */
-public class Bullet extends Sprite {
+public class Bullet extends Sprite implements Movable {
 
     public Bullet(float xpos, float ypos, Window window) {
         super(xpos, ypos, window);
@@ -16,6 +16,9 @@ public class Bullet extends Sprite {
     public void draw() {
         window.fill(255, 0, 0);
         window.ellipse(20, 20, 10, 10);
+    }
+
+    public void move() {;
     }
 
 }

@@ -1,7 +1,5 @@
 package org.bcit.comp2522.project;
 
-import java.util.Random;
-
 /**
  * The Enemy class extends the Sprite class and implements the Collidable interface to specify
  * attributes for enemies in a game. An Enemy has health, x and y velocities, and follows a Path.
@@ -10,13 +8,21 @@ import java.util.Random;
  * @author Victor Vasconcellos
  * @version 1.0
  */
-public class Enemy extends Sprite implements Collidable {
+public class Enemy extends Sprite implements Collidable, Movable {
   private int health;
   private int vx;
   private int vy;
   private final int originalVx;
   private final int originalVy;
   private final Path path;
+
+  public int getHealth() {
+    return health;
+  }
+
+  public void setHealth(int health) {
+    this.health = health;
+  }
 
   /**
    * Constructor for creating a new Enemy.
@@ -38,39 +44,13 @@ public class Enemy extends Sprite implements Collidable {
     path = window.path;
   }
 
-  /**
-   * Generate a new Enemy with random attributes.
-   * The Enemy can be a boss, regular or fast enemy.
-   */
-  public void generateRandomEnemy() {
-    // Create a new instance of the Random class
-    Random rand = new Random();
-
-    // Generate a random number between 1 and 3
-    int randomNum = rand.nextInt(3) + 1;
-
-    if (randomNum == 1) {
-      // boss
-      //Enemy enemy = new Enemy(0, 180, window, 100, 1, 1);
-    }
-
-    if (randomNum == 2) {
-      // regular
-      //Enemy enemy = new Enemy(0, 180, window, 50, 2, 2);
-    }
-
-    if (randomNum == 3) {
-      //fast
-      //Enemy enemy = new Enemy(0, 180, window, 25, 4, 4);
-    }
-  }
 
   /**
    * Updates the position of the Enemy.
    * The Enemy follows the Path, changing its velocity as necessary to move towards the next
    * Node on the Path.
    */
-  public void update() {
+  public void move() {
     Node current = path.getHead();
     while (current != null) {
       if (getXpos() == current.getXpos() && getYpos() == current.getYpos()) {
@@ -116,11 +96,4 @@ public class Enemy extends Sprite implements Collidable {
     }
     return false;
   }
-
-  //  public void die() {
-  //    if (health <= 0) {
-  //      window.removeEnemy(this);
-  //    }
-  //  }
-
 }

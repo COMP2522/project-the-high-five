@@ -38,9 +38,9 @@ public class Window extends PApplet {
   public void draw() {
     background(0);
     path.draw();
-    testEnemy1.update();
-    testEnemy2.update();
-    testEnemy3.update();
+    testEnemy1.move();
+    testEnemy2.move();
+    testEnemy3.move();
     testEnemy1.draw();
     testEnemy2.draw();
     testEnemy3.draw();
@@ -63,5 +63,8 @@ public class Window extends PApplet {
     String[] appletArgs = new String[]{"towerDefence"};
     Window tdGame = new Window();
     PApplet.runSketch(appletArgs, tdGame);
+  }
+
+  public void removeEnemy(Enemy enemy) {
   }
 }
