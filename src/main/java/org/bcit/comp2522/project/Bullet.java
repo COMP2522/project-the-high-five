@@ -18,7 +18,7 @@ public class Bullet extends Sprite implements Movable {
         window.ellipse(20, 20, 10, 10);
     }
 
-    public void move() {;
+    public void move() {
     }
 
 }

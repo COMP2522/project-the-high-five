@@ -1,5 +1,6 @@
 package org.bcit.comp2522.project;
 
+import java.util.ArrayList;
 import processing.core.PApplet;
 
 /**
@@ -7,11 +8,14 @@ import processing.core.PApplet;
  * bullets, and path objects.
  */
 public class Window extends PApplet {
-  Enemy testEnemy1;
-  Enemy testEnemy2;
-  Enemy testEnemy3;
+  ArrayList<Enemy> enemies;
   Bullet testBullet;
   Path path;
+
+  // Variables for the timer
+  int timeRegularEnemy = 0;
+  int timeFastEnemy = 0;
+  int timeBossEnemy = 0;
 
   /**
    * Sets up the game window and initializes objects.
@@ -25,11 +29,8 @@ public class Window extends PApplet {
    */
   public void init() {
     path = new Path(this);
-    testEnemy1 = new Enemy(0, 180, this, 100, 1, 1);
-    testEnemy2 = new Enemy(0, 180, this, 100, 2, 2);
-    testEnemy3 = new Enemy(0, 180, this, 100, 4, 4);
     testBullet = new Bullet(0, 200, this);
-
+    enemies = new ArrayList<>();
   }
 
   /**
@@ -38,13 +39,36 @@ public class Window extends PApplet {
   public void draw() {
     background(0);
     path.draw();
-    testEnemy1.move();
-    testEnemy2.move();
-    testEnemy3.move();
-    testEnemy1.draw();
-    testEnemy2.draw();
-    testEnemy3.draw();
     testBullet.draw();
+
+    // Update the timer
+    timeRegularEnemy++;
+    timeFastEnemy++;
+    timeBossEnemy++;
+
+    // Check if it's time to spawn a new regular enemy
+    if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
+      timeRegularEnemy = 0;
+      enemies.add(new Enemy(0, 180, this, 100, 2, 2));
+    }
+
+    // Check if it's time to spawn a new fast enemy
+    if (timeFastEnemy >= 600) { // 600 frames = 10 seconds
+      timeFastEnemy = 0;
+      enemies.add(new Enemy(0, 180, this, 100, 5, 5));
+    }
+
+    // Check if it's time to spawn a new boss enemy
+    if (timeBossEnemy >= 900) { // 900 frames = 15 seconds
+      timeBossEnemy = 0;
+      enemies.add(new Enemy(0, 180, this, 100, 1, 1));
+    }
+
+    // Update and draw the enemies
+    for (Enemy enemy : enemies) {
+      enemy.move();
+      enemy.draw();
+    }
   }
 
   /**
@@ -65,6 +89,6 @@ public class Window extends PApplet {
     PApplet.runSketch(appletArgs, tdGame);
   }
 
-  public void removeEnemy(Enemy enemy) {
-  }
+//  public void removeEnemy(Enemy enemy) {
+//  }
 }

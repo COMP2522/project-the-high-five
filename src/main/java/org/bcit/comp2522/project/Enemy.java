@@ -44,6 +44,15 @@ public class Enemy extends Sprite implements Collidable, Movable {
     path = window.path;
   }
 
+  /**
+   * Draws the elements in the window.
+   */
+  public void draw() {
+    float size = 50;
+    window.pushStyle();
+    window.ellipse(getXpos(), getYpos(), size, size);
+    window.popStyle();
+  }
 
   /**
    * Updates the position of the Enemy.
