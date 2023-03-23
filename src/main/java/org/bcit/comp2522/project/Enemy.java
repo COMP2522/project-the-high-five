@@ -13,11 +13,11 @@ public class Enemy extends Sprite implements Collidable{
 
   int vx;
   int vy;
+  int speed;
   Path path;
   public Enemy(float xpos, float ypos, Window window) {
     super(xpos, ypos, window);
-    vx = 10;
-    vy = 10;
+    speed = 3;
     path = window.path;
   }
 
@@ -30,22 +30,23 @@ public class Enemy extends Sprite implements Collidable{
 //  }
 
   public void update(){
+    int i = 0;
     Node current = path.getHead();
     while (current != null) {
       if (getXpos() == current.getXpos() && getYpos() == current.getYpos()) {
         if (current.next != null) {
           if (current.next.getXpos() > current.getXpos()) {
-            vx = 10;
+            vx = 2;
             vy = 0;
           } else if (current.next.getXpos() < current.getXpos()) {
-            vx = -10;
+            vx = -2;
             vy = 0;
           } else if (current.next.getYpos() > current.getYpos()) {
             vx = 0;
-            vy = 10;
+            vy = 2;
           } else if (current.next.getYpos() < current.getYpos()) {
             vx = 0;
-            vy = -10;
+            vy = -2;
           }
         }
       }
