@@ -70,10 +70,10 @@ public class Enemy extends Sprite implements Collidable{
     return false;
   }
 
-  public void die() {
-    if (health <= 0) {
-      window.removeEnemy(this);
-    }
-  }
+//  public void die() {
+//    if (health <= 0) {
+//      window.removeEnemy(this);
+//    }
+//  }
 
 }
