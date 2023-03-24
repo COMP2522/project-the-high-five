@@ -1,9 +1,7 @@
 package org.bcit.comp2522.project;
 
 
-public abstract class Sprite {
-
-
+public abstract class Sprite implements Drawable {
   private float xpos;
   private float ypos;
   protected final Window window;
@@ -34,9 +32,5 @@ public abstract class Sprite {
    * Draws the elements in the window.
    */
   public void draw() {
-    float size = 50;
-    window.pushStyle();
-    window.ellipse(xpos, ypos, size, size);
-    window.popStyle();
   }
 }
