@@ -36,17 +36,17 @@ public class Enemy extends Sprite implements Collidable{
       if (getXpos() == current.getXpos() && getYpos() == current.getYpos()) {
         if (current.next != null) {
           if (current.next.getXpos() > current.getXpos()) {
-            vx = 2;
+            vx = speed;
             vy = 0;
           } else if (current.next.getXpos() < current.getXpos()) {
-            vx = -2;
+            vx = -speed;
             vy = 0;
           } else if (current.next.getYpos() > current.getYpos()) {
             vx = 0;
-            vy = 2;
+            vy = speed;
           } else if (current.next.getYpos() < current.getYpos()) {
             vx = 0;
-            vy = -2;
+            vy = -speed;
           }
         }
       }
