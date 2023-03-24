@@ -1,20 +1,20 @@
 package org.bcit.comp2522.project;
 
 public class Node {
-  private float xpos;
-  private float ypos;
+  private int xpos;
+  private int ypos;
   Node next;
 
-  public Node(float xpos, float ypos) {
+  public Node(int xpos, int ypos) {
     this.xpos = xpos;
     this.ypos = ypos;
     next = null;
   }
 
-  public float getXpos() {
+  public int getXpos() {
     return xpos;
   }
-  public float getYpos() {
+  public int getYpos() {
     return ypos;
   }
 }

@@ -20,6 +20,7 @@ public class Window extends PApplet {
   /**
    * Sets up the game window and initializes objects.
    */
+  Grid grid;
   public void setup() {
     this.init();
   }
@@ -29,6 +30,16 @@ public class Window extends PApplet {
    */
   public void init() {
     path = new Path(this);
+    grid = new Grid(this);
+    // Test for path
+    path.addCorner(40,288);
+    path.addCorner(184,288);
+    path.addCorner(184,384);
+    path.addCorner(472,384);
+    path.addCorner(472,288);
+    path.connectCorners();
+
+
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
   }
@@ -49,19 +60,19 @@ public class Window extends PApplet {
     // Check if it's time to spawn a new regular enemy
     if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
       timeRegularEnemy = 0;
-      enemies.add(new Enemy(0, 180, this, 100, 2, 2));
+      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 100, 2, 2));
     }
 
     // Check if it's time to spawn a new fast enemy
     if (timeFastEnemy >= 600) { // 600 frames = 10 seconds
       timeFastEnemy = 0;
-      enemies.add(new Enemy(0, 180, this, 100, 5, 5));
+      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 100, 4, 4));
     }
 
     // Check if it's time to spawn a new boss enemy
     if (timeBossEnemy >= 900) { // 900 frames = 15 seconds
       timeBossEnemy = 0;
-      enemies.add(new Enemy(0, 180, this, 100, 1, 1));
+      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 100, 1, 1));
     }
 
     // Update and draw the enemies
@@ -69,6 +80,7 @@ public class Window extends PApplet {
       enemy.move();
       enemy.draw();
     }
+    grid.draw();
   }
 
   /**
