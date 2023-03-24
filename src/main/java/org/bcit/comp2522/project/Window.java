@@ -60,19 +60,19 @@ public class Window extends PApplet {
     // Check if it's time to spawn a new regular enemy
     if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
       timeRegularEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 100, 2, 2));
+      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 2, 2, 2, 50));
     }
 
     // Check if it's time to spawn a new fast enemy
     if (timeFastEnemy >= 600) { // 600 frames = 10 seconds
       timeFastEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 100, 4, 4));
+      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 1, 4, 4,35));
     }
 
     // Check if it's time to spawn a new boss enemy
     if (timeBossEnemy >= 900) { // 900 frames = 15 seconds
       timeBossEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 100, 1, 1));
+      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 4, 1, 1, 75));
     }
 
     // Update and draw the enemies
