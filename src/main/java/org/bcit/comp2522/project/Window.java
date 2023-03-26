@@ -1,6 +1,8 @@
 package org.bcit.comp2522.project;
 
-import java.util.ArrayList;
+import  java.util.ArrayList;
+import java.util.Random;
+
 import processing.core.PApplet;
 
 /**
@@ -11,6 +13,7 @@ public class Window extends PApplet {
   ArrayList<Enemy> enemies;
   Bullet testBullet;
   Path path;
+  ArrayList<Tower> towers;
 
   // Variables for the timer
   int timeRegularEnemy = 0;
@@ -42,6 +45,7 @@ public class Window extends PApplet {
 
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
+    towers = new ArrayList<>();
   }
 
   /**
@@ -51,6 +55,7 @@ public class Window extends PApplet {
     background(0);
     path.draw();
     testBullet.draw();
+
 
     // Update the timer
     timeRegularEnemy++;
@@ -81,6 +86,18 @@ public class Window extends PApplet {
       enemy.draw();
     }
     grid.draw();
+
+    // For now just hardcoded only 5 towers being made in fixed spots but would like to customize based on level
+    towers.add(new Tower(200, 200,this));
+    towers.add(new Tower(600, 350,this));
+    towers.add(new Tower(700, 100,this));
+    towers.add(new Tower(100, 10,this));
+    towers.add(new Tower(400, 500,this));
+
+    // draw the towers
+    for (Tower tower : towers){
+      tower.draw();
+    }
   }
 
   /**

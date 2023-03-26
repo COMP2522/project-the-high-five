@@ -6,8 +6,14 @@ import java.util.ArrayList;
  * This class manages the tower class
  * @author gursidhsandhu
  */
-public abstract class Tower_Manager {
+public class TowerManager {
 
   // list of tower objects
   private ArrayList<Tower> towers;
+
+  // constructor
+  public TowerManager (){
+    this.towers = new ArrayList<Tower>();
+  }
+
 }
