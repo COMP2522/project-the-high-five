@@ -25,7 +25,6 @@ public class Tower extends Sprite implements Collidable{
   public void draw(){
 
     window.pushStyle();
-
     // draw the base square of the tower
     window.fill(100, 100, 100);
     window.stroke(0, 0, 0);

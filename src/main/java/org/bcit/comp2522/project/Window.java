@@ -98,7 +98,6 @@ public class Window extends PApplet {
     for (Tower tower : towers){
       tower.draw();
     }
-
   }
 
   /**

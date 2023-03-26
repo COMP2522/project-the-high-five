@@ -11,6 +11,7 @@ public class TowerManager {
   // list of tower objects
   private ArrayList<Tower> towers;
 
+  // constructor
   public TowerManager (){
     this.towers = new ArrayList<Tower>();
   }
