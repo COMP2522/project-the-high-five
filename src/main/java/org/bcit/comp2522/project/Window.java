@@ -12,17 +12,24 @@ public class Window extends PApplet {
   Bullet testBullet;
   Path path;
 
+  private Menu menu;
+  private int stage;
+
   // Variables for the timer
   int timeRegularEnemy = 0;
   int timeFastEnemy = 0;
   int timeBossEnemy = 0;
 
+  Grid grid;
+
   /**
    * Sets up the game window and initializes objects.
    */
-  Grid grid;
   public void setup() {
+    stage = 1;
+    menu = new Menu(this);
     this.init();
+
   }
 
   /**
@@ -48,39 +55,43 @@ public class Window extends PApplet {
    * Draws objects on the game window.
    */
   public void draw() {
-    background(0);
-    path.draw();
-    testBullet.draw();
+    if (stage == 1) {
+      menu.display();
+    } else {
+      background(0);
+      path.draw();
+      testBullet.draw();
 
-    // Update the timer
-    timeRegularEnemy++;
-    timeFastEnemy++;
-    timeBossEnemy++;
+      // Update the timer
+      timeRegularEnemy++;
+      timeFastEnemy++;
+      timeBossEnemy++;
 
-    // Check if it's time to spawn a new regular enemy
-    if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
-      timeRegularEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 2, 2, 2, 50));
+      // Check if it's time to spawn a new regular enemy
+      if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
+        timeRegularEnemy = 0;
+        enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 2, 2, 2, 50));
+      }
+
+      // Check if it's time to spawn a new fast enemy
+      if (timeFastEnemy >= 600) { // 600 frames = 10 seconds
+        timeFastEnemy = 0;
+        enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 1, 4, 4, 35));
+      }
+
+      // Check if it's time to spawn a new boss enemy
+      if (timeBossEnemy >= 900) { // 900 frames = 15 seconds
+        timeBossEnemy = 0;
+        enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 4, 1, 1, 75));
+      }
+
+      // Update and draw the enemies
+      for (Enemy enemy : enemies) {
+        enemy.move();
+        enemy.draw();
+      }
+      grid.draw();
     }
-
-    // Check if it's time to spawn a new fast enemy
-    if (timeFastEnemy >= 600) { // 600 frames = 10 seconds
-      timeFastEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 1, 4, 4,35));
-    }
-
-    // Check if it's time to spawn a new boss enemy
-    if (timeBossEnemy >= 900) { // 900 frames = 15 seconds
-      timeBossEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 4, 1, 1, 75));
-    }
-
-    // Update and draw the enemies
-    for (Enemy enemy : enemies) {
-      enemy.move();
-      enemy.draw();
-    }
-    grid.draw();
   }
 
   /**
