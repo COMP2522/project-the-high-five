@@ -4,16 +4,20 @@ import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
 
-import java.sql.SQLOutput;
 
+/**
+ * Displays Menu screen
+ * @author Cheryl Lau
+ * @version 1.0 2023
+ */
 public class Menu {
 
-    private PApplet parent;
+    private Window parent;
     private PImage backgroundImage;
 
 
 
-    public Menu(PApplet parent){
+    public Menu(Window parent){
         this.parent = parent;
         String dataPath = parent.sketchPath("images");
         this.backgroundImage = parent.loadImage(dataPath + "/laptop.jpg");
@@ -22,33 +26,15 @@ public class Menu {
 
     public void display() {
 
-        PApplet p = parent;
+        parent.image(backgroundImage, 0, 0, parent.width, parent.height);
 
-        PFont gameFont;
-        int horizontalPos = p.width/2;
-        int startPos = p.height * 5 / 14;
-        int loadPos = p.height * 8 / 14;
-        int buttonWidth = 400;
-        int buttonHeight = 100;
+        int horizontalPos = parent.width/2;
 
-        p.image(backgroundImage, 0, 0, p.width, p.height);
-        p.rectMode(p.CENTER);
-        p.fill(0,0,0);
-        p.rect(horizontalPos, startPos, buttonWidth,buttonHeight);
-        p.rect(horizontalPos, loadPos, buttonWidth,buttonHeight);
+        Button startButton = new Button(parent, "START GAME", ButtonFunction.START, horizontalPos, parent.height * 5 / 14);
+        Button loadButton = new Button(parent, "LOAD GAME", ButtonFunction.LOAD, horizontalPos, parent.height * 8 / 14);
 
-        String dataPath = p.sketchPath("fonts");
-        gameFont = p.createFont("" + dataPath + "/Righteous-Regular.ttf", 400);
-
-        p.textFont(gameFont);
-        p.fill(255);
-        p.textSize(40);
-        p.textAlign(parent.CENTER, parent.CENTER);
-        p.text("START GAME",horizontalPos,startPos);
-        p.text("LOAD GAME",horizontalPos,loadPos);
-
-
-
+        startButton.displayButton();
+        loadButton.displayButton();
 
     }
 
