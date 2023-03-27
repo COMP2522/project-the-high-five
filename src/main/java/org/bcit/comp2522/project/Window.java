@@ -117,6 +117,10 @@ public class Window extends PApplet {
 public void keyPressed(){
     if (key == 'm' || key == 'M'){
       stage = 1;
+      this.init();
+      timeRegularEnemy = 0;
+      timeFastEnemy = 0;
+      timeBossEnemy = 0;
     }
 }
 
