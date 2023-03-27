@@ -10,7 +10,36 @@ import processing.core.PFont;
  */
 public class Button {
 
-    Window parent;
+
+
+    private Window parent;
+
+    private int x; //y-coordinate of the button in the Window
+
+    private int y;  //y-coordinate of the button in the Window
+
+
+
+    ButtonFunction function; //enum function of a button
+
+
+
+    boolean isHovered = false; //if the button is hovered over
+
+    private String text; //text displayed on the button
+
+
+
+    private int width;
+    private int height;
+
+    public Button(Window parent, String text, ButtonFunction function, int x, int y){
+        this.parent = parent;
+        this.text = text;
+        this.x = x;
+        this.y = y;
+        this.function = function;
+    }
 
     public int getX() {
         return x;
@@ -20,17 +49,13 @@ public class Button {
         this.x = x;
     }
 
-    /**
-     * x-coordinate of button on the screen
-     */
-    private int x;
+    public int getY() {
+        return y;
+    }
 
-    /**
-     * y-coordindate of button the screen
-     */
-    private int y;
-
-    ButtonFunction function;
+    public void setY(int y) {
+        this.y = y;
+    }
 
     public String getText() {
         return text;
@@ -40,21 +65,45 @@ public class Button {
         this.text = text;
     }
 
-    private String text;
+    public int getWidth() {
+        return width;
+    }
 
-    public Button(Window parent, String text, ButtonFunction function, int x, int y){
-        this.parent = parent;
-        this.text = text;
-        this.x = x;
-        this.y = y;
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public boolean getHovered() {
+        return isHovered;
+    }
+
+    public Window getParent() {
+        return parent;
+    }
+
+    public ButtonFunction getFunction() {
+        return function;
+    }
+
+    public void setHovered(boolean hovered) {
+        isHovered = hovered;
+        System.out.println("hovered");
     }
 
     public void menuButtonShape(){
-        int buttonWidth = 400;
-        int buttonHeight = 100;
+        this.width = 400;
+        this.height = 100;
         parent.rectMode(parent.CENTER);
         parent.fill(0,0,0);
-        parent.rect(this.x, this.y, buttonWidth,buttonHeight);
+        parent.rect(this.x, this.y, width,height);
     }
 
     public void menuButtonText(){

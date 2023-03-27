@@ -15,6 +15,12 @@ public class Menu {
     private Window parent;
     private PImage backgroundImage;
 
+    ButtonHandler startBH;
+
+    ButtonHandler loadBH;
+
+
+
 
 
     public Menu(Window parent){
@@ -28,13 +34,25 @@ public class Menu {
 
         parent.image(backgroundImage, 0, 0, parent.width, parent.height);
 
-        int horizontalPos = parent.width/2;
+        int horizontalPos = parent.width / 2;
 
         Button startButton = new Button(parent, "START GAME", ButtonFunction.START, horizontalPos, parent.height * 5 / 14);
         Button loadButton = new Button(parent, "LOAD GAME", ButtonFunction.LOAD, horizontalPos, parent.height * 8 / 14);
+        startBH = new ButtonHandler(startButton);
+
+        loadBH = new ButtonHandler(loadButton);
 
         startButton.displayButton();
         loadButton.displayButton();
+
+    }
+
+    public void mousePressed(){
+
+
+        startBH.clickHandler();
+        loadBH.clickHandler();
+
 
     }
 

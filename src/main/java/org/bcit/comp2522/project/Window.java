@@ -14,11 +14,11 @@ public class Window extends PApplet {
 
   private Menu menu;
 
-  public void setStage(int stage) {
-    this.stage = stage;
-  }
+
 
   private int stage;
+
+  ButtonHandler bh;
 
   // Variables for the timer
   int timeRegularEnemy = 0;
@@ -35,6 +35,10 @@ public class Window extends PApplet {
     menu = new Menu(this);
     this.init();
 
+  }
+
+  public void setStage(int stage) {
+    this.stage = stage;
   }
 
   /**
@@ -62,6 +66,7 @@ public class Window extends PApplet {
   public void draw() {
     if (stage == 1) {
       menu.display();
+
     } else {
       background(0);
       path.draw();
@@ -105,6 +110,19 @@ public class Window extends PApplet {
   public void settings() {
     size(1280, 720);
   }
+
+  public void mousePressed(){
+    menu.mousePressed();
+  }
+
+
+public void keyPressed(){
+    if (key == 'm'){
+      stage = 1;
+    }
+}
+
+
 
   /**
    * Main method that runs the game.

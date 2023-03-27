@@ -14,13 +14,32 @@ public class ButtonHandler {
 
     Button button;
 
+
+
     public ButtonHandler(Button button){
 
         this.button = button;
+        this.parent = button.getParent();
     }
 
-    public void startButtonPressed(){
-        if (this.button.function == ButtonFunction.START){
+    public boolean checkHover(){
+        int x = button.getX();
+        int y = button.getY();
+        int width = button.getWidth();
+        int height = button.getHeight();
+
+
+
+        return parent.mouseX >= x && parent.mouseX <= x + width &&
+                parent.mouseY >= y && parent.mouseY <= y + height;
+    }
+
+
+
+    public void clickHandler(){
+
+        if (button.getFunction() == ButtonFunction.START && checkHover()){
+
             parent.setStage(2);
         }
 
