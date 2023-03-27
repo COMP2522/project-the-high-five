@@ -22,7 +22,7 @@ public class ButtonHandler {
         this.parent = button.getParent();
     }
 
-    public boolean checkHover(){
+    public boolean checkHover(int mouseX, int mouseY){
         int x = button.getX();
         int y = button.getY();
         int width = button.getWidth();
@@ -30,16 +30,19 @@ public class ButtonHandler {
 
 
 
-        return parent.mouseX >= x && parent.mouseX <= x + width &&
-                parent.mouseY >= y && parent.mouseY <= y + height;
+
+        return mouseX >= x && mouseX <= x + width &&
+                mouseY >= y && mouseY <= y + height;
     }
 
 
 
-    public void clickHandler(){
+    public void clickHandler(int mouseX, int mouseY){
+//        System.out.println("entered");
+//        System.out.println(checkHover(mouseX, mouseY));
 
-        if (button.getFunction() == ButtonFunction.START && checkHover()){
-
+        if (button.getFunction() == ButtonFunction.START && checkHover(mouseX, mouseY)){
+            System.out.println("clicked");
             parent.setStage(2);
         }
 

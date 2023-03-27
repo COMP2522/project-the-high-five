@@ -7,6 +7,7 @@ import processing.core.PImage;
 
 /**
  * Displays Menu screen
+ *
  * @author Cheryl Lau
  * @version 1.0 2023
  */
@@ -20,10 +21,7 @@ public class Menu {
     ButtonHandler loadBH;
 
 
-
-
-
-    public Menu(Window parent){
+    public Menu(Window parent) {
         this.parent = parent;
         String dataPath = parent.sketchPath("images");
         this.backgroundImage = parent.loadImage(dataPath + "/laptop.jpg");
@@ -39,7 +37,6 @@ public class Menu {
         Button startButton = new Button(parent, "START GAME", ButtonFunction.START, horizontalPos, parent.height * 5 / 14);
         Button loadButton = new Button(parent, "LOAD GAME", ButtonFunction.LOAD, horizontalPos, parent.height * 8 / 14);
         startBH = new ButtonHandler(startButton);
-
         loadBH = new ButtonHandler(loadButton);
 
         startButton.displayButton();
@@ -47,13 +44,9 @@ public class Menu {
 
     }
 
-    public void mousePressed(){
-
-
-        startBH.clickHandler();
-        loadBH.clickHandler();
-
-
+    public void mousePressed(int mouseX, int mouseY) {
+        startBH.clickHandler(mouseX, mouseY);
+        //loadBH.clickHandler();
     }
 
 }

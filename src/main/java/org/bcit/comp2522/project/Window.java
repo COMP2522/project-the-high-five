@@ -14,8 +14,6 @@ public class Window extends PApplet {
 
   private Menu menu;
 
-
-
   private int stage;
 
   ButtonHandler bh;
@@ -112,12 +110,12 @@ public class Window extends PApplet {
   }
 
   public void mousePressed(){
-    menu.mousePressed();
+    menu.mousePressed(mouseX, mouseY);
   }
 
 
 public void keyPressed(){
-    if (key == 'm'){
+    if (key == 'm' || key == 'M'){
       stage = 1;
     }
 }
