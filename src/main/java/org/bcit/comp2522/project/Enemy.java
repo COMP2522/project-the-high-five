@@ -1,5 +1,7 @@
 package org.bcit.comp2522.project;
 
+import processing.core.PImage;
+
 /**
  * The Enemy class extends the Sprite class and implements the Collidable interface to specify
  * attributes for enemies in a game. An Enemy has health, x and y velocities, and follows a Path.
@@ -15,6 +17,10 @@ public class Enemy extends Sprite implements Collidable, Movable {
   private final int originalVx;
   private final int originalVy;
   private final Path path;
+
+  private PImage enemyImage;
+
+  private float size;
 
   public int getHealth() {
     return health;
@@ -37,20 +43,22 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public Enemy(float xpos, float ypos, Window window, int health, int vx, int vy) {
     super(xpos, ypos, window);
     this.health = health;
+    size = 50;
     this.vx = vx;
     this.vy = vy;
     originalVx = vx;
     originalVy = vy;
     path = window.path;
+    enemyImage = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/4d16b377644993.5c8dd561dbec5.gif");
   }
 
   /**
    * Draws the elements in the window.
    */
   public void draw() {
-    float size = 50;
     window.pushStyle();
-    window.ellipse(getXpos(), getYpos(), size, size);
+    window.image(enemyImage, getXpos(), getYpos(), size, size);
+    //window.ellipse(getXpos(), getYpos(), size, size);
     window.popStyle();
   }
 
@@ -97,8 +105,11 @@ public class Enemy extends Sprite implements Collidable, Movable {
    */
   @Override
   public boolean collide(Collidable other) {
+    float distance = 0;
     if (other instanceof Bullet) {
-      if (this.getXpos() == other.getXpos() && this.getYpos() == other.getYpos()) {
+      Bullet bullet = (Bullet) other;
+      distance = (float) Math.sqrt( Math.pow((bullet.getXpos() - getXpos()), 2) + Math.pow((bullet.getYpos() - getYpos()), 2));
+      if (distance < this.size) {
         health -= 1;
         return true;
       }

@@ -2,6 +2,7 @@ package org.bcit.comp2522.project;
 
 import java.util.ArrayList;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * Window class that sets up and runs the game window, and contains instances of enemies,
@@ -11,6 +12,7 @@ public class Window extends PApplet {
   ArrayList<Enemy> enemies;
   Bullet testBullet;
   Path path;
+  private static PImage background;
 
   // Variables for the timer
   int timeRegularEnemy = 0;
@@ -29,14 +31,18 @@ public class Window extends PApplet {
    * Initializes objects.
    */
   public void init() {
+    background = this.loadImage("src/main/java/org/bcit/comp2522/project/asset/BackDrop.png");
     path = new Path(this);
     grid = new Grid(this);
+
     // Test for path
     path.addCorner(40,288);
     path.addCorner(184,288);
     path.addCorner(184,384);
     path.addCorner(472,384);
     path.addCorner(472,288);
+    path.addCorner(712,288);
+    path.addCorner(1192,288);
     path.connectCorners();
 
 
@@ -49,9 +55,14 @@ public class Window extends PApplet {
    */
   public void draw() {
     background(0);
+    //image(background, 0, 0, 1280, 720);
     path.draw();
+    //testBullet.move();
+    //level_1.draw();
+    if (enemies.size() > 0) {
+      testBullet.move();
+    }
     testBullet.draw();
-
     // Update the timer
     timeRegularEnemy++;
     timeFastEnemy++;
@@ -61,6 +72,7 @@ public class Window extends PApplet {
     if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
       timeRegularEnemy = 0;
       enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 100, 2, 2));
+
     }
 
     // Check if it's time to spawn a new fast enemy
@@ -79,6 +91,9 @@ public class Window extends PApplet {
     for (Enemy enemy : enemies) {
       enemy.move();
       enemy.draw();
+      if (enemy.collide(testBullet)){
+        System.out.println("Hits");
+      }
     }
     grid.draw();
   }
