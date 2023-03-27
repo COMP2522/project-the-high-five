@@ -13,6 +13,11 @@ public class Window extends PApplet {
   Path path;
 
   private Menu menu;
+
+  public void setStage(int stage) {
+    this.stage = stage;
+  }
+
   private int stage;
 
   // Variables for the timer
