@@ -1,6 +1,8 @@
 package org.bcit.comp2522.project;
 
-import java.util.ArrayList;
+import  java.util.ArrayList;
+import java.util.Random;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -12,6 +14,7 @@ public class Window extends PApplet {
   ArrayList<Enemy> enemies;
   Bullet testBullet;
   Path path;
+  ArrayList<Tower> towers;
   private static PImage background;
 
   // Variables for the timer
@@ -48,6 +51,7 @@ public class Window extends PApplet {
 
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
+    towers = new ArrayList<>();
   }
 
   /**
@@ -63,6 +67,8 @@ public class Window extends PApplet {
       testBullet.move();
     }
     testBullet.draw();
+
+
     // Update the timer
     timeRegularEnemy++;
     timeFastEnemy++;
@@ -71,20 +77,19 @@ public class Window extends PApplet {
     // Check if it's time to spawn a new regular enemy
     if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
       timeRegularEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 100, 2, 2));
-
+      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 2, 2, 2, 50));
     }
 
     // Check if it's time to spawn a new fast enemy
     if (timeFastEnemy >= 600) { // 600 frames = 10 seconds
       timeFastEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 100, 4, 4));
+      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 1, 4, 4,35));
     }
 
     // Check if it's time to spawn a new boss enemy
     if (timeBossEnemy >= 900) { // 900 frames = 15 seconds
       timeBossEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 100, 1, 1));
+      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 4, 1, 1, 75));
     }
 
     // Update and draw the enemies
@@ -96,6 +101,18 @@ public class Window extends PApplet {
       }
     }
     grid.draw();
+
+    // For now just hardcoded only 5 towers being made in fixed spots but would like to customize based on level
+    towers.add(new Tower(200, 200,this));
+    towers.add(new Tower(600, 350,this));
+    towers.add(new Tower(700, 100,this));
+    towers.add(new Tower(100, 10,this));
+    towers.add(new Tower(400, 500,this));
+
+    // draw the towers
+    for (Tower tower : towers){
+      tower.draw();
+    }
   }
 
   /**

@@ -14,6 +14,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
   private int health;
   private int vx;
   private int vy;
+  private final int size;
   private final int originalVx;
   private final int originalVy;
   private final Path path;
@@ -39,13 +40,15 @@ public class Enemy extends Sprite implements Collidable, Movable {
    * @param health the health of the Enemy
    * @param vx the x-velocity of the Enemy
    * @param vy the y-velocity of the Enemy
+   * @param size the size of the Enemy
    */
-  public Enemy(float xpos, float ypos, Window window, int health, int vx, int vy) {
+  public Enemy(float xpos, float ypos, Window window, int health, int vx, int vy, int size) {
     super(xpos, ypos, window);
     this.health = health;
     size = 50;
     this.vx = vx;
     this.vy = vy;
+    this.size = size;
     originalVx = vx;
     originalVy = vy;
     path = window.path;
