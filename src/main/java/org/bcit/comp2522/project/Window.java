@@ -2,6 +2,7 @@ package org.bcit.comp2522.project;
 
 import  java.util.ArrayList;
 
+import org.w3c.dom.events.MouseEvent;
 import processing.core.PApplet;
 
 /**
@@ -14,6 +15,7 @@ public class Window extends PApplet {
   Path path;
   ArrayList<Tower> towers;
   EnemyManager enemyManager;
+  Tower selectedTower = null;
 
   // Variables for the timer
   int timeRegularEnemy = 0;
@@ -46,6 +48,14 @@ public class Window extends PApplet {
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
     towers = new ArrayList<>();
+    // 5 towers have been spawned on top of each other
+    // This is so the player can drag and drop them into desired spots
+    // 5 is hardcoded number but would lke to personalize based on level.
+    towers.add(new Tower(90, 630,this));
+    towers.add(new Tower(190, 630,this));
+    towers.add(new Tower(290, 630,this));
+    towers.add(new Tower(390, 630,this));
+    towers.add(new Tower(490, 630,this));
   }
 
   /**
@@ -55,7 +65,6 @@ public class Window extends PApplet {
     background(0);
     path.draw();
     testBullet.draw();
-
 
     // Update the timer
     timeRegularEnemy++;
@@ -87,17 +96,32 @@ public class Window extends PApplet {
 
     grid.draw();
 
-    // For now just hardcoded only 5 towers being made in fixed spots but would like to customize based on level
-    towers.add(new Tower(200, 200,this));
-    towers.add(new Tower(600, 350,this));
-    towers.add(new Tower(700, 100,this));
-    towers.add(new Tower(100, 10,this));
-    towers.add(new Tower(400, 500,this));
 
     // draw the towers
     for (Tower tower : towers){
       tower.draw();
     }
+  }
+
+  public void mousePressed(){
+
+    for(Tower tower : towers){
+      if(tower.isHovering()){
+        selectedTower = tower;
+        selectedTower.mousePressed();
+        break;
+      }
+    }
+  }
+
+  public void mouseDragged(){
+    if(selectedTower != null){
+      selectedTower.mouseDragged();
+    }
+  }
+
+  public void mouseReleased(){
+    selectedTower.mouseReleased();
   }
 
   /**
