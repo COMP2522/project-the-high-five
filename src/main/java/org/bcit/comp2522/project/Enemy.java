@@ -75,6 +75,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
    */
   public void draw() {
     window.pushStyle();
+
     //window.image(enemyImage, getXpos(), getYpos(), size, size);
     //window.ellipse(getXpos(), getYpos(), size, size);
 
@@ -88,6 +89,9 @@ public class Enemy extends Sprite implements Collidable, Movable {
     }
     spriteTimer++;
     window.image(enemySprites[spriteIndex], getXpos(), getYpos(), size, size);
+
+//    window.ellipse(getXpos(), getYpos(), size, size);
+
     window.popStyle();
   }
 

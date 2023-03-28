@@ -23,6 +23,7 @@ public class Window extends PApplet {
   Tower selectedTower = null;
   private static PImage background;
 
+
   // Variables for the timer
   int timeRegularEnemy = 0;
   int timeFastEnemy = 0;
@@ -45,9 +46,11 @@ public class Window extends PApplet {
     level_1 = new Level_1(this);
     level_2 = new Level_2(this);
     grid = new Grid(this);
+
     levelManager.addLevel(level_1);
     levelManager.addLevel(level_2);
     enemyManager = new EnemyManager(this);
+
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
     towers = new ArrayList<>();
