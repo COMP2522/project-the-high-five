@@ -19,11 +19,9 @@ public class Window extends PApplet {
 
   Level level_2;
   ArrayList<Tower> towers;
-
-  private static PImage background;
-
   EnemyManager enemyManager;
   Tower selectedTower = null;
+  private static PImage background;
 
 
   // Variables for the timer
@@ -51,6 +49,7 @@ public class Window extends PApplet {
 
     levelManager.addLevel(level_1);
     levelManager.addLevel(level_2);
+    enemyManager = new EnemyManager(this);
 
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
@@ -69,9 +68,10 @@ public class Window extends PApplet {
    * Draws objects on the game window.
    */
   public void draw() {
-
     levelManager.draw();
-
+    for (Tower tower : towers){
+      tower.draw();
+    }
   }
 
   public void mousePressed(){

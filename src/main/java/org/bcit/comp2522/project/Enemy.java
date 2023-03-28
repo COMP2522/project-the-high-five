@@ -70,9 +70,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
     }
   }
 
-
-  PImage enemyImage = window.loadImage("enemy_assets/Spritesheets/Scorpion.png");
-
   /**
    * Draws the elements in the window.
    */
@@ -94,7 +91,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
     window.image(enemySprites[spriteIndex], getXpos(), getYpos(), size, size);
 
 //    window.ellipse(getXpos(), getYpos(), size, size);
-    window.image(enemyImage, getXpos(), getYpos(), size, size);
 
     window.popStyle();
   }
