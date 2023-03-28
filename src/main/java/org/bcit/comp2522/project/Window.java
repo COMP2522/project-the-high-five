@@ -54,6 +54,10 @@ public class Window extends PApplet {
     path.connectCorners();
 
 
+    timeRegularEnemy = 0;
+    timeFastEnemy = 0;
+    timeBossEnemy = 0;
+
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
   }
@@ -118,9 +122,7 @@ public void keyPressed(){
     if (key == 'm' || key == 'M'){
       stage = 1;
       this.init();
-      timeRegularEnemy = 0;
-      timeFastEnemy = 0;
-      timeBossEnemy = 0;
+
     }
 }
 
