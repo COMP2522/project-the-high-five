@@ -1,8 +1,8 @@
 package org.bcit.comp2522.project;
 
 import  java.util.ArrayList;
-import java.util.Random;
 
+import org.w3c.dom.events.MouseEvent;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -19,6 +19,8 @@ public class Window extends PApplet {
 
   Level level_2;
   ArrayList<Tower> towers;
+  EnemyManager enemyManager;
+  Tower selectedTower = null;
   private static PImage background;
 
   // Variables for the timer
@@ -45,9 +47,18 @@ public class Window extends PApplet {
     grid = new Grid(this);
     levelManager.addLevel(level_1);
     levelManager.addLevel(level_2);
+    enemyManager = new EnemyManager(this);
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
     towers = new ArrayList<>();
+    // 5 towers have been spawned on top of each other
+    // This is so the player can drag and drop them into desired spots
+    // 5 is hardcoded number but would lke to personalize based on level.
+    towers.add(new Tower(90, 630,this));
+    towers.add(new Tower(190, 630,this));
+    towers.add(new Tower(290, 630,this));
+    towers.add(new Tower(390, 630,this));
+    towers.add(new Tower(490, 630,this));
   }
 
   /**
@@ -55,6 +66,30 @@ public class Window extends PApplet {
    */
   public void draw() {
     levelManager.draw();
+    for (Tower tower : towers){
+      tower.draw();
+    }
+  }
+
+  public void mousePressed(){
+
+    for(Tower tower : towers){
+      if(tower.isHovering()){
+        selectedTower = tower;
+        selectedTower.mousePressed();
+        break;
+      }
+    }
+  }
+
+  public void mouseDragged(){
+    if(selectedTower != null){
+      selectedTower.mouseDragged();
+    }
+  }
+
+  public void mouseReleased(){
+    selectedTower.mouseReleased();
   }
 
   /**
