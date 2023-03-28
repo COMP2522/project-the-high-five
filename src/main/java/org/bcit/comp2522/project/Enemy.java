@@ -19,9 +19,12 @@ public class Enemy extends Sprite implements Collidable, Movable {
   private final int originalVy;
   private final Path path;
 
-  private PImage enemyImage;
+  private int spriteIndex = 0;
+  private int spriteTimer = 0;
 
-  private float size;
+  private PImage enemyImage;
+  private PImage enemySprite;
+  private PImage[] enemySprites = new PImage[8];
 
   public int getHealth() {
     return health;
@@ -42,7 +45,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
    * @param vy the y-velocity of the Enemy
    * @param size the size of the Enemy
    */
-  public Enemy(float xpos, float ypos, Window window, int health, int vx, int vy, int size) {
+  public Enemy(float xpos, float ypos, Window window, int health, int vx, int vy, int size, Level level) {
     super(xpos, ypos, window);
     this.health = health;
     size = 50;
@@ -51,8 +54,20 @@ public class Enemy extends Sprite implements Collidable, Movable {
     this.size = size;
     originalVx = vx;
     originalVy = vy;
-    path = window.path;
-    enemyImage = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/4d16b377644993.5c8dd561dbec5.gif");
+    path = level.getPath();
+    enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Clampbeetle.png");
+    loadSprite();
+    //enemyImage = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/4d16b377644993.5c8dd561dbec5.gif");
+  }
+
+  public void loadSprite(){
+    int spriteWidth = 64;
+    int spriteHeight = 64;
+    int spriteLength = 8;
+    for (int i = 0; i < spriteLength; i++) {
+      int x = i%spriteLength * spriteWidth;
+      enemySprites[i] = enemySprite.get(x, 320, spriteWidth, spriteHeight);
+    }
   }
 
   /**
@@ -60,8 +75,19 @@ public class Enemy extends Sprite implements Collidable, Movable {
    */
   public void draw() {
     window.pushStyle();
-    window.image(enemyImage, getXpos(), getYpos(), size, size);
+    //window.image(enemyImage, getXpos(), getYpos(), size, size);
     //window.ellipse(getXpos(), getYpos(), size, size);
+
+    if (spriteTimer >= 8) {
+      if (spriteIndex >= enemySprites.length - 1) {
+        spriteIndex = 0;
+      } else {
+        spriteIndex++;
+      }
+      spriteTimer = 0;
+    }
+    spriteTimer++;
+    window.image(enemySprites[spriteIndex], getXpos(), getYpos(), size, size);
     window.popStyle();
   }
 

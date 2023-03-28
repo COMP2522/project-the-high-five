@@ -112,4 +112,14 @@ public class Path {
   public Node getHead() {
     return head;
   }
+
+  public void reset() {
+    head = null;
+    tail = null;
+    corners.clear();
+  }
+
+  public void clearCorner(){
+    corners.clear();
+  }
 }
