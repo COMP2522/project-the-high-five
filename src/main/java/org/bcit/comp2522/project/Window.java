@@ -1,7 +1,6 @@
 package org.bcit.comp2522.project;
 
 import  java.util.ArrayList;
-import java.util.Random;
 
 import org.w3c.dom.events.MouseEvent;
 import processing.core.PApplet;
@@ -15,6 +14,7 @@ public class Window extends PApplet {
   Bullet testBullet;
   Path path;
   ArrayList<Tower> towers;
+  EnemyManager enemyManager;
   Tower selectedTower = null;
 
   // Variables for the timer
@@ -44,6 +44,7 @@ public class Window extends PApplet {
     path.addCorner(472,288);
     path.connectCorners();
 
+    enemyManager = new EnemyManager(this);
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
     towers = new ArrayList<>();
@@ -90,9 +91,9 @@ public class Window extends PApplet {
 
     // Update and draw the enemies
     for (Enemy enemy : enemies) {
-      enemy.move();
-      enemy.draw();
+        enemyManager.update(enemy);
     }
+
     grid.draw();
 
 

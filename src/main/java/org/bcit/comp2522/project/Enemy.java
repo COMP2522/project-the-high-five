@@ -1,5 +1,7 @@
 package org.bcit.comp2522.project;
 
+import processing.core.PImage;
+
 /**
  * The Enemy class extends the Sprite class and implements the Collidable interface to specify
  * attributes for enemies in a game. An Enemy has health, x and y velocities, and follows a Path.
@@ -47,12 +49,16 @@ public class Enemy extends Sprite implements Collidable, Movable {
     path = window.path;
   }
 
+
+  PImage enemyImage = window.loadImage("enemy_assets/Spritesheets/Scorpion.png");
+
   /**
    * Draws the elements in the window.
    */
   public void draw() {
     window.pushStyle();
-    window.ellipse(getXpos(), getYpos(), size, size);
+//    window.ellipse(getXpos(), getYpos(), size, size);
+    window.image(enemyImage, getXpos(), getYpos(), size, size);
     window.popStyle();
   }
 
