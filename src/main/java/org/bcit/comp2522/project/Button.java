@@ -18,11 +18,7 @@ public class Button {
 
     private int y;  //y-coordinate of the button in the Window
 
-
-
     ButtonFunction function; //enum function of a button
-
-
 
     boolean isHovered = false; //if the button is hovered over
 
@@ -30,8 +26,8 @@ public class Button {
 
 
 
-    private int width;
-    private int height;
+    private int buttonWidth;
+    private int buttonHeight;
 
     public Button(Window parent, String text, ButtonFunction function, int x, int y){
         this.parent = parent;
@@ -66,19 +62,19 @@ public class Button {
     }
 
     public int getWidth() {
-        return width;
+        return buttonWidth;
     }
 
     public void setWidth(int width) {
-        this.width = width;
+        this.buttonWidth = width;
     }
 
     public int getHeight() {
-        return height;
+        return buttonHeight;
     }
 
     public void setHeight(int height) {
-        this.height = height;
+        this.buttonHeight = height;
     }
 
     public boolean getHovered() {
@@ -99,11 +95,11 @@ public class Button {
     }
 
     public void menuButtonShape(){
-        this.width = 400;
-        this.height = 100;
+        this.buttonWidth = 400;
+        this.buttonHeight = 100;
         parent.rectMode(parent.CENTER);
         parent.fill(0,0,0);
-        parent.rect(this.x, this.y, width,height);
+        parent.rect(this.x, this.y, buttonWidth,buttonHeight);
     }
 
     public void menuButtonText(){

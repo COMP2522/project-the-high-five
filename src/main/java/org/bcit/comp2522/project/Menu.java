@@ -30,12 +30,12 @@ public class Menu {
 
     public void display() {
 
-        parent.image(backgroundImage, 0, 0, parent.width, parent.height);
+        parent.image(backgroundImage, 0, 0, Window.windowWidth, Window.windowHeight);
 
-        int horizontalPos = parent.width / 2;
+        int horizontalPos = Window.windowWidth/ 2;
 
-        Button startButton = new Button(parent, "START GAME", ButtonFunction.START, horizontalPos, parent.height * 5 / 14);
-        Button loadButton = new Button(parent, "LOAD GAME", ButtonFunction.LOAD, horizontalPos, parent.height * 8 / 14);
+        Button startButton = new Button(parent, "START GAME", ButtonFunction.START, horizontalPos, Window.windowHeight * 5 / 14);
+        Button loadButton = new Button(parent, "LOAD GAME", ButtonFunction.LOAD, horizontalPos, Window.windowHeight * 8 / 14);
         startBH = new ButtonHandler(startButton);
         loadBH = new ButtonHandler(loadButton);
 

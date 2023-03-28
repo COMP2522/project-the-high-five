@@ -8,6 +8,10 @@ import processing.core.PApplet;
  * bullets, and path objects.
  */
 public class Window extends PApplet {
+
+  public static final int windowWidth = 1280;
+  public static final int windowHeight = 720;
+
   ArrayList<Enemy> enemies;
   Bullet testBullet;
   Path path;
@@ -110,7 +114,7 @@ public class Window extends PApplet {
    * Sets up the size of the game window.
    */
   public void settings() {
-    size(1280, 720);
+    size(windowWidth, windowHeight);
   }
 
   public void mousePressed(){
