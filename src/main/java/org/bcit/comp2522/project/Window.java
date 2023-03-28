@@ -4,6 +4,7 @@ import  java.util.ArrayList;
 
 import org.w3c.dom.events.MouseEvent;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * Window class that sets up and runs the game window, and contains instances of enemies,
@@ -13,9 +14,17 @@ public class Window extends PApplet {
   ArrayList<Enemy> enemies;
   Bullet testBullet;
   Path path;
+  LevelManager levelManager;
+  Level level_1;
+
+  Level level_2;
   ArrayList<Tower> towers;
+
+  private static PImage background;
+
   EnemyManager enemyManager;
   Tower selectedTower = null;
+
 
   // Variables for the timer
   int timeRegularEnemy = 0;
@@ -34,17 +43,15 @@ public class Window extends PApplet {
    * Initializes objects.
    */
   public void init() {
-    path = new Path(this);
+    background = this.loadImage("src/main/java/org/bcit/comp2522/project/asset/BackDrop.png");
+    levelManager = new LevelManager(this, 2);
+    level_1 = new Level_1(this);
+    level_2 = new Level_2(this);
     grid = new Grid(this);
-    // Test for path
-    path.addCorner(40,288);
-    path.addCorner(184,288);
-    path.addCorner(184,384);
-    path.addCorner(472,384);
-    path.addCorner(472,288);
-    path.connectCorners();
 
-    enemyManager = new EnemyManager(this);
+    levelManager.addLevel(level_1);
+    levelManager.addLevel(level_2);
+
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
     towers = new ArrayList<>();
@@ -62,45 +69,9 @@ public class Window extends PApplet {
    * Draws objects on the game window.
    */
   public void draw() {
-    background(0);
-    path.draw();
-    testBullet.draw();
 
-    // Update the timer
-    timeRegularEnemy++;
-    timeFastEnemy++;
-    timeBossEnemy++;
+    levelManager.draw();
 
-    // Check if it's time to spawn a new regular enemy
-    if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
-      timeRegularEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 2, 2, 2, 50));
-    }
-
-    // Check if it's time to spawn a new fast enemy
-    if (timeFastEnemy >= 600) { // 600 frames = 10 seconds
-      timeFastEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 1, 4, 4,35));
-    }
-
-    // Check if it's time to spawn a new boss enemy
-    if (timeBossEnemy >= 900) { // 900 frames = 15 seconds
-      timeBossEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 4, 1, 1, 75));
-    }
-
-    // Update and draw the enemies
-    for (Enemy enemy : enemies) {
-        enemyManager.update(enemy);
-    }
-
-    grid.draw();
-
-
-    // draw the towers
-    for (Tower tower : towers){
-      tower.draw();
-    }
   }
 
   public void mousePressed(){
@@ -131,6 +102,11 @@ public class Window extends PApplet {
     size(1280, 720);
   }
 
+  public void keyPressed() {
+    if (key == 'z' || key == 'Z') {
+      levelManager.nextLevel();
+    }
+  }
   /**
    * Main method that runs the game.
    *
