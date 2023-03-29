@@ -117,7 +117,7 @@ public class Window extends PApplet {
           break;
         }
       }
-      // makes sure game doesnt crash when tower isnt clicked
+      // makes sure game doesn't crash when tower isn't clicked
       if (selectedTower == null) {
         return;
       }
@@ -133,12 +133,12 @@ public class Window extends PApplet {
   public void mouseReleased(){
     if(selectedTower != null){
       selectedTower.mouseReleased();
-      if (level_1.getPath().isTowerOnPath(selectedTower.getCenterX(), selectedTower.getCenterY(), selectedTower.getRadius())) {
-        System.out.println("current xpos is " + selectedTower.getXpos());
-        System.out.println("original xpos was " + selectedTower.getOriginalXPos());
-        selectedTower.setXpos(selectedTower.getOriginalXPos());
-        selectedTower.setYpos(selectedTower.getOriginalYPos());
-      }
+     // if (level_1.getPath().isTowerOnPath(selectedTower.getCenterX(), selectedTower.getCenterY(), selectedTower.getRadius())) {
+      //  System.out.println("current xpos is " + selectedTower.getXpos());
+       // System.out.println("original xpos was " + selectedTower.getOriginalXPos());
+        //selectedTower.setXpos(selectedTower.getOriginalXPos());
+        //selectedTower.setYpos(selectedTower.getOriginalYPos());
+     // }
     }
 
 
