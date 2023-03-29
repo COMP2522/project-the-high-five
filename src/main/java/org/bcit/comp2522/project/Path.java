@@ -108,7 +108,7 @@ public class Path {
     return result;
   }
 
-  // this is for other issue im working on
+  // this is for other issue im working on for later
   // this method checks if a certain tower is on the path or not
   // this method is used in window and all parameters are based off one specific tower
   // checks that one tower with every single node in the linked list
