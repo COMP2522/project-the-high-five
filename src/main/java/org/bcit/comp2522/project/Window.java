@@ -24,6 +24,7 @@ public class Window extends PApplet {
   Level level_2;
   ArrayList<Tower> towers;
   Tower selectedTower = null;
+
   private static PImage background;
 
   private Menu menu;
@@ -33,11 +34,13 @@ public class Window extends PApplet {
   ButtonHandler bh;
 
   Grid grid;
+  private Player player;
 
   /**
    * Sets up the game window and initializes objects.
    */
   public void setup() {
+    Player.getInstance();
     stage = 1;
     menu = new Menu(this);
     this.init();
