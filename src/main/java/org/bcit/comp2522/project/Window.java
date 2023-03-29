@@ -1,51 +1,78 @@
 package org.bcit.comp2522.project;
 
 import  java.util.ArrayList;
-import java.util.Random;
 
 import org.w3c.dom.events.MouseEvent;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * Window class that sets up and runs the game window, and contains instances of enemies,
  * bullets, and path objects.
  */
 public class Window extends PApplet {
+
+  public static final int windowWidth = 1280;
+  public static final int windowHeight = 720;
+
   ArrayList<Enemy> enemies;
   Bullet testBullet;
   Path path;
+  LevelManager levelManager;
+  Level level_1;
+
+  Level level_2;
   ArrayList<Tower> towers;
   EnemyManager enemyManager;
   Tower selectedTower = null;
+  private static PImage background;
+
+
+  private Menu menu;
+
+  private int stage;
+
+  ButtonHandler bh;
 
   // Variables for the timer
   int timeRegularEnemy = 0;
   int timeFastEnemy = 0;
   int timeBossEnemy = 0;
 
+  Grid grid;
+
   /**
    * Sets up the game window and initializes objects.
    */
-  Grid grid;
   public void setup() {
+    stage = 1;
+    menu = new Menu(this);
     this.init();
+
+  }
+
+  public void setStage(int stage) {
+    this.stage = stage;
   }
 
   /**
    * Initializes objects.
    */
   public void init() {
-    path = new Path(this);
+    background = this.loadImage("src/main/java/org/bcit/comp2522/project/asset/BackDrop.png");
+    levelManager = new LevelManager(this, 2);
+    level_1 = new Level_1(this);
+    level_2 = new Level_2(this);
     grid = new Grid(this);
-    // Test for path
-    path.addCorner(40,288);
-    path.addCorner(184,288);
-    path.addCorner(184,384);
-    path.addCorner(472,384);
-    path.addCorner(472,288);
-    path.connectCorners();
 
+    levelManager.addLevel(level_1);
+    levelManager.addLevel(level_2);
     enemyManager = new EnemyManager(this);
+
+    timeRegularEnemy = 0;
+    timeFastEnemy = 0;
+    timeBossEnemy = 0;
+
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
     towers = new ArrayList<>();
@@ -63,60 +90,35 @@ public class Window extends PApplet {
    * Draws objects on the game window.
    */
   public void draw() {
-    background(0);
-    path.draw();
-    testBullet.draw();
-
-
-    // Update the timer
-    timeRegularEnemy++;
-    timeFastEnemy++;
-    timeBossEnemy++;
-
-    // Check if it's time to spawn a new regular enemy
-    if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
-      timeRegularEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 2, 2, 2, 50));
-    }
-
-    // Check if it's time to spawn a new fast enemy
-    if (timeFastEnemy >= 600) { // 600 frames = 10 seconds
-      timeFastEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 1, 4, 4,35));
-    }
-
-    // Check if it's time to spawn a new boss enemy
-    if (timeBossEnemy >= 900) { // 900 frames = 15 seconds
-      timeBossEnemy = 0;
-      enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 4, 1, 1, 75));
-    }
-
-    // Update and draw the enemies
-    for (Enemy enemy : enemies) {
-        enemyManager.update(enemy);
-    }
-    grid.draw();
-
-
-    // draw the towers
-    for (Tower tower : towers){
-      tower.draw();
-    }
-  }
-
-  public void mousePressed(){
-
-    for(Tower tower : towers){
-      if(tower.isHovering()){
-        selectedTower = tower;
-        selectedTower.mousePressed();
-        break;
+    if (stage == 1) {
+      menu.display();
+    } else {
+      background(0);
+      path.draw();
+      testBullet.draw();
+      levelManager.draw();
+      for (Tower tower : towers) {
+        tower.draw();
       }
     }
   }
 
-  public void mouseDragged(){
-    if(selectedTower != null){
+  public void mousePressed() {
+    if (stage == 1) {
+      menu.mousePressed(mouseX, mouseY);
+    } else {
+      for (Tower tower : towers) {
+        if (tower.isHovering()) {
+          selectedTower = tower;
+          selectedTower.mousePressed();
+          break;
+        }
+      }
+    }
+  }
+
+  public void mouseDragged() {
+    if (selectedTower != null) {
       selectedTower.mouseDragged();
     }
   }
@@ -129,8 +131,25 @@ public class Window extends PApplet {
    * Sets up the size of the game window.
    */
   public void settings() {
-    size(1280, 720);
+    size(windowWidth, windowHeight);
   }
+
+
+
+public void keyPressed(){
+    if (key == 'm' || key == 'M'){
+      stage = 1;
+      this.init();
+
+    }
+
+      if (key == 'z' || key == 'Z') {
+        levelManager.nextLevel();
+      }
+}
+
+
+
 
   /**
    * Main method that runs the game.
