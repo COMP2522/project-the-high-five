@@ -96,9 +96,9 @@ public class Window extends PApplet {
     if (stage == 1) {
       menu.display();
     } else {
-      background(0);
-      path.draw();
-      testBullet.draw();
+      //background(0);
+      //path.draw();
+      //testBullet.draw();
       levelManager.draw();
       for (Tower tower : towers) {
         tower.draw();
@@ -117,6 +117,10 @@ public class Window extends PApplet {
           break;
         }
       }
+      // makes sure game doesn't crash when tower isn't clicked
+      if (selectedTower == null) {
+        return;
+      }
     }
   }
 
@@ -127,7 +131,18 @@ public class Window extends PApplet {
   }
 
   public void mouseReleased(){
-    selectedTower.mouseReleased();
+    if(selectedTower != null){
+      selectedTower.mouseReleased();
+      // this is for other issue im working on for later
+     // if (level_1.getPath().isTowerOnPath(selectedTower.getCenterX(), selectedTower.getCenterY(), selectedTower.getRadius())) {
+      //  System.out.println("current xpos is " + selectedTower.getXpos());
+       // System.out.println("original xpos was " + selectedTower.getOriginalXPos());
+        //selectedTower.setXpos(selectedTower.getOriginalXPos());
+        //selectedTower.setYpos(selectedTower.getOriginalYPos());
+     // }
+    }
+
+
   }
 
   /**

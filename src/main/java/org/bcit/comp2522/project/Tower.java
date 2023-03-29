@@ -45,6 +45,26 @@ public class Tower extends Sprite implements Collidable{
   private float offsetX;
   private float offsetY;
 
+  private float originalXPos;
+
+  public float getOriginalXPos() {
+    return originalXPos;
+  }
+
+  public void setOriginalXPos(float originalXPos) {
+    this.originalXPos = originalXPos;
+  }
+
+  public float getOriginalYPos() {
+    return originalYPos;
+  }
+
+  public void setOriginalYPos(float originalYPos) {
+    this.originalYPos = originalYPos;
+  }
+
+  private float originalYPos;
+
 
   public float getCenterX() {
     return centerX;
@@ -242,7 +262,7 @@ public class Tower extends Sprite implements Collidable{
   public boolean collide(Collidable other) {
     if(other instanceof Enemy){
       double distanceTwo = sqrt(pow(other.getXpos() - this.centerX,2) + pow(other.getYpos() - this.centerY,2));
-      if(distanceTwo <= this.radius){
+      if(distanceTwo <= radius){
         shoot();
       }
     }
