@@ -89,10 +89,12 @@ public class Window extends PApplet {
   /**
    * Draws objects on the game window.
    */
+  /**
+   * Draws objects on the game window.
+   */
   public void draw() {
     if (stage == 1) {
       menu.display();
-
     } else {
       background(0);
       path.draw();
@@ -104,21 +106,22 @@ public class Window extends PApplet {
     }
   }
 
-  public void mousePressed(){
-  if (stage == 1){
-    menu.mousePressed(mouseX, mouseY);
-  } else
-    for(Tower tower : towers){
-      if(tower.isHovering()){
-        selectedTower = tower;
-        selectedTower.mousePressed();
-        break;
+  public void mousePressed() {
+    if (stage == 1) {
+      menu.mousePressed(mouseX, mouseY);
+    } else {
+      for (Tower tower : towers) {
+        if (tower.isHovering()) {
+          selectedTower = tower;
+          selectedTower.mousePressed();
+          break;
+        }
       }
     }
   }
 
-  public void mouseDragged(){
-    if(selectedTower != null){
+  public void mouseDragged() {
+    if (selectedTower != null) {
       selectedTower.mouseDragged();
     }
   }
