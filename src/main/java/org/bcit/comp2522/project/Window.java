@@ -1,7 +1,10 @@
 package org.bcit.comp2522.project;
 
-import java.util.ArrayList;
+import  java.util.ArrayList;
+
+import org.w3c.dom.events.MouseEvent;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * Window class that sets up and runs the game window, and contains instances of enemies,
@@ -15,6 +18,15 @@ public class Window extends PApplet {
   ArrayList<Enemy> enemies;
   Bullet testBullet;
   Path path;
+  LevelManager levelManager;
+  Level level_1;
+
+  Level level_2;
+  ArrayList<Tower> towers;
+  EnemyManager enemyManager;
+  Tower selectedTower = null;
+  private static PImage background;
+
 
   private Menu menu;
 
@@ -47,16 +59,15 @@ public class Window extends PApplet {
    * Initializes objects.
    */
   public void init() {
-    path = new Path(this);
+    background = this.loadImage("src/main/java/org/bcit/comp2522/project/asset/BackDrop.png");
+    levelManager = new LevelManager(this, 2);
+    level_1 = new Level_1(this);
+    level_2 = new Level_2(this);
     grid = new Grid(this);
-    // Test for path
-    path.addCorner(40,288);
-    path.addCorner(184,288);
-    path.addCorner(184,384);
-    path.addCorner(472,384);
-    path.addCorner(472,288);
-    path.connectCorners();
 
+    levelManager.addLevel(level_1);
+    levelManager.addLevel(level_2);
+    enemyManager = new EnemyManager(this);
 
     timeRegularEnemy = 0;
     timeFastEnemy = 0;
@@ -64,50 +75,59 @@ public class Window extends PApplet {
 
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
+    towers = new ArrayList<>();
+    // 5 towers have been spawned on top of each other
+    // This is so the player can drag and drop them into desired spots
+    // 5 is hardcoded number but would lke to personalize based on level.
+    towers.add(new Tower(90, 630,this));
+    towers.add(new Tower(190, 630,this));
+    towers.add(new Tower(290, 630,this));
+    towers.add(new Tower(390, 630,this));
+    towers.add(new Tower(490, 630,this));
   }
 
+  /**
+   * Draws objects on the game window.
+   */
   /**
    * Draws objects on the game window.
    */
   public void draw() {
     if (stage == 1) {
       menu.display();
-
     } else {
       background(0);
       path.draw();
       testBullet.draw();
-
-      // Update the timer
-      timeRegularEnemy++;
-      timeFastEnemy++;
-      timeBossEnemy++;
-
-      // Check if it's time to spawn a new regular enemy
-      if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
-        timeRegularEnemy = 0;
-        enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 2, 2, 2, 50));
+      levelManager.draw();
+      for (Tower tower : towers) {
+        tower.draw();
       }
-
-      // Check if it's time to spawn a new fast enemy
-      if (timeFastEnemy >= 600) { // 600 frames = 10 seconds
-        timeFastEnemy = 0;
-        enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 1, 4, 4, 35));
-      }
-
-      // Check if it's time to spawn a new boss enemy
-      if (timeBossEnemy >= 900) { // 900 frames = 15 seconds
-        timeBossEnemy = 0;
-        enemies.add(new Enemy(path.getHead().getXpos(), path.getHead().getYpos(), this, 4, 1, 1, 75));
-      }
-
-      // Update and draw the enemies
-      for (Enemy enemy : enemies) {
-        enemy.move();
-        enemy.draw();
-      }
-      grid.draw();
     }
+  }
+
+  public void mousePressed() {
+    if (stage == 1) {
+      menu.mousePressed(mouseX, mouseY);
+    } else {
+      for (Tower tower : towers) {
+        if (tower.isHovering()) {
+          selectedTower = tower;
+          selectedTower.mousePressed();
+          break;
+        }
+      }
+    }
+  }
+
+  public void mouseDragged() {
+    if (selectedTower != null) {
+      selectedTower.mouseDragged();
+    }
+  }
+
+  public void mouseReleased() {
+    selectedTower.mouseReleased();
   }
 
   /**
@@ -117,9 +137,6 @@ public class Window extends PApplet {
     size(windowWidth, windowHeight);
   }
 
-  public void mousePressed(){
-    menu.mousePressed(mouseX, mouseY);
-  }
 
 
 public void keyPressed(){
@@ -128,7 +145,12 @@ public void keyPressed(){
       this.init();
 
     }
+
+      if (key == 'z' || key == 'Z') {
+        levelManager.nextLevel();
+      }
 }
+
 
 
 
