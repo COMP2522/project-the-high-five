@@ -11,6 +11,23 @@ import java.util.ArrayList;
  */
 public class BulletManager {
 
-    private ArrayList<Bullet> bullets;
+  private final ArrayList<Bullet> bullets;
 
+  private final Window window;
+
+  public BulletManager(Window window) {
+    this.window = window;
+    bullets = window.bullets;
+  }
+
+  public void remove(Bullet bullet) {
+    if (bullet.getXpos() >= window.width || bullet.getYpos() >= window.height) {
+      bullets.remove(bullet);
+      for (Enemy enemy : window.enemies) {
+        if (bullet.collide(enemy)) {
+          bullets.remove(bullet);
+        }
+      }
+    }
+  }
 }

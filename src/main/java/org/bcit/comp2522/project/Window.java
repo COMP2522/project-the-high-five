@@ -17,6 +17,9 @@ public class Window extends PApplet {
 
   ArrayList<Enemy> enemies;
   Bullet testBullet;
+
+  ArrayList<Bullet> bullets;
+
   Path path;
   LevelManager levelManager;
   Level level_1;
@@ -97,7 +100,7 @@ public class Window extends PApplet {
       menu.display();
     } else {
       background(0);
-      path.draw();
+//      path.draw();
       testBullet.draw();
       levelManager.draw();
       for (Tower tower : towers) {
@@ -126,9 +129,9 @@ public class Window extends PApplet {
     }
   }
 
-  public void mouseReleased(){
-    selectedTower.mouseReleased();
-  }
+//  public void mouseReleased(){
+//    selectedTower.mouseReleased();
+//  }
 
   /**
    * Sets up the size of the game window.
