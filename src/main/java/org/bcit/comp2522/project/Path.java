@@ -1,11 +1,14 @@
 package org.bcit.comp2522.project;
 
+import processing.core.PImage;
+
 import java.util.ArrayList;
 
 public class Path {
   private Node head;
   private Node tail;
   private Window window;
+  private final PImage image;
 
   private ArrayList<Node> corners = new ArrayList<Node>();
 
@@ -15,6 +18,7 @@ public class Path {
    */
   public Path(Window window) {
     this.window = window;
+    image = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/d5372s0-96ad72be-b30e-44ad-b239-81feb2bfc32d.jpg");
 
   }
 
@@ -22,8 +26,9 @@ public class Path {
     Node current = head;
     while (current != null) {
       window.pushStyle();
-      window.fill(0, 255, 0);
-      window.square(current.getXpos(), current.getYpos(), 20);
+//      window.fill(0, 255, 0);
+//      window.square(current.getXpos(), current.getYpos(), 20);
+      window.image(image, current.getXpos(), current.getYpos(), 48, 48);
       window.popStyle();
       current = current.next;
     }
@@ -106,5 +111,15 @@ public class Path {
 
   public Node getHead() {
     return head;
+  }
+
+  public void reset() {
+    head = null;
+    tail = null;
+    corners.clear();
+  }
+
+  public void clearCorner(){
+    corners.clear();
   }
 }
