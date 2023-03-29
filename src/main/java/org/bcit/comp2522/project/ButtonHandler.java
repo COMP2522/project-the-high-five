@@ -27,12 +27,14 @@ public class ButtonHandler {
         int y = button.getY();
         int width = button.getWidth();
         int height = button.getHeight();
+        int xRadius = width / 2;
+        int yRadius = height / 2;
 
 
+        return mouseX >= x - xRadius && mouseX <= x + xRadius &&
+                mouseY >= y - yRadius && mouseY <= y + yRadius;
 
 
-        return mouseX >= x && mouseX <= x + width &&
-                mouseY >= y && mouseY <= y + height;
     }
 
 
