@@ -23,21 +23,14 @@ public class Window extends PApplet {
 
   Level level_2;
   ArrayList<Tower> towers;
-  EnemyManager enemyManager;
   Tower selectedTower = null;
   private static PImage background;
-
 
   private Menu menu;
 
   private int stage;
 
   ButtonHandler bh;
-
-  // Variables for the timer
-  int timeRegularEnemy = 0;
-  int timeFastEnemy = 0;
-  int timeBossEnemy = 0;
 
   Grid grid;
 
@@ -67,11 +60,6 @@ public class Window extends PApplet {
 
     levelManager.addLevel(level_1);
     levelManager.addLevel(level_2);
-    enemyManager = new EnemyManager(this);
-
-    timeRegularEnemy = 0;
-    timeFastEnemy = 0;
-    timeBossEnemy = 0;
 
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
@@ -134,8 +122,6 @@ public class Window extends PApplet {
     size(windowWidth, windowHeight);
   }
 
-
-
 public void keyPressed(){
     if (key == 'm' || key == 'M'){
       stage = 1;
@@ -149,8 +135,6 @@ public void keyPressed(){
 }
 
 
-
-
   /**
    * Main method that runs the game.
    *
@@ -162,6 +146,4 @@ public void keyPressed(){
     PApplet.runSketch(appletArgs, tdGame);
   }
 
-//  public void removeEnemy(Enemy enemy) {
-//  }
 }
