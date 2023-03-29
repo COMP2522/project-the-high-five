@@ -11,6 +11,10 @@ import processing.core.PImage;
  * bullets, and path objects.
  */
 public class Window extends PApplet {
+
+  public static final int windowWidth = 1280;
+  public static final int windowHeight = 720;
+
   ArrayList<Enemy> enemies;
   Bullet testBullet;
   Path path;
@@ -24,17 +28,31 @@ public class Window extends PApplet {
   private static PImage background;
 
 
+  private Menu menu;
+
+  private int stage;
+
+  ButtonHandler bh;
+
   // Variables for the timer
   int timeRegularEnemy = 0;
   int timeFastEnemy = 0;
   int timeBossEnemy = 0;
 
+  Grid grid;
+
   /**
    * Sets up the game window and initializes objects.
    */
-  Grid grid;
   public void setup() {
+    stage = 1;
+    menu = new Menu(this);
     this.init();
+
+  }
+
+  public void setStage(int stage) {
+    this.stage = stage;
   }
 
   /**
@@ -50,6 +68,10 @@ public class Window extends PApplet {
     levelManager.addLevel(level_1);
     levelManager.addLevel(level_2);
     enemyManager = new EnemyManager(this);
+
+    timeRegularEnemy = 0;
+    timeFastEnemy = 0;
+    timeBossEnemy = 0;
 
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
@@ -67,26 +89,39 @@ public class Window extends PApplet {
   /**
    * Draws objects on the game window.
    */
+  /**
+   * Draws objects on the game window.
+   */
   public void draw() {
-    levelManager.draw();
-    for (Tower tower : towers){
-      tower.draw();
-    }
-  }
-
-  public void mousePressed(){
-
-    for(Tower tower : towers){
-      if(tower.isHovering()){
-        selectedTower = tower;
-        selectedTower.mousePressed();
-        break;
+    if (stage == 1) {
+      menu.display();
+    } else {
+      background(0);
+      path.draw();
+      testBullet.draw();
+      levelManager.draw();
+      for (Tower tower : towers) {
+        tower.draw();
       }
     }
   }
 
-  public void mouseDragged(){
-    if(selectedTower != null){
+  public void mousePressed() {
+    if (stage == 1) {
+      menu.mousePressed(mouseX, mouseY);
+    } else {
+      for (Tower tower : towers) {
+        if (tower.isHovering()) {
+          selectedTower = tower;
+          selectedTower.mousePressed();
+          break;
+        }
+      }
+    }
+  }
+
+  public void mouseDragged() {
+    if (selectedTower != null) {
       selectedTower.mouseDragged();
     }
   }
@@ -99,14 +134,26 @@ public class Window extends PApplet {
    * Sets up the size of the game window.
    */
   public void settings() {
-    size(1280, 720);
+    size(windowWidth, windowHeight);
   }
 
-  public void keyPressed() {
-    if (key == 'z' || key == 'Z') {
-      levelManager.nextLevel();
+
+
+public void keyPressed(){
+    if (key == 'm' || key == 'M'){
+      stage = 1;
+      this.init();
+
     }
-  }
+
+      if (key == 'z' || key == 'Z') {
+        levelManager.nextLevel();
+      }
+}
+
+
+
+
   /**
    * Main method that runs the game.
    *

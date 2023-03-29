@@ -9,7 +9,7 @@ import java.io.*;
  */
 public class WriteToFile {
 
-    public static void main(String[] args) {
+    public void Write(){
 
 
         String data = "Testing";
