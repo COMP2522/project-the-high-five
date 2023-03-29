@@ -97,9 +97,10 @@ public class Window extends PApplet {
       background(0);
       path.draw();
       testBullet.draw();
-    levelManager.draw();
-    for (Tower tower : towers){
-      tower.draw();
+      levelManager.draw();
+      for (Tower tower : towers) {
+        tower.draw();
+      }
     }
   }
 
@@ -113,7 +114,7 @@ public class Window extends PApplet {
         selectedTower.mousePressed();
         break;
       }
-    }}
+    }
   }
 
   public void mouseDragged(){
