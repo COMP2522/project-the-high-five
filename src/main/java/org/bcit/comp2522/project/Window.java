@@ -133,6 +133,7 @@ public class Window extends PApplet {
   public void mouseReleased(){
     if(selectedTower != null){
       selectedTower.mouseReleased();
+      // this is for other issue
      // if (level_1.getPath().isTowerOnPath(selectedTower.getCenterX(), selectedTower.getCenterY(), selectedTower.getRadius())) {
       //  System.out.println("current xpos is " + selectedTower.getXpos());
        // System.out.println("original xpos was " + selectedTower.getOriginalXPos());
