@@ -117,6 +117,7 @@ public class Window extends PApplet {
           break;
         }
       }
+      // makes sure game doesnt crash when tower isnt clicked
       if (selectedTower == null) {
         return;
       }
