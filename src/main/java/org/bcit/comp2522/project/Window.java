@@ -103,7 +103,7 @@ public class Window extends PApplet {
       for (Tower tower : towers) {
         tower.draw();
       }
-
+    }
   }
 
   public void mousePressed() {
@@ -117,7 +117,7 @@ public class Window extends PApplet {
           break;
         }
       }
-    }}
+    }
   }
 
   public void mouseDragged() {
