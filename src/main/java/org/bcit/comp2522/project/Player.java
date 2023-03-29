@@ -6,6 +6,7 @@ private static Player player;
   int currentLevel;
   int currentScore;
   int coins;
+  int health;
 
 
   private Player(){
