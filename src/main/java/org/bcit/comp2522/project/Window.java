@@ -113,6 +113,16 @@ public class Window extends PApplet {
         tower.draw();
       }
 
+      shootBullets();
+      for (int i = bullets.size() - 1; i >= 0; i--) {
+        Bullet bullet = bullets.get(i);
+        bullet.draw();
+        bullet.move();
+        if (bullet.collide(bullet.target)) {
+          removeBullet(bullet);
+        }
+      }
+
       // draw bullets
       for (Bullet bullet : bullets) {
         bullet.draw();
@@ -121,20 +131,38 @@ public class Window extends PApplet {
     }
   }
 
-  public void mousePressed() {
-    if (stage == 1) {
-      menu.mousePressed(mouseX, mouseY);
-    } else {
-      for (Tower tower : towers) {
-        if (tower.isHovering()) {
-          selectedTower = tower;
-          selectedTower.mousePressed();
+//  public void mousePressed() {
+//    if (stage == 1) {
+//      menu.mousePressed(mouseX, mouseY);
+//    } else {
+//      for (Tower tower : towers) {
+//        if (tower.isHovering()) {
+//          selectedTower = tower;
+//          selectedTower.mousePressed();
+//          break;
+//        }
+//      }
+//      // makes sure game doesn't crash when tower isn't clicked
+//      if (selectedTower == null) {
+//        return;
+//      }
+//    }
+//  }
+
+  private void shootBullets() {
+    for (Tower tower : towers) {
+      // Only spawn a bullet if there's an enemy in range
+      float range = 150;
+      boolean enemyInRange = false;
+      for (Enemy enemy : enemies) {
+        float distance = dist(tower.getXpos(), tower.getYpos(), enemy.getXpos(), enemy.getYpos());
+        if (distance < range) {
+          enemyInRange = true;
           break;
         }
       }
-      // makes sure game doesn't crash when tower isn't clicked
-      if (selectedTower == null) {
-        return;
+      if (enemyInRange) {
+        spawnBullet(tower.getXpos(), tower.getYpos());
       }
     }
   }
@@ -193,8 +221,9 @@ public void keyPressed(){
       }
 }
 
-
-
+  public void removeBullet(Bullet bullet) {
+    bullets.remove(bullet);
+  }
 
   /**
    * Main method that runs the game.
@@ -208,11 +237,5 @@ public void keyPressed(){
   }
 
 //  public void removeEnemy(Enemy enemy) {
-//  }
-
-//  public void removeBullet(Bullet bullet) {
-//    if (bullet.collide()) {
-//      bullets.remove(bullet);
-//    }
 //  }
 }

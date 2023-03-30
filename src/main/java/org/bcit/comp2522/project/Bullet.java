@@ -16,7 +16,7 @@ public class Bullet extends Sprite implements Movable, Collidable {
   private int speed = 5;
   // for now
   private int damage = 1;
-  private Enemy target;
+  Enemy target;
 
   public Bullet(float xpos, float ypos, Window window) {
     super(xpos, ypos, window);
