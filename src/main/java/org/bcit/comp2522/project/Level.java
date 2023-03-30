@@ -3,6 +3,8 @@ package org.bcit.comp2522.project;
 public class Level {
   private Path path;
   private Window window;
+
+  private TileMap tileMap;
   public Level(Window window){
     path = new Path(window);
   }
@@ -12,6 +14,10 @@ public class Level {
 
   public Window window() {
     return window;
+  }
+
+  public TileMap getTileMap() {
+    return tileMap;
   }
 
   public void reset(){

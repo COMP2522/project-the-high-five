@@ -18,7 +18,7 @@ public class Path {
    */
   public Path(Window window) {
     this.window = window;
-    image = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/d5372s0-96ad72be-b30e-44ad-b239-81feb2bfc32d.jpg");
+    image = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/sand_tile.png");
 
   }
 
