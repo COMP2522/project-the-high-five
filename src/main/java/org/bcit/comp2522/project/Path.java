@@ -18,7 +18,7 @@ public class Path {
    */
   public Path(Window window) {
     this.window = window;
-    image = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/d5372s0-96ad72be-b30e-44ad-b239-81feb2bfc32d.jpg");
+    image = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/sand_tile.png");
 
   }
 
@@ -107,6 +107,23 @@ public class Path {
     }
     return result;
   }
+
+  // this is for other issue im working on for later
+  // this method checks if a certain tower is on the path or not
+  // this method is used in window and all parameters are based off one specific tower
+  // checks that one tower with every single node in the linked list
+  //public boolean isTowerOnPath(float x, float y, float radius) {
+   // Node current = head;
+   // while (current != null) {
+     // if (Math.sqrt(Math.pow(x - current.getXpos(), 2) + Math.pow(y - current.getYpos(), 2)) <= radius) {
+        // return true if the tower is found to be on a node
+      //  return true;
+      //}
+     // current = current.next;
+    //}
+    // return false if the tower is not on any node in the path
+   // return false;
+  //}
 
 
   public Node getHead() {

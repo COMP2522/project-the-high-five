@@ -20,15 +20,8 @@ public class EnemyManager {
     enemies = window.enemies;
   }
 
-  public void remove(Enemy enemy){
-    if (enemy.getXpos() >= window.width || enemy.getYpos() >= window.height) {
-      enemies.remove(enemy);
-    }
-  }
-
   public void update(Enemy enemy) {
       enemy.draw();
       enemy.move();
-      remove(enemy);
   }
 }

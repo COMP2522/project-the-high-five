@@ -1,8 +1,13 @@
 package org.bcit.comp2522.project;
 
+import processing.core.PImage;
+
 public class Level_1 extends Level{
   Window window;
 
+  EnemyManager enemyManager;
+  PImage tilemapImg;
+  private TileMap tileMap;
   int timeRegularEnemy;
   int timeFastEnemy;
   int timeBossEnemy;
@@ -13,17 +18,26 @@ public class Level_1 extends Level{
   }
 
   public void init(){
+    tilemapImg = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/map.png");
     timeBossEnemy = 0;
     timeFastEnemy = 0;
     timeRegularEnemy = 0;
+    enemyManager = new EnemyManager(window);
+    tileMap = new TileMap(window, getPath());
     getPath().clearCorner();
-    getPath().addCorner(40, 432);
-    getPath().addCorner(328, 432);
+    getPath().addCorner(40, 384);
+    getPath().addCorner(376, 384);
+    getPath().addCorner(376, 192);
+    getPath().addCorner(760, 192);
+    getPath().addCorner(760, 384);
+    getPath().addCorner(1192, 384);
     getPath().connectCorners();
+    tileMap.setPath();
   }
 
   public void draw(){
     window.background(0);
+    window.image(tilemapImg, 40, 0);
     getPath().draw();
     if (window.enemies.size() > 0) {
       window.testBullet.move();
@@ -55,13 +69,10 @@ public class Level_1 extends Level{
 
     // Update and draw the enemies
     for (Enemy enemy : window.enemies) {
-      enemy.move();
-      enemy.draw();
-//      if (enemy.collide(testBullet)){
-//        System.out.println("Hits");
-//      }
+      enemyManager.update(enemy);
     }
-    window.grid.draw();
+    //window.grid.draw();
+    //tileMap.checkMap();
 
   }
 }

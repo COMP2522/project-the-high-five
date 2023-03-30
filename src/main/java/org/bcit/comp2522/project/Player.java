@@ -1,14 +1,19 @@
 package org.bcit.comp2522.project;
 
 public class Player {
+private static Player player;
 
   int currentLevel;
-  int towerNumber;
   int currentScore;
-  int creepsKilled;
+  int coins;
+  int health;
 
-  public static Player player;
-  private Player(){};
+
+  private Player(){
+    currentLevel = 0;
+    currentScore = 0;
+    coins = 0;
+  };
 
   public static Player getInstance(){
     if(player == null) {
@@ -20,8 +25,5 @@ public class Player {
   }
 
 
-  public void placeTower(){
-    //TODO write place tower
-  }
 
 }
