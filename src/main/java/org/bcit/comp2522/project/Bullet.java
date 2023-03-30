@@ -26,6 +26,7 @@ public class Bullet extends Sprite implements Movable, Collidable {
     window.ellipse(getXpos(), getYpos(), 10, 10);
   }
 
+  // sets target for bullet to track
   public void setTarget(Enemy target) {
     this.target = target;
   }

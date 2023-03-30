@@ -15,6 +15,11 @@ public class BulletManager {
 
   private final Window window;
 
+    /**
+     * Constructs a BulletManager object with a Window object.
+     *
+     * @param window the Window object to associate with the BulletManager
+     */
   public BulletManager(Window window) {
     this.window = window;
     bullets = window.bullets;
@@ -22,6 +27,7 @@ public class BulletManager {
 
   /**
    * Updates the bullets in the game.
+   *
    */
   public void remove(Bullet bullet) {
     if (bullet.getXpos() >= window.width || bullet.getYpos() >= window.height) {

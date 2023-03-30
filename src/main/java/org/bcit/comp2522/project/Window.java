@@ -108,6 +108,8 @@ public class Window extends PApplet {
       for (Tower tower : towers) {
         tower.draw();
       }
+
+      // draw bullets
       for (Bullet bullet : bullets) {
         bullet.draw();
         bullet.move();
