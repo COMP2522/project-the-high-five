@@ -19,6 +19,8 @@ public class Window extends PApplet {
   Bullet testBullet;
   ArrayList<Bullet> bullets;
   BulletManager bulletManager;
+  private int shootingCounter = 0;
+  private int shootingTimer = 0;
 
   Path path;
   LevelManager levelManager;
@@ -118,15 +120,10 @@ public class Window extends PApplet {
         Bullet bullet = bullets.get(i);
         bullet.draw();
         bullet.move();
-        if (bullet.collide(bullet.target)) {
+        Enemy collidedEnemy = bullet.collide(bullet.target);
+        if (collidedEnemy != null) {
           removeBullet(bullet);
         }
-      }
-
-      // draw bullets
-      for (Bullet bullet : bullets) {
-        bullet.draw();
-        bullet.move();
       }
     }
   }
@@ -150,20 +147,28 @@ public class Window extends PApplet {
 //  }
 
   private void shootBullets() {
-    for (Tower tower : towers) {
-      // Only spawn a bullet if there's an enemy in range
-      float range = 150;
-      boolean enemyInRange = false;
-      for (Enemy enemy : enemies) {
-        float distance = dist(tower.getXpos(), tower.getYpos(), enemy.getXpos(), enemy.getYpos());
-        if (distance < range) {
-          enemyInRange = true;
-          break;
+    shootingTimer++;
+
+    if (shootingCounter < 10 && shootingTimer % 10 == 0) { // Adjust the '10' to control the shooting frequency within the burst
+      for (Tower tower : towers) {
+        // Only spawn a bullet if there's an enemy in range
+        float range = 150;
+        boolean enemyInRange = false;
+        for (Enemy enemy : enemies) {
+          float distance = dist(tower.getXpos(), tower.getYpos(), enemy.getXpos(), enemy.getYpos());
+          if (distance < range) {
+            enemyInRange = true;
+            break;
+          }
+        }
+        if (enemyInRange) {
+          spawnBullet(tower.getXpos(), tower.getYpos());
+          shootingCounter++;
         }
       }
-      if (enemyInRange) {
-        spawnBullet(tower.getXpos(), tower.getYpos());
-      }
+    } else if (shootingCounter >= 10 && shootingTimer >= 120) { // Reset the shooting counter after a 2-second cooldown
+      shootingCounter = 0;
+      shootingTimer = 0;
     }
   }
 

@@ -1,7 +1,5 @@
 package org.bcit.comp2522.project;
 
-import processing.core.PVector;
-
 import static processing.core.PApplet.*;
 
 /**
@@ -75,16 +73,29 @@ public class Bullet extends Sprite implements Movable, Collidable {
   }
 
 
+//  @Override
+//  public boolean collide(Collidable other) {
+//    if (other instanceof Enemy) {
+//      Enemy enemy = (Enemy) other;
+//      float distance = dist(getXpos(), getYpos(), enemy.getXpos(), enemy.getYpos());
+//      if (distance < 2) {
+//        enemy.setHealth(enemy.getHealth() - damage);
+//        return true;
+//      }
+//    }
+//    return false;
+//  }
+
   @Override
-  public boolean collide(Collidable other) {
+  public Enemy collide(Collidable other) {
     if (other instanceof Enemy) {
       Enemy enemy = (Enemy) other;
       float distance = dist(getXpos(), getYpos(), enemy.getXpos(), enemy.getYpos());
       if (distance < 2) {
         enemy.setHealth(enemy.getHealth() - damage);
-        return true;
+        return enemy;
       }
     }
-    return false;
+    return null;
   }
 }
