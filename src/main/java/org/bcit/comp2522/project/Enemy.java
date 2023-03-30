@@ -18,11 +18,8 @@ public class Enemy extends Sprite implements Collidable, Movable {
   private final int originalVx;
   private final int originalVy;
   private final Path path;
-
   private int spriteIndex = 0;
   private int spriteTimer = 0;
-
-  private PImage enemyImage;
   private PImage enemySprite;
   private PImage[] enemySprites = new PImage[8];
 
@@ -57,7 +54,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
     path = level.getPath();
     enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Clampbeetle.png");
     loadSprite();
-    //enemyImage = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/4d16b377644993.5c8dd561dbec5.gif");
   }
 
   public void loadSprite(){
@@ -76,9 +72,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public void draw() {
     window.pushStyle();
 
-    //window.image(enemyImage, getXpos(), getYpos(), size, size);
-    //window.ellipse(getXpos(), getYpos(), size, size);
-
     if (spriteTimer >= 8) {
       if (spriteIndex >= enemySprites.length - 1) {
         spriteIndex = 0;
@@ -87,11 +80,9 @@ public class Enemy extends Sprite implements Collidable, Movable {
       }
       spriteTimer = 0;
     }
+
     spriteTimer++;
     window.image(enemySprites[spriteIndex], getXpos(), getYpos(), size, size);
-
-//    window.ellipse(getXpos(), getYpos(), size, size);
-
     window.popStyle();
   }
 

@@ -3,6 +3,8 @@ package org.bcit.comp2522.project;
 public class Level_1 extends Level{
   Window window;
 
+  EnemyManager enemyManager;
+
   int timeRegularEnemy;
   int timeFastEnemy;
   int timeBossEnemy;
@@ -16,6 +18,7 @@ public class Level_1 extends Level{
     timeBossEnemy = 0;
     timeFastEnemy = 0;
     timeRegularEnemy = 0;
+    enemyManager = new EnemyManager(window);
     getPath().clearCorner();
     getPath().addCorner(40, 432);
     getPath().addCorner(328, 432);
@@ -55,11 +58,7 @@ public class Level_1 extends Level{
 
     // Update and draw the enemies
     for (Enemy enemy : window.enemies) {
-      enemy.move();
-      enemy.draw();
-//      if (enemy.collide(testBullet)){
-//        System.out.println("Hits");
-//      }
+      enemyManager.update(enemy);
     }
     window.grid.draw();
 

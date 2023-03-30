@@ -101,9 +101,9 @@ public class Window extends PApplet {
     if (stage == 1) {
       menu.display();
     } else {
-      background(0);
-      path.draw();
-      testBullet.draw();
+      //background(0);
+      //path.draw();
+      //testBullet.draw();
       levelManager.draw();
       for (Tower tower : towers) {
         tower.draw();
@@ -125,6 +125,10 @@ public class Window extends PApplet {
           selectedTower.mousePressed();
           break;
         }
+      }
+      // makes sure game doesn't crash when tower isn't clicked
+      if (selectedTower == null) {
+        return;
       }
     }
   }
