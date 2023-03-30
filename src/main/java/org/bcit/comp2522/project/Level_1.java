@@ -11,10 +11,12 @@ public class Level_1 extends Level{
   int timeRegularEnemy;
   int timeFastEnemy;
   int timeBossEnemy;
+  private UI ui;
   public Level_1(Window window){
     super(window);
     this.window = window;
     init();
+    ui = new UI(window);
   }
 
   public void init(){
@@ -73,6 +75,9 @@ public class Level_1 extends Level{
     }
     //window.grid.draw();
     //tileMap.checkMap();
-
+    ui.displayHP(Player.getInstance().getHealth());
+    ui.displayLevelNumber(1);
+    ui.displayEnemiesDefeated(window.enemies.size());
+    ui.displayPlayPauseButton(true);
   }
 }

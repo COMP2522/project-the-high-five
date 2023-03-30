@@ -44,7 +44,6 @@ public class Window extends PApplet {
   int timeBossEnemy = 0;
 
   Grid grid;
-  private Player player;
 
   /**
    * Sets up the game window and initializes objects.
@@ -54,12 +53,15 @@ public class Window extends PApplet {
     stage = 1;
     menu = new Menu(this);
     this.init();
-
   }
 
   public void setStage(int stage) {
     this.stage = stage;
   }
+
+//  public Player getPlayer() {
+//    return player;
+//  }
 
   /**
    * Initializes objects.

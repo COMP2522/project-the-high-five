@@ -1,8 +1,6 @@
 package org.bcit.comp2522.project;
 
-import processing.core.PApplet;
-
-public class UI extends PApplet {
+public class UI {
 
   Window window;
 
@@ -11,34 +9,34 @@ public class UI extends PApplet {
   }
 
   public void displayLevelNumber(int levelNumber) {
-    textAlign(CENTER);
-    textSize(32);
-    fill(255, 255, 255);
-    text("Level " + levelNumber, 640, 360);
+    window.textAlign(window.CENTER);
+    window.textSize(32);
+    window.fill(255, 255, 255);
+    window.text("Level " + levelNumber, 640, 85);
   }
 
   public void displayEnemiesDefeated(int enemiesDefeated) {
-    textAlign(CENTER);
-    textSize(32);
-    fill(255, 255, 255);
-    text("Enemies Defeated: " + enemiesDefeated, 640, 360);
+    window.textAlign(window.CENTER);
+    window.textSize(32);
+    window.fill(255, 255, 255);
+    window.text("Enemies Defeated: " + enemiesDefeated, 1050, 85);
   }
 
   public void displayHP(int hp) {
-    textAlign(CENTER);
-    textSize(32);
-    fill(255, 255, 255);
-    text("HP: " + hp, 640, 360);
+    window.textAlign(window.CENTER);
+    window.textSize(32);
+    window.fill(255, 255, 255);
+    window.text("HP: " + hp, 1050, 635);
   }
 
   public void displayPlayPauseButton(boolean isPlaying) {
-    textAlign(CENTER);
-    textSize(32);
-    fill(255, 255, 255);
+    window.textAlign(window.CENTER);
+    window.textSize(32);
+    window.fill(255, 255, 255);
     if (isPlaying) {
-      text("Pause", 640, 360);
+      window.text("Pause", 640, 635);
     } else {
-      text("Play", 640, 360);
+      window.text("Play", 640, 635);
     }
   }
 
