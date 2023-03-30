@@ -6,6 +6,7 @@ public class LevelManager {
   private Level currentLevelObject;
   private final int numberOfLevels;
 
+
   public LevelManager(Window window, int numberOfLevels){
     currentLevel = 0;
     this.numberOfLevels = numberOfLevels;
@@ -23,6 +24,7 @@ public class LevelManager {
       //currentLevelObject = levels[currentLevel];
     } else {
       currentLevel++;
+      Player.resetStats();
 
       //currentLevelObject = levels[currentLevel];
     }

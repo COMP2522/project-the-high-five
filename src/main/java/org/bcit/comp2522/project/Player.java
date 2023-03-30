@@ -11,8 +11,9 @@ private static Player player;
 
   private Player(){
     currentLevel = 0;
-    currentScore = 0;
-    coins = 0;
+    currentScore = 1000;
+    coins = 100;
+    health = 10;
   };
 
   public static Player getInstance(){
@@ -22,6 +23,12 @@ private static Player player;
     }
     return player;
 
+  }
+
+  public static void resetStats(){
+
+    int coins = 0;
+    int health = 10;
   }
 
 
