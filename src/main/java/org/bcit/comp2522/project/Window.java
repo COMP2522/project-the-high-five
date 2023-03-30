@@ -17,14 +17,20 @@ public class Window extends PApplet {
 
   ArrayList<Enemy> enemies;
   Bullet testBullet;
+  ArrayList<Bullet> bullets;
+  BulletManager bulletManager;
+
   Path path;
   LevelManager levelManager;
   Level level_1;
 
   Level level_2;
   ArrayList<Tower> towers;
+  EnemyManager enemyManager;
   Tower selectedTower = null;
+
   private static PImage background;
+
 
   private Menu menu;
 
@@ -32,12 +38,19 @@ public class Window extends PApplet {
 
   ButtonHandler bh;
 
+  // Variables for the timer
+  int timeRegularEnemy = 0;
+  int timeFastEnemy = 0;
+  int timeBossEnemy = 0;
+
   Grid grid;
+  private Player player;
 
   /**
    * Sets up the game window and initializes objects.
    */
   public void setup() {
+    Player.getInstance();
     stage = 1;
     menu = new Menu(this);
     this.init();
@@ -60,6 +73,14 @@ public class Window extends PApplet {
 
     levelManager.addLevel(level_1);
     levelManager.addLevel(level_2);
+    enemyManager = new EnemyManager(this);
+    bulletManager = new BulletManager(this);
+    // array of bullets
+    bullets = new ArrayList<>();
+
+    timeRegularEnemy = 0;
+    timeFastEnemy = 0;
+    timeBossEnemy = 0;
 
     testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
@@ -77,6 +98,9 @@ public class Window extends PApplet {
   /**
    * Draws objects on the game window.
    */
+  /**
+   * Draws objects on the game window.
+   */
   public void draw() {
     if (stage == 1) {
       menu.display();
@@ -87,6 +111,12 @@ public class Window extends PApplet {
       levelManager.draw();
       for (Tower tower : towers) {
         tower.draw();
+      }
+
+      // draw bullets
+      for (Bullet bullet : bullets) {
+        bullet.draw();
+        bullet.move();
       }
     }
   }
@@ -115,19 +145,31 @@ public class Window extends PApplet {
     }
   }
 
-  public void mouseReleased(){
-    if(selectedTower != null){
-      selectedTower.mouseReleased();
-      // this is for other issue im working on for later
-     // if (level_1.getPath().isTowerOnPath(selectedTower.getCenterX(), selectedTower.getCenterY(), selectedTower.getRadius())) {
-      //  System.out.println("current xpos is " + selectedTower.getXpos());
-       // System.out.println("original xpos was " + selectedTower.getOriginalXPos());
-        //selectedTower.setXpos(selectedTower.getOriginalXPos());
-        //selectedTower.setYpos(selectedTower.getOriginalYPos());
-     // }
+  private void spawnBullet(float x, float y) {
+    if (!enemies.isEmpty()) {
+//      Enemy nearestEnemy = enemies.get(0);
+//      float minDist = dist(x, y, nearestEnemy.getXpos(), nearestEnemy.getYpos());
+//
+//      for (Enemy enemy : enemies) {
+//        float curDist = dist(x, y, enemy.getXpos(), enemy.getYpos());
+//        if (curDist < minDist) {
+//          nearestEnemy = enemy;
+//          minDist = curDist;
+//        }
+//      }
+
+      Bullet newBullet = new Bullet(x, y, this);
+      newBullet.setTarget(newBullet.window.enemies.get(newBullet.track()));
+      bullets.add(newBullet);
     }
+  }
 
-
+  public void mouseReleased() {
+    if (selectedTower != null) {
+      spawnBullet(selectedTower.getXpos(), selectedTower.getYpos());
+      selectedTower.mouseReleased();
+      selectedTower = null;
+    }
   }
 
   /**
@@ -136,6 +178,8 @@ public class Window extends PApplet {
   public void settings() {
     size(windowWidth, windowHeight);
   }
+
+
 
 public void keyPressed(){
     if (key == 'm' || key == 'M'){
@@ -150,6 +194,8 @@ public void keyPressed(){
 }
 
 
+
+
   /**
    * Main method that runs the game.
    *
@@ -161,4 +207,12 @@ public void keyPressed(){
     PApplet.runSketch(appletArgs, tdGame);
   }
 
+//  public void removeEnemy(Enemy enemy) {
+//  }
+
+//  public void removeBullet(Bullet bullet) {
+//    if (bullet.collide()) {
+//      bullets.remove(bullet);
+//    }
+//  }
 }
