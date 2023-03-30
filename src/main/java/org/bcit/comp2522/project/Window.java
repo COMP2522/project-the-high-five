@@ -28,6 +28,7 @@ public class Window extends PApplet {
   ArrayList<Tower> towers;
   EnemyManager enemyManager;
   Tower selectedTower = null;
+
   private static PImage background;
 
 
@@ -43,11 +44,13 @@ public class Window extends PApplet {
   int timeBossEnemy = 0;
 
   Grid grid;
+  private Player player;
 
   /**
    * Sets up the game window and initializes objects.
    */
   public void setup() {
+    Player.getInstance();
     stage = 1;
     menu = new Menu(this);
     this.init();
