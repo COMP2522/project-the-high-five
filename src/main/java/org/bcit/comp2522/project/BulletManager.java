@@ -23,10 +23,12 @@ public class BulletManager {
   public void remove(Bullet bullet) {
     if (bullet.getXpos() >= window.width || bullet.getYpos() >= window.height) {
       bullets.remove(bullet);
-      for (Enemy enemy : window.enemies) {
-        if (bullet.collide(enemy)) {
+    } else if (bullet.getXpos() <= 0 || bullet.getYpos() <= 0) {
+      bullets.remove(bullet);
+    }
+    for (Enemy enemy : window.enemies) {
+      if (bullet.collide(enemy)) {
           bullets.remove(bullet);
-        }
       }
     }
   }
