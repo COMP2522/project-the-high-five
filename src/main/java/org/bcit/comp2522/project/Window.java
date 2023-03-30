@@ -128,23 +128,23 @@ public class Window extends PApplet {
     }
   }
 
-//  public void mousePressed() {
-//    if (stage == 1) {
-//      menu.mousePressed(mouseX, mouseY);
-//    } else {
-//      for (Tower tower : towers) {
-//        if (tower.isHovering()) {
-//          selectedTower = tower;
-//          selectedTower.mousePressed();
-//          break;
-//        }
-//      }
-//      // makes sure game doesn't crash when tower isn't clicked
-//      if (selectedTower == null) {
-//        return;
-//      }
-//    }
-//  }
+  public void mousePressed() {
+    if (stage == 1) {
+      menu.mousePressed(mouseX, mouseY);
+    } else {
+      for (Tower tower : towers) {
+        if (tower.isHovering()) {
+          selectedTower = tower;
+          selectedTower.mousePressed();
+          break;
+        }
+      }
+      // makes sure game doesn't crash when tower isn't clicked
+      if (selectedTower == null) {
+        return;
+      }
+    }
+  }
 
   private void shootBullets() {
     shootingTimer++;
