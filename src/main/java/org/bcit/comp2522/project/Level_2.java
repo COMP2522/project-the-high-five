@@ -37,7 +37,7 @@ public class Level_2 extends Level {
     window.image(tilemapImg, 40, 0);
     getPath().draw();
     //System.out.println(getPath().getHead());
-    window.grid.draw();
+    //window.grid.draw();
 
 
   }

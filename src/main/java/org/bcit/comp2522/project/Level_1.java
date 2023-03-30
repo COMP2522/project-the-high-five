@@ -71,7 +71,7 @@ public class Level_1 extends Level{
     for (Enemy enemy : window.enemies) {
       enemyManager.update(enemy);
     }
-    window.grid.draw();
+    //window.grid.draw();
     //tileMap.checkMap();
 
   }
