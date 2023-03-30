@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class BulletManager {
 
+  // array of bullets
   private final ArrayList<Bullet> bullets;
 
   private final Window window;

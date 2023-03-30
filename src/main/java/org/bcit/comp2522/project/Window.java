@@ -75,6 +75,7 @@ public class Window extends PApplet {
     levelManager.addLevel(level_2);
     enemyManager = new EnemyManager(this);
     bulletManager = new BulletManager(this);
+    // array of bullets
     bullets = new ArrayList<>();
 
     timeRegularEnemy = 0;
