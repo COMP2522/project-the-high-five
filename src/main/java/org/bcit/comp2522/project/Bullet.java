@@ -9,40 +9,40 @@ package org.bcit.comp2522.project;
  */
 public class Bullet extends Sprite implements Movable, Collidable {
 
-    public Bullet(float xpos, float ypos, Window window) {
-        super(xpos, ypos, window);
-    }
+  public Bullet(float xpos, float ypos, Window window) {
+    super(xpos, ypos, window);
+  }
 
-    public void draw() {
-        window.fill(255, 0, 0);
-        window.ellipse(getXpos(), getYpos(), 10, 10);
+  public void draw() {
+    window.fill(255, 0, 0);
+    window.ellipse(getXpos(), getYpos(), 10, 10);
+  }
+  public int track() {
+    int curr = 0;
+    for(Enemy enemy:window.enemies){
+      if (enemy.getXpos() > window.enemies.get(curr).getXpos()){
+        curr = window.enemies.indexOf(enemy);
+      }
     }
-    public int track(){
-        int curr = 0;
-        for(Enemy enemy:window.enemies){
-           if (enemy.getXpos() > window.enemies.get(curr).getXpos()){
-               curr = window.enemies.indexOf(enemy);
-           }
-        }
-        return curr;
+    return curr;
+  }
+  public void update(int tracking) {
+    if (window.enemies.get(tracking).getXpos() != getXpos()){
+      setXpos(getXpos() + 5);
     }
-    public void update(int tracking) {
-        if (window.enemies.get(tracking).getXpos() != getXpos()){
-            setXpos(getXpos() + 5);
-        }
-        if (window.enemies.get(tracking).getYpos() != getYpos()){
-            setYpos(getYpos() + 5);
-        }
-        //setXpos(getXpos() + 5);
-        //setYpos(getYpos() + 5);
+    if (window.enemies.get(tracking).getYpos() != getYpos()){
+      setYpos(getYpos() + 5);
     }
-    public void move() {
-        update(track());
-    }
+    //setXpos(getXpos() + 5);
+    //setYpos(getYpos() + 5);
+  }
+  public void move() {
+    update(track());
+  }
 
 
-    @Override
-    public boolean collide(Collidable other) {
-        return false;
-    }
+  @Override
+  public boolean collide(Collidable other) {
+    return false;
+  }
 }
