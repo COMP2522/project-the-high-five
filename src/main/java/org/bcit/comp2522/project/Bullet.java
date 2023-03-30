@@ -30,6 +30,8 @@ public class Bullet extends Sprite implements Movable, Collidable {
     this.target = target;
   }
 
+
+//  unused for now
 //  public void updatePosition() {
 //    if (target != null) {
 //      PVector direction = new PVector(target.getXpos() - this.getXpos(), target.getYpos() - this.getXpos()y);

@@ -102,7 +102,7 @@ public class Window extends PApplet {
       menu.display();
     } else {
       background(0);
-//      path.draw();
+      path.draw();
       testBullet.draw();
       levelManager.draw();
       for (Tower tower : towers) {

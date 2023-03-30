@@ -20,6 +20,9 @@ public class BulletManager {
     bullets = window.bullets;
   }
 
+  /**
+   * Updates the bullets in the game.
+   */
   public void remove(Bullet bullet) {
     if (bullet.getXpos() >= window.width || bullet.getYpos() >= window.height) {
       bullets.remove(bullet);
