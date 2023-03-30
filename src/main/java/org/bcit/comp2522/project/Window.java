@@ -84,7 +84,7 @@ public class Window extends PApplet {
     timeFastEnemy = 0;
     timeBossEnemy = 0;
 
-    testBullet = new Bullet(0, 200, this);
+//    testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
     towers = new ArrayList<>();
     // 5 towers have been spawned on top of each other

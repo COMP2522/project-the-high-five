@@ -41,10 +41,10 @@ public class Level_1 extends Level{
     window.background(0);
     window.image(tilemapImg, 40, 0);
     getPath().draw();
-    if (window.enemies.size() > 0) {
-      window.testBullet.move();
-    }
-    window.testBullet.draw();
+//    if (window.enemies.size() > 0) {
+//      window.testBullet.move();
+//    }
+//    window.testBullet.draw();
 
     // Update the timer
     timeRegularEnemy++;

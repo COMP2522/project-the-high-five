@@ -26,7 +26,7 @@ public class UI {
     window.textAlign(window.CENTER);
     window.textSize(32);
     window.fill(255, 255, 255);
-    window.text("HP: " + hp, 1050, 635);
+    window.text("HP: " + hp, 1050, 658);
   }
 
   public void displayPlayPauseButton(boolean isPlaying) {
@@ -34,9 +34,9 @@ public class UI {
     window.textSize(32);
     window.fill(255, 255, 255);
     if (isPlaying) {
-      window.text("Pause", 640, 635);
+      window.text("Pause", 640, 658);
     } else {
-      window.text("Play", 640, 635);
+      window.text("Play", 640, 658);
     }
   }
 
