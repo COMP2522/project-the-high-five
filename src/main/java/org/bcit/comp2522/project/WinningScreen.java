@@ -18,6 +18,7 @@ public class WinningScreen {
         parent.background(0);
         parent.textSize(50);
         parent.textAlign(parent.CENTER, parent.CENTER);
-        parent.text("YAY YOU WON!   :) ", Window.windowWidth/2, Window.windowHeight/2);
+        parent.text("YAY YOU WON!   :) " +
+                "\nYour score was: " + Player.getCurrentScore(), Window.windowWidth/2, Window.windowHeight/2);
     }
 }

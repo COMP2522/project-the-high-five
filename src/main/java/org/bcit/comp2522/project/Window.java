@@ -49,7 +49,7 @@ public class Window extends PApplet {
    */
   public void setup() {
     Player.getInstance();
-    stage = 4;
+    stage = 1;
     menu = new Menu(this);
     this.init();
 
@@ -200,6 +200,14 @@ public void keyPressed(){
 
       if (key == 'z' || key == 'Z') {
         levelManager.nextLevel();
+      }
+
+      if (key == 'w' || key == 'W') {
+        levelManager.killEnemies();
+      }
+
+      if (key == 'l' || key == 'L') {
+        levelManager.killPlayer();
       }
 }
 

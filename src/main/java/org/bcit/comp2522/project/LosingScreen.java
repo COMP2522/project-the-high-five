@@ -23,6 +23,9 @@ public class LosingScreen {
         parent.background(0);
         parent.textSize(50);
         parent.textAlign(parent.CENTER, parent.CENTER);
-        parent.text("OH NO\nYOU LOST  :( ", Window.windowWidth/2, Window.windowHeight/2);
+        parent.text("OH NO\nYOU LOST  :( " +
+                "\nYour score was :" + Player.getCurrentScore(), Window.windowWidth/2, Window.windowHeight/2);
     }
+
+
 }
