@@ -47,12 +47,12 @@ public class Level_1 extends Level {
   }
 
   public void draw() {
-    window.background(0);
-    window.image(tilemapImg, 40, 0);
-    getPath().draw();
-    selectTowerUI.draw();
-    selectTowerUI.selectTower();
-    selectTowerUI.slotClicked();
+//    window.background(0);
+//    window.image(tilemapImg, 40, 0);
+//    getPath().draw();
+//    selectTowerUI.draw();
+//    selectTowerUI.selectTower();
+//    selectTowerUI.slotClicked();
     //
     //window.testBullet.draw();
     if (Player.getHealth() <= 0) {
@@ -65,10 +65,13 @@ public class Level_1 extends Level {
       window.background(0);
       window.image(tilemapImg, 40, 0);
       getPath().draw();
+      selectTowerUI.draw();
+      selectTowerUI.selectTower();
+      selectTowerUI.slotClicked();
       if (window.enemies.size() > 0) {
         window.testBullet.move();
       }
-      window.testBullet.draw();
+      //window.testBullet.draw();
 
       // Update the timer
       timeRegularEnemy++;

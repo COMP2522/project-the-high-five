@@ -109,15 +109,15 @@ public class Window extends PApplet {
         //path.draw();
         //testBullet.draw();
         levelManager.draw();
-        for (Tower tower : towers) {
-          tower.draw();
-        }
-
-        // draw bullets
-        for (Bullet bullet : bullets) {
-          bullet.draw();
-          bullet.move();
-        }
+//        for (Tower tower : towers) {
+//          tower.draw();
+//        }
+//
+//        // draw bullets
+//        for (Bullet bullet : bullets) {
+//          bullet.draw();
+//          bullet.move();
+//        }
         break;
       case 3:
         LosingScreen ls = new LosingScreen(this);
@@ -136,34 +136,34 @@ public class Window extends PApplet {
       menu.mousePressed(mouseX, mouseY);
     } else {
 
-      for (Tower tower : towers) {
-        if (tower.isHovering()) {
-          selectedTower = tower;
-          selectedTower.mousePressed();
-          break;
-        }
-      }
+//      for (Tower tower : towers) {
+//        if (tower.isHovering()) {
+//          selectedTower = tower;
+//          selectedTower.mousePressed();
+//          break;
+//        }
+//      }
       // makes sure game doesn't crash when tower isn't clicked
-      if (selectedTower == null) {
-        return;
-      }
+//      if (selectedTower == null) {
+//        return;
+//      }
     }
   }
 
-  public void mouseDragged() {
-    if (selectedTower != null) {
-      selectedTower.mouseDragged();
-    }
-  }
+//  public void mouseDragged() {
+//    if (selectedTower != null) {
+//      selectedTower.mouseDragged();
+//    }
+//  }
 
 
-  public void mouseReleased() {
-    if (selectedTower != null) {
-      //spawnBullet(selectedTower.getXpos(), selectedTower.getYpos());
-      selectedTower.mouseReleased();
-      selectedTower = null;
-    }
-  }
+//  public void mouseReleased() {
+//    if (selectedTower != null) {
+//      //spawnBullet(selectedTower.getXpos(), selectedTower.getYpos());
+//      selectedTower.mouseReleased();
+//      selectedTower = null;
+//    }
+//  }
 
   /**
    * Sets up the size of the game window.
