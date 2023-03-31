@@ -69,7 +69,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public boolean getIsDead() {
     return isDead;
   }
-
+  // Remove enemy when out of bounds
   public void outOfBounds() {
     if (getXpos() > window.width) {
       isDead = true;
