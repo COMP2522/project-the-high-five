@@ -2,11 +2,17 @@ package org.bcit.comp2522.project;
 
 import processing.core.PImage;
 
+import java.util.ArrayList;
+
 public class Level_1 extends Level{
   Window window;
 
   EnemyManager enemyManager;
   PImage tilemapImg;
+
+  SelectTowerUI selectTowerUI;
+
+  private ArrayList<Tower> towers;
   private TileMap tileMap;
   int timeRegularEnemy;
   int timeFastEnemy;
@@ -23,7 +29,8 @@ public class Level_1 extends Level{
     timeFastEnemy = 0;
     timeRegularEnemy = 0;
     enemyManager = new EnemyManager(window);
-    tileMap = new TileMap(window, getPath());
+    towers = new ArrayList<>();
+    tileMap = new TileMap(window, getPath(), towers);
     getPath().clearCorner();
     getPath().addCorner(40, 384);
     getPath().addCorner(376, 384);
@@ -33,16 +40,18 @@ public class Level_1 extends Level{
     getPath().addCorner(1192, 384);
     getPath().connectCorners();
     tileMap.setPath();
+    selectTowerUI = new SelectTowerUI(window, tileMap);
   }
 
   public void draw(){
     window.background(0);
     window.image(tilemapImg, 40, 0);
     getPath().draw();
-    if (window.enemies.size() > 0) {
-      window.testBullet.move();
-    }
-    window.testBullet.draw();
+    selectTowerUI.draw();
+    selectTowerUI.selectTower();
+    selectTowerUI.slotClicked();
+    //
+    //window.testBullet.draw();
 
     // Update the timer
     timeRegularEnemy++;
@@ -69,7 +78,10 @@ public class Level_1 extends Level{
 
     // Update and draw the enemies
     enemyManager.update();
-    //window.grid.draw();
+    for (Tower tower : towers) {
+      tower.draw();
+    }
+    window.grid.draw();
     //tileMap.checkMap();
 
   }
