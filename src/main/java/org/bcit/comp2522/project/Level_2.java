@@ -32,6 +32,7 @@ public class Level_2 extends Level {
     timeFastEnemy = 0;
     timeRegularEnemy = 0;
     enemyManager = new EnemyManager(window);
+
     getPath().clearCorner();
     getPath().addCorner(40, 384);
     getPath().addCorner(280, 384);
