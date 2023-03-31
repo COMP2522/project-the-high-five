@@ -41,9 +41,9 @@ public class Highscore {
         dbh.insertHighScore(user, highscore);
     }
 
-    public void retrieveHighscores() {
+    public ArrayList<Highscore> retrieveHighscores() {
         DatabaseHandler dbh = new DatabaseHandler("testuser", "cake1234");
-        dbh.retrieveHighScores();
+        return dbh.retrieveHighScores();
     }
 
     }

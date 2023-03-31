@@ -10,6 +10,7 @@ public class EnemyManager {
   private final ArrayList<Enemy> enemies;
   private final Window window;
 
+
   /**
    * Constructs an EnemyManager object with a Window object.
    *
@@ -21,6 +22,7 @@ public class EnemyManager {
   }
   public void addEnemy(Enemy enemy){
     enemies.add(enemy);
+
   }
 
   public void removeEnemy(){

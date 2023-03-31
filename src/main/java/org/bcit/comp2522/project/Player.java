@@ -38,7 +38,7 @@ public class Player {
         Player.coins = coins;
     }
 
-    public int getHealth() {
+    public static int getHealth() {
         return health;
     }
 

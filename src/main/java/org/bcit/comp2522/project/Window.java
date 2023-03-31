@@ -2,7 +2,6 @@ package org.bcit.comp2522.project;
 
 import  java.util.ArrayList;
 
-import org.w3c.dom.events.MouseEvent;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -36,7 +35,7 @@ public class Window extends PApplet {
 
   private int stage;
 
-  ButtonHandler bh;
+  private ButtonHandler bh;
 
   // Variables for the timer
   int timeRegularEnemy = 0;
@@ -44,7 +43,6 @@ public class Window extends PApplet {
   int timeBossEnemy = 0;
 
   Grid grid;
-  private Player player;
 
   /**
    * Sets up the game window and initializes objects.
@@ -102,22 +100,34 @@ public class Window extends PApplet {
    * Draws objects on the game window.
    */
   public void draw() {
-    if (stage == 1) {
-      menu.display();
-    } else {
-      //background(0);
-      //path.draw();
-      //testBullet.draw();
-      levelManager.draw();
-      for (Tower tower : towers) {
-        tower.draw();
-      }
+    switch (stage) {
+      case 1:
+        menu.display();
+        break;
+      case 2:
+        //background(0);
+        //path.draw();
+        //testBullet.draw();
+        levelManager.draw();
+        for (Tower tower : towers) {
+          tower.draw();
+        }
 
-      // draw bullets
-      for (Bullet bullet : bullets) {
-        bullet.draw();
-        bullet.move();
-      }
+        // draw bullets
+        for (Bullet bullet : bullets) {
+          bullet.draw();
+          bullet.move();
+        }
+        break;
+      case 3:
+        LosingScreen ls = new LosingScreen(this);
+        ls.display();
+        break;
+      case 4:
+        WinningScreen ws = new WinningScreen(this);
+        ws.display();
+        break;
+
     }
   }
 
@@ -191,6 +201,14 @@ public void keyPressed(){
 
       if (key == 'z' || key == 'Z') {
         levelManager.nextLevel();
+      }
+
+      if (key == 'w' || key == 'W') {
+        levelManager.killEnemies();
+      }
+
+      if (key == 'l' || key == 'L') {
+        levelManager.killPlayer();
       }
 }
 
