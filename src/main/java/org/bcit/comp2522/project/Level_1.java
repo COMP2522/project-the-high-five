@@ -13,6 +13,7 @@ public class Level_1 extends Level {
   SelectTowerUI selectTowerUI;
 
   private ArrayList<Tower> towers;
+  private BulletManager bulletManager;
   private TileMap tileMap;
   int timeRegularEnemy;
   int timeFastEnemy;
@@ -31,7 +32,8 @@ public class Level_1 extends Level {
     timeRegularEnemy = 0;
     enemyManager = new EnemyManager(window);
     towers = new ArrayList<>();
-    tileMap = new TileMap(window, getPath(), towers);
+    bulletManager = new BulletManager(window);
+    tileMap = new TileMap(window, getPath(), towers, bulletManager);
     getPath().clearCorner();
     getPath().addCorner(40, 384);
     getPath().addCorner(376, 384);
@@ -45,12 +47,12 @@ public class Level_1 extends Level {
   }
 
   public void draw() {
-    window.background(0);
-    window.image(tilemapImg, 40, 0);
-    getPath().draw();
-    selectTowerUI.draw();
-    selectTowerUI.selectTower();
-    selectTowerUI.slotClicked();
+//    window.background(0);
+//    window.image(tilemapImg, 40, 0);
+//    getPath().draw();
+//    selectTowerUI.draw();
+//    selectTowerUI.selectTower();
+//    selectTowerUI.slotClicked();
     //
     //window.testBullet.draw();
     if (Player.getHealth() <= 0) {
@@ -63,10 +65,13 @@ public class Level_1 extends Level {
       window.background(0);
       window.image(tilemapImg, 40, 0);
       getPath().draw();
+      selectTowerUI.draw();
+      selectTowerUI.selectTower();
+      selectTowerUI.slotClicked();
       if (window.enemies.size() > 0) {
         window.testBullet.move();
       }
-      window.testBullet.draw();
+      //window.testBullet.draw();
 
       // Update the timer
       timeRegularEnemy++;
@@ -91,13 +96,22 @@ public class Level_1 extends Level {
         enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 4, 1, 1, 3, this));
       }
 
-      // Update and draw the enemies
-      enemyManager.update();
-      for (Tower tower : towers) {
-        tower.draw();
+    // Update and draw the enemies
+
+    for (Tower tower : towers) {
+      tower.draw();
+      //tower.inRange(enemyManager);
+      tower.shootingEnemy(enemyManager);
+      if (tower.isInRange()) {
+        window.stroke(255, 0, 0);
+      } else {
+        window.stroke(0, 0, 0);
       }
-      window.grid.draw();
-      //tileMap.checkMap();
+    }
+    bulletManager.update();
+    enemyManager.update();
+    window.grid.draw();
+    //tileMap.checkMap();
 
     }
   }

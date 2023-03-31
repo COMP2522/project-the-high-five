@@ -33,6 +33,9 @@ public class EnemyManager {
       }
     }
   }
+  public ArrayList<Enemy> getEnemies() {
+    return enemies;
+  }
 
   public void update() {
     for (Enemy enemy : enemies) {

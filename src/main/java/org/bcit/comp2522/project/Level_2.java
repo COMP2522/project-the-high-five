@@ -10,6 +10,7 @@ public class Level_2 extends Level {
   EnemyManager enemyManager;
   private TileMap tileMap;
   private ArrayList<Tower> towers;
+  private BulletManager bulletManager;
 
   int timeRegularEnemy;
   int timeFastEnemy;
@@ -20,15 +21,13 @@ public class Level_2 extends Level {
   public Level_2(Window window) {
     super(window);
     this.window = window;
-
     tilemapImg = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/map.png");
     init();
   }
 
-
   public void init(){
     towers = new ArrayList<>();
-    tileMap = new TileMap(window, getPath(), towers);
+    tileMap = new TileMap(window, getPath(), towers, bulletManager);
     timeBossEnemy = 0;
     timeFastEnemy = 0;
     timeRegularEnemy = 0;
