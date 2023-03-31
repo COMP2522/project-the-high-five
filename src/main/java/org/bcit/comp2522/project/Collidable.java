@@ -1,7 +1,7 @@
 package org.bcit.comp2522.project;
 
 public interface Collidable {
-    boolean collide(Collidable other);
+    boolean collide(Object other);
 
     float getXpos();
 
