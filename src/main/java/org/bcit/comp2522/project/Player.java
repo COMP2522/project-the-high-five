@@ -2,10 +2,10 @@ package org.bcit.comp2522.project;
 
 public class Player {
     private static Player player;
-    private int currentLevel;
-    private int currentScore;
-    private int coins;
-   private int health;
+    private static int currentLevel;
+    private static int currentScore;
+    private static int coins;
+   private static int health;
 
     private Player() {
         currentLevel = 0;
@@ -14,36 +14,36 @@ public class Player {
         health = 10;
     }
 
-    public int getCurrentLevel() {
+    public static int getCurrentLevel() {
         return currentLevel;
     }
 
-    public void setCurrentLevel(int currentLevel) {
-        this.currentLevel = currentLevel;
+    public static void setCurrentLevel(int currentLevel) {
+        Player.currentLevel = currentLevel;
     }
 
-    public int getCurrentScore() {
+    public static int getCurrentScore() {
         return currentScore;
     }
 
-    public void setCurrentScore(int currentScore) {
-        this.currentScore = currentScore;
+    public static void setCurrentScore(int currentScore) {
+        Player.currentScore = currentScore;
     }
 
-    public int getCoins() {
+    public static int getCoins() {
         return coins;
     }
 
-    public void setCoins(int coins) {
-        this.coins = coins;
+    public static void setCoins(int coins) {
+        Player.coins = coins;
     }
 
     public int getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public static void setHealth(int health) {
+        Player.health = health;
     }
 
 
@@ -60,8 +60,8 @@ public class Player {
     }
 
     public static void resetStats() {
-        player.setCoins(0);
-        player.setCoins(10);
+        Player.setCoins(0);
+        Player.setCoins(10);
 
     }
 
