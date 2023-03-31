@@ -18,12 +18,11 @@ public class Grid {
     window.stroke(27, 168, 240);
     for (int i = 40; i <= 1240; i += 48){
       window.line(i,0,i,720);
-      window.text(i, i, 720);
+      window.text(i, i+10, 700);
       window.fill(27, 168, 240);
     }
     for (int i = 0; i <= 720; i += 48){
       window.line(40,i,1240,i);
-
       //window.text(i, 10, i);
     }
     window.popStyle();

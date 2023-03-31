@@ -17,6 +17,9 @@ public class Window extends PApplet {
 
   ArrayList<Enemy> enemies;
   Bullet testBullet;
+  ArrayList<Bullet> bullets;
+  BulletManager bulletManager;
+
   Path path;
   LevelManager levelManager;
   Level level_1;
@@ -25,6 +28,7 @@ public class Window extends PApplet {
   ArrayList<Tower> towers;
   EnemyManager enemyManager;
   Tower selectedTower = null;
+
   private static PImage background;
 
 
@@ -40,11 +44,13 @@ public class Window extends PApplet {
   int timeBossEnemy = 0;
 
   Grid grid;
+  private Player player;
 
   /**
    * Sets up the game window and initializes objects.
    */
   public void setup() {
+    Player.getInstance();
     stage = 1;
     menu = new Menu(this);
     this.init();
@@ -68,6 +74,9 @@ public class Window extends PApplet {
     levelManager.addLevel(level_1);
     levelManager.addLevel(level_2);
     enemyManager = new EnemyManager(this);
+    bulletManager = new BulletManager(this);
+    // array of bullets
+    bullets = new ArrayList<>();
 
     timeRegularEnemy = 0;
     timeFastEnemy = 0;
@@ -96,12 +105,18 @@ public class Window extends PApplet {
     if (stage == 1) {
       menu.display();
     } else {
-      background(0);
-      path.draw();
-      testBullet.draw();
+      //background(0);
+      //path.draw();
+      //testBullet.draw();
       levelManager.draw();
       for (Tower tower : towers) {
         tower.draw();
+      }
+
+      // draw bullets
+      for (Bullet bullet : bullets) {
+        bullet.draw();
+        bullet.move();
       }
     }
   }
@@ -117,6 +132,10 @@ public class Window extends PApplet {
           break;
         }
       }
+      // makes sure game doesn't crash when tower isn't clicked
+      if (selectedTower == null) {
+        return;
+      }
     }
   }
 
@@ -126,8 +145,31 @@ public class Window extends PApplet {
     }
   }
 
-  public void mouseReleased(){
-    selectedTower.mouseReleased();
+  private void spawnBullet(float x, float y) {
+    if (!enemies.isEmpty()) {
+//      Enemy nearestEnemy = enemies.get(0);
+//      float minDist = dist(x, y, nearestEnemy.getXpos(), nearestEnemy.getYpos());
+//
+//      for (Enemy enemy : enemies) {
+//        float curDist = dist(x, y, enemy.getXpos(), enemy.getYpos());
+//        if (curDist < minDist) {
+//          nearestEnemy = enemy;
+//          minDist = curDist;
+//        }
+//      }
+
+      Bullet newBullet = new Bullet(x, y, this);
+      newBullet.setTarget(newBullet.window.enemies.get(newBullet.track()));
+      bullets.add(newBullet);
+    }
+  }
+
+  public void mouseReleased() {
+    if (selectedTower != null) {
+      spawnBullet(selectedTower.getXpos(), selectedTower.getYpos());
+      selectedTower.mouseReleased();
+      selectedTower = null;
+    }
   }
 
   /**
@@ -166,5 +208,11 @@ public void keyPressed(){
   }
 
 //  public void removeEnemy(Enemy enemy) {
+//  }
+
+//  public void removeBullet(Bullet bullet) {
+//    if (bullet.collide()) {
+//      bullets.remove(bullet);
+//    }
 //  }
 }

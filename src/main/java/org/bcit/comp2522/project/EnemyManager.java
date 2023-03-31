@@ -17,18 +17,27 @@ public class EnemyManager {
    */
   public EnemyManager(Window window) {
     this.window = window;
-    enemies = window.enemies;
+    enemies = new ArrayList<>();
+  }
+  public void addEnemy(Enemy enemy){
+    enemies.add(enemy);
   }
 
-  public void remove(Enemy enemy){
-    if (enemy.getXpos() >= window.width || enemy.getYpos() >= window.height) {
-      enemies.remove(enemy);
+  public void removeEnemy(){
+    for (Enemy enemy : enemies) {
+      if (enemy.getIsDead()) {
+        enemies.remove(enemy);
+        break;
+      }
     }
   }
 
-  public void update(Enemy enemy) {
+  public void update() {
+    for (Enemy enemy : enemies) {
       enemy.draw();
       enemy.move();
-      remove(enemy);
+      enemy.outOfBounds();
+    }
+    removeEnemy();
   }
 }
