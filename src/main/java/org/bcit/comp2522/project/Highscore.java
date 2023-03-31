@@ -10,6 +10,8 @@ public class Highscore {
 
         this.highscore = Player.getInstance().currentScore;
     }
+
+
 }
 
 
