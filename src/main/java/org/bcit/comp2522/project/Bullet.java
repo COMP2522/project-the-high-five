@@ -14,6 +14,21 @@ import static processing.core.PApplet.*;
 public class Bullet extends Sprite implements Movable, Collidable {
 
   private int speed = 5;
+
+  private int size = 10;
+
+  public int getDamage() {
+    return damage;
+  }
+
+  public int getSize() {
+    return size;
+  }
+
+  public void setDamage(int damage) {
+    this.damage = damage;
+  }
+
   // for now
   private int damage = 1;
   private Enemy target;
@@ -24,7 +39,7 @@ public class Bullet extends Sprite implements Movable, Collidable {
 
   public void draw() {
     window.fill(0, 255, 0);
-    window.ellipse(getXpos(), getYpos(), 10, 10);
+    window.ellipse(getXpos(), getYpos(), size, size);
   }
 
   // sets target for bullet to track
@@ -76,7 +91,7 @@ public class Bullet extends Sprite implements Movable, Collidable {
 
 
   @Override
-  public boolean collide(Collidable other) {
+  public boolean collide(Object other) {
     if (other instanceof Enemy) {
       Enemy enemy = (Enemy) other;
       float distance = dist(getXpos(), getYpos(), enemy.getXpos(), enemy.getYpos());
