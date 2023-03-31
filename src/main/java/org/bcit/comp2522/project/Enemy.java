@@ -23,6 +23,12 @@ public class Enemy extends Sprite implements Collidable, Movable {
   private PImage enemySprite;
   private PImage[] enemySprites = new PImage[8];
 
+  private PImage[] enemySpritesUP = new PImage[8];
+
+  private PImage[] enemySpritesDOWN = new PImage[8];
+
+  private int direction = 0;
+
   private boolean isDead = false;
 
   public int getHealth() {
@@ -56,7 +62,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
     originalVx = vx;
     originalVy = vy;
     path = level.getPath();
-    enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Clampbeetle.png");
+    enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Clampbeetle3.png");
     loadSprite();
   }
 
@@ -74,10 +80,17 @@ public class Enemy extends Sprite implements Collidable, Movable {
     int spriteWidth = 64;
     int spriteHeight = 64;
     int spriteLength = 8;
+    int upY = 256;
+    int downY = 192;
+    int rightY = 320;
     for (int i = 0; i < spriteLength; i++) {
       int x = i%spriteLength * spriteWidth;
-      enemySprites[i] = enemySprite.get(x, 320, spriteWidth, spriteHeight);
+      enemySprites[i] = enemySprite.get(x, rightY, spriteWidth, spriteHeight);
+      enemySpritesUP[i] = enemySprite.get(x, upY, spriteWidth, spriteHeight);
+      enemySpritesDOWN[i] = enemySprite.get(x, downY, spriteWidth, spriteHeight);
     }
+
+
   }
 
   /**
@@ -85,7 +98,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
    */
   public void draw() {
     window.pushStyle();
-
+    // Sprite animation timer
     if (spriteTimer >= 8) {
       if (spriteIndex >= enemySprites.length - 1) {
         spriteIndex = 0;
@@ -96,7 +109,15 @@ public class Enemy extends Sprite implements Collidable, Movable {
     }
 
     spriteTimer++;
-    window.image(enemySprites[spriteIndex], getXpos(), getYpos(), size, size);
+    // Draw sprite based on direction
+    if (direction == 0) {
+      window.image(enemySprites[spriteIndex], getXpos(), getYpos(), size, size);
+    } else if (direction == 2) {
+      window.image(enemySpritesUP[spriteIndex], getXpos(), getYpos(), size, size);
+    } else if (direction == 1) {
+      window.image(enemySpritesDOWN[spriteIndex], getXpos(), getYpos(), size, size);
+    }
+    //window.image(enemySprites[spriteIndex], getXpos(), getYpos(), size, size);
     window.popStyle();
   }
 
@@ -111,21 +132,24 @@ public class Enemy extends Sprite implements Collidable, Movable {
       if (getXpos() == current.getXpos() && getYpos() == current.getYpos()) {
         if (current.next != null) {
           if (current.next.getXpos() > current.getXpos()) {
-            // go right
+            // go right, direction = 0;
             vx = originalVx;
             vy = 0;
+            direction = 0;
           } else if (current.next.getXpos() < current.getXpos()) {
             // go left
             vx = originalVx * -1;
             vy = 0;
           } else if (current.next.getYpos() > current.getYpos()) {
-            // go down
+            // go down, direction = 1;
             vx = 0;
             vy = originalVy;
+            direction = 1;
           } else if (current.next.getYpos() < current.getYpos()) {
-            // go up
+            // go up , direction = 2;
             vx = 0;
             vy = originalVy * -1;
+            direction = 2;
           }
         }
       }
