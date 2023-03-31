@@ -14,14 +14,15 @@ public class Enemy extends Sprite implements Collidable, Movable {
   private int health;
   private int vx;
   private int vy;
-  private final int size;
+  private final int size = 50;
   private final int originalVx;
   private final int originalVy;
   private final Path path;
   private int spriteIndex = 0;
   private int spriteTimer = 0;
+  private int damage;
   private PImage enemySprite;
-  private PImage[] enemySprites = new PImage[8];
+  protected PImage[] enemySprites = new PImage[8];
 
   private PImage[] enemySpritesUP = new PImage[8];
 
@@ -40,15 +41,14 @@ public class Enemy extends Sprite implements Collidable, Movable {
    * @param health the health of the Enemy
    * @param vx the x-velocity of the Enemy
    * @param vy the y-velocity of the Enemy
-   * @param size the size of the Enemy
+   * @param damage the damage the Enemy deals to the Player
    */
-  public Enemy(float xpos, float ypos, Window window, int health, int vx, int vy, int size, Level level) {
+  public Enemy(float xpos, float ypos, Window window, int health, int vx, int vy, int damage, Level level) {
     super(xpos, ypos, window);
     this.health = health;
-    size = 50;
     this.vx = vx;
     this.vy = vy;
-    this.size = size;
+    this.damage = damage;
     originalVx = vx;
     originalVy = vy;
     path = level.getPath();
@@ -71,7 +71,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public void outOfBounds() {
     if (getXpos() > window.width) {
       isDead = true;
-      Player.getInstance().setHealth(Player.getInstance().getHealth() - size);
+      Player.setHealth(Player.getHealth() - damage);
     }
   }
 
@@ -175,7 +175,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
             health -= bullet.getDamage();
             if (health <= 0) {
             isDead = true;
-            Player.getInstance().setCoins(Player.getInstance().getCoins() + size);
+            Player.getInstance().setCoins(Player.getInstance().getCoins() + damage);
             }
             return true;
         }
