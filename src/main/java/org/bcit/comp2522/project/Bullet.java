@@ -14,6 +14,15 @@ import static processing.core.PApplet.*;
 public class Bullet extends Sprite implements Movable, Collidable {
 
   private int speed = 5;
+
+  public int getDamage() {
+    return damage;
+  }
+
+  public void setDamage(int damage) {
+    this.damage = damage;
+  }
+
   // for now
   private int damage = 1;
   private Enemy target;
@@ -76,7 +85,7 @@ public class Bullet extends Sprite implements Movable, Collidable {
 
 
   @Override
-  public boolean collide(Collidable other) {
+  public boolean collide(Object other) {
     if (other instanceof Enemy) {
       Enemy enemy = (Enemy) other;
       float distance = dist(getXpos(), getYpos(), enemy.getXpos(), enemy.getYpos());

@@ -52,19 +52,19 @@ public class Level_1 extends Level{
     // Check if it's time to spawn a new regular enemy
     if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
       timeRegularEnemy = 0;
-      enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 2, 2, 2, 50, this));
+      enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 2, 2, 2, 2, this));
     }
 
     // Check if it's time to spawn a new fast enemy
     if (timeFastEnemy >= 600) { // 600 frames = 10 seconds
       timeFastEnemy = 0;
-      enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 1, 4, 4,35, this));
+      enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 1, 4, 4,1, this));
     }
 
     // Check if it's time to spawn a new boss enemy
     if (timeBossEnemy >= 900) { // 900 frames = 15 seconds
       timeBossEnemy = 0;
-      enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 4, 1, 1, 75, this));
+      enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 4, 1, 1, 3, this));
     }
 
     // Update and draw the enemies

@@ -25,16 +25,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
 
   private boolean isDead = false;
 
-  public int getHealth() {
-    return health;
-  }
-
-
-
-  public void setHealth(int health) {
-    this.health = health;
-  }
-
   /**
    * Constructor for creating a new Enemy.
    *
@@ -60,6 +50,14 @@ public class Enemy extends Sprite implements Collidable, Movable {
     loadSprite();
   }
 
+  public int getHealth() {
+    return health;
+  }
+
+  public void setHealth(int health) {
+    this.health = health;
+  }
+
   public boolean getIsDead() {
     return isDead;
   }
@@ -67,6 +65,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public void outOfBounds() {
     if (getXpos() > window.width) {
       isDead = true;
+      Player.getInstance().setHealth(Player.getInstance().getHealth() - size);
     }
   }
 
@@ -142,13 +141,15 @@ public class Enemy extends Sprite implements Collidable, Movable {
    * @return true if the Enemy has collided with the other Collidable object, false otherwise
    */
   @Override
-  public boolean collide(Collidable other) {
-    float distance = 0;
+  public boolean collide(Object other) {
     if (other instanceof Bullet) {
-      Bullet bullet = (Bullet) other;
-      distance = (float) Math.sqrt( Math.pow((bullet.getXpos() - getXpos()), 2) + Math.pow((bullet.getYpos() - getYpos()), 2));
-      if (distance < this.size) {
-        health -= 1;
+        Bullet bullet = (Bullet) other;
+      if (getXpos() == bullet.getXpos() && getYpos() == bullet.getYpos()) {
+        health -= bullet.getDamage();
+        if (health <= 0) {
+          isDead = true;
+          Player.getInstance().setCoins(Player.getInstance().getCoins() + size);
+        }
         return true;
       }
     }
