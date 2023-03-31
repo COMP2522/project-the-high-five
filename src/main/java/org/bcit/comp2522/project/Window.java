@@ -2,7 +2,6 @@ package org.bcit.comp2522.project;
 
 import  java.util.ArrayList;
 
-import org.w3c.dom.events.MouseEvent;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -19,8 +18,6 @@ public class Window extends PApplet {
   Bullet testBullet;
   ArrayList<Bullet> bullets;
   BulletManager bulletManager;
-  private int shootingCounter = 0;
-  private int shootingTimer = 0;
 
   Path path;
   LevelManager levelManager;
@@ -38,7 +35,7 @@ public class Window extends PApplet {
 
   private int stage;
 
-  ButtonHandler bh;
+  private ButtonHandler bh;
 
   // Variables for the timer
   int timeRegularEnemy = 0;
@@ -46,7 +43,6 @@ public class Window extends PApplet {
   int timeBossEnemy = 0;
 
   Grid grid;
-  private Player player;
 
   /**
    * Sets up the game window and initializes objects.
@@ -104,27 +100,34 @@ public class Window extends PApplet {
    * Draws objects on the game window.
    */
   public void draw() {
-    if (stage == 1) {
-      menu.display();
-    } else {
-      //background(0);
-      //path.draw();
-      //testBullet.draw();
-      levelManager.draw();
-      for (Tower tower : towers) {
-        tower.draw();
-      }
-
-      shootBullets();
-      for (int i = bullets.size() - 1; i >= 0; i--) {
-        Bullet bullet = bullets.get(i);
-        bullet.draw();
-        bullet.move();
-        Enemy collidedEnemy = bullet.collide(bullet.target);
-        if (collidedEnemy != null) {
-          removeBullet(bullet);
+    switch (stage) {
+      case 1:
+        menu.display();
+        break;
+      case 2:
+        //background(0);
+        //path.draw();
+        //testBullet.draw();
+        levelManager.draw();
+        for (Tower tower : towers) {
+          tower.draw();
         }
-      }
+
+        // draw bullets
+        for (Bullet bullet : bullets) {
+          bullet.draw();
+          bullet.move();
+        }
+        break;
+      case 3:
+        LosingScreen ls = new LosingScreen(this);
+        ls.display();
+        break;
+      case 4:
+        WinningScreen ws = new WinningScreen(this);
+        ws.display();
+        break;
+
     }
   }
 
@@ -132,6 +135,7 @@ public class Window extends PApplet {
     if (stage == 1) {
       menu.mousePressed(mouseX, mouseY);
     } else {
+
       for (Tower tower : towers) {
         if (tower.isHovering()) {
           selectedTower = tower;
@@ -143,32 +147,6 @@ public class Window extends PApplet {
       if (selectedTower == null) {
         return;
       }
-    }
-  }
-
-  private void shootBullets() {
-    shootingTimer++;
-
-    if (shootingCounter < 10 && shootingTimer % 10 == 0) { // Adjust the '10' to control the shooting frequency within the burst
-      for (Tower tower : towers) {
-        // Only spawn a bullet if there's an enemy in range
-        float range = 150;
-        boolean enemyInRange = false;
-        for (Enemy enemy : enemies) {
-          float distance = dist(tower.getXpos(), tower.getYpos(), enemy.getXpos(), enemy.getYpos());
-          if (distance < range) {
-            enemyInRange = true;
-            break;
-          }
-        }
-        if (enemyInRange) {
-          spawnBullet(tower.getXpos(), tower.getYpos());
-          shootingCounter++;
-        }
-      }
-    } else if (shootingCounter >= 10 && shootingTimer >= 120) { // Reset the shooting counter after a 2-second cooldown
-      shootingCounter = 0;
-      shootingTimer = 0;
     }
   }
 
@@ -224,11 +202,18 @@ public void keyPressed(){
       if (key == 'z' || key == 'Z') {
         levelManager.nextLevel();
       }
+
+      if (key == 'w' || key == 'W') {
+        levelManager.killEnemies();
+      }
+
+      if (key == 'l' || key == 'L') {
+        levelManager.killPlayer();
+      }
 }
 
-  public void removeBullet(Bullet bullet) {
-    bullets.remove(bullet);
-  }
+
+
 
   /**
    * Main method that runs the game.
@@ -242,5 +227,11 @@ public void keyPressed(){
   }
 
 //  public void removeEnemy(Enemy enemy) {
+//  }
+
+//  public void removeBullet(Bullet bullet) {
+//    if (bullet.collide()) {
+//      bullets.remove(bullet);
+//    }
 //  }
 }

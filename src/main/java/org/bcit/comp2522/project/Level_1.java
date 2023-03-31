@@ -2,28 +2,36 @@ package org.bcit.comp2522.project;
 
 import processing.core.PImage;
 
-public class Level_1 extends Level{
+import java.util.ArrayList;
+
+public class Level_1 extends Level {
   Window window;
 
   EnemyManager enemyManager;
   PImage tilemapImg;
+
+  SelectTowerUI selectTowerUI;
+
+  private ArrayList<Tower> towers;
   private TileMap tileMap;
   int timeRegularEnemy;
   int timeFastEnemy;
   int timeBossEnemy;
-  public Level_1(Window window){
+
+  public Level_1(Window window) {
     super(window);
     this.window = window;
     init();
   }
 
-  public void init(){
+  public void init() {
     tilemapImg = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/map.png");
     timeBossEnemy = 0;
     timeFastEnemy = 0;
     timeRegularEnemy = 0;
     enemyManager = new EnemyManager(window);
-    tileMap = new TileMap(window, getPath());
+    towers = new ArrayList<>();
+    tileMap = new TileMap(window, getPath(), towers);
     getPath().clearCorner();
     getPath().addCorner(40, 384);
     getPath().addCorner(376, 384);
@@ -33,44 +41,64 @@ public class Level_1 extends Level{
     getPath().addCorner(1192, 384);
     getPath().connectCorners();
     tileMap.setPath();
+    selectTowerUI = new SelectTowerUI(window, tileMap);
   }
 
-  public void draw(){
+  public void draw() {
     window.background(0);
     window.image(tilemapImg, 40, 0);
     getPath().draw();
-    if (window.enemies.size() > 0) {
-      window.testBullet.move();
+    selectTowerUI.draw();
+    selectTowerUI.selectTower();
+    selectTowerUI.slotClicked();
+    //
+    //window.testBullet.draw();
+    if (Player.getHealth() <= 0) {
+      window.setStage(3);
+
+    } else {
+      if (super.numEnemies <= 0) {
+        window.setStage(4);
+      }
+      window.background(0);
+      window.image(tilemapImg, 40, 0);
+      getPath().draw();
+      if (window.enemies.size() > 0) {
+        window.testBullet.move();
+      }
+      window.testBullet.draw();
+
+      // Update the timer
+      timeRegularEnemy++;
+      timeFastEnemy++;
+      timeBossEnemy++;
+
+      // Check if it's time to spawn a new regular enemy
+      if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
+        timeRegularEnemy = 0;
+        enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 2, 2, 2, 2, this));
+      }
+
+      // Check if it's time to spawn a new fast enemy
+      if (timeFastEnemy >= 600) { // 600 frames = 10 seconds
+        timeFastEnemy = 0;
+        enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 1, 4, 4, 1, this));
+      }
+
+      // Check if it's time to spawn a new boss enemy
+      if (timeBossEnemy >= 900) { // 900 frames = 15 seconds
+        timeBossEnemy = 0;
+        enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 4, 1, 1, 3, this));
+      }
+
+      // Update and draw the enemies
+      enemyManager.update();
+      for (Tower tower : towers) {
+        tower.draw();
+      }
+      window.grid.draw();
+      //tileMap.checkMap();
+
     }
-    window.testBullet.draw();
-
-    // Update the timer
-    timeRegularEnemy++;
-    timeFastEnemy++;
-    timeBossEnemy++;
-
-    // Check if it's time to spawn a new regular enemy
-    if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
-      timeRegularEnemy = 0;
-      enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 2, 2, 2, 2, this));
-    }
-
-    // Check if it's time to spawn a new fast enemy
-    if (timeFastEnemy >= 600) { // 600 frames = 10 seconds
-      timeFastEnemy = 0;
-      enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 1, 4, 4,1, this));
-    }
-
-    // Check if it's time to spawn a new boss enemy
-    if (timeBossEnemy >= 900) { // 900 frames = 15 seconds
-      timeBossEnemy = 0;
-      enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 4, 1, 1, 3, this));
-    }
-
-    // Update and draw the enemies
-    enemyManager.update();
-    //window.grid.draw();
-    //tileMap.checkMap();
-
   }
 }
