@@ -144,14 +144,17 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public boolean collide(Object other) {
     if (other instanceof Bullet) {
         Bullet bullet = (Bullet) other;
-      if (getXpos() == bullet.getXpos() && getYpos() == bullet.getYpos()) {
-        health -= bullet.getDamage();
-        if (health <= 0) {
-          isDead = true;
-          Player.getInstance().setCoins(Player.getInstance().getCoins() + size);
+        if (getXpos() < bullet.getXpos() + bullet.getSize()
+            && getXpos() + size > bullet.getXpos()
+            && getYpos() < bullet.getYpos() + bullet.getSize()
+            && getYpos() + size > bullet.getYpos()) {
+            health -= bullet.getDamage();
+            if (health <= 0) {
+            isDead = true;
+            Player.getInstance().setCoins(Player.getInstance().getCoins() + size);
+            }
+            return true;
         }
-        return true;
-      }
     }
     return false;
   }

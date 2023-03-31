@@ -15,8 +15,14 @@ public class Bullet extends Sprite implements Movable, Collidable {
 
   private int speed = 5;
 
+  private int size = 10;
+
   public int getDamage() {
     return damage;
+  }
+
+  public int getSize() {
+    return size;
   }
 
   public void setDamage(int damage) {
@@ -33,7 +39,7 @@ public class Bullet extends Sprite implements Movable, Collidable {
 
   public void draw() {
     window.fill(0, 255, 0);
-    window.ellipse(getXpos(), getYpos(), 10, 10);
+    window.ellipse(getXpos(), getYpos(), size, size);
   }
 
   // sets target for bullet to track
