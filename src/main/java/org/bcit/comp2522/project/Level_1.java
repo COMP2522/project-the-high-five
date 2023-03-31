@@ -13,6 +13,7 @@ public class Level_1 extends Level{
   SelectTowerUI selectTowerUI;
 
   private ArrayList<Tower> towers;
+  private BulletManager bulletManager;
   private TileMap tileMap;
   int timeRegularEnemy;
   int timeFastEnemy;
@@ -30,7 +31,8 @@ public class Level_1 extends Level{
     timeRegularEnemy = 0;
     enemyManager = new EnemyManager(window);
     towers = new ArrayList<>();
-    tileMap = new TileMap(window, getPath(), towers);
+    bulletManager = new BulletManager(window);
+    tileMap = new TileMap(window, getPath(), towers, bulletManager);
     getPath().clearCorner();
     getPath().addCorner(40, 384);
     getPath().addCorner(376, 384);
@@ -77,10 +79,19 @@ public class Level_1 extends Level{
     }
 
     // Update and draw the enemies
-    enemyManager.update();
+
     for (Tower tower : towers) {
       tower.draw();
+      //tower.inRange(enemyManager);
+      tower.shootingEnemy(enemyManager);
+      if (tower.isInRange()) {
+        window.stroke(255, 0, 0);
+      } else {
+        window.stroke(0, 0, 0);
+      }
     }
+    bulletManager.update();
+    enemyManager.update();
     window.grid.draw();
     //tileMap.checkMap();
 

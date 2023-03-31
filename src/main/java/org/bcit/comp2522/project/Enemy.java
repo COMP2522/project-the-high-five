@@ -157,6 +157,35 @@ public class Enemy extends Sprite implements Collidable, Movable {
     setXpos(getXpos() + vx);
     setYpos(getYpos() + vy);
   }
+  public void move2() {
+    Node current = path.getHead();
+    if (current.next != null) {
+      if (current.next.getXpos() > current.getXpos()) {
+        // go right, direction = 0;
+        vx = originalVx;
+        vy = 0;
+        direction = 0;
+      } else if (current.next.getXpos() < current.getXpos()) {
+        // go left
+        vx = originalVx * -1;
+        vy = 0;
+      } else if (current.next.getYpos() > current.getYpos()) {
+        // go down, direction = 1;
+        vx = 0;
+        vy = originalVy;
+        direction = 1;
+      } else if (current.next.getYpos() < current.getYpos()) {
+        // go up , direction = 2;
+        vx = 0;
+        vy = originalVy * -1;
+        direction = 2;
+      }
+      current = current.next;
+    }
+    setXpos(getXpos() + vx);
+    setYpos(getYpos() + vy);
+  }
+
 
   /**
    * Determines if the Enemy has collided with another Collidable object.
