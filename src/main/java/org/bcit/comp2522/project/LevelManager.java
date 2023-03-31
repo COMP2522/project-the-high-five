@@ -13,7 +13,7 @@ public class LevelManager {
     currentLevelObject = levels[0];
   }
   public void draw(){
-    System.out.println("drawing level:" + currentLevel);
+    //System.out.println("drawing level:" + currentLevel);
     levels[currentLevel].draw();
   }
   public void nextLevel(){
@@ -23,6 +23,7 @@ public class LevelManager {
       //currentLevelObject = levels[currentLevel];
     } else {
       currentLevel++;
+      Player.resetStats();
 
       //currentLevelObject = levels[currentLevel];
     }

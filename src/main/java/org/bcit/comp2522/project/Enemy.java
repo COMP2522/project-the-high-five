@@ -23,24 +23,18 @@ public class Enemy extends Sprite implements Collidable, Movable {
   private PImage enemySprite;
   private PImage[] enemySprites = new PImage[8];
 
-  public int getHealth() {
-    return health;
-  }
-
-  public void setHealth(int health) {
-    this.health = health;
-  }
+  private boolean isDead = false;
 
   /**
    * Constructor for creating a new Enemy.
    *
-   * @param xpos   the x-coordinate of the Enemy
-   * @param ypos   the y-coordinate of the Enemy
+   * @param xpos the x-coordinate of the Enemy
+   * @param ypos the y-coordinate of the Enemy
    * @param window the Window that the Enemy is in
    * @param health the health of the Enemy
-   * @param vx     the x-velocity of the Enemy
-   * @param vy     the y-velocity of the Enemy
-   * @param size   the size of the Enemy
+   * @param vx the x-velocity of the Enemy
+   * @param vy the y-velocity of the Enemy
+   * @param size the size of the Enemy
    */
   public Enemy(float xpos, float ypos, Window window, int health, int vx, int vy, int size, Level level) {
     super(xpos, ypos, window);
@@ -56,12 +50,31 @@ public class Enemy extends Sprite implements Collidable, Movable {
     loadSprite();
   }
 
-  public void loadSprite() {
+  public int getHealth() {
+    return health;
+  }
+
+  public void setHealth(int health) {
+    this.health = health;
+  }
+
+  public boolean getIsDead() {
+    return isDead;
+  }
+
+  public void outOfBounds() {
+    if (getXpos() > window.width) {
+      isDead = true;
+      Player.getInstance().setHealth(Player.getInstance().getHealth() - size);
+    }
+  }
+
+  public void loadSprite(){
     int spriteWidth = 64;
     int spriteHeight = 64;
     int spriteLength = 8;
     for (int i = 0; i < spriteLength; i++) {
-      int x = i % spriteLength * spriteWidth;
+      int x = i%spriteLength * spriteWidth;
       enemySprites[i] = enemySprite.get(x, 320, spriteWidth, spriteHeight);
     }
   }
@@ -128,17 +141,21 @@ public class Enemy extends Sprite implements Collidable, Movable {
    * @return true if the Enemy has collided with the other Collidable object, false otherwise
    */
   @Override
-  public Enemy collide(Collidable other) {
-//    float distance = 0;
-//    if (other instanceof Bullet) {
-//      Bullet bullet = (Bullet) other;
-//      distance = (float) Math.sqrt( Math.pow((bullet.getXpos() - getXpos()), 2) + Math.pow((bullet.getYpos() - getYpos()), 2));
-//      if (distance < this.size) {
-//        health -= 1;
-//        return true;
-//      }
-//    }
-//    return false;
-    return null;
+  public boolean collide(Object other) {
+    if (other instanceof Bullet) {
+        Bullet bullet = (Bullet) other;
+        if (getXpos() < bullet.getXpos() + bullet.getSize()
+            && getXpos() + size > bullet.getXpos()
+            && getYpos() < bullet.getYpos() + bullet.getSize()
+            && getYpos() + size > bullet.getYpos()) {
+            health -= bullet.getDamage();
+            if (health <= 0) {
+            isDead = true;
+            Player.getInstance().setCoins(Player.getInstance().getCoins() + size);
+            }
+            return true;
+        }
+    }
+    return false;
   }
 }

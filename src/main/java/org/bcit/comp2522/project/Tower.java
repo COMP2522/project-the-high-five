@@ -259,14 +259,14 @@ public class Tower extends Sprite implements Collidable{
 // method to check if enemy has entered the radius around a tower
   // not complete yet
   @Override
-  public Enemy collide(Collidable other) {
-    if(other instanceof Enemy){
-      double distanceTwo = sqrt(pow(other.getXpos() - this.centerX,2) + pow(other.getYpos() - this.centerY,2));
+  public boolean collide(Object other) {
+    if(other instanceof Enemy) {
+      Enemy enemy = (Enemy) other;
+      double distanceTwo = sqrt(pow(enemy.getXpos() - this.centerX,2) + pow(enemy.getYpos() - this.centerY,2));
       if(distanceTwo <= radius){
         shoot();
       }
     }
-//    return false;
-    return null;
+    return false;
   }
 }

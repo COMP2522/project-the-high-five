@@ -1,10 +1,13 @@
 package org.bcit.comp2522.project;
 
+import processing.core.PImage;
+
 public class Level_1 extends Level{
   Window window;
 
   EnemyManager enemyManager;
-
+  PImage tilemapImg;
+  private TileMap tileMap;
   int timeRegularEnemy;
   int timeFastEnemy;
   int timeBossEnemy;
@@ -15,18 +18,26 @@ public class Level_1 extends Level{
   }
 
   public void init(){
+    tilemapImg = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/map.png");
     timeBossEnemy = 0;
     timeFastEnemy = 0;
     timeRegularEnemy = 0;
     enemyManager = new EnemyManager(window);
+    tileMap = new TileMap(window, getPath());
     getPath().clearCorner();
-    getPath().addCorner(40, 432);
-    getPath().addCorner(328, 432);
+    getPath().addCorner(40, 384);
+    getPath().addCorner(376, 384);
+    getPath().addCorner(376, 192);
+    getPath().addCorner(760, 192);
+    getPath().addCorner(760, 384);
+    getPath().addCorner(1192, 384);
     getPath().connectCorners();
+    tileMap.setPath();
   }
 
   public void draw(){
     window.background(0);
+    window.image(tilemapImg, 40, 0);
     getPath().draw();
     if (window.enemies.size() > 0) {
       window.testBullet.move();
@@ -41,26 +52,25 @@ public class Level_1 extends Level{
     // Check if it's time to spawn a new regular enemy
     if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
       timeRegularEnemy = 0;
-      window.enemies.add(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 2, 2, 2, 50, this));
+      enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 2, 2, 2, 2, this));
     }
 
     // Check if it's time to spawn a new fast enemy
     if (timeFastEnemy >= 600) { // 600 frames = 10 seconds
       timeFastEnemy = 0;
-      window.enemies.add(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 1, 4, 4,35, this));
+      enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 1, 4, 4,1, this));
     }
 
     // Check if it's time to spawn a new boss enemy
     if (timeBossEnemy >= 900) { // 900 frames = 15 seconds
       timeBossEnemy = 0;
-      window.enemies.add(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 4, 1, 1, 75, this));
+      enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 4, 1, 1, 3, this));
     }
 
     // Update and draw the enemies
-    for (Enemy enemy : window.enemies) {
-      enemyManager.update(enemy);
-    }
-    window.grid.draw();
+    enemyManager.update();
+    //window.grid.draw();
+    //tileMap.checkMap();
 
   }
 }

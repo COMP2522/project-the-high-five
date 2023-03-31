@@ -1,5 +1,7 @@
 package org.bcit.comp2522.project;
 
+import processing.core.PVector;
+
 import static processing.core.PApplet.*;
 
 /**
@@ -12,9 +14,24 @@ import static processing.core.PApplet.*;
 public class Bullet extends Sprite implements Movable, Collidable {
 
   private int speed = 5;
+
+  private int size = 10;
+
+  public int getDamage() {
+    return damage;
+  }
+
+  public int getSize() {
+    return size;
+  }
+
+  public void setDamage(int damage) {
+    this.damage = damage;
+  }
+
   // for now
   private int damage = 1;
-  Enemy target;
+  private Enemy target;
 
   public Bullet(float xpos, float ypos, Window window) {
     super(xpos, ypos, window);
@@ -22,7 +39,7 @@ public class Bullet extends Sprite implements Movable, Collidable {
 
   public void draw() {
     window.fill(0, 255, 0);
-    window.ellipse(getXpos(), getYpos(), 10, 10);
+    window.ellipse(getXpos(), getYpos(), size, size);
   }
 
   // sets target for bullet to track
@@ -73,29 +90,16 @@ public class Bullet extends Sprite implements Movable, Collidable {
   }
 
 
-//  @Override
-//  public boolean collide(Collidable other) {
-//    if (other instanceof Enemy) {
-//      Enemy enemy = (Enemy) other;
-//      float distance = dist(getXpos(), getYpos(), enemy.getXpos(), enemy.getYpos());
-//      if (distance < 2) {
-//        enemy.setHealth(enemy.getHealth() - damage);
-//        return true;
-//      }
-//    }
-//    return false;
-//  }
-
   @Override
-  public Enemy collide(Collidable other) {
+  public boolean collide(Object other) {
     if (other instanceof Enemy) {
       Enemy enemy = (Enemy) other;
       float distance = dist(getXpos(), getYpos(), enemy.getXpos(), enemy.getYpos());
       if (distance < 2) {
         enemy.setHealth(enemy.getHealth() - damage);
-        return enemy;
+        return true;
       }
     }
-    return null;
+    return false;
   }
 }

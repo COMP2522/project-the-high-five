@@ -108,7 +108,7 @@ public class Button {
         gameFont = parent.createFont("" + dataPath + "/Righteous-Regular.ttf", 400);
         parent.textFont(gameFont);
         parent.fill(255);
-        parent.textSize(40);
+        parent.textSize(16);
         parent.textAlign(parent.CENTER, parent.CENTER);
         parent.text(this.text, this.x, this.y);
     }
