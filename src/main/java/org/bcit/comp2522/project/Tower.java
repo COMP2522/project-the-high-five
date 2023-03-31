@@ -1,6 +1,8 @@
 package org.bcit.comp2522.project;
 
 
+import processing.core.PImage;
+
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import static processing.core.PApplet.dist;
@@ -15,6 +17,9 @@ public class Tower extends Sprite implements Collidable{
 
   private int attackRate;
   private int range;
+
+  private PImage towerSprite1;
+  private PImage towerWeapon1;
 
   public int getBaseSize() {
     return baseSize;
@@ -100,6 +105,8 @@ public class Tower extends Sprite implements Collidable{
 
   public Tower(float xpos, float ypos,Window window) {
     super(xpos, ypos, window);
+    towerSprite1 = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Tower1e.png");
+    towerWeapon1 = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Tower 06 - Level 01 - Weapon.png").get(0,0,64,64);
   }
 
   public void shoot(){
@@ -128,16 +135,18 @@ public class Tower extends Sprite implements Collidable{
     }
 
     // draw the base square of the tower
-    window.fill(100, 100, 100);
-    window.square(getXpos(), getYpos(), baseSize);
-    // draw the top of the tower
-    window.fill(211, 211, 211);
-    window.rect(getXpos() + baseSize / 4, (float) (getYpos() - baseSize*1.5), (baseSize/2), (float) (baseSize*1.5));
-
-    // draw the top triangle of the tower
-    window.fill(255,0,0);
-    window.triangle(getXpos() + baseSize/4, (float) (getYpos() - baseSize*1.5), getXpos() + baseSize/2 , (float) (getYpos() - (baseSize*1.5) - (baseSize/2))
-        ,getXpos() + baseSize - (baseSize/4),(float) (getYpos() - baseSize*1.5));
+//    window.fill(100, 100, 100);
+//    window.square(getXpos(), getYpos(), baseSize);
+//    // draw the top of the tower
+//    window.fill(211, 211, 211);
+//    window.rect(getXpos() + baseSize / 4, (float) (getYpos() - baseSize*1.5), (baseSize/2), (float) (baseSize*1.5));
+//
+//    // draw the top triangle of the tower
+//    window.fill(255,0,0);
+//    window.triangle(getXpos() + baseSize/4, (float) (getYpos() - baseSize*1.5), getXpos() + baseSize/2 , (float) (getYpos() - (baseSize*1.5) - (baseSize/2))
+//        ,getXpos() + baseSize - (baseSize/4),(float) (getYpos() - baseSize*1.5));
+    window.image(towerSprite1,getXpos(),getYpos() - 96 + 48,48,96);
+    window.image(towerWeapon1,getXpos() - 7,getYpos() - 89 + 48);
 
     // draw the radius around the tower
     //window.stroke(255,0,0);
@@ -168,7 +177,6 @@ public class Tower extends Sprite implements Collidable{
       if(distance > maxDistance){
         maxDistance = distance;
       }
-
     }
 
     // now check all the corners of the rectangle
@@ -259,9 +267,10 @@ public class Tower extends Sprite implements Collidable{
 // method to check if enemy has entered the radius around a tower
   // not complete yet
   @Override
-  public boolean collide(Collidable other) {
-    if(other instanceof Enemy){
-      double distanceTwo = sqrt(pow(other.getXpos() - this.centerX,2) + pow(other.getYpos() - this.centerY,2));
+  public boolean collide(Object other) {
+    if(other instanceof Enemy) {
+      Enemy enemy = (Enemy) other;
+      double distanceTwo = sqrt(pow(enemy.getXpos() - this.centerX,2) + pow(enemy.getYpos() - this.centerY,2));
       if(distanceTwo <= radius){
         shoot();
       }

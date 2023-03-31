@@ -135,6 +135,7 @@ public class Window extends PApplet {
     if (stage == 1) {
       menu.mousePressed(mouseX, mouseY);
     } else {
+
       for (Tower tower : towers) {
         if (tower.isHovering()) {
           selectedTower = tower;

@@ -41,5 +41,6 @@ public class EnemyManager {
       enemy.outOfBounds();
     }
     removeEnemy();
+    //System.out.println("Size of enemies: " + enemies.size());
   }
 }

@@ -23,17 +23,13 @@ public class Enemy extends Sprite implements Collidable, Movable {
   private PImage enemySprite;
   private PImage[] enemySprites = new PImage[8];
 
+  private PImage[] enemySpritesUP = new PImage[8];
+
+  private PImage[] enemySpritesDOWN = new PImage[8];
+
+  private int direction = 0;
+
   private boolean isDead = false;
-
-  public int getHealth() {
-    return health;
-  }
-
-
-
-  public void setHealth(int health) {
-    this.health = health;
-  }
 
   /**
    * Constructor for creating a new Enemy.
@@ -56,17 +52,26 @@ public class Enemy extends Sprite implements Collidable, Movable {
     originalVx = vx;
     originalVy = vy;
     path = level.getPath();
-    enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Clampbeetle.png");
+    enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Clampbeetle3.png");
     loadSprite();
+  }
+
+  public int getHealth() {
+    return health;
+  }
+
+  public void setHealth(int health) {
+    this.health = health;
   }
 
   public boolean getIsDead() {
     return isDead;
   }
-
+  // Remove enemy when out of bounds
   public void outOfBounds() {
     if (getXpos() > window.width) {
       isDead = true;
+      Player.getInstance().setHealth(Player.getInstance().getHealth() - size);
     }
   }
 
@@ -74,10 +79,17 @@ public class Enemy extends Sprite implements Collidable, Movable {
     int spriteWidth = 64;
     int spriteHeight = 64;
     int spriteLength = 8;
+    int upY = 256;
+    int downY = 192;
+    int rightY = 320;
     for (int i = 0; i < spriteLength; i++) {
       int x = i%spriteLength * spriteWidth;
-      enemySprites[i] = enemySprite.get(x, 320, spriteWidth, spriteHeight);
+      enemySprites[i] = enemySprite.get(x, rightY, spriteWidth, spriteHeight);
+      enemySpritesUP[i] = enemySprite.get(x, upY, spriteWidth, spriteHeight);
+      enemySpritesDOWN[i] = enemySprite.get(x, downY, spriteWidth, spriteHeight);
     }
+
+
   }
 
   /**
@@ -85,7 +97,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
    */
   public void draw() {
     window.pushStyle();
-
+    // Sprite animation timer
     if (spriteTimer >= 8) {
       if (spriteIndex >= enemySprites.length - 1) {
         spriteIndex = 0;
@@ -96,7 +108,15 @@ public class Enemy extends Sprite implements Collidable, Movable {
     }
 
     spriteTimer++;
-    window.image(enemySprites[spriteIndex], getXpos(), getYpos(), size, size);
+    // Draw sprite based on direction
+    if (direction == 0) {
+      window.image(enemySprites[spriteIndex], getXpos(), getYpos(), size, size);
+    } else if (direction == 2) {
+      window.image(enemySpritesUP[spriteIndex], getXpos(), getYpos(), size, size);
+    } else if (direction == 1) {
+      window.image(enemySpritesDOWN[spriteIndex], getXpos(), getYpos(), size, size);
+    }
+    //window.image(enemySprites[spriteIndex], getXpos(), getYpos(), size, size);
     window.popStyle();
   }
 
@@ -111,21 +131,24 @@ public class Enemy extends Sprite implements Collidable, Movable {
       if (getXpos() == current.getXpos() && getYpos() == current.getYpos()) {
         if (current.next != null) {
           if (current.next.getXpos() > current.getXpos()) {
-            // go right
+            // go right, direction = 0;
             vx = originalVx;
             vy = 0;
+            direction = 0;
           } else if (current.next.getXpos() < current.getXpos()) {
             // go left
             vx = originalVx * -1;
             vy = 0;
           } else if (current.next.getYpos() > current.getYpos()) {
-            // go down
+            // go down, direction = 1;
             vx = 0;
             vy = originalVy;
+            direction = 1;
           } else if (current.next.getYpos() < current.getYpos()) {
-            // go up
+            // go up , direction = 2;
             vx = 0;
             vy = originalVy * -1;
+            direction = 2;
           }
         }
       }
@@ -142,15 +165,20 @@ public class Enemy extends Sprite implements Collidable, Movable {
    * @return true if the Enemy has collided with the other Collidable object, false otherwise
    */
   @Override
-  public boolean collide(Collidable other) {
-    float distance = 0;
+  public boolean collide(Object other) {
     if (other instanceof Bullet) {
-      Bullet bullet = (Bullet) other;
-      distance = (float) Math.sqrt( Math.pow((bullet.getXpos() - getXpos()), 2) + Math.pow((bullet.getYpos() - getYpos()), 2));
-      if (distance < this.size) {
-        health -= 1;
-        return true;
-      }
+        Bullet bullet = (Bullet) other;
+        if (getXpos() < bullet.getXpos() + bullet.getSize()
+            && getXpos() + size > bullet.getXpos()
+            && getYpos() < bullet.getYpos() + bullet.getSize()
+            && getYpos() + size > bullet.getYpos()) {
+            health -= bullet.getDamage();
+            if (health <= 0) {
+            isDead = true;
+            Player.getInstance().setCoins(Player.getInstance().getCoins() + size);
+            }
+            return true;
+        }
     }
     return false;
   }
