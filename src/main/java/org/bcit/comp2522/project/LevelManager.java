@@ -23,6 +23,7 @@ public class LevelManager {
       //currentLevelObject = levels[currentLevel];
     } else {
       currentLevel++;
+      Player.resetStats();
 
       //currentLevelObject = levels[currentLevel];
     }
