@@ -4,16 +4,19 @@ import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerApi;
 import com.mongodb.ServerApiVersion;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
+import java.util.ArrayList;
+
 import static com.mongodb.client.model.Filters.eq;
 
 public class DatabaseHandler {
 
-    MongoDatabase database;
+    private MongoDatabase database;
 
     public DatabaseHandler(String username, String password){
         ConnectionString connectionString = new ConnectionString("mongodb+srv://" + username + ":" + password + "@2522.ru0dahn.mongodb.net/?retryWrites=true&w=majority");
@@ -43,30 +46,55 @@ public class DatabaseHandler {
 
     }
 
-    public void insertHighScore(String user, int score, String collectionName){
+    public void insertHighScore(String user, int score){
 
         Document document = new Document();
         document.append("user", user)
         .append("score",score);
-        new Thread(()->database.getCollection(collectionName).insertOne(document)).start();
+        new Thread(()->database.getCollection("highScores").insertOne(document)).start();
 
     }
-    public static void main(String[] args) {
 
-        DatabaseHandler dbh = new DatabaseHandler("testuser", "cake1234");
+    public ArrayList<Highscore> retrieveHighScores() {
+        FindIterable<Document> cursor = this.database.getCollection("highScores")
+                .find()
+                .sort(new Document("score", -1).append("user", 1))
+                .limit(10);
 
-//        dbh.insertHighScore("cheryl", 1700, "highScores");
-//        dbh.insertHighScore("cheryl", 2100, "highScores");
-
-
-
-        Document find = dbh.database.getCollection("highScores").find(eq("user", "cheryl")).first();
-
-        System.out.println(find);
-
-
-
+        ArrayList<Highscore> highscores = new ArrayList<Highscore>();
+        for (Document document : cursor) {
+            Highscore highscore = new Highscore();
+            highscore.setUser(document.getString("user"));
+            highscore.setHighscore(document.getInteger("score"));
+            highscores.add(highscore);
+        }
+        return highscores;
     }
+//    public static void main(String[] args) {
+//
+//        DatabaseHandler dbh = new DatabaseHandler("testuser", "cake1234");
+//
+////        dbh.insertHighScore("cheryl", 1700, "highScores");
+////        dbh.insertHighScore("cheryl", 2100, "highScores");
+//
+//
+//
+//        //
+//        // Document find = dbh.database.getCollection("highScores").find(eq("user", "cheryl")).first();
+//
+//        //
+//        //
+//        // System.out.println(find);
+//
+//
+//
+////        for (Highscore hs : dbh.retrieveHighScores()){
+////            System.out.println(hs.getHighscore());
+////        }
+//
+//
+//
+//    }
 
 
 }
