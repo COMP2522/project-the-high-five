@@ -43,4 +43,8 @@ public class EnemyManager {
     removeEnemy();
     //System.out.println("Size of enemies: " + enemies.size());
   }
+
+  public ArrayList<Enemy> getEnemies() {
+    return enemies;
+  }
 }

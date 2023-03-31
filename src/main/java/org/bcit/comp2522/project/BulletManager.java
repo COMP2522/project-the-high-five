@@ -11,35 +11,50 @@ import java.util.ArrayList;
  */
 public class BulletManager {
 
-  // array of bullets
-  private final ArrayList<Bullet> bullets;
+  public ArrayList<Bullet> getBullets() {
+    return bullets;
+  }
 
+  private final ArrayList<Bullet> bullets;
   private final Window window;
 
-    /**
-     * Constructs a BulletManager object with a Window object.
-     *
-     * @param window the Window object to associate with the BulletManager
-     */
+  /**
+   * Constructs a BulletManager object with a Window object.
+   *
+   * @param window the Window object to associate with the BulletManager
+   */
   public BulletManager(Window window) {
     this.window = window;
     bullets = window.bullets;
   }
 
-  /**
-   * Updates the bullets in the game.
-   *
-   */
-//  public void remove(Bullet bullet) {
-//    if (bullet.getXpos() >= window.width || bullet.getYpos() >= window.height) {
-//      bullets.remove(bullet);
-//    } else if (bullet.getXpos() <= 0 || bullet.getYpos() <= 0) {
-//      bullets.remove(bullet);
-//    }
-//    for (Enemy enemy : window.enemies) {
-//      if (bullet.collide(enemy)) {
-//          bullets.remove(bullet);
-//      }
-//    }
-//  }
+  public void addBullet(Bullet bullet) {
+    bullets.add(bullet);
+  }
+
+  public void removeBullet() {
+    for (Bullet bullet : bullets) {
+      if (bullet.getXpos() >= window.width || bullet.getYpos() >= window.height) {
+        bullets.remove(bullet);
+        break;
+      } else if (bullet.getXpos() <= 0 || bullet.getYpos() <= 0) {
+        bullets.remove(bullet);
+        break;
+      }
+      for (Enemy enemy : window.enemies) {
+        if (bullet.getXpos() == enemy.getXpos() && bullet.getYpos() == enemy.getYpos()) {
+          bullets.remove(bullet);
+          break;
+        }
+      }
+    }
+  }
+
+  public void update() {
+    for (Bullet bullet : bullets) {
+      bullet.move();
+      bullet.draw();
+    }
+  }
+
 }

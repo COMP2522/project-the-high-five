@@ -11,9 +11,10 @@ import static processing.core.PApplet.dist;
  * This class represents the towers in the game
  * Contains attributes and methods each tower
  * object should have
+ *
  * @author gursidhsandhu
  */
-public class Tower extends Sprite implements Collidable{
+public class Tower extends Sprite implements Collidable {
 
   private int attackRate;
   private int range;
@@ -96,27 +97,27 @@ public class Tower extends Sprite implements Collidable{
   }
 
   // These two variables represent the center of the tower
-  float centerX = getXpos() + (baseSize/2);
-  float centerY = getYpos() - (baseSize/2);
+  float centerX = getXpos() + (baseSize / 2);
+  float centerY = getYpos() - (baseSize / 2);
   float radius = findRadius();
 
   // variable that checks the distance between the mouse position and the towers center
   double distance;
 
-  public Tower(float xpos, float ypos,Window window) {
+  BulletManager bulletManager;
+  private boolean tracking = false;
+  private Enemy target = null;
+
+  public Tower(float xpos, float ypos, Window window) {
     super(xpos, ypos, window);
     towerSprite1 = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Tower1e.png");
-    towerWeapon1 = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Tower 06 - Level 01 - Weapon.png").get(0,0,64,64);
-  }
-
-  public void shoot(){
-    System.out.println("enter");
+    towerWeapon1 = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Tower 06 - Level 01 - Weapon.png").get(0, 0, 64, 64);
   }
 
   // drawing criteria for towers
-  public void draw(){
+  public void draw() {
 
-    distance = sqrt(pow(window.mouseX - centerX,2) + pow(window.mouseY - centerY,2));
+    distance = sqrt(pow(window.mouseX - centerX, 2) + pow(window.mouseY - centerY, 2));
 
     window.pushStyle();
 
@@ -124,13 +125,13 @@ public class Tower extends Sprite implements Collidable{
 
     // check if the mouse is close enough to the tower to consider it being hovered by
     // create a white outline to let player know they are hovering over the tower
-    if(distance <= radius){
+    if (distance <= radius) {
       hovering = true;
       window.stroke(0);
-      if(!clicked){
+      if (!clicked) {
         window.stroke(255);
       }
-    }else{
+    } else {
       hovering = false;
     }
 
@@ -145,15 +146,14 @@ public class Tower extends Sprite implements Collidable{
 //    window.fill(255,0,0);
 //    window.triangle(getXpos() + baseSize/4, (float) (getYpos() - baseSize*1.5), getXpos() + baseSize/2 , (float) (getYpos() - (baseSize*1.5) - (baseSize/2))
 //        ,getXpos() + baseSize - (baseSize/4),(float) (getYpos() - baseSize*1.5));
-    window.image(towerSprite1,getXpos(),getYpos() - 96 + 48,48,96);
-    window.image(towerWeapon1,getXpos() - 7,getYpos() - 89 + 48);
+    window.image(towerSprite1, getXpos(), getYpos() - 96 + 48, 48, 96);
+    window.image(towerWeapon1, getXpos() - 7, getYpos() - 89 + 48);
 
     // draw the radius around the tower
     //window.stroke(255,0,0);
     //window.strokeWeight(2);
     //window.noFill();;
     //window.ellipse(centerX, centerY, radius, radius*2);
-
 
 
     window.popStyle();
@@ -166,26 +166,26 @@ public class Tower extends Sprite implements Collidable{
   // method that finds the radius around the tower
   // check the distance of every point in the tower from its center coordinates
   // the farthest away point will be the maxDistance from the center
-  public float findRadius(){
+  public float findRadius() {
 
     // first check all the 4 corners of the square one by one
-    for(int i=0; i < 4; i++){
-      float x = getXpos() + (i%2) * baseSize;
-      float y = getYpos() + (i/2) * baseSize;
+    for (int i = 0; i < 4; i++) {
+      float x = getXpos() + (i % 2) * baseSize;
+      float y = getYpos() + (i / 2) * baseSize;
       float distance = dist(centerX, centerY, x, y);
 
-      if(distance > maxDistance){
+      if (distance > maxDistance) {
         maxDistance = distance;
       }
     }
 
     // now check all the corners of the rectangle
-    for(int i = 0; i < 4; i++){
-      float x = getXpos() + (i%2)*baseSize/2;
-      float y = getYpos() - baseSize/4 + (i/2)*baseSize/2;
-      float distance = dist(centerX, centerY,x, y);
+    for (int i = 0; i < 4; i++) {
+      float x = getXpos() + (i % 2) * baseSize / 2;
+      float y = getYpos() - baseSize / 4 + (i / 2) * baseSize / 2;
+      float distance = dist(centerX, centerY, x, y);
 
-      if(distance > maxDistance){
+      if (distance > maxDistance) {
         maxDistance = distance;
       }
 
@@ -193,34 +193,34 @@ public class Tower extends Sprite implements Collidable{
 
     // finally check all 3 points of the triangle
     // for the triangle it is easier to just have a condition that matches to each point
-    for(int i=0; i < 3; i++){
+    for (int i = 0; i < 3; i++) {
 
       float x;
       float y;
 
-      switch(i){
+      switch (i) {
 
         // first point
         case 0:
-          x = getXpos() + baseSize/4;
-          y = (float) (getYpos() - baseSize*1.5);
+          x = getXpos() + baseSize / 4;
+          y = (float) (getYpos() - baseSize * 1.5);
           break;
 
-          // second point
+        // second point
         case 1:
-          x = getXpos() + baseSize/2;
-          y = (float) (getYpos() - (baseSize*1.5) - (baseSize/2));
+          x = getXpos() + baseSize / 2;
+          y = (float) (getYpos() - (baseSize * 1.5) - (baseSize / 2));
           break;
 
-          // third point
+        // third point
         default:
-          x = getXpos() + baseSize - (baseSize/4);
-          y = (float) (getYpos() - baseSize*1.5);
+          x = getXpos() + baseSize - (baseSize / 4);
+          y = (float) (getYpos() - baseSize * 1.5);
       }
 
-      float distance = dist(centerX, centerY,x, y);
+      float distance = dist(centerX, centerY, x, y);
 
-      if(distance > maxDistance){
+      if (distance > maxDistance) {
         maxDistance = distance;
       }
 
@@ -234,10 +234,10 @@ public class Tower extends Sprite implements Collidable{
 
   // method that checks if the distance is less than or equal to radius
   // if it is then we assume the mouse is hovering over tower
-  public void mousePressed(){
-    if(hovering){
+  public void mousePressed() {
+    if (hovering) {
       clicked = true;
-    } else{
+    } else {
       clicked = false;
     }
     //System.out.println("sets offsets");
@@ -247,31 +247,67 @@ public class Tower extends Sprite implements Collidable{
   }
 
   // this method indicates the tower is being dragged by the mouse
-  public void mouseDragged(){
-    if(clicked){
+  public void mouseDragged() {
+    if (clicked) {
       //System.out.println("new position");
       centerX = window.mouseX - offsetX;
-      setXpos(centerX - (baseSize/2));
+      setXpos(centerX - (baseSize / 2));
       centerY = window.mouseY - offsetY;
-      setYpos(centerY + (baseSize/2));
+      setYpos(centerY + (baseSize / 2));
     }
   }
 
-  public void mouseReleased(){
+  public void mouseReleased() {
     //System.out.println("not clicked");
     clicked = false;
 
   }
 
+  public void track(Enemy enemy) {
+    float distance = dist(centerX, centerY, enemy.getXpos(), enemy.getYpos());
+    if (distance <= radius) {
+      if (!isTracking()) {
+        setTracker(true);
+        setTarget(enemy);
+        shoot();
+      }
+    } else {
+      setTracker(false);
+    }
+  }
 
-// method to check if enemy has entered the radius around a tower
+  public boolean isTracking() {
+    return tracking;
+  }
+
+  public void setTracker(boolean isTracking) {
+    this.tracking = isTracking;
+  }
+
+  public Enemy getTarget() {
+    return target;
+  }
+
+  public void setTarget(Enemy target) {
+    this.target = target;
+  }
+
+  public void shoot() {
+    Bullet bullet = new Bullet(getXpos(), getYpos(), window);
+    bulletManager.addBullet(bullet);
+    System.out.println(bulletManager.getBullets());
+    bulletManager.update();
+  }
+
+
+  // method to check if enemy has entered the radius around a tower
   // not complete yet
   @Override
   public boolean collide(Object other) {
-    if(other instanceof Enemy) {
+    if (other instanceof Enemy) {
       Enemy enemy = (Enemy) other;
-      double distanceTwo = sqrt(pow(enemy.getXpos() - this.centerX,2) + pow(enemy.getYpos() - this.centerY,2));
-      if(distanceTwo <= radius){
+      double distanceTwo = sqrt(pow(enemy.getXpos() - this.centerX, 2) + pow(enemy.getYpos() - this.centerY, 2));
+      if (distanceTwo <= radius) {
         shoot();
       }
     }

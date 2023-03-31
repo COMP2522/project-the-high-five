@@ -63,10 +63,10 @@ public class Level_1 extends Level {
       window.background(0);
       window.image(tilemapImg, 40, 0);
       getPath().draw();
-      if (window.enemies.size() > 0) {
-        window.testBullet.move();
-      }
-      window.testBullet.draw();
+//      if (window.enemies.size() > 0) {
+//        window.testBullet.move();
+//      }
+//      window.testBullet.draw();
 
       // Update the timer
       timeRegularEnemy++;
@@ -100,5 +100,11 @@ public class Level_1 extends Level {
       //tileMap.checkMap();
 
     }
+    for (Tower tower : towers) {
+      for (Enemy enemy : enemyManager.getEnemies()) {
+        tower.track(enemy);
+      }
+    }
   }
 }
+

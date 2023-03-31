@@ -169,9 +169,6 @@ public class Window extends PApplet {
 //        }
 //      }
 
-      Bullet newBullet = new Bullet(x, y, this);
-      newBullet.setTarget(newBullet.window.enemies.get(newBullet.track()));
-      bullets.add(newBullet);
     }
   }
 
