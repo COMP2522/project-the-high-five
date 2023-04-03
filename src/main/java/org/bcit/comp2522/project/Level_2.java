@@ -81,7 +81,7 @@ public class Level_2 extends Level {
     }
 
     // Update and draw the enemies
-    enemyManager.update();
+    enemyManager.update(bulletManager);
     //window.grid.draw();
     //tileMap.checkMap();
 

@@ -17,16 +17,12 @@ public class Window extends PApplet {
   ArrayList<Enemy> enemies;
   Bullet testBullet;
   ArrayList<Bullet> bullets;
-  BulletManager bulletManager;
-
   Path path;
   LevelManager levelManager;
   Level level_1;
-
   Level level_2;
   ArrayList<Tower> towers;
   EnemyManager enemyManager;
-  Tower selectedTower = null;
 
   private static PImage background;
 
@@ -72,7 +68,6 @@ public class Window extends PApplet {
     levelManager.addLevel(level_1);
     levelManager.addLevel(level_2);
     enemyManager = new EnemyManager(this);
-    bulletManager = new BulletManager(this);
     // array of bullets
     bullets = new ArrayList<>();
 
@@ -80,17 +75,8 @@ public class Window extends PApplet {
     timeFastEnemy = 0;
     timeBossEnemy = 0;
 
-    //testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
     towers = new ArrayList<>();
-    // 5 towers have been spawned on top of each other
-    // This is so the player can drag and drop them into desired spots
-    // 5 is hardcoded number but would lke to personalize based on level.
-//    towers.add(new Tower(90, 630,this));
-//    towers.add(new Tower(190, 630,this));
-//    towers.add(new Tower(290, 630,this));
-//    towers.add(new Tower(390, 630,this));
-//    towers.add(new Tower(490, 630,this));
   }
 
   /**
@@ -105,19 +91,7 @@ public class Window extends PApplet {
         menu.display();
         break;
       case 2:
-        //background(0);
-        //path.draw();
-        //testBullet.draw();
         levelManager.draw();
-//        for (Tower tower : towers) {
-//          tower.draw();
-//        }
-//
-//        // draw bullets
-//        for (Bullet bullet : bullets) {
-//          bullet.draw();
-//          bullet.move();
-//        }
         break;
       case 3:
         LosingScreen ls = new LosingScreen(this);
@@ -134,36 +108,9 @@ public class Window extends PApplet {
   public void mousePressed() {
     if (stage == 1) {
       menu.mousePressed(mouseX, mouseY);
-    } else {
-
-//      for (Tower tower : towers) {
-//        if (tower.isHovering()) {
-//          selectedTower = tower;
-//          selectedTower.mousePressed();
-//          break;
-//        }
-//      }
-      // makes sure game doesn't crash when tower isn't clicked
-//      if (selectedTower == null) {
-//        return;
-//      }
     }
   }
 
-//  public void mouseDragged() {
-//    if (selectedTower != null) {
-//      selectedTower.mouseDragged();
-//    }
-//  }
-
-
-//  public void mouseReleased() {
-//    if (selectedTower != null) {
-//      //spawnBullet(selectedTower.getXpos(), selectedTower.getYpos());
-//      selectedTower.mouseReleased();
-//      selectedTower = null;
-//    }
-//  }
 
   /**
    * Sets up the size of the game window.
@@ -171,8 +118,6 @@ public class Window extends PApplet {
   public void settings() {
     size(windowWidth, windowHeight);
   }
-
-
 
 public void keyPressed(){
     if (key == 'm' || key == 'M'){
@@ -193,10 +138,6 @@ public void keyPressed(){
         levelManager.killPlayer();
       }
 }
-
-
-
-
   /**
    * Main method that runs the game.
    *
@@ -208,12 +149,4 @@ public void keyPressed(){
     PApplet.runSketch(appletArgs, tdGame);
   }
 
-//  public void removeEnemy(Enemy enemy) {
-//  }
-
-//  public void removeBullet(Bullet bullet) {
-//    if (bullet.collide()) {
-//      bullets.remove(bullet);
-//    }
-//  }
 }

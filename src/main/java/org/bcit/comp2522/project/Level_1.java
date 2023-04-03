@@ -47,14 +47,6 @@ public class Level_1 extends Level {
   }
 
   public void draw() {
-//    window.background(0);
-//    window.image(tilemapImg, 40, 0);
-//    getPath().draw();
-//    selectTowerUI.draw();
-//    selectTowerUI.selectTower();
-//    selectTowerUI.slotClicked();
-    //
-    //window.testBullet.draw();
     if (Player.getHealth() <= 0) {
       window.setStage(3);
 
@@ -109,7 +101,7 @@ public class Level_1 extends Level {
       }
     }
     bulletManager.update();
-    enemyManager.update();
+    enemyManager.update(bulletManager);
     window.grid.draw();
     //tileMap.checkMap();
 

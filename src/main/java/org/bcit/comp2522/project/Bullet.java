@@ -45,5 +45,8 @@ public class Bullet extends Sprite {
     window.circle(getXpos(), getYpos(), 10);
   }
 
+  public void remove() {
+    window.bullets.remove(this);
+  }
 
 }

@@ -37,13 +37,15 @@ public class EnemyManager {
     return enemies;
   }
 
-  public void update() {
+  public void update(BulletManager bulletManager) {
     for (Enemy enemy : enemies) {
       enemy.draw();
       enemy.move();
       enemy.outOfBounds();
+      for (Bullet bullet : bulletManager.bullets) {
+        enemy.collide(bullet);
+      }
     }
     removeEnemy();
-    //System.out.println("Size of enemies: " + enemies.size());
   }
 }
