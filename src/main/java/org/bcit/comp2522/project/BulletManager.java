@@ -2,7 +2,7 @@ package org.bcit.comp2522.project;
 
 import java.util.ArrayList;
 
-/*
+/**
   * BulletManager.java
   * Manages the bullets in the game.
   *
@@ -11,10 +11,10 @@ import java.util.ArrayList;
   */
 public class BulletManager {
 
-  private final ArrayList<Bullet> bullets;
+  final ArrayList<Bullet> bullets;
   private final Window window;
 
-  /*
+  /**
     * Constructs a BulletManager object with a Window object.
     *
     * @param window the Window object to associate with the BulletManager
@@ -52,5 +52,4 @@ public class BulletManager {
       bullet.draw();
     }
   }
-
 }

@@ -195,13 +195,16 @@ public class Enemy extends Sprite implements Collidable, Movable {
    */
   @Override
   public boolean collide(Object other) {
+    System.out.println("Collide is called in Enemy");
     if (other instanceof Bullet) {
+      System.out.println("Collide is called in Enemy and other is a bullet");
         Bullet bullet = (Bullet) other;
         if (getXpos() < bullet.getXpos() + bullet.getSize()
             && getXpos() + size > bullet.getXpos()
             && getYpos() < bullet.getYpos() + bullet.getSize()
             && getYpos() + size > bullet.getYpos()) {
             health -= bullet.getDamage();
+            System.out.println("Enemy got hit!");
             if (health <= 0) {
             isDead = true;
             Player.getInstance().setCoins(Player.getInstance().getCoins() + damage);
