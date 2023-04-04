@@ -21,6 +21,7 @@ public class Window extends PApplet {
   LevelManager levelManager;
   Level level_1;
   Level level_2;
+  Level level_3;
   ArrayList<Tower> towers;
   EnemyManager enemyManager;
 
@@ -60,13 +61,15 @@ public class Window extends PApplet {
    */
   public void init() {
     background = this.loadImage("src/main/java/org/bcit/comp2522/project/asset/BackDrop.png");
-    levelManager = new LevelManager(this, 2);
+    levelManager = new LevelManager(this, 3);
     level_1 = new Level_1(this);
     level_2 = new Level_2(this);
+    level_3 = new Level_3(this);
     grid = new Grid(this);
 
     levelManager.addLevel(level_1);
     levelManager.addLevel(level_2);
+    levelManager.addLevel(level_3);
     enemyManager = new EnemyManager(this);
     // array of bullets
     bullets = new ArrayList<>();

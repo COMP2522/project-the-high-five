@@ -6,12 +6,9 @@ import java.util.ArrayList;
 
 public class Level_1 extends Level {
   Window window;
-
   EnemyManager enemyManager;
   PImage tilemapImg;
-
   SelectTowerUI selectTowerUI;
-
   private ArrayList<Tower> towers;
   private BulletManager bulletManager;
   private TileMap tileMap;
@@ -60,10 +57,6 @@ public class Level_1 extends Level {
       selectTowerUI.draw();
       selectTowerUI.selectTower();
       selectTowerUI.slotClicked();
-      if (window.enemies.size() > 0) {
-        window.testBullet.move();
-      }
-      //window.testBullet.draw();
 
       // Update the timer
       timeRegularEnemy++;
