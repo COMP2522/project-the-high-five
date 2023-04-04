@@ -9,7 +9,8 @@ import processing.core.PFont;
  * @version 1.0 2023
  */
 public class LosingScreen {
-    private Window parent;
+    private final Window parent;
+    private final int size = 400;
 
     public LosingScreen(Window parent){
         this.parent = parent;
@@ -18,7 +19,7 @@ public class LosingScreen {
     public void display(){
         PFont gameFont;
         String dataPath = parent.sketchPath("fonts");
-        gameFont = parent.createFont("" + dataPath + "/Righteous-Regular.ttf", 400);
+        gameFont = parent.createFont("" + dataPath + "/Righteous-Regular.ttf", size);
         parent.textFont(gameFont);
         parent.background(0);
         parent.textSize(50);

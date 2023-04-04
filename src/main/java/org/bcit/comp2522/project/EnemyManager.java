@@ -22,7 +22,6 @@ public class EnemyManager {
   }
   public void addEnemy(Enemy enemy){
     enemies.add(enemy);
-
   }
 
   public void removeEnemy(){
@@ -40,7 +39,7 @@ public class EnemyManager {
   public void update(BulletManager bulletManager) {
     for (Enemy enemy : enemies) {
       enemy.draw();
-      enemy.move2();
+      enemy.move();
       enemy.outOfBounds();
       for (Bullet bullet : bulletManager.bullets) {
         enemy.collide(bullet);
