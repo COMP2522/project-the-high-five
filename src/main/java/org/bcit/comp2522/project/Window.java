@@ -102,6 +102,11 @@ public class Window extends PApplet {
         ws.display();
         break;
 
+      case 5:
+        HighscoreScreen hs = new HighscoreScreen(this);
+        hs.display();
+        break;
+
     }
   }
 
