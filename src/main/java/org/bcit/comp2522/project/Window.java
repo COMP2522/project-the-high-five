@@ -29,6 +29,8 @@ public class Window extends PApplet {
 
   private Menu menu;
 
+  private HighscoreScreen highscoreScreen;
+
   private int stage;
 
   private ButtonHandler bh;
@@ -47,6 +49,7 @@ public class Window extends PApplet {
     Player.getInstance();
     stage = 1;
     menu = new Menu(this);
+    highscoreScreen = new HighscoreScreen(this);
     this.init();
 
   }
@@ -103,8 +106,8 @@ public class Window extends PApplet {
         break;
 
       case 5:
-        HighscoreScreen hs = new HighscoreScreen(this);
-        hs.display();
+
+        highscoreScreen.display();
         break;
 
     }

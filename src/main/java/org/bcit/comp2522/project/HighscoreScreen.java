@@ -37,12 +37,6 @@ public class HighscoreScreen {
         window.text("Leader Board", Window.windowWidth / 2 , Window.windowHeight * 2 / 12);
         retrieveHighscores();
 
-
-
-
-
-
-
     }
 
     public void retrieveHighscores() {
@@ -68,7 +62,4 @@ public class HighscoreScreen {
 
     }
 
-    public static void main(String[] args) {
-
-    }
 }
