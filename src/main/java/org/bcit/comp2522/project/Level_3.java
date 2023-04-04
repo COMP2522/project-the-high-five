@@ -41,12 +41,16 @@ public class Level_3 extends Level {
     getPath().addCorner(808, 432);
     getPath().addCorner(664, 432);
     getPath().addCorner(664, 288);
+    //getPath().addCorner(808, 288);
     getPath().addCorner(1000, 288);
     getPath().addCorner(1000, 144);
     getPath().addCorner(1232, 144);
     getPath().connectCorners();
     tileMap.setPath();
     selectTowerUI = new SelectTowerUI(window, tileMap);
+    //tileMap.checkMap();
+    //getPath().printNode();
+    //enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 2, 2, 2, 2, this));
   }
 
   public void draw() {

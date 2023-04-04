@@ -335,6 +335,7 @@ public class Tower extends Sprite implements Collidable{
         float angle = window.atan2(tracking.getYpos() - getYpos(), tracking.getXpos() - getXpos());
         bulletManager.addBullet(new Bullet(getXpos() + 24, getYpos() + 24, window, angle));
         standby = false;
+        tracking = null;
       }
     }
   }
