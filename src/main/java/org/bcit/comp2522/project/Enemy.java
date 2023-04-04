@@ -28,6 +28,8 @@ public class Enemy extends Sprite implements Collidable, Movable {
 
   private PImage[] enemySpritesDOWN = new PImage[8];
 
+  private Node currentNode;
+
   private int direction = 0;
 
   private boolean isDead = false;
@@ -54,6 +56,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
     path = level.getPath();
     enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Clampbeetle3.png");
     loadSprite();
+    currentNode = path.getHead();
   }
 
   public int getHealth() {
@@ -88,8 +91,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
       enemySpritesUP[i] = enemySprite.get(x, upY, spriteWidth, spriteHeight);
       enemySpritesDOWN[i] = enemySprite.get(x, downY, spriteWidth, spriteHeight);
     }
-
-
   }
 
   /**
@@ -130,25 +131,30 @@ public class Enemy extends Sprite implements Collidable, Movable {
     while (current != null) {
       if (getXpos() == current.getXpos() && getYpos() == current.getYpos()) {
         if (current.next != null) {
+          System.out.println("next Xpos and Ypos = " + current.next.getXpos() + ", " + current.next.getYpos());
           if (current.next.getXpos() > current.getXpos()) {
             // go right, direction = 0;
             vx = originalVx;
             vy = 0;
             direction = 0;
+            break;
           } else if (current.next.getXpos() < current.getXpos()) {
             // go left
             vx = originalVx * -1;
             vy = 0;
+            break;
           } else if (current.next.getYpos() > current.getYpos()) {
             // go down, direction = 1;
             vx = 0;
             vy = originalVy;
             direction = 1;
+            break;
           } else if (current.next.getYpos() < current.getYpos()) {
             // go up , direction = 2;
             vx = 0;
             vy = originalVy * -1;
             direction = 2;
+            break;
           }
         }
       }
@@ -158,29 +164,33 @@ public class Enemy extends Sprite implements Collidable, Movable {
     setYpos(getYpos() + vy);
   }
   public void move2() {
-    Node current = path.getHead();
-    if (current.next != null) {
-      if (current.next.getXpos() > current.getXpos()) {
-        // go right, direction = 0;
-        vx = originalVx;
-        vy = 0;
-        direction = 0;
-      } else if (current.next.getXpos() < current.getXpos()) {
-        // go left
-        vx = originalVx * -1;
-        vy = 0;
-      } else if (current.next.getYpos() > current.getYpos()) {
-        // go down, direction = 1;
-        vx = 0;
-        vy = originalVy;
-        direction = 1;
-      } else if (current.next.getYpos() < current.getYpos()) {
-        // go up , direction = 2;
-        vx = 0;
-        vy = originalVy * -1;
-        direction = 2;
+    //currentNode = path.getHead();
+    if (getXpos() == currentNode.getXpos() && getYpos() == currentNode.getYpos()) {
+      if (currentNode.next != null) {
+        //System.out.println("next Xpos and Ypos = " + currentNode.next.getXpos() + ", " + currentNode.next.getYpos());
+        if (currentNode.next.getXpos() > currentNode.getXpos()) {
+          // go right, direction = 0;
+          vx = originalVx;
+          vy = 0;
+          direction = 0;
+        } else if (currentNode.next.getXpos() < currentNode.getXpos()) {
+          // go left, direction = 3;
+          vx = originalVx * -1;
+          vy = 0;
+        } else if (currentNode.next.getYpos() > currentNode.getYpos()) {
+          // go down, direction = 1;
+          vx = 0;
+          vy = originalVy;
+          direction = 1;
+        } else if (currentNode.next.getYpos() < currentNode.getYpos()) {
+          // go up , direction = 2;
+          vx = 0;
+          vy = originalVy * -1;
+          direction = 2;
+        }
+        currentNode = currentNode.next;
       }
-      current = current.next;
+
     }
     setXpos(getXpos() + vx);
     setYpos(getYpos() + vy);

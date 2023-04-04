@@ -54,19 +54,14 @@ public class TileMap {
 
   }
   public void checkMap(){
-    if (window.mousePressed && (window.mouseX > 40 && window.mouseX < 1240) && (window.mouseY > 0 && window.mouseY < 720)){
-      int x = window.mouseX - 40;
-      int y = window.mouseY;
-      int row = y/48;
-      int col = x/48;
-      map[row][col] = 1;
+
       System.out.println("Tile check:");
       for (int i = 0; i < 15; i++){
         for (int j = 0; j < 25; j++){
           System.out.print(map[i][j] + " ");
         }
         System.out.println();
-      }
+
     }
   }
 

@@ -40,7 +40,7 @@ public class EnemyManager {
   public void update(BulletManager bulletManager) {
     for (Enemy enemy : enemies) {
       enemy.draw();
-      enemy.move();
+      enemy.move2();
       enemy.outOfBounds();
       for (Bullet bullet : bulletManager.bullets) {
         enemy.collide(bullet);
