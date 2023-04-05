@@ -18,7 +18,10 @@ public class DatabaseHandler {
 
     private MongoDatabase database;
 
-    public DatabaseHandler(String username, String password){
+    private String username = "testuser";
+    private String password = "cake1234";
+
+    public DatabaseHandler(){
         ConnectionString connectionString = new ConnectionString("mongodb+srv://" + username + ":" + password + "@2522.ru0dahn.mongodb.net/?retryWrites=true&w=majority");
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
@@ -30,11 +33,7 @@ public class DatabaseHandler {
         this.database = mongoClient.getDatabase("towerDefence");
 
 
-        try {
-            database.createCollection("highScores");
-        } catch (Exception e) {
-            System.out.println("Collection already in database");
-        }
+
 
     }
 
@@ -47,7 +46,11 @@ public class DatabaseHandler {
     }
 
     public void insertHighScore(String user, int score){
-
+        try {
+            database.createCollection("highScores");
+        } catch (Exception e) {
+            System.out.println("Collection already in database");
+        }
         Document document = new Document();
         document.append("user", user)
         .append("score",score);
@@ -59,7 +62,7 @@ public class DatabaseHandler {
         FindIterable<Document> cursor = this.database.getCollection("highScores")
                 .find()
                 .sort(new Document("score", -1).append("user", 1))
-                .limit(10);
+                .limit(8);
 
         ArrayList<Highscore> highscores = new ArrayList<Highscore>();
         for (Document document : cursor) {

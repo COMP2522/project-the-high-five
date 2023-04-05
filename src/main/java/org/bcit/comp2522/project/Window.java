@@ -25,10 +25,17 @@ public class Window extends PApplet {
   ArrayList<Tower> towers;
   EnemyManager enemyManager;
 
+  private String userInput;
+
   private static PImage background;
 
 
   private Menu menu;
+
+  private HighscoreScreen highscoreScreen;
+  private WinningScreen ws;
+
+  private LosingScreen ls;
 
   private int stage;
 
@@ -41,6 +48,10 @@ public class Window extends PApplet {
 
   Grid grid;
 
+  public Window(){
+    userInput = "";
+  }
+
   /**
    * Sets up the game window and initializes objects.
    */
@@ -48,12 +59,23 @@ public class Window extends PApplet {
     Player.getInstance();
     stage = 1;
     menu = new Menu(this);
+    highscoreScreen = new HighscoreScreen(this);
+    ws = new WinningScreen(this);
+    ls = new LosingScreen(this);
     this.init();
 
   }
 
   public void setStage(int stage) {
     this.stage = stage;
+  }
+
+  public void setUserInput(String input){
+    this.userInput = input;
+  }
+
+  public String getUserInput(){
+    return userInput;
   }
 
   /**
@@ -97,12 +119,17 @@ public class Window extends PApplet {
         levelManager.draw();
         break;
       case 3:
-        LosingScreen ls = new LosingScreen(this);
+        ls = new LosingScreen(this);
         ls.display();
         break;
       case 4:
-        WinningScreen ws = new WinningScreen(this);
+        ws = new WinningScreen(this);
         ws.display();
+        break;
+
+      case 5:
+        highscoreScreen.refreshHighscores();
+        highscoreScreen.display();
         break;
 
     }
@@ -122,12 +149,13 @@ public class Window extends PApplet {
     size(windowWidth, windowHeight);
   }
 
-public void keyPressed(){
-    if (key == 'm' || key == 'M'){
-      stage = 1;
-      this.init();
+  public void keyPressed() {
+    if (stage != 3 && stage != 4) {
+      if (key == 'm' || key == 'M') {
+        stage = 1;
+        this.init();
 
-    }
+      }
 
       if (key == 'z' || key == 'Z') {
         levelManager.nextLevel();
@@ -140,7 +168,28 @@ public void keyPressed(){
       if (key == 'l' || key == 'L') {
         levelManager.killPlayer();
       }
-}
+
+
+    } else {
+      if (userInput == null){
+        userInput = "";
+      }
+
+      if (Character.isLetter(key)) {
+        userInput += key;
+        System.out.println(userInput);
+      } else {
+        if (key == BACKSPACE && userInput.length() > 0){
+          userInput = userInput.substring(0, userInput.length() - 1);
+          System.out.println(userInput);
+        } else {
+          if (key == ENTER) {
+            ws.logHighscore();
+          }
+        }
+      }
+    }
+  }
   /**
    * Main method that runs the game.
    *
@@ -150,6 +199,7 @@ public void keyPressed(){
     String[] appletArgs = new String[]{"towerDefence"};
     Window tdGame = new Window();
     PApplet.runSketch(appletArgs, tdGame);
+
   }
 
 }

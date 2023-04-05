@@ -109,7 +109,7 @@ public class Button {
         parent.textFont(gameFont);
         parent.fill(255);
         parent.textSize(16);
-        parent.textAlign(parent.CENTER, parent.CENTER);
+        parent.textAlign(parent.CENTER);
         parent.text(this.text, this.x, this.y);
     }
 

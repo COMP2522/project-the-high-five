@@ -37,12 +37,12 @@ public class Highscore {
 
 
     public void publishHighscore() {
-        DatabaseHandler dbh = new DatabaseHandler("testuser", "cake1234");
+        DatabaseHandler dbh = new DatabaseHandler();
         dbh.insertHighScore(user, highscore);
     }
 
     public ArrayList<Highscore> retrieveHighscores() {
-        DatabaseHandler dbh = new DatabaseHandler("testuser", "cake1234");
+        DatabaseHandler dbh = new DatabaseHandler();
         return dbh.retrieveHighScores();
     }
 

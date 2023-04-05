@@ -25,7 +25,22 @@ public class LosingScreen {
         parent.textSize(50);
         parent.textAlign(parent.CENTER, parent.CENTER);
         parent.text("OH NO\nYOU LOST  :( " +
-                "\nYour score was :" + Player.getCurrentScore(), Window.windowWidth/2, Window.windowHeight/2);
+                "\nYour score was :" + Player.getCurrentScore(), Window.windowWidth/2, Window.windowHeight/3);
+
+        parent.text("ENTER YOUR NAME:", Window.windowWidth/3, Window.windowHeight * 8 /12);
+        parent.fill(111,185,15);
+        parent.text(parent.getUserInput().toUpperCase(), Window.windowWidth * 2 / 3, Window.windowHeight * 8/12);
+
+        parent.fill(255);
+        parent.text("HIT ENTER TO SAVE", Window.windowWidth * 2 / 3, Window.windowHeight * 10/12);
+    }
+
+    public void logHighscore(){
+        DatabaseHandler dbh = new DatabaseHandler();
+        dbh.insertHighScore(parent.getUserInput().toUpperCase(), Player.getCurrentScore());
+        parent.setUserInput("");
+        parent.setStage(1);
+
     }
 
 
