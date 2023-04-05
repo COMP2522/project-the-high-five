@@ -47,9 +47,6 @@ public class WinningScreen {
         parent.setUserInput("");
         parent.setStage(1);
 
-
-
-
     }
 
 }

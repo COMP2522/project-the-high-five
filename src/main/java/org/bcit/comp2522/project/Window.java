@@ -34,6 +34,8 @@ public class Window extends PApplet {
   private HighscoreScreen highscoreScreen;
   private WinningScreen ws;
 
+  private LosingScreen ls;
+
   private int stage;
 
   private ButtonHandler bh;
@@ -58,6 +60,7 @@ public class Window extends PApplet {
     menu = new Menu(this);
     highscoreScreen = new HighscoreScreen(this);
     ws = new WinningScreen(this);
+    ls = new LosingScreen(this);
     this.init();
 
   }
@@ -113,7 +116,7 @@ public class Window extends PApplet {
         levelManager.draw();
         break;
       case 3:
-        LosingScreen ls = new LosingScreen(this);
+        ls = new LosingScreen(this);
         ls.display();
         break;
       case 4:
