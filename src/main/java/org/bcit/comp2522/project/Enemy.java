@@ -20,13 +20,13 @@ public class Enemy extends Sprite implements Collidable, Movable {
   private final Path path;
   private int spriteIndex = 0;
   private int spriteTimer = 0;
-  private int damage;
-  private PImage enemySprite;
+  private final int spriteLength = 8;
+  private final int damage;
+  private final PImage enemySprite;
   protected PImage[] enemySprites = new PImage[8];
+  private final PImage[] enemySpritesUP = new PImage[8];
 
-  private PImage[] enemySpritesUP = new PImage[8];
-
-  private PImage[] enemySpritesDOWN = new PImage[8];
+  private final PImage[] enemySpritesDOWN = new PImage[8];
 
   private Node currentNode;
 
@@ -59,14 +59,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
     currentNode = path.getHead();
   }
 
-  public int getHealth() {
-    return health;
-  }
-
-  public void setHealth(int health) {
-    this.health = health;
-  }
-
   public boolean getIsDead() {
     return isDead;
   }
@@ -81,7 +73,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public void loadSprite(){
     int spriteWidth = 64;
     int spriteHeight = 64;
-    int spriteLength = 8;
     int upY = 256;
     int downY = 192;
     int rightY = 320;
@@ -99,7 +90,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public void draw() {
     window.pushStyle();
     // Sprite animation timer
-    if (spriteTimer >= 8) {
+    if (spriteTimer >= spriteLength) {
       if (spriteIndex >= enemySprites.length - 1) {
         spriteIndex = 0;
       } else {
@@ -117,7 +108,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
     } else if (direction == 1) {
       window.image(enemySpritesDOWN[spriteIndex], getXpos(), getYpos(), size, size);
     }
-    //window.image(enemySprites[spriteIndex], getXpos(), getYpos(), size, size);
     window.popStyle();
   }
 
@@ -127,43 +117,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
    * Node on the Path.
    */
   public void move() {
-    Node current = path.getHead();
-    while (current != null) {
-      if (getXpos() == current.getXpos() && getYpos() == current.getYpos()) {
-        if (current.next != null) {
-          System.out.println("next Xpos and Ypos = " + current.next.getXpos() + ", " + current.next.getYpos());
-          if (current.next.getXpos() > current.getXpos()) {
-            // go right, direction = 0;
-            vx = originalVx;
-            vy = 0;
-            direction = 0;
-            break;
-          } else if (current.next.getXpos() < current.getXpos()) {
-            // go left
-            vx = originalVx * -1;
-            vy = 0;
-            break;
-          } else if (current.next.getYpos() > current.getYpos()) {
-            // go down, direction = 1;
-            vx = 0;
-            vy = originalVy;
-            direction = 1;
-            break;
-          } else if (current.next.getYpos() < current.getYpos()) {
-            // go up , direction = 2;
-            vx = 0;
-            vy = originalVy * -1;
-            direction = 2;
-            break;
-          }
-        }
-      }
-      current = current.next;
-    }
-    setXpos(getXpos() + vx);
-    setYpos(getYpos() + vy);
-  }
-  public void move2() {
     //currentNode = path.getHead();
     if (getXpos() == currentNode.getXpos() && getYpos() == currentNode.getYpos()) {
       if (currentNode.next != null) {
@@ -206,10 +159,9 @@ public class Enemy extends Sprite implements Collidable, Movable {
   @Override
   public boolean collide(Object other) {
     System.out.println("Collide is called in Enemy");
-    if (other instanceof Bullet) {
+    if (other instanceof Bullet bullet) {
       System.out.println("Collide is called in Enemy and other is a bullet");
-        Bullet bullet = (Bullet) other;
-        if (getXpos() < bullet.getXpos() + bullet.getSize()
+      if (getXpos() < bullet.getXpos() + bullet.getSize()
             && getXpos() + size > bullet.getXpos()
             && getYpos() < bullet.getYpos() + bullet.getSize()
             && getYpos() + size > bullet.getYpos()) {
@@ -217,7 +169,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
             System.out.println("Enemy got hit!");
             if (health <= 0) {
             isDead = true;
-            Player.getInstance().setCoins(Player.getInstance().getCoins() + damage);
+            Player.setCoins(Player.getCoins() + damage);
             }
             return true;
         }

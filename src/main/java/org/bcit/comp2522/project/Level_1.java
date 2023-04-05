@@ -12,9 +12,9 @@ public class Level_1 extends Level {
   private ArrayList<Tower> towers;
   private BulletManager bulletManager;
   private TileMap tileMap;
-  int timeRegularEnemy;
-  int timeFastEnemy;
-  int timeBossEnemy;
+  private int timeRegularEnemy;
+  private int timeFastEnemy;
+  private int timeBossEnemy;
 
   public Level_1(Window window) {
     super(window);

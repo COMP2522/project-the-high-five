@@ -13,7 +13,7 @@ public class Bullet extends Sprite {
     return speed;
   }
 
-  private int speed = 20;
+  private int speed;
 
   private int size;
 
@@ -27,7 +27,8 @@ public class Bullet extends Sprite {
 
   public Bullet(float xpos, float ypos, Window window, float angle) {
     super(xpos, ypos, window);
-    size = 10;
+    this.speed = 10;
+    this.size = 10;
     this.angle = angle;
   }
 
