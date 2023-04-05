@@ -21,9 +21,7 @@ public class HighscoreScreen {
     public HighscoreScreen(Window window) {
         this.window = window;
         this.backgroundImage = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/BackDrop.png");
-        Highscore hs = new Highscore();
-        highscores = new ArrayList<Highscore>();
-        highscores = hs.retrieveHighscores();
+
 
     }
 
@@ -35,7 +33,15 @@ public class HighscoreScreen {
         window.textSize(50);
 
         window.text("Leader Board", Window.windowWidth / 2 , Window.windowHeight * 2 / 12);
+        window.textSize(40);
         retrieveHighscores();
+
+    }
+
+    public void refreshHighscores(){
+        Highscore hs = new Highscore();
+        highscores = new ArrayList<Highscore>();
+        highscores = hs.retrieveHighscores();
 
     }
 
