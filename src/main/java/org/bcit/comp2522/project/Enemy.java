@@ -14,23 +14,23 @@ public class Enemy extends Sprite implements Collidable, Movable {
   private int health;
   private int vx;
   private int vy;
-  private final int size = 50;
+  private int size = 55;
   private final int originalVx;
   private final int originalVy;
   private final Path path;
-  private int spriteIndex = 0;
-  private int spriteTimer = 0;
-  private final int spriteLength = 8;
+  public int spriteIndex = 0;
+  public int spriteTimer = 0;
+  private final int spriteLength;
   private final int damage;
-  private final PImage enemySprite;
-  protected PImage[] enemySprites = new PImage[8];
-  private final PImage[] enemySpritesUP = new PImage[8];
+  public PImage enemySprite;
+  public PImage[] enemySprites = new PImage[8];
+  public PImage[] enemySpritesUP = new PImage[8];
 
-  private final PImage[] enemySpritesDOWN = new PImage[8];
+  public PImage[] enemySpritesDOWN = new PImage[8];
 
   private Node currentNode;
 
-  private int direction = 0;
+  public int direction = 0;
 
   private boolean isDead = false;
 
@@ -54,9 +54,19 @@ public class Enemy extends Sprite implements Collidable, Movable {
     originalVx = vx;
     originalVy = vy;
     path = level.getPath();
-    enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Clampbeetle3.png");
-    loadSprite();
+    spriteLength = 8;
+    //enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Clampbeetle3.png");
+    //loadSprite();
     currentNode = path.getHead();
+
+  }
+
+  public void setSize(int size) {
+    this.size = size;
+  }
+
+  public int getSpriteLength(){
+    return spriteLength;
   }
 
   public boolean getIsDead() {
