@@ -43,10 +43,6 @@ public class Window extends PApplet {
 
   private ButtonHandler bh;
 
-  // Variables for the timer
-  int timeRegularEnemy = 0;
-  int timeFastEnemy = 0;
-  int timeBossEnemy = 0;
 
   Grid grid;
 
@@ -101,10 +97,6 @@ public class Window extends PApplet {
     enemyManager = new EnemyManager(this);
     // array of bullets
     bullets = new ArrayList<>();
-
-    timeRegularEnemy = 0;
-    timeFastEnemy = 0;
-    timeBossEnemy = 0;
 
     enemies = new ArrayList<>();
     towers = new ArrayList<>();
