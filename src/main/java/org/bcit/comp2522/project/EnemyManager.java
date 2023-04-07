@@ -10,6 +10,7 @@ public class EnemyManager {
   private final ArrayList<Enemy> enemies;
   private final Window window;
 
+
   /**
    * Constructs an EnemyManager object with a Window object.
    *
@@ -17,11 +18,33 @@ public class EnemyManager {
    */
   public EnemyManager(Window window) {
     this.window = window;
-    enemies = window.enemies;
+    enemies = new ArrayList<>();
+  }
+  public void addEnemy(Enemy enemy){
+    enemies.add(enemy);
   }
 
-  public void update(Enemy enemy) {
+  public void removeEnemy(){
+    for (Enemy enemy : enemies) {
+      if (enemy.getIsDead()) {
+        enemies.remove(enemy);
+        break;
+      }
+    }
+  }
+  public ArrayList<Enemy> getEnemies() {
+    return enemies;
+  }
+
+  public void update(BulletManager bulletManager) {
+    for (Enemy enemy : enemies) {
       enemy.draw();
       enemy.move();
+      enemy.outOfBounds();
+      for (Bullet bullet : bulletManager.bullets) {
+        enemy.collide(bullet);
+      }
+    }
+    removeEnemy();
   }
 }

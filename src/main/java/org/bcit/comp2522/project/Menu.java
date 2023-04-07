@@ -20,6 +20,8 @@ public class Menu {
 
     ButtonHandler loadBH;
 
+    ButtonHandler highscoreBH;
+
 
     public Menu(Window parent) {
         this.parent = parent;
@@ -34,19 +36,24 @@ public class Menu {
 
         int horizontalPos = Window.windowWidth/ 2;
 
-        Button startButton = new Button(parent, "START GAME", ButtonFunction.START, horizontalPos, Window.windowHeight * 5 / 14);
-        Button loadButton = new Button(parent, "LOAD GAME", ButtonFunction.LOAD, horizontalPos, Window.windowHeight * 8 / 14);
+        Button startButton = new Button(parent, "START GAME", ButtonFunction.START, horizontalPos, Window.windowHeight * 3 / 12);
+        Button loadButton = new Button(parent, "LOAD GAME", ButtonFunction.LOAD, horizontalPos, Window.windowHeight * 5 / 12);
+        Button hsButton = new Button(parent, "HIGH SCORES", ButtonFunction.HIGHSCORE, horizontalPos, Window.windowHeight * 7 / 12);
         startBH = new ButtonHandler(startButton);
         loadBH = new ButtonHandler(loadButton);
+        highscoreBH = new ButtonHandler(hsButton);
 
         startButton.displayButton();
         loadButton.displayButton();
+        hsButton.displayButton();
 
     }
 
     public void mousePressed(int mouseX, int mouseY) {
         startBH.clickHandler(mouseX, mouseY);
         //loadBH.clickHandler();
+
+        highscoreBH.clickHandler(mouseX, mouseY);
     }
 
 }

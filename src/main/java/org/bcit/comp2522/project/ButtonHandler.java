@@ -40,12 +40,13 @@ public class ButtonHandler {
 
 
     public void clickHandler(int mouseX, int mouseY){
-//        System.out.println("entered");
-//        System.out.println(checkHover(mouseX, mouseY));
+
 
         if (button.getFunction() == ButtonFunction.START && checkHover(mouseX, mouseY)){
-            System.out.println("clicked");
             parent.setStage(2);
+        }
+        if (button.getFunction() == ButtonFunction.HIGHSCORE && checkHover(mouseX, mouseY)){
+            parent.setStage(5);
         }
 
     }

@@ -5,8 +5,13 @@ public class Level {
   private Window window;
 
   private TileMap tileMap;
+  protected int numEnemies = 10;
   public Level(Window window){
     path = new Path(window);
+  }
+
+  public void setNumEnemies(int numEnemies){
+    this.numEnemies = numEnemies;
   }
   public Path getPath() {
     return path;
