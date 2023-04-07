@@ -15,8 +15,6 @@ public class Window extends PApplet {
   public static final int windowHeight = 720;
 
   ArrayList<Enemy> enemies;
-  Bullet testBullet;
-  UI ui = new UI(this);
   ArrayList<Bullet> bullets;
   Path path;
   LevelManager levelManager;
@@ -66,7 +64,6 @@ public class Window extends PApplet {
     ws = new WinningScreen(this);
     ls = new LosingScreen(this);
     this.init();
-    ui.displayEnemiesDefeated();
   }
 
   public void setStage(int stage) {
@@ -138,7 +135,6 @@ public class Window extends PApplet {
         highscoreScreen.refreshHighscores();
         highscoreScreen.display();
         break;
-
     }
   }
 
@@ -147,7 +143,6 @@ public class Window extends PApplet {
       menu.mousePressed(mouseX, mouseY);
     }
   }
-
 
   /**
    * Sets up the size of the game window.
@@ -206,7 +201,5 @@ public class Window extends PApplet {
     String[] appletArgs = new String[]{"towerDefence"};
     Window tdGame = new Window();
     PApplet.runSketch(appletArgs, tdGame);
-
   }
-
 }

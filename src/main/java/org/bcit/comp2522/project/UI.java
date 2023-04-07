@@ -8,7 +8,8 @@ public class UI {
     this.window = window;
   }
 
-  public void displayLevelNumber(int levelNumber) {
+  public void displayLevelNumber() {
+    int levelNumber = LevelManager.getCurrentLevel() + 1;
     window.textAlign(window.CENTER);
     window.textSize(32);
     window.fill(255, 255, 255);
@@ -23,11 +24,20 @@ public class UI {
     window.text("Enemies Defeated: " + enemiesDefeated, 1050, 85);
   }
 
-  public void displayHP(int hp) {
+  public void displayHP() {
+    int hp = Player.getHealth();
     window.textAlign(window.CENTER);
     window.textSize(32);
     window.fill(255, 255, 255);
     window.text("HP: " + hp, 1050, 658);
+  }
+
+  public void displayCoins() {
+    int coins = Player.getCoins();
+    window.textAlign(window.CENTER);
+    window.textSize(32);
+    window.fill(255, 255, 255);
+    window.text("Coins: " + coins, 640, 570);
   }
 
   public void displayPlayPauseButton(boolean isPlaying) {
