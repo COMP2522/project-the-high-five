@@ -76,19 +76,19 @@ public class Level_5 extends Level{
         // Check if it's time to spawn a new regular enemy
         if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
             timeRegularEnemy = 0;
-            enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 2, 2, 2, 2, this));
+            enemyManager.addEnemy(new Beetle(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 2, 2, 2, 2, this));
         }
 
         // Check if it's time to spawn a new fast enemy
         if (timeFastEnemy >= 400) { // 400 frames = 6.7 seconds
             timeFastEnemy = 0;
-            enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 1, 4, 4, 1, this));
+            enemyManager.addEnemy(new Locust(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 1, 4, 4, 1, this));
         }
 
         // Check if it's time to spawn a new boss enemy
         if (timeBossEnemy >= 750) { // 750 frames = 12.5 seconds
             timeBossEnemy = 0;
-            enemyManager.addEnemy(new Enemy(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 4, 1, 1, 3, this));
+            enemyManager.addEnemy(new Bee(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 4, 1, 1, 3, this));
         }
 
         for (Tower tower : towers) {
