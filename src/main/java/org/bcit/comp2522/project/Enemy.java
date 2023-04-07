@@ -11,8 +11,6 @@ import processing.core.PImage;
  * @version 1.0
  */
 public class Enemy extends Sprite implements Collidable, Movable {
-  private static int enemiesKilled = 0;
-  private static int levelCompleted = 0;
   private int health;
   private int vx;
   private int vy;
@@ -35,6 +33,8 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public int direction = 0;
 
   private boolean isDead = false;
+
+  EnemyManager enemyManager;
 
   /**
    * Constructor for creating a new Enemy.
@@ -60,7 +60,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
     //enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Clampbeetle3.png");
     //loadSprite();
     currentNode = path.getHead();
-
+    enemyManager = new EnemyManager(window);
   }
 
   public void setSize(int size) {
@@ -69,22 +69,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
 
   public int getSpriteLength(){
     return spriteLength;
-  }
-
-  public static void setEnemiesKilled(int enemiesKilled) {
-    Enemy.enemiesKilled = enemiesKilled;
-  }
-
-  public static int getEnemiesKilled() {
-    return enemiesKilled;
-  }
-
-  public static int getLevelCompleted() {
-    return levelCompleted;
-  }
-
-  public static void setLevelCompleted(int levelCompleted) {
-    Enemy.levelCompleted = levelCompleted;
   }
 
   public boolean getIsDead() {
@@ -194,7 +178,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
             && getYpos() + size > bullet.getYpos()) {
             health -= bullet.getDamage();
             if (health <= 0) {
-            enemiesKilled++;
+            enemyManager.setEnemiesKilled(EnemyManager.getEnemiesKilled() + 1);
             isDead = true;
             Player.setCoins(Player.getCoins() + damage);
             }

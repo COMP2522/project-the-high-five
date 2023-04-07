@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public class EnemyManager {
   private final ArrayList<Enemy> enemies;
   private final Window window;
-
+  private static int enemiesKilled = 0;
+  private static int levelCompleted = 0;
 
   /**
    * Constructs an EnemyManager object with a Window object.
@@ -20,6 +21,23 @@ public class EnemyManager {
     this.window = window;
     enemies = new ArrayList<>();
   }
+
+  public static int getEnemiesKilled() {
+    return enemiesKilled;
+  }
+
+  public static void setEnemiesKilled(int enemiesKilled) {
+    EnemyManager.enemiesKilled = enemiesKilled;
+  }
+
+  public static int getLevelCompleted() {
+    return levelCompleted;
+  }
+
+  public static void setLevelCompleted(int levelCompleted) {
+    EnemyManager.levelCompleted = levelCompleted;
+  }
+
   public void addEnemy(Enemy enemy){
     enemies.add(enemy);
   }
@@ -41,12 +59,12 @@ public class EnemyManager {
       enemy.draw();
       enemy.move();
       enemy.outOfBounds();
-      if (enemy.getEnemiesKilled() == 20) {
-        enemy.setEnemiesKilled(0);
+      if (enemiesKilled == 20) {
+        enemiesKilled = 0;
         window.levelManager.nextLevel();
-        enemy.setLevelCompleted(enemy.getLevelCompleted() + 1);
+        levelCompleted++;
       }
-      if (enemy.getLevelCompleted() == 5) {
+      if (levelCompleted == 5) {
         window.levelManager.killEnemies();
       }
       for (Bullet bullet : bulletManager.bullets) {
