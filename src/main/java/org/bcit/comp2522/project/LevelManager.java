@@ -18,6 +18,7 @@ public class LevelManager {
   public void draw() {
     //System.out.println("drawing level:" + currentLevel);
     levels[currentLevel].draw();
+    ui.setup();
     ui.displayEnemiesDefeated();
     ui.displayLevelNumber();
     ui.displayHP();
@@ -61,11 +62,11 @@ public class LevelManager {
    * This is just a temporary method to kill off enemies to trigger losing
    * function faster for testing purposes.  DELETE LATER
    */
-  public void killEnemies(){
+  public void killEnemies() {
     levels[currentLevel].setNumEnemies(0);
   }
 
-  public void killPlayer(){
+  public void killPlayer() {
     Player.setHealth(0);
   }
 

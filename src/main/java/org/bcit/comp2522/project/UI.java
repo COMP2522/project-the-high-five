@@ -1,11 +1,20 @@
 package org.bcit.comp2522.project;
 
+import processing.core.PImage;
+
 public class UI {
 
+  public PImage coinImage;
+  public PImage hpImage;
   Window window;
 
   public UI(Window window) {
     this.window = window;
+  }
+
+  public void setup() {
+    coinImage = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/coin3.png");
+    hpImage = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/redHeart.png");
   }
 
   public void displayLevelNumber() {
@@ -29,7 +38,8 @@ public class UI {
     window.textAlign(window.CENTER);
     window.textSize(32);
     window.fill(255, 255, 255);
-    window.text("HP: " + hp, 1050, 658);
+    window.text(hp, 1050, 659);
+    window.image(hpImage, 1067, 631, 32, 32);
   }
 
   public void displayCoins() {
@@ -37,7 +47,8 @@ public class UI {
     window.textAlign(window.CENTER);
     window.textSize(32);
     window.fill(255, 255, 255);
-    window.text("Coins: " + coins, 640, 570);
+    window.text(coins, 615, 563);
+    window.image(coinImage, 645, 537, 32, 32);
   }
 
   public void displayPlayPauseButton(boolean isPlaying) {
