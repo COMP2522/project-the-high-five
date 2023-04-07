@@ -44,7 +44,7 @@ public class Bullet extends Sprite {
   }
 
   public void draw() {
-    window.fill(0, 255, 0);
+    window.fill(0, 0, 255);
     window.circle(getXpos(), getYpos(), 10);
   }
 
