@@ -14,18 +14,21 @@ public class Enemy extends Sprite implements Collidable, Movable {
   private int health;
   private int vx;
   private int vy;
-  private final int size;
+  private final int size = 50;
   private final int originalVx;
   private final int originalVy;
   private final Path path;
   private int spriteIndex = 0;
   private int spriteTimer = 0;
-  private PImage enemySprite;
-  private PImage[] enemySprites = new PImage[8];
+  private final int spriteLength = 8;
+  private final int damage;
+  private final PImage enemySprite;
+  protected PImage[] enemySprites = new PImage[8];
+  private final PImage[] enemySpritesUP = new PImage[8];
 
-  private PImage[] enemySpritesUP = new PImage[8];
+  private final PImage[] enemySpritesDOWN = new PImage[8];
 
-  private PImage[] enemySpritesDOWN = new PImage[8];
+  private Node currentNode;
 
   private int direction = 0;
 
@@ -40,28 +43,20 @@ public class Enemy extends Sprite implements Collidable, Movable {
    * @param health the health of the Enemy
    * @param vx the x-velocity of the Enemy
    * @param vy the y-velocity of the Enemy
-   * @param size the size of the Enemy
+   * @param damage the damage the Enemy deals to the Player
    */
-  public Enemy(float xpos, float ypos, Window window, int health, int vx, int vy, int size, Level level) {
+  public Enemy(float xpos, float ypos, Window window, int health, int vx, int vy, int damage, Level level) {
     super(xpos, ypos, window);
     this.health = health;
-    size = 50;
     this.vx = vx;
     this.vy = vy;
-    this.size = size;
+    this.damage = damage;
     originalVx = vx;
     originalVy = vy;
     path = level.getPath();
     enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Clampbeetle3.png");
     loadSprite();
-  }
-
-  public int getHealth() {
-    return health;
-  }
-
-  public void setHealth(int health) {
-    this.health = health;
+    currentNode = path.getHead();
   }
 
   public boolean getIsDead() {
@@ -71,14 +66,13 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public void outOfBounds() {
     if (getXpos() > window.width) {
       isDead = true;
-      Player.getInstance().setHealth(Player.getInstance().getHealth() - size);
+      Player.setHealth(Player.getHealth() - damage);
     }
   }
 
   public void loadSprite(){
     int spriteWidth = 64;
     int spriteHeight = 64;
-    int spriteLength = 8;
     int upY = 256;
     int downY = 192;
     int rightY = 320;
@@ -88,8 +82,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
       enemySpritesUP[i] = enemySprite.get(x, upY, spriteWidth, spriteHeight);
       enemySpritesDOWN[i] = enemySprite.get(x, downY, spriteWidth, spriteHeight);
     }
-
-
   }
 
   /**
@@ -98,7 +90,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public void draw() {
     window.pushStyle();
     // Sprite animation timer
-    if (spriteTimer >= 8) {
+    if (spriteTimer >= spriteLength) {
       if (spriteIndex >= enemySprites.length - 1) {
         spriteIndex = 0;
       } else {
@@ -116,7 +108,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
     } else if (direction == 1) {
       window.image(enemySpritesDOWN[spriteIndex], getXpos(), getYpos(), size, size);
     }
-    //window.image(enemySprites[spriteIndex], getXpos(), getYpos(), size, size);
     window.popStyle();
   }
 
@@ -126,37 +117,38 @@ public class Enemy extends Sprite implements Collidable, Movable {
    * Node on the Path.
    */
   public void move() {
-    Node current = path.getHead();
-    while (current != null) {
-      if (getXpos() == current.getXpos() && getYpos() == current.getYpos()) {
-        if (current.next != null) {
-          if (current.next.getXpos() > current.getXpos()) {
-            // go right, direction = 0;
-            vx = originalVx;
-            vy = 0;
-            direction = 0;
-          } else if (current.next.getXpos() < current.getXpos()) {
-            // go left
-            vx = originalVx * -1;
-            vy = 0;
-          } else if (current.next.getYpos() > current.getYpos()) {
-            // go down, direction = 1;
-            vx = 0;
-            vy = originalVy;
-            direction = 1;
-          } else if (current.next.getYpos() < current.getYpos()) {
-            // go up , direction = 2;
-            vx = 0;
-            vy = originalVy * -1;
-            direction = 2;
-          }
+    //currentNode = path.getHead();
+    if (getXpos() == currentNode.getXpos() && getYpos() == currentNode.getYpos()) {
+      if (currentNode.next != null) {
+        //System.out.println("next Xpos and Ypos = " + currentNode.next.getXpos() + ", " + currentNode.next.getYpos());
+        if (currentNode.next.getXpos() > currentNode.getXpos()) {
+          // go right, direction = 0;
+          vx = originalVx;
+          vy = 0;
+          direction = 0;
+        } else if (currentNode.next.getXpos() < currentNode.getXpos()) {
+          // go left, direction = 3;
+          vx = originalVx * -1;
+          vy = 0;
+        } else if (currentNode.next.getYpos() > currentNode.getYpos()) {
+          // go down, direction = 1;
+          vx = 0;
+          vy = originalVy;
+          direction = 1;
+        } else if (currentNode.next.getYpos() < currentNode.getYpos()) {
+          // go up , direction = 2;
+          vx = 0;
+          vy = originalVy * -1;
+          direction = 2;
         }
+        currentNode = currentNode.next;
       }
-      current = current.next;
+
     }
     setXpos(getXpos() + vx);
     setYpos(getYpos() + vy);
   }
+
 
   /**
    * Determines if the Enemy has collided with another Collidable object.
@@ -166,16 +158,18 @@ public class Enemy extends Sprite implements Collidable, Movable {
    */
   @Override
   public boolean collide(Object other) {
-    if (other instanceof Bullet) {
-        Bullet bullet = (Bullet) other;
-        if (getXpos() < bullet.getXpos() + 10
+    System.out.println("Collide is called in Enemy");
+    if (other instanceof Bullet bullet) {
+      System.out.println("Collide is called in Enemy and other is a bullet");
+      if (getXpos() < bullet.getXpos() + bullet.getSize()
             && getXpos() + size > bullet.getXpos()
-            && getYpos() < bullet.getYpos() + 10
+            && getYpos() < bullet.getYpos() + bullet.getSize()
             && getYpos() + size > bullet.getYpos()) {
             health -= bullet.getDamage();
+            System.out.println("Enemy got hit!");
             if (health <= 0) {
             isDead = true;
-            Player.getInstance().setCoins(Player.getInstance().getCoins() + size);
+            Player.setCoins(Player.getCoins() + damage);
             }
             return true;
         }

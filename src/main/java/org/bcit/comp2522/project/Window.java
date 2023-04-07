@@ -17,21 +17,25 @@ public class Window extends PApplet {
   ArrayList<Enemy> enemies;
   Bullet testBullet;
   ArrayList<Bullet> bullets;
-  BulletManager bulletManager;
-
   Path path;
   LevelManager levelManager;
   Level level_1;
-
   Level level_2;
+  Level level_3;
   ArrayList<Tower> towers;
   EnemyManager enemyManager;
-  Tower selectedTower = null;
+
+  private String userInput;
 
   private static PImage background;
 
 
   private Menu menu;
+
+  private HighscoreScreen highscoreScreen;
+  private WinningScreen ws;
+
+  private LosingScreen ls;
 
   private int stage;
 
@@ -44,6 +48,10 @@ public class Window extends PApplet {
 
   Grid grid;
 
+  public Window(){
+    userInput = "";
+  }
+
   /**
    * Sets up the game window and initializes objects.
    */
@@ -51,6 +59,9 @@ public class Window extends PApplet {
     Player.getInstance();
     stage = 1;
     menu = new Menu(this);
+    highscoreScreen = new HighscoreScreen(this);
+    ws = new WinningScreen(this);
+    ls = new LosingScreen(this);
     this.init();
 
   }
@@ -59,20 +70,29 @@ public class Window extends PApplet {
     this.stage = stage;
   }
 
+  public void setUserInput(String input){
+    this.userInput = input;
+  }
+
+  public String getUserInput(){
+    return userInput;
+  }
+
   /**
    * Initializes objects.
    */
   public void init() {
     background = this.loadImage("src/main/java/org/bcit/comp2522/project/asset/BackDrop.png");
-    levelManager = new LevelManager(this, 2);
+    levelManager = new LevelManager(this, 3);
     level_1 = new Level_1(this);
     level_2 = new Level_2(this);
+    level_3 = new Level_3(this);
     grid = new Grid(this);
 
     levelManager.addLevel(level_1);
     levelManager.addLevel(level_2);
+    levelManager.addLevel(level_3);
     enemyManager = new EnemyManager(this);
-    bulletManager = new BulletManager(this);
     // array of bullets
     bullets = new ArrayList<>();
 
@@ -80,17 +100,8 @@ public class Window extends PApplet {
     timeFastEnemy = 0;
     timeBossEnemy = 0;
 
-    testBullet = new Bullet(0, 200, this);
     enemies = new ArrayList<>();
     towers = new ArrayList<>();
-    // 5 towers have been spawned on top of each other
-    // This is so the player can drag and drop them into desired spots
-    // 5 is hardcoded number but would lke to personalize based on level.
-    towers.add(new Tower(90, 630,this));
-    towers.add(new Tower(190, 630,this));
-    towers.add(new Tower(290, 630,this));
-    towers.add(new Tower(390, 630,this));
-    towers.add(new Tower(490, 630,this));
   }
 
   /**
@@ -105,27 +116,20 @@ public class Window extends PApplet {
         menu.display();
         break;
       case 2:
-        //background(0);
-        //path.draw();
-        //testBullet.draw();
         levelManager.draw();
-        for (Tower tower : towers) {
-          tower.draw();
-        }
-
-        // draw bullets
-        for (Bullet bullet : bullets) {
-          bullet.draw();
-          bullet.move();
-        }
         break;
       case 3:
-        LosingScreen ls = new LosingScreen(this);
+        ls = new LosingScreen(this);
         ls.display();
         break;
       case 4:
-        WinningScreen ws = new WinningScreen(this);
+        ws = new WinningScreen(this);
         ws.display();
+        break;
+
+      case 5:
+        highscoreScreen.refreshHighscores();
+        highscoreScreen.display();
         break;
 
     }
@@ -134,51 +138,9 @@ public class Window extends PApplet {
   public void mousePressed() {
     if (stage == 1) {
       menu.mousePressed(mouseX, mouseY);
-    } else {
-
-      for (Tower tower : towers) {
-        if (tower.isHovering()) {
-          selectedTower = tower;
-          selectedTower.mousePressed();
-          break;
-        }
-      }
-      // makes sure game doesn't crash when tower isn't clicked
-      if (selectedTower == null) {
-        return;
-      }
     }
   }
 
-  public void mouseDragged() {
-    if (selectedTower != null) {
-      selectedTower.mouseDragged();
-    }
-  }
-
-  private void spawnBullet(float x, float y) {
-    if (!enemies.isEmpty()) {
-//      Enemy nearestEnemy = enemies.get(0);
-//      float minDist = dist(x, y, nearestEnemy.getXpos(), nearestEnemy.getYpos());
-//
-//      for (Enemy enemy : enemies) {
-//        float curDist = dist(x, y, enemy.getXpos(), enemy.getYpos());
-//        if (curDist < minDist) {
-//          nearestEnemy = enemy;
-//          minDist = curDist;
-//        }
-//      }
-
-    }
-  }
-
-  public void mouseReleased() {
-    if (selectedTower != null) {
-      spawnBullet(selectedTower.getXpos(), selectedTower.getYpos());
-      selectedTower.mouseReleased();
-      selectedTower = null;
-    }
-  }
 
   /**
    * Sets up the size of the game window.
@@ -187,14 +149,13 @@ public class Window extends PApplet {
     size(windowWidth, windowHeight);
   }
 
+  public void keyPressed() {
+    if (stage != 3 && stage != 4) {
+      if (key == 'm' || key == 'M') {
+        stage = 1;
+        this.init();
 
-
-public void keyPressed(){
-    if (key == 'm' || key == 'M'){
-      stage = 1;
-      this.init();
-
-    }
+      }
 
       if (key == 'z' || key == 'Z') {
         levelManager.nextLevel();
@@ -207,11 +168,28 @@ public void keyPressed(){
       if (key == 'l' || key == 'L') {
         levelManager.killPlayer();
       }
-}
 
 
+    } else {
+      if (userInput == null){
+        userInput = "";
+      }
 
-
+      if (Character.isLetter(key)) {
+        userInput += key;
+        System.out.println(userInput);
+      } else {
+        if (key == BACKSPACE && userInput.length() > 0){
+          userInput = userInput.substring(0, userInput.length() - 1);
+          System.out.println(userInput);
+        } else {
+          if (key == ENTER) {
+            ws.logHighscore();
+          }
+        }
+      }
+    }
+  }
   /**
    * Main method that runs the game.
    *
@@ -221,14 +199,7 @@ public void keyPressed(){
     String[] appletArgs = new String[]{"towerDefence"};
     Window tdGame = new Window();
     PApplet.runSketch(appletArgs, tdGame);
+
   }
 
-//  public void removeEnemy(Enemy enemy) {
-//  }
-
-//  public void removeBullet(Bullet bullet) {
-//    if (bullet.collide()) {
-//      bullets.remove(bullet);
-//    }
-//  }
 }

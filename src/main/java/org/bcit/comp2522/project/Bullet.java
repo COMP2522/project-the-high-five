@@ -13,7 +13,11 @@ public class Bullet extends Sprite {
     return speed;
   }
 
-  private int speed = 5;
+  private int speed;
+
+  private int size;
+
+  private float angle;
 
   public int getDamage() {
     return damage;
@@ -21,12 +25,20 @@ public class Bullet extends Sprite {
 
   private int damage = 1;
 
-  public Bullet(float xpos, float ypos, Window window) {
+  public Bullet(float xpos, float ypos, Window window, float angle) {
     super(xpos, ypos, window);
+    this.speed = 10;
+    this.size = 10;
+    this.angle = angle;
+  }
+
+  public int getSize() {
+    return size;
   }
 
   public void move() {
-
+    setXpos(getXpos() + (float) (speed * Math.cos(angle)));
+    setYpos(getYpos() + (float) (speed * Math.sin(angle)));
   }
 
   public void draw() {
@@ -34,5 +46,8 @@ public class Bullet extends Sprite {
     window.circle(getXpos(), getYpos(), 10);
   }
 
+  public void remove() {
+    window.bullets.remove(this);
+  }
 
 }

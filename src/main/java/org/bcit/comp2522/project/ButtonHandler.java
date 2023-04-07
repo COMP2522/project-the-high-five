@@ -45,6 +45,9 @@ public class ButtonHandler {
         if (button.getFunction() == ButtonFunction.START && checkHover(mouseX, mouseY)){
             parent.setStage(2);
         }
+        if (button.getFunction() == ButtonFunction.HIGHSCORE && checkHover(mouseX, mouseY)){
+            parent.setStage(5);
+        }
 
     }
 

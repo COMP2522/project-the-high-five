@@ -22,7 +22,6 @@ public class EnemyManager {
   }
   public void addEnemy(Enemy enemy){
     enemies.add(enemy);
-
   }
 
   public void removeEnemy(){
@@ -33,15 +32,20 @@ public class EnemyManager {
       }
     }
   }
+  public ArrayList<Enemy> getEnemies() {
+    return enemies;
+  }
 
-  public void update() {
+  public void update(BulletManager bulletManager) {
     for (Enemy enemy : enemies) {
       enemy.draw();
       enemy.move();
       enemy.outOfBounds();
+      for (Bullet bullet : bulletManager.bullets) {
+        enemy.collide(bullet);
+      }
     }
     removeEnemy();
-    //System.out.println("Size of enemies: " + enemies.size());
   }
 
   public ArrayList<Enemy> getEnemies() {

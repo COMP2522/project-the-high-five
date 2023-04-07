@@ -8,14 +8,17 @@ public class TileMap {
   private Path path;
 
   private ArrayList<Tower> towers;
+
+  private BulletManager bulletManager;
   private final int ROW;
   private final int COL;
 
   private Window window;
-  public TileMap(Window window, Path path, ArrayList<Tower> towers){
+  public TileMap(Window window, Path path, ArrayList<Tower> towers, BulletManager bulletManager){
     this.window = window;
     this.path = path;
     this.towers = towers;
+    this.bulletManager = bulletManager;
     ROW = 15;
     COL = 25;
     map = new int[15][25];
@@ -51,19 +54,14 @@ public class TileMap {
 
   }
   public void checkMap(){
-    if (window.mousePressed && (window.mouseX > 40 && window.mouseX < 1240) && (window.mouseY > 0 && window.mouseY < 720)){
-      int x = window.mouseX - 40;
-      int y = window.mouseY;
-      int row = y/48;
-      int col = x/48;
-      map[row][col] = 1;
+
       System.out.println("Tile check:");
       for (int i = 0; i < 15; i++){
         for (int j = 0; j < 25; j++){
           System.out.print(map[i][j] + " ");
         }
         System.out.println();
-      }
+
     }
   }
 
@@ -78,7 +76,7 @@ public class TileMap {
         int col = x / 48;
         if (map[row][col] != 1) {
           map[row][col] = selectedTower;
-          towers.add(new Tower(col*48+40, row*48, window));
+          towers.add(new Tower(col*48+40, row*48, window, bulletManager));
           System.out.println("Tower placement" + col*48 + ", " + row*48);
           return true;
         } else {

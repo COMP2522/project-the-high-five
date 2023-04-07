@@ -60,6 +60,25 @@ public class Path {
     }
     return result;
   }
+  public void printNode(){
+    Node current = head;
+    while (current != null){
+      System.out.println("Current node:" + current.getXpos() + " " + current.getYpos());
+      current = current.next;
+    }
+  }
+  public boolean nodeExist(int x, int y){
+    boolean result = false;
+    Node current = head;
+    while (current != null){
+      if (current.getXpos() == x && current.getYpos() == y){
+        result = true;
+        break;
+      }
+      current = current.next;
+    }
+    return result;
+  }
 
   /**
    * Connects the corners of the path.
@@ -75,29 +94,52 @@ public class Path {
         if (current.getXpos() == next.getXpos()){
           if (current.getYpos() < next.getYpos()){
             for (int j = current.getYpos() + 48; j < next.getYpos(); j += 48){
-              Node temp = new Node(current.getXpos(), j);
-              current.next = temp;
-              current = temp;
+              if (!nodeExist(current.getXpos(), j)){
+                Node temp = new Node(current.getXpos(), j);
+                current.next = temp;
+                current = temp;
+                //System.out.println("Node added:" + current.getXpos() + " " + current.getYpos());
+              } else {
+                //System.out.println("Node already exist");
+              }
+
             }
           } else {
             for (int j = current.getYpos() - 48; j > next.getYpos(); j -= 48){
-              Node temp = new Node(current.getXpos(), j);
-              current.next = temp;
-              current = temp;
+              if (!nodeExist(current.getXpos(), j)){
+                Node temp = new Node(current.getXpos(), j);
+                current.next = temp;
+                current = temp;
+                //System.out.println("Node added:" + current.getXpos() + " " + current.getYpos());
+              } else {
+                //System.out.println("Node already exist");
+              }
             }
           }
         } else {
           if (current.getXpos() < next.getXpos()){
             for (int j = current.getXpos() + 48; j < next.getXpos(); j += 48){
-              Node temp = new Node(j, current.getYpos());
-              current.next = temp;
-              current = temp;
+              if (!nodeExist(j, current.getYpos())){
+                Node temp = new Node(j, current.getYpos());
+                current.next = temp;
+                current = temp;
+                //System.out.println("Node added:" + current.getXpos() + " " + current.getYpos());
+              } else {
+                //System.out.println("Node already exist");
+              }
+
             }
           } else {
             for (int j = current.getXpos() - 48; j > next.getXpos(); j -= 48){
-              Node temp = new Node(j, current.getYpos());
-              current.next = temp;
-              current = temp;
+              if (!nodeExist(j, current.getYpos())){
+                Node temp = new Node(j, current.getYpos());
+                current.next = temp;
+                current = temp;
+                //System.out.println("Node added:" + current.getXpos() + " " + current.getYpos());
+              } else {
+                //.out.println("Node already exist");
+              }
+
             }
           }
         }
