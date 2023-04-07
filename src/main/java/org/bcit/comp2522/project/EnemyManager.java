@@ -42,13 +42,12 @@ public class EnemyManager {
       enemy.move();
       enemy.outOfBounds();
       for (Bullet bullet : bulletManager.bullets) {
-        enemy.collide(bullet);
+//        enemy.collide(bullet);
+        if (enemy.collide(bullet)) {
+          bullet.setIsHit(true);
+        }
       }
     }
     removeEnemy();
-  }
-
-  public ArrayList<Enemy> getEnemies() {
-    return enemies;
   }
 }
