@@ -41,8 +41,15 @@ public class EnemyManager {
       enemy.draw();
       enemy.move();
       enemy.outOfBounds();
+      if (enemy.getEnemiesKilled() == 20) {
+        enemy.setEnemiesKilled(0);
+        window.levelManager.nextLevel();
+        enemy.setLevelCompleted(enemy.getLevelCompleted() + 1);
+      }
+      if (enemy.getLevelCompleted() == 5) {
+        window.levelManager.killEnemies();
+      }
       for (Bullet bullet : bulletManager.bullets) {
-//        enemy.collide(bullet);
         if (enemy.collide(bullet)) {
           bullet.setIsHit(true);
         }

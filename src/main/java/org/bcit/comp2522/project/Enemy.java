@@ -57,9 +57,26 @@ public class Enemy extends Sprite implements Collidable, Movable {
     currentNode = path.getHead();
   }
 
+  public static void setEnemiesKilled(int enemiesKilled) {
+    Enemy.enemiesKilled = enemiesKilled;
+  }
+
+  public static int getEnemiesKilled() {
+    return enemiesKilled;
+  }
+
+  public static int getLevelCompleted() {
+    return levelCompleted;
+  }
+
+  public static void setLevelCompleted(int levelCompleted) {
+    Enemy.levelCompleted = levelCompleted;
+  }
+
   public boolean getIsDead() {
     return isDead;
   }
+
   // Remove enemy when out of bounds
   public void outOfBounds() {
     if (getXpos() > window.width) {
@@ -166,14 +183,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
             enemiesKilled++;
             isDead = true;
             Player.setCoins(Player.getCoins() + damage);
-            }
-            if (enemiesKilled == 20) {
-              enemiesKilled = 0;
-              window.levelManager.nextLevel();
-              levelCompleted++;
-            }
-            if (levelCompleted == 5) {
-              window.levelManager.killEnemies();
             }
             return true;
       }
