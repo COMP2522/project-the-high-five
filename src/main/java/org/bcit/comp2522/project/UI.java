@@ -15,7 +15,8 @@ public class UI {
     window.text("Level " + levelNumber, 640, 85);
   }
 
-  public void displayEnemiesDefeated(int enemiesDefeated) {
+  public void displayEnemiesDefeated() {
+    int enemiesDefeated = EnemyManager.getEnemiesKilled();
     window.textAlign(window.CENTER);
     window.textSize(32);
     window.fill(255, 255, 255);

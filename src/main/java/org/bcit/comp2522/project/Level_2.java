@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Level_2 extends Level {
     Window window;
+    UI ui;
     EnemyManager enemyManager;
     PImage tilemapImg;
     SelectTowerUI selectTowerUI;
@@ -46,6 +47,7 @@ public class Level_2 extends Level {
         getPath().connectCorners();
         tileMap.setPath();
         selectTowerUI = new SelectTowerUI(window, tileMap);
+        ui = new UI(window);
     }
 
     public void draw() {
@@ -101,7 +103,7 @@ public class Level_2 extends Level {
         enemyManager.update(bulletManager);
         window.grid.draw();
         //tileMap.checkMap();
-
+        ui.displayEnemiesDefeated();
     }
 
 }

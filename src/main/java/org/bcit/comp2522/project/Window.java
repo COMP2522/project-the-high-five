@@ -16,6 +16,7 @@ public class Window extends PApplet {
 
   ArrayList<Enemy> enemies;
   Bullet testBullet;
+  UI ui = new UI(this);
   ArrayList<Bullet> bullets;
   Path path;
   LevelManager levelManager;
@@ -65,7 +66,7 @@ public class Window extends PApplet {
     ws = new WinningScreen(this);
     ls = new LosingScreen(this);
     this.init();
-
+    ui.displayEnemiesDefeated();
   }
 
   public void setStage(int stage) {
