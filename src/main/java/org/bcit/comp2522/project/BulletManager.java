@@ -28,20 +28,23 @@ public class BulletManager {
     bullets.add(bullet);
   }
 
+//  public void removeBullet() {
+//    for (Bullet bullet : bullets) {
+//      if (bullet.getXpos() >= window.width || bullet.getYpos() >= window.height) {
+//        bullets.remove(bullet);
+//        break;
+//      } else if (bullet.getXpos() <= 0 || bullet.getYpos() <= 0) {
+//        bullets.remove(bullet);
+//        break;
+//      }
+//    }
+//  }
+
   public void removeBullet() {
     for (Bullet bullet : bullets) {
-      if (bullet.getXpos() >= window.width || bullet.getYpos() >= window.height) {
+      if (bullet.getIsHit()) {
         bullets.remove(bullet);
         break;
-      } else if (bullet.getXpos() <= 0 || bullet.getYpos() <= 0) {
-        bullets.remove(bullet);
-        break;
-      }
-      for (Enemy enemy : window.enemies) {
-        if (bullet.getXpos() == enemy.getXpos() && bullet.getYpos() == enemy.getYpos()) {
-          bullets.remove(bullet);
-          break;
-        }
       }
     }
   }
@@ -51,5 +54,6 @@ public class BulletManager {
       bullet.move();
       bullet.draw();
     }
+    removeBullet();
   }
 }

@@ -96,8 +96,6 @@ public class Level_1 extends Level {
     bulletManager.update();
     enemyManager.update(bulletManager);
     window.grid.draw();
-    //tileMap.checkMap();
-
     }
   }
 }

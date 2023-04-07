@@ -25,6 +25,8 @@ public class Bullet extends Sprite {
 
   private int damage = 1;
 
+  private boolean isHit = false;
+
   public Bullet(float xpos, float ypos, Window window, float angle) {
     super(xpos, ypos, window);
     this.speed = 10;
@@ -42,12 +44,15 @@ public class Bullet extends Sprite {
   }
 
   public void draw() {
-    window.fill(0, 255, 0);
+    window.fill(0, 0, 255);
     window.circle(getXpos(), getYpos(), 10);
   }
 
-  public void remove() {
-    window.bullets.remove(this);
+  public boolean getIsHit() {
+    return isHit;
   }
 
+  public void setIsHit(boolean isHit) {
+    this.isHit = isHit;
+  }
 }
