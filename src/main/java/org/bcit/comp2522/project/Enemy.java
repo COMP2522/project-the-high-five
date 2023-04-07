@@ -11,6 +11,8 @@ import processing.core.PImage;
  * @version 1.0
  */
 public class Enemy extends Sprite implements Collidable, Movable {
+  private static int enemiesKilled = 0;
+  private static int levelCompleted = 0;
   private int health;
   private int vx;
   private int vy;
@@ -168,21 +170,27 @@ public class Enemy extends Sprite implements Collidable, Movable {
    */
   @Override
   public boolean collide(Object other) {
-    System.out.println("Collide is called in Enemy");
     if (other instanceof Bullet bullet) {
-      System.out.println("Collide is called in Enemy and other is a bullet");
       if (getXpos() < bullet.getXpos() + bullet.getSize()
             && getXpos() + size > bullet.getXpos()
             && getYpos() < bullet.getYpos() + bullet.getSize()
             && getYpos() + size > bullet.getYpos()) {
             health -= bullet.getDamage();
-            System.out.println("Enemy got hit!");
             if (health <= 0) {
+            enemiesKilled++;
             isDead = true;
             Player.setCoins(Player.getCoins() + damage);
             }
+            if (enemiesKilled == 20) {
+              enemiesKilled = 0;
+              window.levelManager.nextLevel();
+              levelCompleted++;
+            }
+            if (levelCompleted == 5) {
+              window.levelManager.killEnemies();
+            }
             return true;
-        }
+      }
     }
     return false;
   }
