@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Level_2 extends Level {
 
     //SelectTowerUI selectTowerUI;
+    TowerManager towerManager;
 
 
     public Level_2(Window window) {
@@ -22,6 +23,7 @@ public class Level_2 extends Level {
 //        bulletManager = new BulletManager(window);
 //        tileMap = new TileMap(window, getPath(), towers, bulletManager);
         levelreset();
+        towerManager = new TowerManager(window);
         //levelManager = new LevelManager(window, 5);
 //        setTimeRegularEnemy(0);
 //        setTimeFastEnemy(0);
@@ -57,6 +59,7 @@ public class Level_2 extends Level {
             getSelectTowerUI().draw();
             getSelectTowerUI().selectTower();
             getSelectTowerUI().slotClicked();
+            towerManager.draw();
         }
 
         // Update the timer
@@ -82,16 +85,10 @@ public class Level_2 extends Level {
             getEnemyManager().addEnemy(new Bee(getPath().getHead().getXpos(), getPath().getHead().getYpos(), getWindow(), 4, 1, 1, 3, this));
         }
 
-        for (Tower tower : getTowers()) {
-            tower.draw();
-            //tower.inRange(enemyManager);
-            tower.shootingEnemy(getEnemyManager());
-            if (tower.isInRange()) {
-                getWindow().stroke(255, 0, 0);
-            } else {
-                getWindow().stroke(0, 0, 0);
-            }
-        }
+        // towerMethods
+        towerManager.shoot(enemyManager);
+        towerManager.inRange();
+
         getBulletManager().update();
         getEnemyManager().update(getBulletManager());
         getWindow().grid.draw();

@@ -9,14 +9,16 @@ public class SelectTowerUI {
   private PImage tower1;
 
   private TileMap tileMap;
+  TowerManager towerManager;
 
   private int selectedTower;
-  public SelectTowerUI(Window window, TileMap tileMap){
+  public SelectTowerUI(Window window, TileMap tileMap, TowerManager towerManager){
     this.window = window;
     this.tileMap = tileMap;
     inventoryIMG = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/towerslot.png");
     tower1 = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/tower1icon.png").get(0,0,96,96);
     selectedTower = 0;
+    this.towerManager = towerManager;
   }
 
   public void selectTower(){

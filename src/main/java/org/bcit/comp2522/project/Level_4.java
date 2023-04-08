@@ -5,7 +5,7 @@ import processing.core.PImage;
 import java.util.ArrayList;
 
 public class Level_4 extends Level {
-
+    TowerManager towerManager;
 
 
     public Level_4(Window window) {
@@ -16,7 +16,7 @@ public class Level_4 extends Level {
     public void init() {
         levelreset();
         //levelManager = new LevelManager(window, 5);
-
+        towerManager = new TowerManager(window);
         getPath().clearCorner();
         getPath().addCorner(40, 336);
         getPath().addCorner(520, 336);
@@ -51,6 +51,7 @@ public class Level_4 extends Level {
             getSelectTowerUI().draw();
             getSelectTowerUI().selectTower();
             getSelectTowerUI().slotClicked();
+            towerManager.draw();
         }
 
         // Update the timer
@@ -76,16 +77,10 @@ public class Level_4 extends Level {
             getEnemyManager().addEnemy(new Bee(getPath().getHead().getXpos(), getPath().getHead().getYpos(), getWindow(), 4, 1, 1, 3, this));
         }
 
-        for (Tower tower : getTowers()) {
-            tower.draw();
-            //tower.inRange(enemyManager);
-            tower.shootingEnemy(getEnemyManager());
-            if (tower.isInRange()) {
-                getWindow().stroke(255, 0, 0);
-            } else {
-                getWindow().stroke(0, 0, 0);
-            }
-        }
+        // towerMethods
+        towerManager.shoot(enemyManager);
+        towerManager.inRange();
+
         getBulletManager().update();
         getEnemyManager().update(getBulletManager());
         getWindow().grid.draw();

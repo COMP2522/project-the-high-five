@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Level_1 extends Level {
 
   //SelectTowerUI selectTowerUI;
+  TowerManager towerManager;
 
 
   public Level_1(Window window) {
@@ -22,6 +23,7 @@ public class Level_1 extends Level {
 //    bulletManager = new BulletManager(window);
 //    tileMap = new TileMap(window, getPath(), towers, bulletManager);
     levelreset();
+    towerManager = new TowerManager(window);
 //    setTimeRegularEnemy(0);
 //    setTimeFastEnemy(0);
 //    setTimeBossEnemy(0);
@@ -51,6 +53,7 @@ public class Level_1 extends Level {
       getSelectTowerUI().draw();
       getSelectTowerUI().selectTower();
       getSelectTowerUI().slotClicked();
+      towerManager.draw();
 
       // Update the timer
       increaseTimeRegularEnemy(1);
@@ -78,21 +81,15 @@ public class Level_1 extends Level {
         getEnemyManager().addEnemy(new Bee(getPath().getHead().getXpos(), getPath().getHead().getYpos(), getWindow(), 4, 1, 1, 3, this));
       }
 
-    // Update and draw the enemies
+      // towerMethods
+      towerManager.shoot(enemyManager);
+      towerManager.inRange();
 
-    for (Tower tower : getTowers()) {
-      tower.draw();
-      //tower.inRange(enemyManager);
-      tower.shootingEnemy(getEnemyManager());
-      if (tower.isInRange()) {
-        getWindow().stroke(255, 0, 0);
-      } else {
-        getWindow().stroke(0, 0, 0);
-      }
-    }
-    getBulletManager().update();
-    getEnemyManager().update(getBulletManager());
-    getWindow().grid.draw();
+
+      // update and draw bullets
+      getBulletManager().update();
+      getEnemyManager().update(getBulletManager());
+      getWindow().grid.draw();
     }
   }
 }
