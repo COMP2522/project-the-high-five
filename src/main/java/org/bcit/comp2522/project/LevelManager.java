@@ -1,21 +1,28 @@
 package org.bcit.comp2522.project;
 
 public class LevelManager {
-  private int currentLevel;
+  private static int currentLevel;
   private Level[] levels;
   private Level currentLevelObject;
   private final int numberOfLevels;
+  UI ui;
 
   public LevelManager(Window window, int numberOfLevels) {
     currentLevel = 0;
     this.numberOfLevels = numberOfLevels;
     levels = new Level[numberOfLevels];
     currentLevelObject = levels[0];
+    ui = new UI(window);
   }
 
   public void draw() {
     //System.out.println("drawing level:" + currentLevel);
     levels[currentLevel].draw();
+    ui.setup();
+    ui.displayEnemiesDefeated();
+    ui.displayLevelNumber();
+    ui.displayHP();
+    ui.displayCoins();
   }
 
   public void nextLevel() {
@@ -47,15 +54,19 @@ public class LevelManager {
     return currentLevelObject;
   }
 
+  public static int getCurrentLevel() {
+    return currentLevel;
+  }
+
   /**
    * This is just a temporary method to kill off enemies to trigger losing
    * function faster for testing purposes.  DELETE LATER
    */
-  public void killEnemies(){
+  public void killEnemies() {
     levels[currentLevel].setNumEnemies(0);
   }
 
-  public void killPlayer(){
+  public void killPlayer() {
     Player.setHealth(0);
   }
 
