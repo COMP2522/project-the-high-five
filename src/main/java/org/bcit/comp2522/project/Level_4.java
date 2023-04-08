@@ -12,9 +12,6 @@ public class Level_4 extends Level {
     private ArrayList<Tower> towers;
     private BulletManager bulletManager;
     private TileMap tileMap;
-    private int timeRegularEnemy;
-    private int timeFastEnemy;
-    private int timeBossEnemy;
 
     public Level_4(Window window) {
         super(window);
@@ -24,13 +21,14 @@ public class Level_4 extends Level {
 
     public void init() {
         tilemapImg = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/map.png");
-        timeBossEnemy = 0;
-        timeFastEnemy = 0;
-        timeRegularEnemy = 0;
         enemyManager = new EnemyManager(window);
         towers = new ArrayList<>();
         bulletManager = new BulletManager(window);
         tileMap = new TileMap(window, getPath(), towers, bulletManager);
+        levelManager = new LevelManager(window, 5);
+        levelManager.setTimeRegularEnemy(0);
+        levelManager.setTimeFastEnemy(0);
+        levelManager.setTimeBossEnemy(0);
         getPath().clearCorner();
         getPath().addCorner(40, 336);
         getPath().addCorner(520, 336);
@@ -69,25 +67,25 @@ public class Level_4 extends Level {
         }
 
         // Update the timer
-        timeRegularEnemy++;
-        timeFastEnemy++;
-        timeBossEnemy++;
+        levelManager.setTimeRegularEnemy(levelManager.getTimeRegularEnemy() + 1);
+        levelManager.setTimeFastEnemy(levelManager.getTimeFastEnemy() + 1);
+        levelManager.setTimeBossEnemy(levelManager.getTimeBossEnemy() + 1);
 
         // Check if it's time to spawn a new regular enemy
-        if (timeRegularEnemy >= 300) { // 300 frames = 5 seconds
-            timeRegularEnemy = 0;
+        if (levelManager.getTimeRegularEnemy() >= 300) { // 300 frames = 5 seconds
+            levelManager.setTimeRegularEnemy(0);
             enemyManager.addEnemy(new Beetle(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 2, 2, 2, 2, this));
         }
 
         // Check if it's time to spawn a new fast enemy
-        if (timeFastEnemy >= 450) { // 450 frames = 7.5 seconds
-            timeFastEnemy = 0;
+        if (levelManager.getTimeFastEnemy() >= 450) { // 450 frames = 7.5 seconds
+            levelManager.setTimeFastEnemy(0);
             enemyManager.addEnemy(new Locust(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 1, 4, 4, 1, this));
         }
 
         // Check if it's time to spawn a new boss enemy
-        if (timeBossEnemy >= 850) { // 850 frames = 14.2 seconds
-            timeBossEnemy = 0;
+        if (levelManager.getTimeBossEnemy() >= 850) { // 850 frames = 14.2 seconds
+            levelManager.setTimeBossEnemy(0);
             enemyManager.addEnemy(new Bee(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 4, 1, 1, 3, this));
         }
 
