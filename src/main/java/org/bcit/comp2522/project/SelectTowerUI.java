@@ -6,6 +6,8 @@ public class SelectTowerUI {
   private Window window;
   private PImage inventoryIMG;
 
+  private PImage tower1;
+
   private TileMap tileMap;
 
   private int selectedTower;
@@ -13,6 +15,7 @@ public class SelectTowerUI {
     this.window = window;
     this.tileMap = tileMap;
     inventoryIMG = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/towerslot.png");
+    tower1 = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/tower1icon.png").get(0,0,96,96);
     selectedTower = 0;
   }
 
@@ -33,6 +36,7 @@ public class SelectTowerUI {
 
   public void draw(){
     window.image(inventoryIMG, 376, 576);
-    window.square(440, 640, 64);
+    //window.square(440, 640, 64);
+    window.image(tower1, 395, 595,96,96);
   }
 }
