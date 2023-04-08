@@ -15,7 +15,6 @@ public class Window extends PApplet {
   public static final int windowHeight = 720;
 
   ArrayList<Enemy> enemies;
-  Bullet testBullet;
   ArrayList<Bullet> bullets;
   Path path;
   LevelManager levelManager;
@@ -43,10 +42,6 @@ public class Window extends PApplet {
 
   private ButtonHandler bh;
 
-  // Variables for the timer
-  int timeRegularEnemy = 0;
-  int timeFastEnemy = 0;
-  int timeBossEnemy = 0;
 
   Grid grid;
 
@@ -65,7 +60,6 @@ public class Window extends PApplet {
     ws = new WinningScreen(this);
     ls = new LosingScreen(this);
     this.init();
-
   }
 
   public void setStage(int stage) {
@@ -102,10 +96,6 @@ public class Window extends PApplet {
     // array of bullets
     bullets = new ArrayList<>();
 
-    timeRegularEnemy = 0;
-    timeFastEnemy = 0;
-    timeBossEnemy = 0;
-
     enemies = new ArrayList<>();
     towers = new ArrayList<>();
   }
@@ -137,7 +127,6 @@ public class Window extends PApplet {
         highscoreScreen.refreshHighscores();
         highscoreScreen.display();
         break;
-
     }
   }
 
@@ -146,7 +135,6 @@ public class Window extends PApplet {
       menu.mousePressed(mouseX, mouseY);
     }
   }
-
 
   /**
    * Sets up the size of the game window.
@@ -205,7 +193,5 @@ public class Window extends PApplet {
     String[] appletArgs = new String[]{"towerDefence"};
     Window tdGame = new Window();
     PApplet.runSketch(appletArgs, tdGame);
-
   }
-
 }

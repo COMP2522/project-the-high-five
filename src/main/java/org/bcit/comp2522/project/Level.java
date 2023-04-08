@@ -3,9 +3,10 @@ package org.bcit.comp2522.project;
 public class Level {
   private Path path;
   private Window window;
-
+  LevelManager levelManager;
   private TileMap tileMap;
   protected int numEnemies = 10;
+
   public Level(Window window){
     path = new Path(window);
   }
@@ -13,6 +14,7 @@ public class Level {
   public void setNumEnemies(int numEnemies){
     this.numEnemies = numEnemies;
   }
+
   public Path getPath() {
     return path;
   }
@@ -28,8 +30,10 @@ public class Level {
   public void reset(){
     path.reset();
   }
+
   public void init(){
   }
+
   public void draw(){
   }
 }
