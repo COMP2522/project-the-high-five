@@ -1,8 +1,8 @@
 package org.bcit.comp2522.project;
 
 public class Node {
-  private int xpos;
-  private int ypos;
+  private final int xpos;
+  private final int ypos;
   Node next;
 
   public Node(int xpos, int ypos) {

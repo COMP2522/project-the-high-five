@@ -10,32 +10,31 @@ import java.util.ArrayList;
  */
 public class GameState {
 
-    private Player player;
+    private final Player player;
     //private TowerManager towerManager;
-    private EnemyManager enemyManager;
+    private final EnemyManager enemyManager;
 
     //private final ArrayList<Enemy> enemies;
-    private int health;
-    private int coins;
+    private final int health;
+    private final int coins;
 
 
-    private int score;
+    private final int score;
     private int time;
-    private Level currentLevel;
+    private final int currentLevel;
     private int timeRegularEnemy;
     private int timeFastEnemy;
     private int timeBossEnemy;
 
 
-    public GameState(Player player, Window window) {
+    public GameState(Player player, Window window, LevelManager lm) {
 
             this.player = player;
             this.enemyManager = window.enemyManager;
             this.health = Player.getHealth();
             this.coins = Player.getCoins();
             this.score = Player.getCoins();
-            this.currentLevel = window.levelManager.getCurrentLevelObject();
-            //this.enemies = window.enemyManager.getEnemies();
+            this.currentLevel = LevelManager.getCurrentLevel();
 
     }
 
@@ -55,7 +54,7 @@ public class GameState {
         return score;
     }
 
-    public Level getCurrentLevel() {
+    public int getCurrentLevel() {
         return currentLevel;
     }
 

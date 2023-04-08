@@ -4,7 +4,7 @@ import processing.core.PImage;
 
 import java.util.ArrayList;
 
-public class Level_2 extends Level {
+public class Level_4 extends Level {
     Window window;
     EnemyManager enemyManager;
     PImage tilemapImg;
@@ -13,7 +13,7 @@ public class Level_2 extends Level {
     private BulletManager bulletManager;
     private TileMap tileMap;
 
-    public Level_2(Window window) {
+    public Level_4(Window window) {
         super(window);
         this.window = window;
         init();
@@ -30,17 +30,21 @@ public class Level_2 extends Level {
         levelManager.setTimeFastEnemy(0);
         levelManager.setTimeBossEnemy(0);
         getPath().clearCorner();
-        getPath().addCorner(40, 384);
-        getPath().addCorner(280, 384);
-        getPath().addCorner(280, 528);
-        getPath().addCorner(520, 528);
+        getPath().addCorner(40, 336);
+        getPath().addCorner(520, 336);
         getPath().addCorner(520, 96);
-        getPath().addCorner(856, 96);
-        getPath().addCorner(856, 288);
-        getPath().addCorner(664, 288);
-        getPath().addCorner(664, 432);
-        getPath().addCorner(1192, 432);
-        getPath().addCorner(376, 288);
+        getPath().addCorner(808, 96);
+        getPath().addCorner(808, 240);
+        getPath().addCorner(952, 240);
+        getPath().addCorner(952, 48);
+        getPath().addCorner(1144, 48);
+        getPath().addCorner(1144, 432);
+        getPath().addCorner(1144, 528);
+        getPath().addCorner(1144, 624);
+        getPath().addCorner(808, 624);
+        getPath().addCorner(808, 432);
+        getPath().addCorner(1232, 432);
+
         getPath().connectCorners();
         tileMap.setPath();
         selectTowerUI = new SelectTowerUI(window, tileMap);
@@ -68,19 +72,19 @@ public class Level_2 extends Level {
         levelManager.setTimeBossEnemy(levelManager.getTimeBossEnemy() + 1);
 
         // Check if it's time to spawn a new regular enemy
-        if (levelManager.getTimeRegularEnemy() >= 400) { // 400 frames = 6.6 seconds
+        if (levelManager.getTimeRegularEnemy() >= 300) { // 300 frames = 5 seconds
             levelManager.setTimeRegularEnemy(0);
             enemyManager.addEnemy(new Beetle(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 2, 2, 2, 2, this));
         }
 
         // Check if it's time to spawn a new fast enemy
-        if (levelManager.getTimeFastEnemy() >= 500) { // 500 frames = 8 seconds
+        if (levelManager.getTimeFastEnemy() >= 450) { // 450 frames = 7.5 seconds
             levelManager.setTimeFastEnemy(0);
             enemyManager.addEnemy(new Locust(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 1, 4, 4, 1, this));
         }
 
         // Check if it's time to spawn a new boss enemy
-        if (levelManager.getTimeBossEnemy() >= 1200) { // 1200 frames = 20 seconds
+        if (levelManager.getTimeBossEnemy() >= 850) { // 850 frames = 14.2 seconds
             levelManager.setTimeBossEnemy(0);
             enemyManager.addEnemy(new Bee(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 4, 1, 1, 3, this));
         }
@@ -99,5 +103,6 @@ public class Level_2 extends Level {
         enemyManager.update(bulletManager);
         window.grid.draw();
         //tileMap.checkMap();
+
     }
 }

@@ -3,10 +3,10 @@ package org.bcit.comp2522.project;
 import processing.core.PImage;
 
 public class SelectTowerUI {
-  private Window window;
-  private PImage inventoryIMG;
+  private final Window window;
+  private final PImage inventoryIMG;
 
-  private TileMap tileMap;
+  private final TileMap tileMap;
 
   private int selectedTower;
   public SelectTowerUI(Window window, TileMap tileMap){

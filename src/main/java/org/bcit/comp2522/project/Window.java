@@ -15,13 +15,14 @@ public class Window extends PApplet {
   public static final int windowHeight = 720;
 
   ArrayList<Enemy> enemies;
-  Bullet testBullet;
   ArrayList<Bullet> bullets;
   Path path;
   LevelManager levelManager;
   Level level_1;
   Level level_2;
   Level level_3;
+  Level level_4;
+  Level level_5;
   ArrayList<Tower> towers;
   EnemyManager enemyManager;
 
@@ -41,10 +42,6 @@ public class Window extends PApplet {
 
   private ButtonHandler bh;
 
-  // Variables for the timer
-  int timeRegularEnemy = 0;
-  int timeFastEnemy = 0;
-  int timeBossEnemy = 0;
 
   Grid grid;
 
@@ -63,7 +60,6 @@ public class Window extends PApplet {
     ws = new WinningScreen(this);
     ls = new LosingScreen(this);
     this.init();
-
   }
 
   public int getStage() {
@@ -87,22 +83,22 @@ public class Window extends PApplet {
    */
   public void init() {
     background = this.loadImage("src/main/java/org/bcit/comp2522/project/asset/BackDrop.png");
-    levelManager = new LevelManager(this, 3);
+    levelManager = new LevelManager(this, 5);
     level_1 = new Level_1(this);
     level_2 = new Level_2(this);
     level_3 = new Level_3(this);
+    level_4 = new Level_4(this);
+    level_5 = new Level_5(this);
     grid = new Grid(this);
 
     levelManager.addLevel(level_1);
     levelManager.addLevel(level_2);
     levelManager.addLevel(level_3);
+    levelManager.addLevel(level_4);
+    levelManager.addLevel(level_5);
     enemyManager = new EnemyManager(this);
     // array of bullets
     bullets = new ArrayList<>();
-
-    timeRegularEnemy = 0;
-    timeFastEnemy = 0;
-    timeBossEnemy = 0;
 
     enemies = new ArrayList<>();
     towers = new ArrayList<>();
@@ -135,7 +131,6 @@ public class Window extends PApplet {
         highscoreScreen.refreshHighscores();
         highscoreScreen.display();
         break;
-
     }
   }
 
@@ -144,7 +139,6 @@ public class Window extends PApplet {
       menu.mousePressed(mouseX, mouseY);
     }
   }
-
 
   /**
    * Sets up the size of the game window.
@@ -203,7 +197,5 @@ public class Window extends PApplet {
     String[] appletArgs = new String[]{"towerDefence"};
     Window tdGame = new Window();
     PApplet.runSketch(appletArgs, tdGame);
-
   }
-
 }

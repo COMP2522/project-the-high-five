@@ -13,14 +13,14 @@ import processing.core.PImage;
  */
 public class Menu {
 
-    private Window parent;
-    private PImage backgroundImage;
+    private final Window parent;
+    private final PImage backgroundImage;
 
-    ButtonHandler startBH;
+    private ButtonHandler startBH;
 
-    ButtonHandler loadBH;
+    private ButtonHandler loadBH;
 
-    ButtonHandler highscoreBH;
+    private ButtonHandler highscoreBH;
 
 
     public Menu(Window parent) {

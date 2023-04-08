@@ -7,10 +7,10 @@ import java.util.ArrayList;
 public class Path {
   private Node head;
   private Node tail;
-  private Window window;
+  private final Window window;
   private final PImage image;
 
-  private ArrayList<Node> corners = new ArrayList<Node>();
+  private final ArrayList<Node> corners = new ArrayList<Node>();
 
   /**
    * Creates a path for the enemies to follow.

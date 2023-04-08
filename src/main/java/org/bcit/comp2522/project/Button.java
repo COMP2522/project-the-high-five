@@ -12,7 +12,7 @@ public class Button {
 
 
 
-    private Window parent;
+    private final Window parent;
 
     private int x; //y-coordinate of the button in the Window
 

@@ -9,13 +9,13 @@ import static processing.event.MouseEvent.ENTER;
 
 public class WinningScreen {
 
-    private Window parent;
+    private final Window parent;
 
     private PFont gameFont;
 
     private Scanner scanner;
 
-    private String userInput = "";
+    private final String userInput = "";
 
     public WinningScreen(Window parent){
         this.parent = parent;

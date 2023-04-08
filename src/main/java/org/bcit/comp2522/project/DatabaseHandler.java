@@ -17,10 +17,10 @@ import static com.mongodb.client.model.Filters.eq;
 
 public class DatabaseHandler {
 
-    private MongoDatabase database;
+    private final MongoDatabase database;
 
-    private String username = "testuser";
-    private String password = "cake1234";
+    private final String username = "testuser";
+    private final String password = "cake1234";
 
     public DatabaseHandler(){
         ConnectionString connectionString = new ConnectionString("mongodb+srv://" + username + ":" + password + "@2522.ru0dahn.mongodb.net/?retryWrites=true&w=majority");
@@ -80,7 +80,7 @@ public class DatabaseHandler {
         try {
             database.createCollection("gamestate");
         } catch (Exception e) {
-            System.out.println("");
+            System.out.println();
         }
 
         UpdateOptions options = new UpdateOptions().upsert(true);

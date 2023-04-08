@@ -3,17 +3,17 @@ package org.bcit.comp2522.project;
 import java.util.ArrayList;
 
 public class TileMap {
-  private int[][] map;
+  private final int[][] map;
 
-  private Path path;
+  private final Path path;
 
-  private ArrayList<Tower> towers;
+  private final ArrayList<Tower> towers;
 
-  private BulletManager bulletManager;
+  private final BulletManager bulletManager;
   private final int ROW;
   private final int COL;
 
-  private Window window;
+  private final Window window;
   public TileMap(Window window, Path path, ArrayList<Tower> towers, BulletManager bulletManager){
     this.window = window;
     this.path = path;

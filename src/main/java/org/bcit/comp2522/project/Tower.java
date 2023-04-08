@@ -1,6 +1,7 @@
 package org.bcit.comp2522.project;
 
 
+import processing.core.PApplet;
 import processing.core.PImage;
 
 import static java.lang.Math.pow;
@@ -18,10 +19,10 @@ public class Tower extends Sprite implements Collidable{
   private int attackRate;
   private int range;
 
-  private PImage towerSprite1;
-  private PImage towerWeapon1;
+  private final PImage towerSprite1;
+  private final PImage towerWeapon1;
 
-  private PImage[] towerWeaponSprites = new PImage[6];
+  private final PImage[] towerWeaponSprites = new PImage[6];
 
   public int getBaseSize() {
     return baseSize;
@@ -39,7 +40,7 @@ public class Tower extends Sprite implements Collidable{
 
   private int spriteIndex = 0;
 
-  private BulletManager bulletManager;
+  private final BulletManager bulletManager;
 
 
   public boolean isHovering() {
@@ -273,11 +274,7 @@ public class Tower extends Sprite implements Collidable{
   // method that checks if the distance is less than or equal to radius
   // if it is then we assume the mouse is hovering over tower
   public void mousePressed(){
-    if(hovering){
-      clicked = true;
-    } else{
-      clicked = false;
-    }
+    clicked = hovering;
     //System.out.println("sets offsets");
     offsetX = window.mouseX - centerX;
     offsetY = window.mouseY - centerY;
@@ -306,8 +303,7 @@ public class Tower extends Sprite implements Collidable{
   // not complete yet
   @Override
   public boolean collide(Object other) {
-    if(other instanceof Enemy) {
-      Enemy enemy = (Enemy) other;
+    if(other instanceof Enemy enemy) {
       double distanceTwo = sqrt(pow(enemy.getXpos() - this.centerX,2) + pow(enemy.getYpos() - this.centerY,2));
       double distance1 = dist(enemy.getXpos(), enemy.getYpos(), getXpos() + 24, getYpos() + 24);
       if(distance1 <= radius){
@@ -332,7 +328,7 @@ public class Tower extends Sprite implements Collidable{
       standby = true;
       timer = 0;
       if (tracking != null) {
-        float angle = window.atan2(tracking.getYpos() - getYpos(), tracking.getXpos() - getXpos());
+        float angle = PApplet.atan2(tracking.getYpos() - getYpos(), tracking.getXpos() - getXpos());
         bulletManager.addBullet(new Bullet(getXpos() + 24, getYpos() + 24, window, angle));
         standby = false;
         tracking = null;

@@ -11,8 +11,6 @@ import processing.core.PImage;
  * @version 1.0
  */
 public class Enemy extends Sprite implements Collidable, Movable {
-  private static int enemiesKilled = 0;
-  private static int levelCompleted = 0;
   private int health;
   private int vx;
   private int vy;
@@ -35,6 +33,8 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public int direction = 0;
 
   private boolean isDead = false;
+
+  EnemyManager enemyManager;
 
   /**
    * Constructor for creating a new Enemy.
@@ -60,7 +60,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
     //enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Clampbeetle3.png");
     //loadSprite();
     currentNode = path.getHead();
-
+    enemyManager = new EnemyManager(window);
   }
 
   public void setSize(int size) {
@@ -74,6 +74,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public boolean getIsDead() {
     return isDead;
   }
+
   // Remove enemy when out of bounds
   public void outOfBounds() {
     if (getXpos() > window.width) {
@@ -177,17 +178,9 @@ public class Enemy extends Sprite implements Collidable, Movable {
             && getYpos() + size > bullet.getYpos()) {
             health -= bullet.getDamage();
             if (health <= 0) {
-            enemiesKilled++;
+            EnemyManager.setEnemiesKilled(EnemyManager.getEnemiesKilled() + 1);
             isDead = true;
             Player.setCoins(Player.getCoins() + damage);
-            }
-            if (enemiesKilled == 20) {
-              enemiesKilled = 0;
-              window.levelManager.nextLevel();
-              levelCompleted++;
-            }
-            if (levelCompleted == 5) {
-              window.levelManager.killEnemies();
             }
             return true;
       }

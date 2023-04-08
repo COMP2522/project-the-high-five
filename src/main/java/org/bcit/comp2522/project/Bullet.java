@@ -13,17 +13,17 @@ public class Bullet extends Sprite {
     return speed;
   }
 
-  private int speed;
+  private final int speed;
 
-  private int size;
+  private final int size;
 
-  private float angle;
+  private final float angle;
 
   public int getDamage() {
     return damage;
   }
 
-  private int damage = 1;
+  private final int damage = 1;
 
   private boolean isHit = false;
 

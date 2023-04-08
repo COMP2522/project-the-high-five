@@ -4,7 +4,7 @@ import java.util.zip.GZIPInputStream;
 
 public class Grid {
   public static final int GRID_SIZE = 12;
-  private Window window;
+  private final Window window;
   public Grid(Window window){
     this.window = window;
   }

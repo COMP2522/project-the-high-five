@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class TowerManager {
 
   // list of tower objects
-  private ArrayList<Tower> towers;
+  private final ArrayList<Tower> towers;
 
   // constructor
   public TowerManager (){

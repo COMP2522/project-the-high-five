@@ -9,13 +9,13 @@ import java.util.ArrayList;
  */
 public class HighscoreScreen {
 
-    private Window window;
+    private final Window window;
 
-    private PImage backgroundImage;
+    private final PImage backgroundImage;
 
     ArrayList<Highscore> highscores = new ArrayList<Highscore>();
 
-    private int scrollCount = 0;
+    private final int scrollCount = 0;
 
 
     public HighscoreScreen(Window window) {
