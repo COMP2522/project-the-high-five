@@ -44,6 +44,7 @@ public class Level_1 extends Level {
   }
 
   public void draw() {
+    super.draw();
     if (Player.getHealth() <= 0) {
       window.setStage(3);
 

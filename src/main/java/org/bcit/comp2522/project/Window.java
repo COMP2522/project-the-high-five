@@ -66,6 +66,10 @@ public class Window extends PApplet {
 
   }
 
+  public int getStage() {
+    return stage;
+  }
+
   public void setStage(int stage) {
     this.stage = stage;
   }

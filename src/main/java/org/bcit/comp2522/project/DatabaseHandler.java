@@ -8,6 +8,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -73,31 +74,31 @@ public class DatabaseHandler {
         }
         return highscores;
     }
-//    public static void main(String[] args) {
-//
-//        DatabaseHandler dbh = new DatabaseHandler("testuser", "cake1234");
-//
-////        dbh.insertHighScore("cheryl", 1700, "highScores");
-////        dbh.insertHighScore("cheryl", 2100, "highScores");
-//
-//
-//
-//        //
-//        // Document find = dbh.database.getCollection("highScores").find(eq("user", "cheryl")).first();
-//
-//        //
-//        //
-//        // System.out.println(find);
-//
-//
-//
-////        for (Highscore hs : dbh.retrieveHighScores()){
-////            System.out.println(hs.getHighscore());
-////        }
-//
-//
-//
-//    }
+
+    public void writeGameState(GameState gameState){
+
+        try {
+            database.createCollection("gamestate");
+        } catch (Exception e) {
+            System.out.println("");
+        }
+
+        UpdateOptions options = new UpdateOptions().upsert(true);
+        Document gamestateDocument = new Document();
+        gamestateDocument.append("player", "player");
+        //gamestateDocument.append("enemies", gameState.getEnemies());
+        gamestateDocument.append("health", gameState.getPlayerHealth());
+        gamestateDocument.append("coins", gameState.getCoins());
+        gamestateDocument.append("score", gameState.getCurrentScore());
+        gamestateDocument.append("currentLevel", gameState.getCurrentLevel());
+
+        database.getCollection("gamestate").updateOne(
+                eq("player", "player"),
+                new Document("$set", gamestateDocument),
+                options
+        );
+        System.out.println("Writing gameState to db");
+    }
 
 
 }
