@@ -25,9 +25,9 @@ public class Level_1 extends Level {
     towers = new ArrayList<>();
     bulletManager = new BulletManager(window);
     tileMap = new TileMap(window, getPath(), towers, bulletManager);
-    levelManager.setTimeRegularEnemy(0);
-    levelManager.setTimeFastEnemy(0);
-    levelManager.setTimeBossEnemy(0);
+    setTimeRegularEnemy(0);
+    setTimeFastEnemy(0);
+    setTimeBossEnemy(0);
     getPath().clearCorner();
     getPath().addCorner(40, 384);
     getPath().addCorner(376, 384);
@@ -56,25 +56,28 @@ public class Level_1 extends Level {
       selectTowerUI.slotClicked();
 
       // Update the timer
-      levelManager.setTimeRegularEnemy(levelManager.getTimeRegularEnemy() + 1);
-      levelManager.setTimeFastEnemy(levelManager.getTimeFastEnemy() + 1);
-      levelManager.setTimeBossEnemy(levelManager.getTimeBossEnemy() + 1);
+      increaseTimeRegularEnemy(1);
+      increaseTimeFastEnemy(1);
+      increaseTimeBossEnemy(1);
+      System.out.println("Time Regular Enemy: " + getTimeRegularEnemy());
+      //levelManager.setTimeFastEnemy(levelManager.getTimeFastEnemy() + 1);
+      //levelManager.setTimeBossEnemy(levelManager.getTimeBossEnemy() + 1);
 
       // Check if it's time to spawn a new regular enemy
-      if (levelManager.getTimeRegularEnemy() >= 300) { // 300 frames = 5 seconds
-        levelManager.setTimeRegularEnemy(0);
+      if (getTimeRegularEnemy() >= 300) { // 300 frames = 5 seconds
+        setTimeRegularEnemy(0);
         enemyManager.addEnemy(new Beetle(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 2, 2, 2, 2, this));
       }
 
       // Check if it's time to spawn a new fast enemy
-      if (levelManager.getTimeFastEnemy() >= 600) { // 600 frames = 10 seconds
-        levelManager.setTimeFastEnemy(0);
+      if (getTimeFastEnemy() >= 600) { // 600 frames = 10 seconds
+        setTimeFastEnemy(0);
         enemyManager.addEnemy(new Locust(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 1, 4, 4, 1, this));
       }
 
       // Check if it's time to spawn a new boss enemy
-      if (levelManager.getTimeBossEnemy() >= 900) { // 900 frames = 15 seconds
-        levelManager.setTimeBossEnemy(0);
+      if (getTimeBossEnemy() >= 900) { // 900 frames = 15 seconds
+        setTimeBossEnemy(0);
         enemyManager.addEnemy(new Bee(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 4, 1, 1, 3, this));
       }
 
