@@ -6,7 +6,7 @@ public class UI {
 
   public PImage coinImage;
   public PImage redHeart;
-  public PImage pinkHeart;
+  public PImage blackHeart;
   Window window;
 
   public UI(Window window) {
@@ -16,7 +16,7 @@ public class UI {
   public void setup() {
     coinImage = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/coin3.png");
     redHeart = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/redHeart.png");
-    pinkHeart = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/pinkHeart.png");
+    blackHeart = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/blackHeart.png");
   }
 
   public void displayLevelNumber() {
@@ -43,40 +43,121 @@ public class UI {
       window.image(redHeart, 1033, 631, 32, 32);
       window.image(redHeart, 1066, 631, 32, 32);
       window.image(redHeart, 1100, 631, 32, 32);
+      window.image(redHeart, 967, 665, 32, 32);
+      window.image(redHeart, 1000, 665, 32, 32);
+      window.image(redHeart, 1033, 665, 32, 32);
+      window.image(redHeart, 1066, 665, 32, 32);
+      window.image(redHeart, 1100, 665, 32, 32);
     } else if (hp == 9) {
       window.image(redHeart, 967, 631, 32, 32);
       window.image(redHeart, 1000, 631, 32, 32);
       window.image(redHeart, 1033, 631, 32, 32);
       window.image(redHeart, 1066, 631, 32, 32);
-      window.image(pinkHeart, 1100, 633, 32, 32);
+      window.image(redHeart, 1100, 631, 32, 32);
+      window.image(redHeart, 967, 665, 32, 32);
+      window.image(redHeart, 1000, 665, 32, 32);
+      window.image(redHeart, 1033, 665, 32, 32);
+      window.image(redHeart, 1066, 665, 32, 32);
+      window.image(blackHeart, 1100, 667, 32, 32);
     } else if (hp == 8) {
       window.image(redHeart, 967, 631, 32, 32);
       window.image(redHeart, 1000, 631, 32, 32);
       window.image(redHeart, 1033, 631, 32, 32);
       window.image(redHeart, 1066, 631, 32, 32);
+      window.image(redHeart, 1100, 631, 32, 32);
+      window.image(redHeart, 967, 665, 32, 32);
+      window.image(redHeart, 1000, 665, 32, 32);
+      window.image(redHeart, 1033, 665, 32, 32);
+      window.image(blackHeart, 1066, 667, 32, 32);
+      window.image(blackHeart, 1100, 667, 32, 32);
     } else if (hp == 7) {
       window.image(redHeart, 967, 631, 32, 32);
       window.image(redHeart, 1000, 631, 32, 32);
       window.image(redHeart, 1033, 631, 32, 32);
-      window.image(pinkHeart, 1066, 633, 32, 32);
+      window.image(redHeart, 1066, 631, 32, 32);
+      window.image(redHeart, 1100, 631, 32, 32);
+      window.image(redHeart, 967, 665, 32, 32);
+      window.image(redHeart, 1000, 665, 32, 32);
+      window.image(blackHeart, 1033, 667, 32, 32);
+      window.image(blackHeart, 1066, 667, 32, 32);
+      window.image(blackHeart, 1100, 667, 32, 32);
     } else if (hp == 6) {
       window.image(redHeart, 967, 631, 32, 32);
       window.image(redHeart, 1000, 631, 32, 32);
       window.image(redHeart, 1033, 631, 32, 32);
+      window.image(redHeart, 1066, 631, 32, 32);
+      window.image(redHeart, 1100, 631, 32, 32);
+      window.image(redHeart, 967, 665, 32, 32);
+      window.image(blackHeart, 1000, 667, 32, 32);
+      window.image(blackHeart, 1033, 667, 32, 32);
+      window.image(blackHeart, 1066, 667, 32, 32);
+      window.image(blackHeart, 1100, 667, 32, 32);
     } else if (hp == 5) {
       window.image(redHeart, 967, 631, 32, 32);
       window.image(redHeart, 1000, 631, 32, 32);
-      window.image(pinkHeart, 1033, 633, 32, 32);
+      window.image(redHeart, 1033, 631, 32, 32);
+      window.image(redHeart, 1066, 631, 32, 32);
+      window.image(redHeart, 1100, 631, 32, 32);
+      window.image(blackHeart, 967, 667, 32, 32);
+      window.image(blackHeart, 1000, 667, 32, 32);
+      window.image(blackHeart, 1033, 667, 32, 32);
+      window.image(blackHeart, 1066, 667, 32, 32);
+      window.image(blackHeart, 1100, 667, 32, 32);
     } else if (hp == 4) {
       window.image(redHeart, 967, 631, 32, 32);
       window.image(redHeart, 1000, 631, 32, 32);
+      window.image(redHeart, 1033, 631, 32, 32);
+      window.image(redHeart, 1066, 631, 32, 32);
+      window.image(blackHeart, 1100, 633, 32, 32);
+      window.image(blackHeart, 967, 667, 32, 32);
+      window.image(blackHeart, 1000, 667, 32, 32);
+      window.image(blackHeart, 1033, 667, 32, 32);
+      window.image(blackHeart, 1066, 667, 32, 32);
+      window.image(blackHeart, 1100, 667, 32, 32);
     } else if (hp == 3) {
       window.image(redHeart, 967, 631, 32, 32);
-      window.image(pinkHeart, 1000, 631, 32, 32);
+      window.image(redHeart, 1000, 631, 32, 32);
+      window.image(redHeart, 1033, 631, 32, 32);
+      window.image(blackHeart, 1066, 633, 32, 32);
+      window.image(blackHeart, 1100, 633, 32, 32);
+      window.image(blackHeart, 967, 667, 32, 32);
+      window.image(blackHeart, 1000, 667, 32, 32);
+      window.image(blackHeart, 1033, 667, 32, 32);
+      window.image(blackHeart, 1066, 667, 32, 32);
+      window.image(blackHeart, 1100, 667, 32, 32);
     } else if (hp == 2) {
       window.image(redHeart, 967, 631, 32, 32);
+      window.image(redHeart, 1000, 631, 32, 32);
+      window.image(blackHeart, 1033, 633, 32, 32);
+      window.image(blackHeart, 1066, 633, 32, 32);
+      window.image(blackHeart, 1100, 633, 32, 32);
+      window.image(blackHeart, 967, 667, 32, 32);
+      window.image(blackHeart, 1000, 667, 32, 32);
+      window.image(blackHeart, 1033, 667, 32, 32);
+      window.image(blackHeart, 1066, 667, 32, 32);
+      window.image(blackHeart, 1100, 667, 32, 32);
     } else if (hp == 1) {
-      window.image(pinkHeart, 967, 633, 32, 32);
+      window.image(redHeart, 967, 631, 32, 32);
+      window.image(blackHeart, 1000, 633, 32, 32);
+      window.image(blackHeart, 1033, 633, 32, 32);
+      window.image(blackHeart, 1066, 633, 32, 32);
+      window.image(blackHeart, 1100, 633, 32, 32);
+      window.image(blackHeart, 967, 667, 32, 32);
+      window.image(blackHeart, 1000, 667, 32, 32);
+      window.image(blackHeart, 1033, 667, 32, 32);
+      window.image(blackHeart, 1066, 667, 32, 32);
+      window.image(blackHeart, 1100, 667, 32, 32);
+    } else if (hp == 0) {
+      window.image(blackHeart, 967, 633, 32, 32);
+      window.image(blackHeart, 1000, 633, 32, 32);
+      window.image(blackHeart, 1033, 633, 32, 32);
+      window.image(blackHeart, 1066, 633, 32, 32);
+      window.image(blackHeart, 1100, 633, 32, 32);
+      window.image(blackHeart, 967, 667, 32, 32);
+      window.image(blackHeart, 1000, 667, 32, 32);
+      window.image(blackHeart, 1033, 667, 32, 32);
+      window.image(blackHeart, 1066, 667, 32, 32);
+      window.image(blackHeart, 1100, 667, 32, 32);
     }
     window.textAlign(window.CENTER);
     window.textSize(32);
