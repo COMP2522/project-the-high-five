@@ -19,6 +19,12 @@ public class Level {
   }
 
   private ArrayList<Tower> towers;
+
+  public TowerManager getTowerManager() {
+    return towerManager;
+  }
+
+  private TowerManager towerManager;
   private PImage tilemapImg;
   protected int numEnemies = 10;
 
@@ -37,13 +43,13 @@ public class Level {
     path = new Path(window);
     tilemapImg = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/map.png");
     enemyManager = new EnemyManager(window);
-    towers = new ArrayList<>();
+    towerManager = new TowerManager(window);
     bulletManager = new BulletManager(window);
-    tileMap = new TileMap(window, getPath(), towers, bulletManager);
+    tileMap = new TileMap(window, getPath(), towerManager, bulletManager);
     timeRegularEnemy = 0;
     timeFastEnemy = 0;
     timeBossEnemy = 0;
-    selectTowerUI = new SelectTowerUI(getWindow(), getTileMap());
+    selectTowerUI = new SelectTowerUI(getWindow(), getTileMap(), towerManager);
   }
 
   public void setNumEnemies(int numEnemies){

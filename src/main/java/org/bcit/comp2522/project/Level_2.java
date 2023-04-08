@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Level_2 extends Level {
 
     //SelectTowerUI selectTowerUI;
-    TowerManager towerManager;
+
 
 
     public Level_2(Window window) {
@@ -17,17 +17,8 @@ public class Level_2 extends Level {
     }
 
     public void init() {
-//        tilemapImg = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/map.png");
-//        enemyManager = new EnemyManager(window);
-//        towers = new ArrayList<>();
-//        bulletManager = new BulletManager(window);
-//        tileMap = new TileMap(window, getPath(), towers, bulletManager);
         levelreset();
-        towerManager = new TowerManager(window);
-        //levelManager = new LevelManager(window, 5);
-//        setTimeRegularEnemy(0);
-//        setTimeFastEnemy(0);
-//        setTimeBossEnemy(0);
+
         getPath().clearCorner();
         getPath().addCorner(40, 384);
         getPath().addCorner(280, 384);
@@ -59,7 +50,7 @@ public class Level_2 extends Level {
             getSelectTowerUI().draw();
             getSelectTowerUI().selectTower();
             getSelectTowerUI().slotClicked();
-            towerManager.draw();
+            getTowerManager().draw();
         }
 
         // Update the timer
@@ -86,12 +77,12 @@ public class Level_2 extends Level {
         }
 
         // towerMethods
-        towerManager.shoot(enemyManager);
-        towerManager.inRange();
+        getTowerManager().shoot(getEnemyManager());
+        getTowerManager().inRange();
 
         getBulletManager().update();
         getEnemyManager().update(getBulletManager());
-        getWindow().grid.draw();
+        //getWindow().grid.draw();
         //tileMap.checkMap();
     }
 }
