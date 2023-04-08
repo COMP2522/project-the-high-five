@@ -9,7 +9,7 @@ public class Level_2 extends Level {
     EnemyManager enemyManager;
     PImage tilemapImg;
     SelectTowerUI selectTowerUI;
-    private ArrayList<Tower> towers;
+    TowerManager towerManager;
     private BulletManager bulletManager;
     private TileMap tileMap;
 
@@ -22,9 +22,9 @@ public class Level_2 extends Level {
     public void init() {
         tilemapImg = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/map.png");
         enemyManager = new EnemyManager(window);
-        towers = new ArrayList<>();
+        towerManager = new TowerManager(window);
         bulletManager = new BulletManager(window);
-        tileMap = new TileMap(window, getPath(), towers, bulletManager);
+        tileMap = new TileMap(window, getPath(), towerManager, bulletManager);
         levelManager = new LevelManager(window, 5);
         levelManager.setTimeRegularEnemy(0);
         levelManager.setTimeFastEnemy(0);
@@ -43,7 +43,7 @@ public class Level_2 extends Level {
         getPath().addCorner(376, 288);
         getPath().connectCorners();
         tileMap.setPath();
-        selectTowerUI = new SelectTowerUI(window, tileMap);
+        selectTowerUI = new SelectTowerUI(window, tileMap,towerManager);
     }
 
     public void draw() {
@@ -60,6 +60,7 @@ public class Level_2 extends Level {
             selectTowerUI.draw();
             selectTowerUI.selectTower();
             selectTowerUI.slotClicked();
+            towerManager.draw();
         }
 
         // Update the timer
@@ -85,16 +86,10 @@ public class Level_2 extends Level {
             enemyManager.addEnemy(new Bee(getPath().getHead().getXpos(), getPath().getHead().getYpos(), window, 4, 1, 1, 3, this));
         }
 
-        for (Tower tower : towers) {
-            tower.draw();
-            //tower.inRange(enemyManager);
-            tower.shootingEnemy(enemyManager);
-            if (tower.isInRange()) {
-                window.stroke(255, 0, 0);
-            } else {
-                window.stroke(0, 0, 0);
-            }
-        }
+        // towerMethods
+        towerManager.shoot(enemyManager);
+        towerManager.inRange();
+
         bulletManager.update();
         enemyManager.update(bulletManager);
         window.grid.draw();

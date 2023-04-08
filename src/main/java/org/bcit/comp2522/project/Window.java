@@ -23,7 +23,7 @@ public class Window extends PApplet {
   Level level_3;
   Level level_4;
   Level level_5;
-  ArrayList<Tower> towers;
+  TowerManager towerManager;
   EnemyManager enemyManager;
 
   private String userInput;
@@ -93,11 +93,11 @@ public class Window extends PApplet {
     levelManager.addLevel(level_4);
     levelManager.addLevel(level_5);
     enemyManager = new EnemyManager(this);
+    towerManager = new TowerManager(this);
     // array of bullets
     bullets = new ArrayList<>();
 
     enemies = new ArrayList<>();
-    towers = new ArrayList<>();
   }
 
   /**
