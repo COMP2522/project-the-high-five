@@ -86,7 +86,7 @@ public class EnemyManager {
         levelCompleted++;
       }
       if (levelCompleted == 5) {
-        window.levelManager.killEnemies();
+        window.setStage(4);
       }
       for (Bullet bullet : bulletManager.bullets) {
         if (enemy.collide(bullet)) {

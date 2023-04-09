@@ -41,11 +41,12 @@ public class GameState {
         this.coins = Player.getCoins();
         this.score = Player.getCoins();
         this.currentLevel = LevelManager.getCurrentLevel();
+        //System.out.println(lm.getCurrentLevelObject());
         this.timeBossEnemy = lm.getTimeBossEnemy();
         this.timeFastEnemy = lm.getTimeFastEnemy();
         this.timeRegularEnemy = lm.getTimeRegularEnemy();
         this.enemiesKilled = EnemyManager.getEnemiesKilled();
-        this.towers = lm.getCurrentLevelObject().getTowers();
+        //this.towers = lm.getCurrentLevelObject().getTowers();
 
     }
 

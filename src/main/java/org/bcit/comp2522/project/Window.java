@@ -190,17 +190,6 @@ public class Window extends PApplet {
         levelManager.nextLevel();
       }
 
-      if (key == 'w' || key == 'W') {
-        levelManager.killEnemies();
-        stage = 3;
-      }
-
-      if (key == 'l' || key == 'L') {
-        levelManager.killPlayer();
-        stage = 4;
-      }
-
-
     } else {
       if (userInput == null){
         userInput = "";
