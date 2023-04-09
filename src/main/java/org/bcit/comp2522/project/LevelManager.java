@@ -83,11 +83,14 @@ public class LevelManager {
     ui.displayCoins();
 
     if (window.getStage() == 2) {
-      new Thread(() -> {
+      Thread thread = new Thread(() -> {
         sm.push(new GameState(Player.getInstance(), window, this));
         sm.pull();
-      }).start();
+      });
+      thread.start();
     }
+
+
 
 
 

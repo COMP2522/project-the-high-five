@@ -54,6 +54,7 @@ public class ButtonHandler {
             Thread myThread = new Thread(() -> {
                 StateManager sm = new StateManager(window, window.getLevelManager());
                 sm.pull();
+                sm.pullCoinsAndPoints();
             });
             myThread.start();
             try {

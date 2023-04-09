@@ -67,6 +67,7 @@ public class Window extends PApplet {
     highscoreScreen = new HighscoreScreen(this);
     ws = new WinningScreen(this);
     ls = new LosingScreen(this);
+
     this.init();
   }
 
@@ -100,6 +101,7 @@ public class Window extends PApplet {
   public void init() {
     background = this.loadImage("src/main/java/org/bcit/comp2522/project/asset/BackDrop.png");
     levelManager = new LevelManager(this, 5);
+    sm = new StateManager(this, levelManager);
     level_1 = new Level_1(this);
     level_2 = new Level_2(this);
     level_3 = new Level_3(this);
@@ -132,9 +134,7 @@ public class Window extends PApplet {
         menu.display();
         break;
       case 2:
-
-          levelManager.draw();
-
+        levelManager.draw();
 
         break;
       case 3:
