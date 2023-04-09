@@ -131,9 +131,8 @@ public class Tower extends Sprite implements Collidable{
   public void loadWeaponSprite1() {
     int spriteWidth = 64;
     int spriteHeight = 64;
-    int spriteLength = towerWeaponSprites.length;
-    for(int i = 0; i < spriteLength; i++) {
-      int x = i%spriteLength * spriteWidth;
+    for(int i = 0; i < towerWeaponSprites.length; i++) {
+      int x = (i % towerWeaponSprites.length) * spriteWidth;
       towerWeaponSprites[i] = towerWeapon1.get(x, 0, spriteWidth, spriteHeight);
     }
   }
@@ -163,23 +162,17 @@ public class Tower extends Sprite implements Collidable{
     } else {
       window.image(towerWeaponSprites[0],getXpos() - 7,getYpos() - 89 + 48);
     }
-    System.out.println(tracking);
+
     drawSprite();
-    window.image(towerSprite1,getXpos(),getYpos() - 96 + 48,48,96);
-    window.image(towerWeaponSprites[spriteIndex],getXpos() - 7,getYpos() - 89 + 48);
+    window.image(towerSprite1,getXpos(),getYpos() - 48,48,96);
+    window.image(towerWeaponSprites[spriteIndex],getXpos() - 7,getYpos() - 41);
     window.noFill();
-    window.circle(getXpos() + 24, getYpos() + 24, radius * 2);
+    // this is just here to visually see radius first
+    // DELETE LATER
+    window.circle(getXpos() + 24, getYpos() + 24, radius *2);
     if (tracking != null) {
       window.circle(tracking.getXpos(), tracking.getYpos(), 10);
     }
-
-    // draw the radius around the tower
-    //window.stroke(255,0,0);
-    //window.strokeWeight(2);
-    //window.noFill();;
-    //window.ellipse(centerX, centerY, radius, radius*2);
-
-
 
     window.popStyle();
   }
@@ -245,13 +238,13 @@ public class Tower extends Sprite implements Collidable{
           y = (float) (getYpos() - baseSize*1.5);
           break;
 
-          // second point
+        // second point
         case 1:
           x = getXpos() + baseSize/2;
           y = (float) (getYpos() - (baseSize*1.5) - (baseSize/2));
           break;
 
-          // third point
+        // third point
         default:
           x = getXpos() + baseSize - (baseSize/4);
           y = (float) (getYpos() - baseSize*1.5);
@@ -299,7 +292,7 @@ public class Tower extends Sprite implements Collidable{
   }
 
 
-// method to check if enemy has entered the radius around a tower
+  // method to check if enemy has entered the radius around a tower
   // not complete yet
   @Override
   public boolean collide(Object other) {
@@ -331,20 +324,10 @@ public class Tower extends Sprite implements Collidable{
         float angle = PApplet.atan2(tracking.getYpos() - getYpos(), tracking.getXpos() - getXpos());
         bulletManager.addBullet(new Bullet(getXpos() + 24, getYpos() + 24, window, angle));
         standby = false;
-        tracking = null;
       }
     }
   }
   public void inRange(Enemy enemy){
-//    for (Enemy enemy : enemyManager.getEnemies()) {
-//      double distance = dist(enemy.getXpos(), enemy.getYpos(), getXpos()+ 24, getYpos()+ 24);
-//      if (distance <= radius) {
-//        inRange = true;
-//        break;
-//      } else {
-//        inRange = false;
-//      }
-//    }
     double distance = dist(enemy.getXpos()+ 24, enemy.getYpos()+ 24, getXpos(), getYpos());
     if (distance <= radius) {
       inRange = true;
@@ -354,6 +337,15 @@ public class Tower extends Sprite implements Collidable{
     }
   }
 
+  public boolean isInRange() {
+    return inRange;
+  }
+
+
+  /**
+   * This method tracks the enemy that is closest to the tower.
+   * @param enemy
+   */
   public void track(Enemy enemy){
     float distance = dist(enemy.getXpos()+ 24, enemy.getYpos()+ 24, getXpos(), getYpos());
     if (distance <= radius) {
@@ -367,7 +359,4 @@ public class Tower extends Sprite implements Collidable{
     }
   }
 
-  public boolean isInRange() {
-    return inRange;
-  }
 }

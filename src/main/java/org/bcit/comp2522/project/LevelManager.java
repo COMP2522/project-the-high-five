@@ -24,6 +24,11 @@ public class LevelManager {
     timeRegularEnemy = 0;
     timeFastEnemy = 0;
     timeBossEnemy = 0;
+    ui.setup();
+  }
+
+  public Level getCurrentLevelObject() {
+    return levels[currentLevel];
   }
 
   public int getTimeRegularEnemy() {
@@ -54,7 +59,7 @@ public class LevelManager {
   public void draw() {
     //System.out.println("drawing level:" + currentLevel);
     levels[currentLevel].draw();
-    ui.setup();
+    //ui.setup();
     ui.displayEnemiesDefeated();
     ui.displayLevelNumber();
     ui.displayHP();

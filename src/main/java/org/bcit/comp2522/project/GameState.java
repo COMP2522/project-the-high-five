@@ -12,11 +12,14 @@ public class GameState {
 
     private final Player player;
     //private TowerManager towerManager;
-    private final EnemyManager enemyManager;
+    //private final EnemyManager enemyManager;
 
     //private final ArrayList<Enemy> enemies;
     private final int health;
     private final int coins;
+
+    //private final TowerManager towerManager;
+    private final ArrayList<Enemy> enemies;
 
 
     private final int score;
@@ -30,11 +33,18 @@ public class GameState {
     public GameState(Player player, Window window, LevelManager lm) {
 
             this.player = player;
-            this.enemyManager = window.enemyManager;
+            this.enemies = lm.getCurrentLevelObject().getEnemyManager().getEnemies();
             this.health = Player.getHealth();
             this.coins = Player.getCoins();
             this.score = Player.getCoins();
             this.currentLevel = LevelManager.getCurrentLevel();
+            this.timeBossEnemy = lm.getTimeBossEnemy();
+            this.timeFastEnemy = lm.getTimeFastEnemy();
+            this.timeRegularEnemy = lm.getTimeRegularEnemy();
+            //this.towers =
+
+
+
 
     }
 

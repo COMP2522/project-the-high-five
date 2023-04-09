@@ -3,21 +3,21 @@ package org.bcit.comp2522.project;
 import java.util.ArrayList;
 
 public class TileMap {
-  private final int[][] map;
+  private int[][] map;
 
-  private final Path path;
+  private Path path;
 
-  private final ArrayList<Tower> towers;
+TowerManager towerManager;
 
-  private final BulletManager bulletManager;
+  private BulletManager bulletManager;
   private final int ROW;
   private final int COL;
 
-  private final Window window;
-  public TileMap(Window window, Path path, ArrayList<Tower> towers, BulletManager bulletManager){
+  private Window window;
+  public TileMap(Window window, Path path, TowerManager towerManager, BulletManager bulletManager){
     this.window = window;
     this.path = path;
-    this.towers = towers;
+    this.towerManager = towerManager;
     this.bulletManager = bulletManager;
     ROW = 15;
     COL = 25;
@@ -76,7 +76,7 @@ public class TileMap {
         int col = x / 48;
         if (map[row][col] != 1) {
           map[row][col] = selectedTower;
-          towers.add(new Tower(col*48+40, row*48, window, bulletManager));
+          towerManager.add(new Tower(col*48+40, row*48, window, bulletManager));
           System.out.println("Tower placement" + col*48 + ", " + row*48);
           return true;
         } else {
