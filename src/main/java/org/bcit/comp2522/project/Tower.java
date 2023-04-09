@@ -34,6 +34,8 @@ public class Tower extends Sprite implements Collidable{
 
   private BulletManager bulletManager;
 
+  private int size = 24;
+
 
   // These two variables represent the center of the tower
   float centerX = getXpos() + (baseSize/2);
@@ -184,7 +186,7 @@ public class Tower extends Sprite implements Collidable{
 
     float radius = maxDistance;
     // this is now the radius around the tower
-    return radius;
+    return maxDistance;
 
   }
 
@@ -198,7 +200,7 @@ public class Tower extends Sprite implements Collidable{
     if(other instanceof Enemy) {
       Enemy enemy = (Enemy) other;
       double distanceTwo = sqrt(pow(enemy.getXpos() - this.centerX,2) + pow(enemy.getYpos() - this.centerY,2));
-      double distance1 = dist(enemy.getXpos(), enemy.getYpos(), getXpos() + 24, getYpos() + 24);
+      double distance1 = dist(enemy.getXpos(), enemy.getYpos(), getXpos() + size, getYpos() + size);
       if(distance1 <= radius){
         shoot();
         return true;
@@ -232,7 +234,7 @@ public class Tower extends Sprite implements Collidable{
       timer = 0;
       if (tracking != null) {
         float angle = window.atan2(tracking.getYpos() - getYpos(), tracking.getXpos() - getXpos());
-        bulletManager.addBullet(new Bullet(getXpos() + 24, getYpos() + 24, window, angle));
+        bulletManager.addBullet(new Bullet(getXpos() + size, getYpos() + size, window, angle));
         standby = false;
       }
     }
@@ -244,7 +246,7 @@ public class Tower extends Sprite implements Collidable{
    * @param enemy represents one enemy.
    */
   public void inRange(Enemy enemy){
-    double distance = dist(enemy.getXpos()+ 24, enemy.getYpos()+ 24, getXpos(), getYpos());
+    double distance = dist(enemy.getXpos()+ size, enemy.getYpos()+ size, getXpos(), getYpos());
     if (distance <= radius) {
       inRange = true;
     } else {
@@ -267,7 +269,7 @@ public class Tower extends Sprite implements Collidable{
    * @param enemy represents one enemy
    */
   public void track(Enemy enemy){
-    float distance = dist(enemy.getXpos()+ 24, enemy.getYpos()+ 24, getXpos(), getYpos());
+    float distance = dist(enemy.getXpos()+ size, enemy.getYpos()+ size, getXpos(), getYpos());
     if (distance <= radius) {
       if (tracking != null){
         if (enemy.getXpos() > tracking.getXpos()){

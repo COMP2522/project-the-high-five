@@ -30,6 +30,7 @@ public class TowerManager {
     towers.add(tower);
   }
 
+
   /**
    * Method that draws out each tower currently in the array.
    */
