@@ -9,9 +9,9 @@ import static processing.core.PApplet.dist;
 
 /**
  * This class represents the towers in the game
- * Contains attributes and methods each tower
- * object should have
+ * Contains attributes and methods each tower object should have.
  * @author gursidhsandhu
+ * @version 1.0
  */
 public class Tower extends Sprite implements Collidable{
 
@@ -96,6 +96,9 @@ public class Tower extends Sprite implements Collidable{
     window.popStyle();
   }
 
+  /**
+   * This method controls the animation of the tower's weapon.
+   */
   public void drawSprite(){
     if (standby){
       spriteIndex = 0;

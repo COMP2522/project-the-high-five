@@ -1,6 +1,23 @@
 package org.bcit.comp2522.project;
 
+/**
+ * Class that represents a variant of an enemy.
+ * @author quintessential quintuplets
+ * @version 1.0
+ */
 public class Bee extends Enemy{
+
+  /**
+   * Constructor of this class.
+   * @param x represents x position.
+   * @param y represents y position.
+   * @param window represents the window it is displayed on.
+   * @param health represents the Bee's health.
+   * @param speed represents the Bee's speed.
+   * @param damage represents the Bee's damage level.
+   * @param reward represents the Bee's reward.
+   * @param level represents the level of game.
+   */
   public Bee(int x, int y, Window window, int health, int speed, int damage, int reward, Level level) {
       super(x, y, window, health, speed, damage, reward, level);
       enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/firewasp.png");
@@ -8,6 +25,9 @@ public class Bee extends Enemy{
       setSize(80);
   }
 
+  /**
+   * Method that controls the animation of the Bee's image.
+   */
   private void loadSpriteBee(){
     int spriteWidth = 96;
     int spriteHeight = 96;
@@ -22,6 +42,9 @@ public class Bee extends Enemy{
     }
   }
 
+  /**
+   * Method that draws out the image of a Bee variant enemy.
+   */
   public void draw() {
     window.pushStyle();
     // Sprite animation timer

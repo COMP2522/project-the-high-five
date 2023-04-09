@@ -14,17 +14,15 @@ public class Window extends PApplet {
   public static final int windowWidth = 1280;
   public static final int windowHeight = 720;
 
-  //ArrayList<Enemy> enemies;
-  //ArrayList<Bullet> bullets;
-  Path path;
+
+
   LevelManager levelManager;
   Level level_1;
   Level level_2;
   Level level_3;
   Level level_4;
   Level level_5;
-  //ArrayList<Tower> towers;
-  //EnemyManager enemyManager;
+
 
   private String userInput;
 
@@ -41,12 +39,14 @@ public class Window extends PApplet {
   private int stage;
 
   private ButtonHandler bh;
+  private StateManager sm;
 
 
   Grid grid;
 
   public Window(){
     userInput = "";
+
   }
 
   public int getStage(){
@@ -70,20 +70,32 @@ public class Window extends PApplet {
     this.init();
   }
 
+  /**
+   * Setter for the stage variable.
+   * @param stage represents what stage the game is in.
+   */
   public void setStage(int stage) {
     this.stage = stage;
   }
 
+  /**
+   * Setter to set the value for userInput variable.
+   * @param input represents what the user inputs to the game.
+   */
   public void setUserInput(String input){
     this.userInput = input;
   }
 
+  /**
+   * Getter for the userInput variable.
+   * @return the value that the user inputs.
+   */
   public String getUserInput(){
     return userInput;
   }
 
   /**
-   * Initializes objects.
+   * Method that initializes the objects displayed on the window.
    */
   public void init() {
     background = this.loadImage("src/main/java/org/bcit/comp2522/project/asset/BackDrop.png");
@@ -120,7 +132,10 @@ public class Window extends PApplet {
         menu.display();
         break;
       case 2:
-        levelManager.draw();
+
+          levelManager.draw();
+
+
         break;
       case 3:
         ls = new LosingScreen(this);
@@ -138,6 +153,9 @@ public class Window extends PApplet {
     }
   }
 
+  /**
+   * Method that recognizes if the player has pressed the mouse.
+   */
   public void mousePressed() {
     if (stage == 1) {
       menu.mousePressed(mouseX, mouseY);
@@ -151,6 +169,10 @@ public class Window extends PApplet {
     size(windowWidth, windowHeight);
   }
 
+  /**
+   * Method that recognizes if the player has pressed a key on the keyboard.
+   * Based on what key is pressed, a different action will take place.
+   */
   public void keyPressed() {
     if (stage != 3 && stage != 4) {
       if (key == 'm' || key == 'M') {
@@ -165,10 +187,12 @@ public class Window extends PApplet {
 
       if (key == 'w' || key == 'W') {
         levelManager.killEnemies();
+        stage = 3;
       }
 
       if (key == 'l' || key == 'L') {
         levelManager.killPlayer();
+        stage = 4;
       }
 
 

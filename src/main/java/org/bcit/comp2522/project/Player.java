@@ -9,7 +9,7 @@ public class Player {
 
     private Player() {
         currentLevel = 0;
-        currentScore = 1000;
+        currentScore = 0;
         coins = 100;
         health = 10;
     }

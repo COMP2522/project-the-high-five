@@ -99,7 +99,7 @@ public class DatabaseHandler {
         //System.out.println("Writing gameState to db");
     }
 
-    public synchronized GameState getGameState(Window window) {
+    public GameState getGameState(Window window) {
         Document gamestateDocument = database.getCollection("gamestate").find(eq("player", "player")).first();
         if (gamestateDocument == null) {
             return null;

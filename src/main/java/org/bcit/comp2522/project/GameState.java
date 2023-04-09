@@ -50,6 +50,11 @@ public class GameState {
 
     }
 
+    public void updateCoins() {
+        this.coins = Player.getCoins();
+    }
+
+
 
     public int getPlayerHealth() {
         return health;

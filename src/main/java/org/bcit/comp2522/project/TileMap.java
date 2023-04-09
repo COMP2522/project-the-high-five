@@ -2,6 +2,9 @@ package org.bcit.comp2522.project;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the tilemap on which the game is played.
+ */
 public class TileMap {
   private int[][] map;
 
@@ -14,6 +17,14 @@ TowerManager towerManager;
   private final int COL;
 
   private Window window;
+
+  /**
+   * Constructor of this class.
+   * @param window represents the window this class is displayed on.
+   * @param path represents the path the enemies travel on.
+   * @param towerManager represents array of towers.
+   * @param bulletManager represents array of bullets.
+   */
   public TileMap(Window window, Path path, TowerManager towerManager, BulletManager bulletManager){
     this.window = window;
     this.path = path;
@@ -30,10 +41,18 @@ TowerManager towerManager;
 
   }
 
+  /**
+   * Getter method to return the map
+   * @return
+   */
   public int[][] getMap() {
     return map;
   }
 
+  /**
+   * This method sets the path on the tilemap.
+   * Lets the tilemap know what exact position the path's nodes are on.
+   */
   public void setPath(){
     Node current = path.getHead();
     while (current != null){
@@ -55,7 +74,7 @@ TowerManager towerManager;
   }
   public void checkMap(){
 
-      System.out.println("Tile check:");
+     // System.out.println("Tile check:");
       for (int i = 0; i < 15; i++){
         for (int j = 0; j < 25; j++){
           System.out.print(map[i][j] + " ");
@@ -65,6 +84,12 @@ TowerManager towerManager;
     }
   }
 
+  /**
+   * This method checks if the selected Tower can be placed on the tilemap.
+   * If player is trying to place tower on path, method will return false.
+   * @param selectedTower represents a specific tower.
+   * @return true or false.
+   */
   public boolean setTower(int selectedTower){
 
     if (selectedTower != 0) {
