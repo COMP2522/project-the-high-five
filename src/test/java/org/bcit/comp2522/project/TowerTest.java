@@ -18,6 +18,7 @@ public class TowerTest {
   static Window window;
   static Tower tower;
   static BulletManager bulletManager;
+  // this is for loading the processing image
   PImage towerImg;
 
   @BeforeEach
@@ -26,7 +27,6 @@ public class TowerTest {
     bulletManager = new BulletManager(window);
     tower = new Tower(205,400,window,bulletManager);
     towerImg = window.loadImage("Tower 06.png");
-
   }
 
   @Test
