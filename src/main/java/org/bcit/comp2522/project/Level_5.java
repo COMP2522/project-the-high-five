@@ -1,16 +1,27 @@
 package org.bcit.comp2522.project;
 
-import processing.core.PImage;
-
-import java.util.ArrayList;
-
+/**
+ Level_5 class is a subclass of Level that represents the fifth level of the game.
+ It initializes the level's components, draws the game objects on the screen,
+ and checks when it is time to spawn a new enemy or to end the level.
+ @author quintessentialquintuplets
+ @version 1.0
+ */
 public class Level_5 extends Level{
 
+    /**
+     * Constructs a Level_5 object.
+     * @param window the window that the level is drawn on
+     */
     public Level_5(Window window) {
         super(window);
         init();
     }
 
+    /**
+     Initializes the level by resetting the level, adding corners to the path, and setting the path on the tile map.
+     It also updates the timer and checks if it's time to spawn a new enemy.
+     */
     public void init() {
         levelreset();
 
@@ -35,6 +46,10 @@ public class Level_5 extends Level{
 
     }
 
+    /**
+     Draws the game objects on the screen, updates the timer and checks if it's time to spawn a new enemy.
+     It also checks if the game is over, and if all enemies are defeated.
+     */
     public void draw() {
         if (Player.getHealth() <= 0) {
             getWindow().setStage(3);
@@ -79,10 +94,8 @@ public class Level_5 extends Level{
         getTowerManager().shoot(getEnemyManager());
         getTowerManager().inRange();
 
+        // update and draw bullets
         getBulletManager().update();
         getEnemyManager().update(getBulletManager());
-        //getWindow().grid.draw();
-        //tileMap.checkMap();
-
     }
 }
