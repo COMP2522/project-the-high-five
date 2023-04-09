@@ -46,6 +46,7 @@ public class Bullet extends Sprite {
 
   /**
    * Returns the size of the bullet.
+   *
    * @return the size of the bullet.
    */
   public int getSize() {
@@ -70,6 +71,7 @@ public class Bullet extends Sprite {
 
   /**
    * Returns whether the bullet has hit a target.
+   *
    * @return whether the bullet has hit a target.
    */
   public boolean getIsHit() {
@@ -78,6 +80,7 @@ public class Bullet extends Sprite {
 
   /**
    * Sets whether the bullet has hit a target.
+   *
    * @param isHit whether the bullet has hit a target.
    */
   public void setIsHit(boolean isHit) {

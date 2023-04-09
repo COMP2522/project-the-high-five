@@ -28,6 +28,7 @@ public class BulletManager {
 
   /**
    * Adds a bullet to the list of bullets.
+   *
    * @param bullet the bullet to add
    */
   public void addBullet(Bullet bullet) {
@@ -43,7 +44,8 @@ public class BulletManager {
       if (bullet.getIsHit()) {
         bullets.remove(bullet);
         break;
-      } else if (bullet.getXpos() >= window.width || bullet.getXpos() <= 0 || bullet.getYpos() >= window.height || bullet.getYpos() <= 0) {
+      } else if (bullet.getXpos() >= window.width || bullet.getXpos() <= 0
+              || bullet.getYpos() >= window.height || bullet.getYpos() <= 0) {
         bullets.remove(bullet);
         break;
       }
