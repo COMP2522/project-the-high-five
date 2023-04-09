@@ -91,7 +91,6 @@ public class Button {
 
     public void setHovered(boolean hovered) {
         isHovered = hovered;
-        System.out.println("hovered");
     }
 
     public void menuButtonShape(){

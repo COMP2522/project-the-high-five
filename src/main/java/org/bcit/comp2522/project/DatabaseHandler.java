@@ -8,6 +8,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -46,11 +47,7 @@ public class DatabaseHandler {
     }
 
     public void insertHighScore(String user, int score){
-        try {
-            database.createCollection("highScores");
-        } catch (Exception e) {
-            System.out.println("Collection already in database");
-        }
+
         Document document = new Document();
         document.append("user", user)
         .append("score",score);
@@ -73,31 +70,59 @@ public class DatabaseHandler {
         }
         return highscores;
     }
-//    public static void main(String[] args) {
-//
-//        DatabaseHandler dbh = new DatabaseHandler("testuser", "cake1234");
-//
-////        dbh.insertHighScore("cheryl", 1700, "highScores");
-////        dbh.insertHighScore("cheryl", 2100, "highScores");
-//
-//
-//
-//        //
-//        // Document find = dbh.database.getCollection("highScores").find(eq("user", "cheryl")).first();
-//
-//        //
-//        //
-//        // System.out.println(find);
-//
-//
-//
-////        for (Highscore hs : dbh.retrieveHighScores()){
-////            System.out.println(hs.getHighscore());
-////        }
-//
-//
-//
-//    }
+
+    public void writeGameState(GameState gameState){
+
+        try {
+            database.createCollection("gamestate");
+        } catch (Exception e) {
+            System.out.println();
+        }
+
+        UpdateOptions options = new UpdateOptions().upsert(true);
+        Document gamestateDocument = new Document();
+        gamestateDocument.append("player", "player");
+        //gamestateDocument.append("enemies", gameState.getEnemies());
+        gamestateDocument.append("health", gameState.getPlayerHealth());
+        gamestateDocument.append("coins", gameState.getCoins());
+        gamestateDocument.append("score", gameState.getCurrentScore());
+        gamestateDocument.append("currentLevel", gameState.getCurrentLevel());
+        gamestateDocument.append("bosstime", gameState.getTimeBossEnemy());
+        gamestateDocument.append("regtime", gameState.getTimeRegularEnemy());
+        gamestateDocument.append("fasttime", gameState.getTimeFastEnemy());
+        gamestateDocument.append("killed", gameState.getEnemiesKilled());
+        database.getCollection("gamestate").updateOne(
+                eq("player", "player"),
+                new Document("$set", gamestateDocument),
+                options
+        );
+        //System.out.println("Writing gameState to db");
+    }
+
+    public GameState getGameState(Window window) {
+        Document gamestateDocument = database.getCollection("gamestate").find(eq("player", "player")).first();
+        if (gamestateDocument == null) {
+            return null;
+        }
+        int health = gamestateDocument.getInteger("health");
+        int coins = gamestateDocument.getInteger("coins");
+        int score = gamestateDocument.getInteger("score");
+        int currentLevel = gamestateDocument.getInteger("currentLevel");
+        int bosstime = gamestateDocument.getInteger("bosstime");
+        int regtime = gamestateDocument.getInteger("regtime");
+        int fasttime = gamestateDocument.getInteger("fasttime");
+        int killed = gamestateDocument.getInteger("killed");
+        GameState gameState = new GameState(Player.getInstance(), window, window.getLevelManager());
+        gameState.setHealth(health);
+        gameState.setCoins(coins);
+        gameState.setScore(score);
+        gameState.setCurrentLevel(currentLevel);
+        gameState.setTimeBossEnemy(bosstime);
+        gameState.setTimeRegularEnemy(regtime);
+        gameState.setTimeFastEnemy(fasttime);
+        return gameState;
+    }
+
 
 
 }

@@ -14,6 +14,9 @@ public class LevelManager {
   private int timeRegularEnemy;
   private int timeFastEnemy;
   private int timeBossEnemy;
+  private Window window;
+
+  private StateManager sm;
 
   /**
    Constructs a new LevelManager object.
@@ -30,12 +33,47 @@ public class LevelManager {
     timeFastEnemy = 0;
     timeBossEnemy = 0;
     ui.setup();
+    this.window = window;
+    sm = new StateManager(window, this);
   }
 
   /**
    Draws the current level and updates the UI to display important information.
    */
+  public int getTimeRegularEnemy() {
+    return timeRegularEnemy;
+  }
+
+  public void setTimeRegularEnemy(int timeRegularEnemy) {
+    this.timeRegularEnemy = timeRegularEnemy;
+  }
+
+  public int getTimeFastEnemy() {
+    return timeFastEnemy;
+  }
+
+  public void setTimeFastEnemy(int timeFastEnemy) {
+    this.timeFastEnemy = timeFastEnemy;
+  }
+
+  public int getTimeBossEnemy() {
+    return timeBossEnemy;
+  }
+
+  public void setTimeBossEnemy(int timeBossEnemy) {
+    this.timeBossEnemy = timeBossEnemy;
+  }
+  public static void setCurrentLevel(int currentLevel){
+    LevelManager.currentLevel = currentLevel;
+  }
+
+  public Level getCurrentLevelObject(){
+    return currentLevelObject;
+  }
+
   public void draw() {
+
+
     //System.out.println("drawing level:" + currentLevel);
     levels[currentLevel].draw();
     //ui.setup();
@@ -43,6 +81,16 @@ public class LevelManager {
     ui.displayLevelNumber();
     ui.displayHP();
     ui.displayCoins();
+
+    if (window.getStage() == 2) {
+      new Thread(() -> {
+        sm.push(new GameState(Player.getInstance(), window, this));
+        sm.pull();
+      }).start();
+    }
+
+
+
   }
 
   /**
