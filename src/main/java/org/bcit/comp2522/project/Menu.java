@@ -51,7 +51,7 @@ public class Menu {
 
     public void mousePressed(int mouseX, int mouseY) {
         startBH.clickHandler(mouseX, mouseY);
-        //loadBH.clickHandler();
+        loadBH.clickHandler(mouseX, mouseY);
 
         highscoreBH.clickHandler(mouseX, mouseY);
     }

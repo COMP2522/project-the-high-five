@@ -50,6 +50,13 @@ public class LevelManager {
   public void setTimeBossEnemy(int timeBossEnemy) {
     this.timeBossEnemy = timeBossEnemy;
   }
+  public static void setCurrentLevel(int currentLevel){
+    LevelManager.currentLevel = currentLevel;
+  }
+
+  public Level getCurrentLevelObject(){
+    return currentLevelObject;
+  }
 
 
   public void draw() {
@@ -64,6 +71,7 @@ public class LevelManager {
     if (window.getStage() == 2) {
       new Thread(() -> {
         sm.push(new GameState(Player.getInstance(), window, this));
+        sm.pull();
       }).start();
     }
   }

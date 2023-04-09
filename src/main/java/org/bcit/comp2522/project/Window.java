@@ -53,6 +53,10 @@ public class Window extends PApplet {
     return stage;
   }
 
+  public LevelManager getLevelManager(){
+    return levelManager;
+  }
+
   /**
    * Sets up the game window and initializes objects.
    */
