@@ -39,12 +39,22 @@ public class Window extends PApplet {
   private int stage;
 
   private ButtonHandler bh;
+  private StateManager sm;
 
 
   Grid grid;
 
   public Window(){
     userInput = "";
+
+  }
+
+  public int getStage(){
+    return stage;
+  }
+
+  public LevelManager getLevelManager(){
+    return levelManager;
   }
 
   /**
@@ -122,7 +132,10 @@ public class Window extends PApplet {
         menu.display();
         break;
       case 2:
-        levelManager.draw();
+
+          levelManager.draw();
+
+
         break;
       case 3:
         ls = new LosingScreen(this);
@@ -174,10 +187,12 @@ public class Window extends PApplet {
 
       if (key == 'w' || key == 'W') {
         levelManager.killEnemies();
+        stage = 3;
       }
 
       if (key == 'l' || key == 'L') {
         levelManager.killPlayer();
+        stage = 4;
       }
 
 
@@ -188,11 +203,11 @@ public class Window extends PApplet {
 
       if (Character.isLetter(key)) {
         userInput += key;
-        System.out.println(userInput);
+        //System.out.println(userInput);
       } else {
         if (key == BACKSPACE && userInput.length() > 0){
           userInput = userInput.substring(0, userInput.length() - 1);
-          System.out.println(userInput);
+          //System.out.println(userInput);
         } else {
           if (key == ENTER) {
             ws.logHighscore();

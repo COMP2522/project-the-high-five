@@ -10,7 +10,7 @@ import processing.core.PApplet;
  *
  */
 public class ButtonHandler {
-    Window parent;
+    Window window;
 
     Button button;
 
@@ -19,7 +19,7 @@ public class ButtonHandler {
     public ButtonHandler(Button button){
 
         this.button = button;
-        this.parent = button.getParent();
+        this.window = button.getParent();
     }
 
     public boolean checkHover(int mouseX, int mouseY){
@@ -43,10 +43,28 @@ public class ButtonHandler {
 
 
         if (button.getFunction() == ButtonFunction.START && checkHover(mouseX, mouseY)){
-            parent.setStage(2);
+            window.setStage(2);
         }
         if (button.getFunction() == ButtonFunction.HIGHSCORE && checkHover(mouseX, mouseY)){
-            parent.setStage(5);
+            window.setStage(5);
+        }
+
+        if(button.getFunction() == ButtonFunction.LOAD && checkHover(mouseX, mouseY)) {
+            window.setStage(2);
+            Thread myThread = new Thread(() -> {
+                StateManager sm = new StateManager(window, window.getLevelManager());
+                sm.pull();
+            });
+            myThread.start();
+            try {
+                myThread.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.printf("loading");
+
+
+
         }
 
     }
