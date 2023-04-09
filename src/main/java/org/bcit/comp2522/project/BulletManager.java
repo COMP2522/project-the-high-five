@@ -3,12 +3,12 @@ package org.bcit.comp2522.project;
 import java.util.ArrayList;
 
 /**
-  * BulletManager.java
-  * Manages the bullets in the game.
-  *
-  * @author Aric Or
-  * @version 1.0
-  */
+ * BulletManager.java
+ * Manages the bullets in the game.
+ *
+ * @author Aric Or
+ * @version 1.0
+ */
 public class BulletManager {
 
   /* The list of bullets. */
@@ -17,9 +17,9 @@ public class BulletManager {
   private final Window window;
 
   /**
-    * Constructs a BulletManager object with a Window object.
-    *
-    * @param window the Window object to associate with the BulletManager
+   * Constructs a BulletManager object with a Window object.
+   *
+   * @param window the Window object to associate with the BulletManager
    */
   public BulletManager(Window window) {
     this.window = window;
