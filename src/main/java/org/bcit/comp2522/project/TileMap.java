@@ -66,7 +66,7 @@ TowerManager towerManager;
   }
 
   public boolean setTower(int selectedTower){
-    boolean result = false;
+
     if (selectedTower != 0) {
       if (window.mousePressed && (window.mouseX > 40 && window.mouseX < 1240) && (window.mouseY > 0 && window.mouseY < 576)) {
 
@@ -74,16 +74,19 @@ TowerManager towerManager;
         int y = window.mouseY;
         int row = y / 48;
         int col = x / 48;
+        // if this location on the grid is valid then place tower
         if (map[row][col] != 1) {
           map[row][col] = selectedTower;
           towerManager.add(new Tower(col*48+40, row*48, window, bulletManager));
-          System.out.println("Tower placement" + col*48 + ", " + row*48);
+          //System.out.println("Tower placement" + col*48 + ", " + row*48);
           return true;
         } else {
           return false;
         }
       }
     }
-    return result;
+    return false;
   }
+
+
 }
