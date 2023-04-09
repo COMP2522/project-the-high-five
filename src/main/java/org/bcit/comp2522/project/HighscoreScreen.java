@@ -5,7 +5,10 @@ import processing.core.PImage;
 import java.util.ArrayList;
 
 /**
- * Displays top 10 highscores
+ * Displays Highscore screen and retrieves and displays highscores.
+ * Provides methods to refresh and retrieve highscores from the database.
+ * Uses Window class to display screen elements and load images.
+ * Uses ArrayList of Highscore objects to store and retrieve highscores.
  */
 public class HighscoreScreen {
 
@@ -15,16 +18,19 @@ public class HighscoreScreen {
 
     ArrayList<Highscore> highscores = new ArrayList<Highscore>();
 
-    private int scrollCount = 0;
 
-
+    /**
+     * Constructs a HighscoreScreen object with a Window object parameter.
+     * @param window a Window object to display the screen elements and load images.
+     */
     public HighscoreScreen(Window window) {
         this.window = window;
         this.backgroundImage = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/BackDrop.png");
-
-
     }
 
+    /**
+     * Displays the highscore screen and retrieves highscores from the database.
+     */
     public void display() {
 
         window.image(backgroundImage, 0,0, Window.windowWidth, Window.windowHeight);
@@ -38,6 +44,10 @@ public class HighscoreScreen {
 
     }
 
+    /**
+     * Refreshes highscores from the database. Populates the highscores ArrayList with the
+     * retrieved highscores.
+     */
     public void refreshHighscores(){
         Highscore hs = new Highscore();
         highscores = new ArrayList<Highscore>();
@@ -45,6 +55,10 @@ public class HighscoreScreen {
 
     }
 
+    /**
+     * Retrieves highscores from highscores ArrayList and displays them on the highscore screen. Displays user and
+     * score with a specific format.
+     */
     public void retrieveHighscores() {
 
         String user;
@@ -54,12 +68,8 @@ public class HighscoreScreen {
 
         for (int i = 0; i < highscores.size(); i++){
 
-
-
             user = highscores.get(i).getUser().toUpperCase();
             score = highscores.get(i).getHighscore();
-//            entry = "" + user.toUpperCase() + "\t\t\t\t" + score;
-
 
             window.text(user, Window.windowWidth * 2 / 6, (Window.windowHeight * (i + 3) / 12));
             window.text(score, Window.windowWidth * 4 /6, Window.windowHeight * (i + 3) / 12);

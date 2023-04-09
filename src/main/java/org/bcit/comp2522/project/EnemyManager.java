@@ -22,26 +22,36 @@ public class EnemyManager {
     enemies = new ArrayList<>();
   }
 
+  /**
+   * Returns the number of enemies that have been killed.
+   *
+   * @return the number of enemies that have been killed
+   */
   public static int getEnemiesKilled() {
     return enemiesKilled;
   }
 
+  /**
+   * Sets the number of enemies that have been killed.
+   *
+   * @param enemiesKilled the number of enemies that have been killed
+   */
   public static void setEnemiesKilled(int enemiesKilled) {
     EnemyManager.enemiesKilled = enemiesKilled;
   }
 
-  public static int getLevelCompleted() {
-    return levelCompleted;
-  }
-
-  public static void setLevelCompleted(int levelCompleted) {
-    EnemyManager.levelCompleted = levelCompleted;
-  }
-
+  /**
+   * Adds an enemy to the ArrayList of enemies.
+   *
+   * @param enemy the enemy to be added
+   */
   public void addEnemy(Enemy enemy){
     enemies.add(enemy);
   }
 
+  /**
+   * Removes an enemy from the ArrayList of enemies.
+   */
   public void removeEnemy(){
     for (Enemy enemy : enemies) {
       if (enemy.getIsDead()) {
@@ -50,10 +60,21 @@ public class EnemyManager {
       }
     }
   }
+
+  /**
+   * Returns the ArrayList of enemies.
+   *
+   * @return the ArrayList of enemies
+   */
   public ArrayList<Enemy> getEnemies() {
     return enemies;
   }
 
+  /**
+   * Updates the state of the enemies in the game, such as their movement and collisions with bullets.
+   *
+   * @param bulletManager the BulletManager object used to handle bullets in the game
+   */
   public void update(BulletManager bulletManager) {
     for (Enemy enemy : enemies) {
       enemy.draw();
