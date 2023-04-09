@@ -22,16 +22,14 @@ public class SelectTowerUI {
   }
 
   public void selectTower(){
-    //System.out.println("Mouse Pos:" + window.mouseX + ", " + window.mouseY);
+    //checking if the mouse was pressed at the position of tower slot
     if(window.mousePressed && (window.mouseX > 408 && window.mouseX < 472 && window.mouseY > 608 && window.mouseY < 672)){
-      System.out.println("Tower 1 selected");
       selectedTower = 1;
     }
   }
 
   public void slotClicked(){
     if (selectedTower != 0 && tileMap.setTower(selectedTower)){
-      System.out.println("Tower placed");
       selectedTower = 0;
     }
   }
