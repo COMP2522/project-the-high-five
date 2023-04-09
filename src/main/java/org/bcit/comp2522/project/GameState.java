@@ -111,6 +111,10 @@ public class GameState {
         return enemiesKilled;
     }
 
+    public void setEnemiesKilled(int killed){
+        this.enemiesKilled = killed;
+    }
+
 
 
 

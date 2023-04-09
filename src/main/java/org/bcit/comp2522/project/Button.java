@@ -1,6 +1,5 @@
 package org.bcit.comp2522.project;
 
-import processing.core.PApplet;
 import processing.core.PFont;
 
 /**
@@ -11,107 +10,203 @@ import processing.core.PFont;
 public class Button {
 
 
+    /**
+     * Window object that the button belongs to.
+     */
+    private Window window;
 
-    private Window parent;
+    /**
+     * The x-coordinate of the button's position within the Window.
+     */
+    private int x;
 
-    private int x; //y-coordinate of the button in the Window
+    /**
+     * The y-coordinate of the button's position within the Window.
+     */
+    private int y;
 
-    private int y;  //y-coordinate of the button in the Window
-
+    /**
+     * The function of the button as defined byt the ButtonFunction enum.
+     */
     ButtonFunction function; //enum function of a button
 
-    boolean isHovered = false; //if the button is hovered over
+    /**
+     * A boolean value indicating whether or not the mouse cursor is currently hovering over the button.
+     */
+    private boolean isHovered = false; //if the button is hovered over
 
-    private String text; //text displayed on the button
+    /**
+     * The text displayed on the button.
+     */
+    private String text;
 
 
 
     private int buttonWidth;
     private int buttonHeight;
 
-    public Button(Window parent, String text, ButtonFunction function, int x, int y){
-        this.parent = parent;
+    /**
+     * Constructor for button.
+     * @param window a Window object that the button will be added to
+     * @param text  the text to display on the button
+     * @param function a ButtonFunction object that represents the action to be performed
+     * when the button is clicked
+     * @param x  the x-coordinate of the button's position on the window
+     * @param y  the y-coordinate of the button's position on the window
+     */
+    public Button(Window window, String text, ButtonFunction function, int x, int y){
+        this.window = window;
         this.text = text;
         this.x = x;
         this.y = y;
         this.function = function;
     }
 
+    /**
+     * Returns the x-coordinate of a button's position.
+     * @return  the x-coordinate of a button's position.
+     */
     public int getX() {
         return x;
     }
 
+
+    /**
+     * Sets the x-coordinate of the button's position.
+     * @param x - the x coordinate to set for the button's position.
+     */
     public void setX(int x) {
         this.x = x;
     }
 
+    /**
+     * Returns the y-coordinate of the button's position.
+     * @return the y-coordinate of the button's position.
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * Sets the y-coordinate of the button's position.
+     * @param y - the y-coordinate to set for the button's position.
+     */
     public void setY(int y) {
         this.y = y;
     }
 
+    /**
+     * Returns the text displayed on the button.
+     * @return the test displayed on the button.
+     */
     public String getText() {
         return text;
     }
 
+    /**
+     * sets the text to be displayed on the button.
+     * @param text to be displayed on the buttons.
+     */
     public void setText(String text) {
         this.text = text;
     }
 
+    /**
+     * Returns the width of the button.
+     * @return the width of the button.
+     */
     public int getWidth() {
         return buttonWidth;
     }
 
+    /**
+     * Sets the width of the button.
+     * @param width - the width to set for the button.
+     */
     public void setWidth(int width) {
         this.buttonWidth = width;
     }
 
+    /**
+     * Returns the height of the button.
+     * @return the height of the button.
+     */
     public int getHeight() {
         return buttonHeight;
     }
 
+    /**
+     * Sets the height of the button.
+     * @param height - the height to set for the button.
+     */
     public void setHeight(int height) {
         this.buttonHeight = height;
     }
 
+    /**
+     * Return whether the mouse is currently hovering the button.
+     * @return true if the mouse is hovering over the button; false otherwise.
+     */
     public boolean getHovered() {
         return isHovered;
     }
 
-    public Window getParent() {
-        return parent;
+    /**
+     * Returns the window that the button is currently in.
+     * @return the window that the button is currently in.
+     */
+    public Window getWindow() {
+        return window;
     }
 
+    /**
+     * Returns the function associated with the button.
+     * @return the function associated with the button.
+     */
     public ButtonFunction getFunction() {
         return function;
     }
 
+    /**
+     * Sets whether the mouse is currently hovered over the button.
+     * @param hovered - true if the mouse is currently hovering over the button;
+     *                false otherwise.
+     */
     public void setHovered(boolean hovered) {
         isHovered = hovered;
     }
 
+    /**
+     * Sets the shape of the button to a rectangle with a width of
+     * 400 and a height of 100. The position of the rectangle is
+     * centered at the button's x and y coordinates.
+     */
     public void menuButtonShape(){
         this.buttonWidth = 400;
         this.buttonHeight = 100;
-        parent.rectMode(parent.CENTER);
-        parent.fill(0,0,0);
-        parent.rect(this.x, this.y, buttonWidth,buttonHeight);
+        window.rectMode(window.CENTER);
+        window.fill(0,0,0);
+        window.rect(this.x, this.y, buttonWidth,buttonHeight);
     }
 
+    /**
+     * Sets the font, color, and alignment for the text to be displayed on the button.
+     * The text is centered at the button's x and y coordinates
+     */
     public void menuButtonText(){
         PFont gameFont;
-        String dataPath = parent.sketchPath("fonts");
-        gameFont = parent.createFont("" + dataPath + "/Righteous-Regular.ttf", 400);
-        parent.textFont(gameFont);
-        parent.fill(255);
-        parent.textSize(16);
-        parent.textAlign(parent.CENTER);
-        parent.text(this.text, this.x, this.y);
+        String dataPath = window.sketchPath("fonts");
+        gameFont = window.createFont("" + dataPath + "/Righteous-Regular.ttf", 400);
+        window.textFont(gameFont);
+        window.fill(255);
+        window.textSize(16);
+        window.textAlign(window.CENTER);
+        window.text(this.text, this.x, this.y);
     }
 
+    /**
+     * Displays the button by calling both the menuButtonShapes() and menuButtonText() methods.
+     */
     public void displayButton(){
         menuButtonShape();
         menuButtonText();

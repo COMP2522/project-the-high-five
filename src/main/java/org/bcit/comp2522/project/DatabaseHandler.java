@@ -11,10 +11,14 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import static com.mongodb.client.model.Filters.eq;
 
+/**
+ * This class represents a handler for a MongoDB database.
+ */
 public class DatabaseHandler {
 
     private MongoDatabase database;
@@ -22,8 +26,14 @@ public class DatabaseHandler {
     private String username = "testuser";
     private String password = "cake1234";
 
+    /**
+     * Constructs a new instance of DatabaseHandler and establishes a connection to the MongoDB database.
+     * The connection string used to connect includes the username and password of the database user and the name
+     * of the database to connect to.
+     */
     public DatabaseHandler(){
-        ConnectionString connectionString = new ConnectionString("mongodb+srv://" + username + ":" + password + "@2522.ru0dahn.mongodb.net/?retryWrites=true&w=majority");
+        ConnectionString connectionString = new ConnectionString("mongodb+srv://" + username + ":" + password
+                + "@2522.ru0dahn.mongodb.net/?retryWrites=true&w=majority");
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
                 .serverApi(ServerApi.builder()
@@ -38,23 +48,26 @@ public class DatabaseHandler {
 
     }
 
-    public void put(String key, String val, String collectionName){
-
-        Document document = new Document();
-        document.append(key, val);
-        new Thread(()->database.getCollection(collectionName).insertOne(document)).start();
-
-    }
-
+    /**
+     * Inserts a new high score record into the "highScores" collection in the database. The insertion
+     * is performed asynchronously in a separate thread.
+     * @param user the user who acheived the high score.
+     * @param score the value of the high score achieved.
+     */
     public void insertHighScore(String user, int score){
 
         Document document = new Document();
         document.append("user", user)
-        .append("score",score);
+                .append("score",score);
         new Thread(()->database.getCollection("highScores").insertOne(document)).start();
 
     }
 
+    /**
+     * Retrieves the top 8 high scores from the "highScores" collection in the database, sorted in descending order by
+     * score, then in ascending order by user name.
+     * @return an ArrayList of HighScore objects representing the top 8 high scores
+     */
     public ArrayList<Highscore> retrieveHighScores() {
         FindIterable<Document> cursor = this.database.getCollection("highScores")
                 .find()
@@ -71,18 +84,21 @@ public class DatabaseHandler {
         return highscores;
     }
 
+    /**
+     * Writes the current state of the game to the "gamestate" collection in the database.
+     * If the
+     * @param gameState
+     */
     public void writeGameState(GameState gameState){
 
         try {
             database.createCollection("gamestate");
         } catch (Exception e) {
-            System.out.println();
         }
 
         UpdateOptions options = new UpdateOptions().upsert(true);
         Document gamestateDocument = new Document();
         gamestateDocument.append("player", "player");
-        //gamestateDocument.append("enemies", gameState.getEnemies());
         gamestateDocument.append("health", gameState.getPlayerHealth());
         gamestateDocument.append("coins", gameState.getCoins());
         gamestateDocument.append("score", gameState.getCurrentScore());
@@ -96,11 +112,12 @@ public class DatabaseHandler {
                 new Document("$set", gamestateDocument),
                 options
         );
-        //System.out.println("Writing gameState to db");
+
     }
 
     public GameState getGameState(Window window) {
-        Document gamestateDocument = database.getCollection("gamestate").find(eq("player", "player")).first();
+        Document gamestateDocument = database.getCollection("gamestate")
+                .find(eq("player", "player")).first();
         if (gamestateDocument == null) {
             return null;
         }
@@ -120,6 +137,7 @@ public class DatabaseHandler {
         gameState.setTimeBossEnemy(bosstime);
         gameState.setTimeRegularEnemy(regtime);
         gameState.setTimeFastEnemy(fasttime);
+        gameState.setEnemiesKilled(killed);
         return gameState;
     }
 
