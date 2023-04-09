@@ -47,11 +47,7 @@ public class DatabaseHandler {
     }
 
     public void insertHighScore(String user, int score){
-        try {
-            database.createCollection("highScores");
-        } catch (Exception e) {
-            System.out.println("Collection already in database");
-        }
+
         Document document = new Document();
         document.append("user", user)
         .append("score",score);
@@ -100,10 +96,10 @@ public class DatabaseHandler {
                 new Document("$set", gamestateDocument),
                 options
         );
-        System.out.println("Writing gameState to db");
+        //System.out.println("Writing gameState to db");
     }
 
-    public GameState getGameState(Window window) {
+    public synchronized GameState getGameState(Window window) {
         Document gamestateDocument = database.getCollection("gamestate").find(eq("player", "player")).first();
         if (gamestateDocument == null) {
             return null;

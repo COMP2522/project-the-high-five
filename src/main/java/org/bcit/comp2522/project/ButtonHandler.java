@@ -61,7 +61,7 @@ public class ButtonHandler {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("loading");
+            System.out.printf("loading");
 
 
 

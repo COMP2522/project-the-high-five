@@ -179,11 +179,11 @@ public class Window extends PApplet {
 
       if (Character.isLetter(key)) {
         userInput += key;
-        System.out.println(userInput);
+        //System.out.println(userInput);
       } else {
         if (key == BACKSPACE && userInput.length() > 0){
           userInput = userInput.substring(0, userInput.length() - 1);
-          System.out.println(userInput);
+          //System.out.println(userInput);
         } else {
           if (key == ENTER) {
             ws.logHighscore();
