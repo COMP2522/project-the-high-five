@@ -18,6 +18,7 @@ public class Grid {
     window.stroke(27, 168, 240);
     for (int i = 40; i <= 1240; i += 48){
       window.line(i,0,i,720);
+      window.textSize(20);
       window.text(i, i+10, 700);
       window.fill(27, 168, 240);
     }
@@ -29,6 +30,7 @@ public class Grid {
     window.pushStyle();
 
     for (int i = 0; i <= 720; i += 48){
+      window.textSize(20);
       window.text(i, 20, i+10);
       window.fill(27, 168, 240);
     }

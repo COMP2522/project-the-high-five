@@ -5,26 +5,14 @@ import processing.core.PImage;
 import java.util.ArrayList;
 
 public class Level_1 extends Level {
-
-  //SelectTowerUI selectTowerUI;
-
-
   public Level_1(Window window) {
     super(window);
-
     init();
   }
 
   public void init() {
-//    tilemapImg = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/map.png");
-//    enemyManager = new EnemyManager(window);
-//    towers = new ArrayList<>();
-//    bulletManager = new BulletManager(window);
-//    tileMap = new TileMap(window, getPath(), towers, bulletManager);
     levelreset();
-//    setTimeRegularEnemy(0);
-//    setTimeFastEnemy(0);
-//    setTimeBossEnemy(0);
+
     getPath().clearCorner();
     getPath().addCorner(40, 384);
     getPath().addCorner(376, 384);
@@ -34,7 +22,6 @@ public class Level_1 extends Level {
     getPath().addCorner(1192, 384);
     getPath().connectCorners();
     getTileMap().setPath();
-    //selectTowerUI = new SelectTowerUI(getWindow(), getTileMap());
   }
 
   public void draw() {
@@ -87,7 +74,7 @@ public class Level_1 extends Level {
       // update and draw bullets
       getBulletManager().update();
       getEnemyManager().update(getBulletManager());
-      //getWindow().grid.draw();
+      getWindow().grid.draw();
     }
   }
 }
