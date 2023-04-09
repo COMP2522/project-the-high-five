@@ -7,7 +7,7 @@ import processing.core.PImage;
  * attributes for enemies in a game. An Enemy has health, x and y velocities, and follows a Path.
  * Enemies can collide with other Collidable objects.
  *
- * @author Victor Vasconcellos
+ * @author quintessential quintuplets
  * @version 1.0
  */
 public class Enemy extends Sprite implements Collidable, Movable {
@@ -25,15 +25,10 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public PImage enemySprite;
   public PImage[] enemySprites = new PImage[8];
   public PImage[] enemySpritesUP = new PImage[8];
-
   public PImage[] enemySpritesDOWN = new PImage[8];
-
   private Node currentNode;
-
   public int direction = 0;
-
   private boolean isDead = false;
-
   EnemyManager enemyManager;
 
   /**
@@ -63,19 +58,35 @@ public class Enemy extends Sprite implements Collidable, Movable {
     enemyManager = new EnemyManager(window);
   }
 
+  /**
+  * Sets the size of the Enemy.
+  *
+  * @param size the health of the Enemy
+  */
   public void setSize(int size) {
     this.size = size;
   }
 
+  /**
+   * Returns the length of Spite.
+   *
+   * @return the length of Sprite
+   */
   public int getSpriteLength(){
     return spriteLength;
   }
 
+  /**
+   * Returns boolean value of whether the Enemy is dead.
+   * @return
+   */
   public boolean getIsDead() {
     return isDead;
   }
 
-  // Remove enemy when out of bounds
+  /**
+   * Removes the Enemy from the game when out of bounds.
+   */
   public void outOfBounds() {
     if (getXpos() > window.width) {
       isDead = true;
@@ -83,6 +94,9 @@ public class Enemy extends Sprite implements Collidable, Movable {
     }
   }
 
+  /**
+   * Loads the sprite images for the Enemy.
+   */
   public void loadSprite(){
     int spriteWidth = 64;
     int spriteHeight = 64;
@@ -161,7 +175,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
     setXpos(getXpos() + vx);
     setYpos(getYpos() + vy);
   }
-
 
   /**
    * Determines if the Enemy has collided with another Collidable object.
