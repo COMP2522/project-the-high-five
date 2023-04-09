@@ -180,7 +180,7 @@ public class Enemy extends Sprite implements Collidable, Movable {
             if (health <= 0) {
             enemyManager.setEnemiesKilled(EnemyManager.getEnemiesKilled() + 1);
             isDead = true;
-            Player.setCoins(Player.getCoins() + damage);
+            Player.setCoins(Player.getCoins() + (2 + damage));
             }
             return true;
       }
