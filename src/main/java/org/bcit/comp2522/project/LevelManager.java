@@ -9,6 +9,9 @@ public class LevelManager {
   private int timeRegularEnemy;
   private int timeFastEnemy;
   private int timeBossEnemy;
+  private Window window;
+
+  private StateManager sm;
 
   public LevelManager(Window window, int numberOfLevels) {
     currentLevel = 0;
@@ -20,6 +23,8 @@ public class LevelManager {
     timeFastEnemy = 0;
     timeBossEnemy = 0;
     ui.setup();
+    this.window = window;
+    sm = new StateManager(window, this);
   }
 
   public int getTimeRegularEnemy() {
@@ -55,6 +60,12 @@ public class LevelManager {
     ui.displayLevelNumber();
     ui.displayHP();
     ui.displayCoins();
+
+    if (window.getStage() == 2) {
+      new Thread(() -> {
+        sm.push(new GameState(Player.getInstance(), window, this));
+      }).start();
+    }
   }
 
   public void nextLevel() {

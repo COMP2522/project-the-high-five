@@ -49,6 +49,10 @@ public class Window extends PApplet {
     userInput = "";
   }
 
+  public int getStage(){
+    return stage;
+  }
+
   /**
    * Sets up the game window and initializes objects.
    */
