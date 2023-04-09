@@ -11,10 +11,14 @@ import processing.core.PImage;
  */
 public class Window extends PApplet {
 
+  /**
+   * The width of the game window.
+   */
   public static final int windowWidth = 1280;
+  /**
+   * The height of the game window.
+   */
   public static final int windowHeight = 720;
-
-
 
   LevelManager levelManager;
   Level level_1;
@@ -40,9 +44,6 @@ public class Window extends PApplet {
 
   private ButtonHandler bh;
   private StateManager sm;
-
-
-
 
   Grid grid;
 
@@ -126,9 +127,6 @@ public class Window extends PApplet {
 
   private static final Object lock = new Object();
 
-  /**
-   * Draws objects on the game window.
-   */
   /**
    * Draws objects on the game window.
    */

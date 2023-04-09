@@ -1,44 +1,57 @@
 package org.bcit.comp2522.project;
 
-import processing.core.PApplet;
-import processing.core.PFont;
 import processing.core.PImage;
 
 
 /**
- * Displays Menu screen
+ * Displays a menu screen with three buttons for starting a new game, loading a saved game and viewing high scores.
  *
  * @author Cheryl Lau
  * @version 1.0 2023
  */
 public class Menu {
 
-    private Window parent;
+    private Window window;
     private PImage backgroundImage;
 
-    ButtonHandler startBH;
+    private ButtonHandler startBH;
 
-    ButtonHandler loadBH;
+    private ButtonHandler loadBH;
 
-    ButtonHandler highscoreBH;
+    private ButtonHandler highscoreBH;
 
+    private final int startButtonHeight = Window.windowHeight * 3 / 12;
+    private final int loadButtonHeight = Window.windowHeight * 5 / 12;
 
-    public Menu(Window parent) {
-        this.parent = parent;
-        String dataPath = parent.sketchPath("images");
-        this.backgroundImage = parent.loadImage(dataPath + "/laptop.jpg");
+    private final int hsButtonHeight = Window.windowHeight * 7 / 12;
+
+    /**
+     * Constructor for the Menu class. Loads the background image for the menu screen.
+     *
+     * @param window the Window that the menu is displayed on.
+     */
+    public Menu(Window window) {
+        this.window = window;
+        String dataPath = window.sketchPath("images");
+        this.backgroundImage = window.loadImage(dataPath + "/laptop.jpg");
 
     }
 
+    /**
+     * Displays the menu screen with buttons for starting a new game, loading a saved game or viewing high scores.
+     */
     public void display() {
 
-        parent.image(backgroundImage, 0, 0, Window.windowWidth, Window.windowHeight);
+        window.image(backgroundImage, 0, 0, Window.windowWidth, Window.windowHeight);
 
         int horizontalPos = Window.windowWidth/ 2;
 
-        Button startButton = new Button(parent, "START GAME", ButtonFunction.START, horizontalPos, Window.windowHeight * 3 / 12);
-        Button loadButton = new Button(parent, "LOAD GAME", ButtonFunction.LOAD, horizontalPos, Window.windowHeight * 5 / 12);
-        Button hsButton = new Button(parent, "HIGH SCORES", ButtonFunction.HIGHSCORE, horizontalPos, Window.windowHeight * 7 / 12);
+        Button startButton = new Button(window, "START GAME",
+                ButtonFunction.START, horizontalPos, startButtonHeight);
+        Button loadButton = new Button(window, "LOAD GAME",
+                ButtonFunction.LOAD, horizontalPos, loadButtonHeight);
+        Button hsButton = new Button(window, "HIGH SCORES",
+                ButtonFunction.HIGHSCORE, horizontalPos, hsButtonHeight);
         startBH = new ButtonHandler(startButton);
         loadBH = new ButtonHandler(loadButton);
         highscoreBH = new ButtonHandler(hsButton);
@@ -49,6 +62,12 @@ public class Menu {
 
     }
 
+    /**
+     * Handles mouse clicks on the buttons in the menu screen.
+     *
+     * @param mouseX the x-coodinate of the mouse click.
+     * @param mouseY the y-coorindate of the mouse click.
+     */
     public void mousePressed(int mouseX, int mouseY) {
         startBH.clickHandler(mouseX, mouseY);
         loadBH.clickHandler(mouseX, mouseY);

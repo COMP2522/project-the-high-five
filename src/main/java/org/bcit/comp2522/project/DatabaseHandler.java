@@ -115,6 +115,12 @@ public class DatabaseHandler {
 
     }
 
+    /**
+     * Retrieves the current game state from the database and creates a new GameGate object with the retrieved data.
+     *
+     * @param window the current game window
+     * @return a GameState object with the current game state data, or null if the game state not found in the database.
+     */
     public GameState getGameState(Window window) {
         Document gamestateDocument = database.getCollection("gamestate")
                 .find(eq("player", "player")).first();

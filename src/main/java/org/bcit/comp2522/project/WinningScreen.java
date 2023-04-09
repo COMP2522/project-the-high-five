@@ -7,6 +7,13 @@ import java.util.Scanner;
 
 import static processing.event.MouseEvent.ENTER;
 
+/**
+ * The WinningScreen class reprsents the screen displayed when the layer wins the game. It displays the player's score
+ * and prompts the player to enter their name to save their high score
+ *
+ * @author Cheryl Lau
+ * @version 1.0 2023
+ */
 public class WinningScreen {
 
     private Window parent;
@@ -17,10 +24,18 @@ public class WinningScreen {
 
     private String userInput = "";
 
-    public WinningScreen(Window parent){
-        this.parent = parent;
+    /**
+     * Constructs a new WinningScreen object with the given Window.
+     * @param window the Window.
+     */
+    public WinningScreen(Window window){
+        this.parent = window;
     }
 
+    /**
+     * Displays the WinningScreen with the Player's score and prompts the player to enter their name and provides
+     * instructions for saving the high score.
+     */
     public void display(){
 
         String dataPath = parent.sketchPath("fonts");
@@ -41,6 +56,10 @@ public class WinningScreen {
 
     }
 
+    /**
+     * Logs the player's high score in the database. Inserts the player's name and score and resets
+     * the user input field.
+     */
     public void logHighscore(){
         DatabaseHandler dbh = new DatabaseHandler();
         dbh.insertHighScore(parent.getUserInput().toUpperCase(), Player.getCurrentScore());
