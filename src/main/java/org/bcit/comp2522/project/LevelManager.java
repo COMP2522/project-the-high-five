@@ -81,6 +81,7 @@ public class LevelManager {
     //ui.setup();
     ui.displayEnemiesDefeated();
     ui.displayLevelNumber();
+    ui.displayScore();
     ui.displayHP();
     ui.displayCoins();
 
