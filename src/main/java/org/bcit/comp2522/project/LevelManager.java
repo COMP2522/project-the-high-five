@@ -15,10 +15,15 @@ public class LevelManager {
 
   private StateManager sm;
 
+  private int timeRegularEnemy;
+  private int timeFastEnemy;
+  private int timeBossEnemy;
+
   /**
-   Constructs a new LevelManager object.
-   @param window the Window object to use for the game UI.
-   @param numberOfLevels the total number of levels in the game.
+   * Constructs a new LevelManager object.
+   *
+   * @param window         the Window object to use for the game UI.
+   * @param numberOfLevels the total number of levels in the game.
    */
   public LevelManager(Window window, int numberOfLevels) {
     currentLevel = 0;
@@ -27,16 +32,43 @@ public class LevelManager {
     currentLevelObject = levels[0];
     ui = new UI(window);
 
+    timeRegularEnemy = 0;
+    timeBossEnemy = 0;
+    timeFastEnemy = 0;
+    sm = new StateManager(window, this);
     ui.setup();
     this.window = window;
-    sm = new StateManager(window, this);
+
   }
 
+  public int getTimeRegularEnemy() {
+    return timeRegularEnemy;
+  }
+
+  public void setTimeRegularEnemy(int timeRegularEnemy) {
+    this.timeRegularEnemy = timeRegularEnemy;
+  }
+
+  public int getTimeFastEnemy() {
+    return timeFastEnemy;
+  }
+
+  public void setTimeFastEnemy(int timeFastEnemy) {
+    this.timeFastEnemy = timeFastEnemy;
+  }
+
+  public int getTimeBossEnemy() {
+    return timeBossEnemy;
+  }
+
+  public void setTimeBossEnemy(int timeBossEnemy) {
+    this.timeBossEnemy = timeBossEnemy;
+  }
   public static void setCurrentLevel(int currentLevel){
     LevelManager.currentLevel = currentLevel;
   }
 
-  public Level getCurrentLevelObject(){
+  public Level getCurrentLevelObject() {
     return currentLevelObject;
   }
 
@@ -52,7 +84,7 @@ public class LevelManager {
     ui.displayHP();
     ui.displayCoins();
 
-    }
+  }
 
 
   public void startThread() {
@@ -75,12 +107,12 @@ public class LevelManager {
     }
   }
 
-    /**
-     Advances the game to the next level.
-     If the current level is the final level, the game will loop back to the beginning.
-     */
+  /**
+   * Advances the game to the next level.
+   * If the current level is the final level, the game will loop back to the beginning.
+   */
   public void nextLevel() {
-        if (currentLevel == numberOfLevels - 1) {
+    if (currentLevel == numberOfLevels - 1) {
       currentLevel = 0;
     } else {
       currentLevel++;
@@ -90,8 +122,9 @@ public class LevelManager {
   }
 
   /**
-   Adds a new level to the game.
-   @param level the Level object to add.
+   * Adds a new level to the game.
+   *
+   * @param level the Level object to add.
    */
   public void addLevel(Level level) {
     int n = 0;
@@ -105,26 +138,15 @@ public class LevelManager {
   }
 
   /**
-  Returns the current level.
-  @return the current level.
-  */
+   * Returns the current level.
+   *
+   * @return the current level.
+   */
   public static int getCurrentLevel() {
     return currentLevel;
   }
 
-  /**
-   * This is just a temporary method to kill off enemies to trigger losing
-   * function faster for testing purposes.  DELETE LATER
-   */
-  public void killEnemies() {
-    levels[currentLevel].setNumEnemies(0);
-  }
 
-  /**
-   * This is just a temporary method to kill off player to trigger losing
-   * function faster for testing purposes.  DELETE LATER
-   */
-  public void killPlayer() {
-    Player.setHealth(0);
-  }
+
+
 }
