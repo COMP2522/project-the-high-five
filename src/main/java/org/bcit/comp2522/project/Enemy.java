@@ -197,7 +197,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
             Player.setCoins(Player.getCoins() + damage);
             Player.setCurrentScore(Player.getCurrentScore() +
                     ((Player.getHealth() * damage * Player.getCoins() / 10)));
-              System.out.println(Player.getCurrentScore());
             }
             return true;
       }
