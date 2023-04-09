@@ -10,7 +10,7 @@ public class TileMap {
 
   private Path path;
 
-TowerManager towerManager;
+  private TowerManager towerManager;
 
   private BulletManager bulletManager;
   private final int ROW;
@@ -72,6 +72,10 @@ TowerManager towerManager;
 //    }
 
   }
+
+  /**
+   * Print out the tilemap. Used for debugging.
+   */
   public void checkMap(){
 
      // System.out.println("Tile check:");

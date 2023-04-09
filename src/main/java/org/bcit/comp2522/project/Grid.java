@@ -1,13 +1,22 @@
 package org.bcit.comp2522.project;
 
 import java.util.zip.GZIPInputStream;
-
+/**
+ * Grid class. Draws the grid on the screen. Only used for testing purposes.
+ * @author Quan Tran
+ */
 public class Grid {
-  public static final int GRID_SIZE = 12;
   private Window window;
+  /**
+   * Constructs a Grid object.
+   * @param window the window that the grid is drawn on
+   */
   public Grid(Window window){
     this.window = window;
   }
+  /**
+   * Draws the grid on the screen.
+   */
   public void draw(){
     window.pushStyle();
     window.stroke(204, 102, 0);

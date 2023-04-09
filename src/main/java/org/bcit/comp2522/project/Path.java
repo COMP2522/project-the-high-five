@@ -21,7 +21,9 @@ public class Path {
     image = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/sand_tile.png");
 
   }
-
+  /**
+   * Draws the path.
+   */
   public void draw() {
     Node current = head;
     while (current != null) {
@@ -42,9 +44,6 @@ public class Path {
    */
   public boolean addCorner(int x, int y){
     boolean result = false;
-//    if (x % 48 != 0 || y % 48 != 0){
-//      return false;
-//    }
     Node temp = new Node(x, y);
     if (corners.size() == 0){
       corners.add(temp);
@@ -60,6 +59,9 @@ public class Path {
     }
     return result;
   }
+  /**
+   * Prints the nodes in the path. For testing purposes.
+   */
   public void printNode(){
     Node current = head;
     while (current != null){
@@ -67,6 +69,12 @@ public class Path {
       current = current.next;
     }
   }
+  /**
+   * Checks if a node already exist.
+   * @param x x position of the node
+   * @param y y position of the node
+   * @return if the node already exist
+   */
   public boolean nodeExist(int x, int y){
     boolean result = false;
     Node current = head;
@@ -167,17 +175,25 @@ public class Path {
    // return false;
   //}
 
-
+  /**
+   * Gets the head of the path.
+   * @return the head of the path
+   */
   public Node getHead() {
     return head;
   }
 
+  /**
+   * Resets the path.
+   */
   public void reset() {
     head = null;
     tail = null;
     corners.clear();
   }
-
+  /**
+   * Clears the corners of the path.
+   */
   public void clearCorner(){
     corners.clear();
   }
