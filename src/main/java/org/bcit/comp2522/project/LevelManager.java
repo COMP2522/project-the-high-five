@@ -25,6 +25,7 @@ public class LevelManager {
     timeFastEnemy = 0;
     timeBossEnemy = 0;
     ui.setup();
+    this.window = window;
   }
 
   public Level getCurrentLevelObject() {

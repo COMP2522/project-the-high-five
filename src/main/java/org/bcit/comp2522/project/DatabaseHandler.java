@@ -91,7 +91,9 @@ public class DatabaseHandler {
         gamestateDocument.append("coins", gameState.getCoins());
         gamestateDocument.append("score", gameState.getCurrentScore());
         gamestateDocument.append("currentLevel", gameState.getCurrentLevel());
-
+        gamestateDocument.append("bosstime", gameState.getTimeBossEnemy());
+        gamestateDocument.append("regtime", gameState.getTimeRegularEnemy());
+        gamestateDocument.append("fasttime", gameState.getTimeFastEnemy());
         database.getCollection("gamestate").updateOne(
                 eq("player", "player"),
                 new Document("$set", gamestateDocument),
