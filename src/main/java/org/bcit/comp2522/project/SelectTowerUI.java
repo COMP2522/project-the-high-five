@@ -12,7 +12,12 @@ public class SelectTowerUI {
   TowerManager towerManager;
 
   private int selectedTower;
-
+  /**
+   * Constructs a SelectTowerUI object.
+   * @param window the window that the UI is drawn on
+   * @param tileMap the tile map that the tower is placed on
+   * @param towerManager the tower manager that manages the towers
+   */
   public SelectTowerUI(Window window, TileMap tileMap, TowerManager towerManager) {
     this.window = window;
     this.tileMap = tileMap;
@@ -21,7 +26,9 @@ public class SelectTowerUI {
     selectedTower = 0;
     this.towerManager = towerManager;
   }
-
+  /**
+   * Select the tower.
+   */
   public void selectTower() {
     //checking if the mouse was pressed at the position of tower slot
     if ((Player.getCoins() / 50) > 0 && window.mousePressed && (window.mouseX > 408 && window.mouseX < 472 && window.mouseY > 608 && window.mouseY < 672)) {
@@ -29,13 +36,18 @@ public class SelectTowerUI {
     }
   }
 
+  /**
+   * Slot clicked. Adds the tower to the tile map.
+   */
   public void slotClicked() {
     if (selectedTower != 0 && tileMap.setTower(selectedTower)) {
       selectedTower = 0;
       Player.setCoins(Player.getCoins() - 50);
     }
   }
-
+  /**
+   * Draws the Tower Selection UI.
+   */
   public void draw() {
     window.image(inventoryIMG, 376, 576);
     //window.square(440, 640, 64);
