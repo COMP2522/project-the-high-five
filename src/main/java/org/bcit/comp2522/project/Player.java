@@ -60,8 +60,7 @@ public class Player {
     }
 
     public static void resetStats() {
-        Player.setCoins(0);
-        Player.setCoins(10);
+        Player.setCoins(100);
 
     }
 
