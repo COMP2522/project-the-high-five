@@ -24,13 +24,17 @@ public class StateManager {
         GameState gs = dbh.getGameState(window);
         LevelManager lm = window.getLevelManager();
         Player.setHealth(gs.getPlayerHealth());
-        Player.setCoins(gs.getCoins());
-        Player.setCurrentScore(gs.getCurrentScore());
         lm.setTimeBossEnemy(gs.getTimeBossEnemy());
         lm.setTimeFastEnemy(gs.getTimeFastEnemy());
         lm.setTimeRegularEnemy(gs.getTimeFastEnemy());
         LevelManager.setCurrentLevel(gs.getCurrentLevel());
 
 
+    }
+
+    public void pullCoinsAndPoints(){
+        GameState gs = dbh.getGameState(window);
+        Player.setCurrentScore(gs.getCurrentScore());
+        Player.setCoins(gs.getCoins());
     }
 }
