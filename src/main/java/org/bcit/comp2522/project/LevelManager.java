@@ -10,10 +10,7 @@ public class LevelManager {
   private Level[] levels;
   private Level currentLevelObject;
   private final int numberOfLevels;
-  UI ui;
-  private int timeRegularEnemy;
-  private int timeFastEnemy;
-  private int timeBossEnemy;
+  private UI ui;
   private Window window;
 
   private StateManager sm;
@@ -29,40 +26,12 @@ public class LevelManager {
     levels = new Level[numberOfLevels];
     currentLevelObject = levels[0];
     ui = new UI(window);
-    timeRegularEnemy = 0;
-    timeFastEnemy = 0;
-    timeBossEnemy = 0;
+
     ui.setup();
     this.window = window;
     sm = new StateManager(window, this);
   }
 
-  /**
-   Draws the current level and updates the UI to display important information.
-   */
-  public int getTimeRegularEnemy() {
-    return timeRegularEnemy;
-  }
-
-  public void setTimeRegularEnemy(int timeRegularEnemy) {
-    this.timeRegularEnemy = timeRegularEnemy;
-  }
-
-  public int getTimeFastEnemy() {
-    return timeFastEnemy;
-  }
-
-  public void setTimeFastEnemy(int timeFastEnemy) {
-    this.timeFastEnemy = timeFastEnemy;
-  }
-
-  public int getTimeBossEnemy() {
-    return timeBossEnemy;
-  }
-
-  public void setTimeBossEnemy(int timeBossEnemy) {
-    this.timeBossEnemy = timeBossEnemy;
-  }
   public static void setCurrentLevel(int currentLevel){
     LevelManager.currentLevel = currentLevel;
   }
@@ -71,9 +40,10 @@ public class LevelManager {
     return currentLevelObject;
   }
 
+  /**
+   * Draws the current level.
+   */
   public void draw() {
-
-
     //System.out.println("drawing level:" + currentLevel);
     levels[currentLevel].draw();
     //ui.setup();
@@ -104,14 +74,6 @@ public class LevelManager {
       thread.start();
     }
   }
-
-
-
-
-
-
-
-
 
     /**
      Advances the game to the next level.

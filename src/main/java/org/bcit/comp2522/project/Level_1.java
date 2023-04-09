@@ -15,7 +15,6 @@ public class Level_1 extends Level {
   */
   public Level_1(Window window) {
     super(window);
-
     init();
   }
 
