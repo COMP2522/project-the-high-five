@@ -82,26 +82,43 @@ public class LevelManager {
     ui.displayHP();
     ui.displayCoins();
 
-    if (window.getStage() == 2) {
-      Thread thread = new Thread(() -> {
-        sm.push(new GameState(Player.getInstance(), window, this));
-        sm.pull();
-      });
-      thread.start();
     }
 
 
+  public void startThread() {
 
-
-
+    if (window.getStage() == 2) {
+      Thread thread = new Thread(() -> {
+        sm.push(new GameState(Player.getInstance(), window, this));
+        while (true) {
+          synchronized (sm) {
+            sm.mainPull();
+          }
+          try {
+            Thread.sleep(1000);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+        }
+      });
+      thread.start();
+    }
   }
 
-  /**
-   Advances the game to the next level.
-   If the current level is the final level, the game will loop back to the beginning.
-   */
+
+
+
+
+
+
+
+
+    /**
+     Advances the game to the next level.
+     If the current level is the final level, the game will loop back to the beginning.
+     */
   public void nextLevel() {
-    if (currentLevel == numberOfLevels - 1) {
+        if (currentLevel == numberOfLevels - 1) {
       currentLevel = 0;
     } else {
       currentLevel++;

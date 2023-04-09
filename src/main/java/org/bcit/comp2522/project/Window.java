@@ -42,6 +42,8 @@ public class Window extends PApplet {
   private StateManager sm;
 
 
+
+
   Grid grid;
 
   public Window(){
@@ -122,6 +124,8 @@ public class Window extends PApplet {
     //towers = new ArrayList<>();
   }
 
+  private static final Object lock = new Object();
+
   /**
    * Draws objects on the game window.
    */
@@ -134,7 +138,10 @@ public class Window extends PApplet {
         menu.display();
         break;
       case 2:
-        levelManager.draw();
+        synchronized (lock) {
+          levelManager.draw();
+          levelManager.startThread();
+        }
 
         break;
       case 3:
