@@ -5,18 +5,14 @@ The game takes place on a 2D game map with a fixed path that the enemies will fo
 
 In addition to the basic gameplay and installation instructions, this Tower Defense game has some specific features:
 
-    The player must kill a certain number of enemies to progress to the next level. In this game, the player must kill 20 enemies to progress to the next level.
-    There are a total of 5 levels in the game, and if the player successfully completes all 5 levels, they win the game.
-    The game has a main menu where the player can start a new game, load a previously played game or exit the game.
-    If the player runs out of money, they cannot buy until they earn more money by killing enemies.
+The UI class manages the user interface elements of a game. It contains methods for displaying the current level number, current score, number of enemies defeated, the player's current health using red and black hearts, and the player's current coins. The class also loads up UI elements such as coinImage, redHeart, and blackHeart. The displayHP method uses if-else statements to display a combination of red and black hearts depending on the player's current health. The displayText method displays text on the screen using a specified x and y coordinate. The constructor takes in a Window object for accessing the LevelManager and updating the game display. The setup method loads up the UI elements.
 
+Installation 
 
-Installation
-
-    Install Java JDK and JRE
-    Download or clone the repository
-    Open the project in your favorite Java IDE
-    Compile and run the game
+Install the Java JDK and JRE
+Download or clone the repository 
+Open the project in your favourite Java IDE
+Compile and run the game
 
 Game Controls
 
