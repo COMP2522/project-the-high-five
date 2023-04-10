@@ -78,6 +78,19 @@ Grid: Made a grid display for development purposes. This helped in placing perna
 
 Beside the contributions mentioned above, I contributed greatly on implementing the general gameplay logic. In addition, I had a heavy hand in troubleshooting and debugging other members code.
 
+
+Gursidh
+
+Continously updated the UML to match the code as classes were being created.
+Created the general methods in Tower, TowerManager, and Sprite as well as the interfaces these classes implemented.
+Heavily contributed in moving the mouse and figuring out how to interact with the users mouse using mousePressed method.
+Helped with visual aspects relating to towers animation.
+Refactored the code to clean up messy code and create a system of classes in which the Manager classes control methods of the class its managing.
+Continously cleaned up the code, added documentation, and made the code visually easier to understand.
+Wrote test cases for some classes, including Tower and TowerManager, to make sure they are functioning as expected.
+
+In addition to those tasks listed above, I was heavily involved in helping my teamates debug their code and talk through the issues they were facing. Refactoring my teamates code was one of the biggest way I contributed to this project.
+
 Credits
 This game was created by Aric, Cheryl, Gursidh, Quan, and Victor
 
