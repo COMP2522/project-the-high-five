@@ -12,6 +12,17 @@ import processing.core.PImage;
 public class UI {
   /* The width and height of the hearts in the UI. */
   private static final int ELEMENT_SIZE = 32;
+  private static final int TEN = 10;
+  private static final int NINE = 9;
+  private static final int EIGHT = 8;
+  private static final int SEVEN = 7;
+  private static final int SIX = 6;
+  private static final int FIVE = 5;
+  private static final int FOUR = 4;
+  private static final int THREE = 3;
+  private static final int TWO = 2;
+  private static final int ONE = 1;
+  private static final int ZERO = 0;
   PImage coinImage;
   PImage redHeart;
   PImage blackHeart;
@@ -75,7 +86,7 @@ public class UI {
    */
   public String displayHP() {
     int hp = Player.getHealth();
-    if (hp == 10) {
+    if (hp == TEN) {
       window.image(redHeart, 967, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1000, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1033, 631, ELEMENT_SIZE, ELEMENT_SIZE);
@@ -86,7 +97,7 @@ public class UI {
       window.image(redHeart, 1033, 665, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1066, 665, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1100, 665, ELEMENT_SIZE, ELEMENT_SIZE);
-    } else if (hp == 9) {
+    } else if (hp == NINE) {
       window.image(redHeart, 967, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1000, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1033, 631, ELEMENT_SIZE, ELEMENT_SIZE);
@@ -97,7 +108,7 @@ public class UI {
       window.image(redHeart, 1033, 665, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1066, 665, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1100, 667, ELEMENT_SIZE, ELEMENT_SIZE);
-    } else if (hp == 8) {
+    } else if (hp == EIGHT) {
       window.image(redHeart, 967, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1000, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1033, 631, ELEMENT_SIZE, ELEMENT_SIZE);
@@ -108,7 +119,7 @@ public class UI {
       window.image(redHeart, 1033, 665, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1066, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1100, 667, ELEMENT_SIZE, ELEMENT_SIZE);
-    } else if (hp == 7) {
+    } else if (hp == SEVEN) {
       window.image(redHeart, 967, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1000, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1033, 631, ELEMENT_SIZE, ELEMENT_SIZE);
@@ -119,7 +130,7 @@ public class UI {
       window.image(blackHeart, 1033, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1066, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1100, 667, ELEMENT_SIZE, ELEMENT_SIZE);
-    } else if (hp == 6) {
+    } else if (hp == SIX) {
       window.image(redHeart, 967, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1000, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1033, 631, ELEMENT_SIZE, ELEMENT_SIZE);
@@ -130,7 +141,7 @@ public class UI {
       window.image(blackHeart, 1033, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1066, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1100, 667, ELEMENT_SIZE, ELEMENT_SIZE);
-    } else if (hp == 5) {
+    } else if (hp == FIVE) {
       window.image(redHeart, 967, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1000, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1033, 631, ELEMENT_SIZE, ELEMENT_SIZE);
@@ -141,7 +152,7 @@ public class UI {
       window.image(blackHeart, 1033, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1066, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1100, 667, ELEMENT_SIZE, ELEMENT_SIZE);
-    } else if (hp == 4) {
+    } else if (hp == FOUR) {
       window.image(redHeart, 967, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1000, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1033, 631, ELEMENT_SIZE, ELEMENT_SIZE);
@@ -152,7 +163,7 @@ public class UI {
       window.image(blackHeart, 1033, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1066, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1100, 667, ELEMENT_SIZE, ELEMENT_SIZE);
-    } else if (hp == 3) {
+    } else if (hp == THREE) {
       window.image(redHeart, 967, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1000, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1033, 631, ELEMENT_SIZE, ELEMENT_SIZE);
@@ -163,7 +174,7 @@ public class UI {
       window.image(blackHeart, 1033, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1066, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1100, 667, ELEMENT_SIZE, ELEMENT_SIZE);
-    } else if (hp == 2) {
+    } else if (hp == TWO) {
       window.image(redHeart, 967, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(redHeart, 1000, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1033, 633, ELEMENT_SIZE, ELEMENT_SIZE);
@@ -174,7 +185,7 @@ public class UI {
       window.image(blackHeart, 1033, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1066, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1100, 667, ELEMENT_SIZE, ELEMENT_SIZE);
-    } else if (hp == 1) {
+    } else if (hp == ONE) {
       window.image(redHeart, 967, 631, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1000, 633, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1033, 633, ELEMENT_SIZE, ELEMENT_SIZE);
@@ -185,7 +196,7 @@ public class UI {
       window.image(blackHeart, 1033, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1066, 667, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1100, 667, ELEMENT_SIZE, ELEMENT_SIZE);
-    } else if (hp == 0) {
+    } else if (hp == ZERO) {
       window.image(blackHeart, 967, 633, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1000, 633, ELEMENT_SIZE, ELEMENT_SIZE);
       window.image(blackHeart, 1033, 633, ELEMENT_SIZE, ELEMENT_SIZE);
