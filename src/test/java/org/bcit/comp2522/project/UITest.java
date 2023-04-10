@@ -1,5 +1,6 @@
 package org.bcit.comp2522.project;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import processing.core.PApplet;
@@ -8,15 +9,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class UITest {
-  private String[] appletArgs = new String[]{"towerDefence"};
-  private Window window;
-  private PImage coinImage;
-  private PImage redHeart;
-  private PImage blackHeart;
-  private UI ui;
+  private static String[] appletArgs = new String[]{"towerDefence"};
+  private static Window window;
+  private static PImage coinImage;
+  private static PImage redHeart;
+  private static PImage blackHeart;
+  private static UI ui;
 
-  @BeforeEach
-  void setup() {
+  @BeforeAll
+  static void setup() {
     window = new Window();
     PApplet.runSketch(appletArgs, window);
     coinImage = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/coin3.png");
@@ -206,11 +207,43 @@ public class UITest {
     assertEquals("0", hpText);
   }
 
-//  @Test
-//  void testDisplayCoins() {
-//    UI ui = new UI(window);
-//    Player.setCoins(15); // Set the player's coins to 15
-//    String coinsText = ui.displayCoins();
-//    assertEquals("15", coinsText);
-//  }
+  @Test
+  void testDisplayCoins1() {
+    UI ui = new UI(window);
+    Player.setCoins(15); // Set the player's coins to 15
+    String coinsText = ui.displayCoins();
+    assertEquals("15", coinsText);
+  }
+
+  @Test
+  void testDisplayCoins2() {
+    UI ui = new UI(window);
+    Player.setCoins(0); // Set the player's coins to 15
+    String coinsText = ui.displayCoins();
+    assertEquals("0", coinsText);
+  }
+
+  @Test
+  void testDisplayCoins3() {
+    UI ui = new UI(window);
+    Player.setCoins(20); // Set the player's coins to 15
+    String coinsText = ui.displayCoins();
+    assertEquals("20", coinsText);
+  }
+
+  @Test
+  void testDisplayCoins4() {
+    UI ui = new UI(window);
+    Player.setCoins(200); // Set the player's coins to 15
+    String coinsText = ui.displayCoins();
+    assertEquals("200", coinsText);
+  }
+
+  @Test
+  void testDisplayCoins5() {
+    UI ui = new UI(window);
+    Player.setCoins(10); // Set the player's coins to 15
+    String coinsText = ui.displayCoins();
+    assertEquals("10", coinsText);
+  }
 }
