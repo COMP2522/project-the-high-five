@@ -17,10 +17,10 @@ Compile and run the game
 
 Game Controls
 
-    Click on a tower on the bottom panel once to select it
-    Click on the game map to place the selected tower (do not drag)
-    Press the 'm' key to go back to the main menu.
-    Press the escape key to quit the game
+Click on a tower on the bottom panel once to select it.
+Click on the game map to place the selected tower (do not drag).
+Press the 'm' key to go back to the main menu.
+Press the escape key to quit the game.
 
 Individual Contributions
 
