@@ -12,12 +12,8 @@ public class LevelManager {
   private final int numberOfLevels;
   private UI ui;
   private Window window;
-
   private StateManager sm;
 
-  private int timeRegularEnemy;
-  private int timeFastEnemy;
-  private int timeBossEnemy;
 
   /**
    * Constructs a new LevelManager object.
@@ -31,10 +27,6 @@ public class LevelManager {
     levels = new Level[numberOfLevels];
     currentLevelObject = levels[0];
     ui = new UI(window);
-
-    timeRegularEnemy = 0;
-    timeBossEnemy = 0;
-    timeFastEnemy = 0;
     sm = new StateManager(window, this);
     ui.setup();
     this.window = window;
@@ -42,64 +34,13 @@ public class LevelManager {
   }
 
   /**
-   * Gets the amount on the timer for regular enemy.
+   * Sets the current level for the game.
    *
-   * @return integer for the timer of a regular enemy.
-  public int getTimeRegularEnemy() {
-    return timeRegularEnemy;
-  }
-
-  /**
-   * Sets the amount on the timer for the regular enemy.
-   *
-   * @param timeRegularEnemy the timer for the regular enemy.
+   * @param currentLevel integer to set the current level.
    */
-  public void setTimeRegularEnemy(int timeRegularEnemy) {
-    this.timeRegularEnemy = timeRegularEnemy;
+  public static void setCurrentLevel(int currentLevel) {
   }
 
-  /**
-   * Gets the amount of timer for the fast enemy.
-   *
-   * @return the time for the fast enemy.
-   */
-  public int getTimeFastEnemy() {
-    return timeFastEnemy;
-  }
-
-  /**
-   * Sets the amount of timer for the fast enemy.
-   *
-   * @param timeFastEnemy integer for the amount on the timer for the fast enemy.
-   */
-  public void setTimeFastEnemy(int timeFastEnemy) {
-    this.timeFastEnemy = timeFastEnemy;
-  }
-
-  /**
-   * Returns the amount on the timer for a boss enemy.
-   *
-   * @return the amount on the timer for a boss enemy.
-   */
-  public int getTimeBossEnemy() {
-    return timeBossEnemy;
-  }
-
-  /**
-   * Sets the amount on the timer for a boss enemy.
-   *
-   * @param timeBossEnemy the amount on the timer for a boss enemy.
-   */
-  public void setTimeBossEnemy(int timeBossEnemy) {
-    this.timeBossEnemy = timeBossEnemy;
-  }
-  public static void setCurrentLevel(int currentLevel){
-    LevelManager.currentLevel = currentLevel;
-  }
-
-  public Level getCurrentLevelObject() {
-    return currentLevelObject;
-  }
 
   /**
    * Draws the current level.
@@ -156,8 +97,4 @@ public class LevelManager {
     return currentLevel;
   }
 
-
-  public int getTimeRegularEnemy() {
-    return timeRegularEnemy;
-  }
 }

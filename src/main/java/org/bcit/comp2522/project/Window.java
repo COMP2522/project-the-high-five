@@ -47,13 +47,13 @@ public class Window extends PApplet {
 
   Grid grid;
 
+  /**
+   * Constructor for the Window the game is displayed on. Intializes userInput to a blank string.
+   */
   public Window(){
     userInput = "";
 
   }
-
-
-
 
   public int getStage(){
     return stage;
