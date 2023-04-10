@@ -1,3 +1,57 @@
+This is a simple Tower Defense game created in Java. The objective of the game is to prevent enemies from reaching the right side of the game map by building towers that will shoot them down.
+
+Gameplay
+The game takes place on a 2D game map with a fixed path that the enemies will follow. The player has a set amount of money that they can use to buy and upgrade towers. The towers will automatically shoot at enemies as they move along the path. The player must strategically place their towers in order to prevent the enemies from reaching the end of the path.
+
+In addition to the basic gameplay and installation instructions, this Tower Defense game has some specific features:
+
+    The player must kill a certain number of enemies to progress to the next level. In this game, the player must kill 20 enemies to progress to the next level.
+    There are a total of 5 levels in the game, and if the player successfully completes all 5 levels, they win the game.
+    The game has a main menu where the player can start a new game, load a previously played game or exit the game.
+    If the player runs out of money, they cannot buy until they earn more money by killing enemies.
+
+
+Installation
+
+    Install Java JDK and JRE
+    Download or clone the repository
+    Open the project in your favorite Java IDE
+    Compile and run the game
+
+Game Controls
+
+    Click on a tower on the bottom panel once to select it
+    Click on the game map to place the selected tower (do not drag)
+    Press the 'm' key to go back to the main menu.
+    Press the escape key to quit the game
+
+Individual Contributions
+
+Cheryl
+
+Database Handling: I implemented a database system that stores the player's high score and game state. The game now reads and writes this data at regular intervals to ensure that the player's progress is always saved and up-to-date. The game reads the JSON game data from the database when the game is loaded, allowing them to continue their game from where they left off.
+
+Menu Screen: I created a user-friendly menu screen that allows the player to start a new game, load a saved game, or view the high scores. This menu screen is easy to navigate.
+
+Non-Blocking Concurrent/Asynchronous Processing: I added a non-blocking concurrent/asynchronous processing system that runs at regular intervals to save game data in the background.
+
+Persistent Data State: I incorporated a non-trivial persistent data state that saves the player's progress and game state in a JSON file. This ensures that the player's progress is always saved, even if they exit the game or shut down their computer.
+
+Winning/Losing Screens: I created winning and losing screens that are displayed at the end of each game. These screens provide feedback to the player and allow them to submit their name and their highscore to the leaderboard.
+
+Highscore Writing to the Database: I implemented a system that writes the player's high score to the database at the end of each game. This ensures that the high score list is always up-to-date and reflects the player's latest score.
+
+Game State Persistence: I implemented a game state persistence system that ensures the player's progress is always saved and up-to-date. This system saves the game state to a file or database at regular intervals, ensuring that the player's progress is always up-to-date.
+
+JSON Game Data: I designed and implemented a JSON game data structure that stores the player's progress and game state. This data structure includes information such as the player's high score, game level, tower upgrades, and enemy progress.
+
+Writing Game Data to File: I implemented a system that writes the JSON game data to a local file. This system ensures that the player's progress is always saved and up-to-date, even if they exit the game or shut down their computer.
+
+Reading Game Data from File: I created a system that reads the JSON game data from the local file as the game is playing. 
+
+Credits
+This game was created by 
+
 For next week, you'll want to have a clear idea of what your project is going to be. Then, in the next lab, I will help you scope your project appropriately. In this repo, write the following:
 1.	A one-liner (exactly 1 sentence) that describes your project.
 Our group is planning to create a tower defense simulator consisting of enemy entities following a predestined path where they will systematically encounter the player’s “towers” trying to impede their movement. 
