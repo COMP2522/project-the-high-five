@@ -26,6 +26,7 @@ public class Node {
   public int getXpos() {
     return xpos;
   }
+
   /**
    * Returns the y position of the node.
    *

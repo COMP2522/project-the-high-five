@@ -1,11 +1,11 @@
 package org.bcit.comp2522.project;
 
-import processing.core.PImage;
-
 import java.util.ArrayList;
+import processing.core.PImage;
 
 /**
  * This class represents the path on the map that the enemy can travel on.
+ *
  * @author quintessential quintuplets
  * @version 1.0
  */
@@ -19,13 +19,15 @@ public class Path {
 
   /**
    * Creates a path for the enemies to follow.
-   * @param window
+   *
+   * @param window the window that the path will be drawn on
    */
   public Path(Window window) {
     this.window = window;
     image = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/sand_tile.png");
 
   }
+
   /**
    * Draws the path.
    */
@@ -33,8 +35,6 @@ public class Path {
     Node current = head;
     while (current != null) {
       window.pushStyle();
-//      window.fill(0, 255, 0);
-//      window.square(current.getXpos(), current.getYpos(), 20);
       window.image(image, current.getXpos(), current.getYpos(), 48, 48);
       window.popStyle();
       current = current.next;
@@ -43,19 +43,21 @@ public class Path {
 
   /**
    * Adds a corner to the path.
+   *
    * @param x x position of the corner
    * @param y y position of the corner
    * @return if the corner was added
    */
-  public boolean addCorner(int x, int y){
+  public boolean addCorner(int x, int y) {
     boolean result = false;
     Node temp = new Node(x, y);
-    if (corners.size() == 0){
+    if (corners.size() == 0) {
       corners.add(temp);
       head = temp;
       result = true;
     } else {
-      if (corners.get(corners.size() - 1).getXpos() == temp.getXpos() || corners.get(corners.size() - 1).getYpos() == temp.getYpos()){
+      if (corners.get(corners.size() - 1).getXpos() == temp.getXpos()
+              || corners.get(corners.size() - 1).getYpos() == temp.getYpos()) {
         corners.add(temp);
         result = true;
       } else {
@@ -64,27 +66,30 @@ public class Path {
     }
     return result;
   }
+
   /**
    * Prints the nodes in the path. For testing purposes.
    */
-  public void printNode(){
+  public void printNode() {
     Node current = head;
-    while (current != null){
+    while (current != null) {
       System.out.println("Current node:" + current.getXpos() + " " + current.getYpos());
       current = current.next;
     }
   }
+
   /**
    * Checks if a node already exist.
+   *
    * @param x x position of the node
    * @param y y position of the node
    * @return if the node already exist
    */
-  public boolean nodeExist(int x, int y){
+  public boolean nodeExist(int x, int y) {
     boolean result = false;
     Node current = head;
-    while (current != null){
-      if (current.getXpos() == x && current.getYpos() == y){
+    while (current != null) {
+      if (current.getXpos() == x && current.getYpos() == y) {
         result = true;
         break;
       }
@@ -95,19 +100,20 @@ public class Path {
 
   /**
    * Connects the corners of the path.
+   *
    * @return if the corners were connected
    */
-  public boolean connectCorners(){
+  public boolean connectCorners() {
     boolean result = false;
     //int count = 0;
-    if (corners.size() > 1){
-      for (int i = 0; i < corners.size() - 1; i++){
+    if (corners.size() > 1) {
+      for (int i = 0; i < corners.size() - 1; i++) {
         Node current = corners.get(i);
         Node next = corners.get(i + 1);
-        if (current.getXpos() == next.getXpos()){
-          if (current.getYpos() < next.getYpos()){
-            for (int j = current.getYpos() + 48; j < next.getYpos(); j += 48){
-              if (!nodeExist(current.getXpos(), j)){
+        if (current.getXpos() == next.getXpos()) {
+          if (current.getYpos() < next.getYpos()) {
+            for (int j = current.getYpos() + 48; j < next.getYpos(); j += 48) {
+              if (!nodeExist(current.getXpos(), j)) {
                 Node temp = new Node(current.getXpos(), j);
                 current.next = temp;
                 current = temp;
@@ -118,8 +124,8 @@ public class Path {
 
             }
           } else {
-            for (int j = current.getYpos() - 48; j > next.getYpos(); j -= 48){
-              if (!nodeExist(current.getXpos(), j)){
+            for (int j = current.getYpos() - 48; j > next.getYpos(); j -= 48) {
+              if (!nodeExist(current.getXpos(), j)) {
                 Node temp = new Node(current.getXpos(), j);
                 current.next = temp;
                 current = temp;
@@ -130,9 +136,9 @@ public class Path {
             }
           }
         } else {
-          if (current.getXpos() < next.getXpos()){
-            for (int j = current.getXpos() + 48; j < next.getXpos(); j += 48){
-              if (!nodeExist(j, current.getYpos())){
+          if (current.getXpos() < next.getXpos()) {
+            for (int j = current.getXpos() + 48; j < next.getXpos(); j += 48) {
+              if (!nodeExist(j, current.getYpos())) {
                 Node temp = new Node(j, current.getYpos());
                 current.next = temp;
                 current = temp;
@@ -143,8 +149,8 @@ public class Path {
 
             }
           } else {
-            for (int j = current.getXpos() - 48; j > next.getXpos(); j -= 48){
-              if (!nodeExist(j, current.getYpos())){
+            for (int j = current.getXpos() - 48; j > next.getXpos(); j -= 48) {
+              if (!nodeExist(j, current.getYpos())) {
                 Node temp = new Node(j, current.getYpos());
                 current.next = temp;
                 current = temp;
@@ -168,20 +174,22 @@ public class Path {
   // this method is used in window and all parameters are based off one specific tower
   // checks that one tower with every single node in the linked list
   //public boolean isTowerOnPath(float x, float y, float radius) {
-   // Node current = head;
-   // while (current != null) {
-     // if (Math.sqrt(Math.pow(x - current.getXpos(), 2) + Math.pow(y - current.getYpos(), 2)) <= radius) {
-        // return true if the tower is found to be on a node
-      //  return true;
-      //}
-     // current = current.next;
-    //}
-    // return false if the tower is not on any node in the path
-   // return false;
+  // Node current = head;
+  // while (current != null) {
+  // if (Math.sqrt(Math.pow(x - current.getXpos(), 2)
+  // + Math.pow(y - current.getYpos(), 2)) <= radius) {
+  // return true if the tower is found to be on a node
+  //  return true;
+  //}
+  // current = current.next;
+  //}
+  // return false if the tower is not on any node in the path
+  // return false;
   //}
 
   /**
    * Gets the head of the path.
+   *
    * @return the head of the path
    */
   public Node getHead() {
@@ -196,10 +204,11 @@ public class Path {
     tail = null;
     corners.clear();
   }
+
   /**
    * Clears the corners of the path.
    */
-  public void clearCorner(){
+  public void clearCorner() {
     corners.clear();
   }
 }
