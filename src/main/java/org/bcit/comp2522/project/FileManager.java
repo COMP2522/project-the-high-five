@@ -3,17 +3,20 @@ package org.bcit.comp2522.project;
 import java.io.*;
 import org.json.JSONObject;
 
-
-
-
 /**
- * Write game data to local file.
+ * Responsible for reading and writing game data from/to local file.
  *
- * @author Cheryl Lau version 1.0 2023
+ * @author Cheryl Lau
+ * @version 1.0 2023
  */
 public class FileManager {
 
 
+    /**
+     * Writes the game state to a file name "saveData.json".
+     *
+     * @param gameState The game state to be written to the file.
+     */
     public static void writeToFile(GameState gameState) {
         JSONObject jsonObject = getGameStateAsJson(gameState);
         try (FileWriter file = new FileWriter("saveData.json")) {
@@ -24,6 +27,11 @@ public class FileManager {
         }
     }
 
+    /**
+     * Reads the game state from a file named "saveData.json".
+     *
+     * @return The game state in a JSON object.
+     */
     public static JSONObject readFromFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader("saveData.json"))) {
             String json = reader.readLine();
@@ -34,14 +42,20 @@ public class FileManager {
         }
     }
 
+    /**
+     * Reads the game state from a file and loads it into the game.
+     */
     public static void readAndLoadFromFile() {
 
         loadGameStateFromJsonObject(readFromFile());
     }
 
 
-
-
+    /**
+     * Loads the game state from a JSONObject and updates the game accordingly.
+     *
+     * @param jsonObject the JSONObject containing the game state.
+     */
     public static void loadGameStateFromJsonObject(JSONObject jsonObject) {
         int currentLevel = jsonObject.getInt("currentLevel");
         int numCoins = jsonObject.getInt("numCoins");
@@ -57,6 +71,12 @@ public class FileManager {
     }
 
 
+    /**
+     * Converts the game state to a JSONObject.
+     *
+     * @param gameState The game state to be convereted to a JSONObject.
+     * @return The game state as a JSONObject.
+     */
     public static JSONObject getGameStateAsJson(GameState gameState) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("playerHealth", gameState.getPlayerHealth());

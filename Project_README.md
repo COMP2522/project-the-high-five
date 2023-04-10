@@ -56,6 +56,9 @@ Develop the Window class in which the game is played on and render the image dep
 Save Player information to a database to retrieve when the same Player is selected.
 Write game data to the database (current level, number of towers, current score, creeps killed)
 Retrieve data from database to load game progress.
+Create Winning, Losing and Highscore screens.
+Highscore writing capability to the database.
+Writing the game state data to a local file for pushing and pulling at regular intervals.
 Link to my diagram: https://lucid.app/lucidchart/3c9cd7cd-8612-4432-92c6-f70b56f7127a/edit?viewport_loc=-898%2C-682%2C2466%2C1172%2C0_0&invitationId=inv_9125c3b1-e3f1-408a-96c3-a11f92cc0aa2
 
 
