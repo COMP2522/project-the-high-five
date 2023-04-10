@@ -72,3 +72,6 @@ Link to my individual UML: https://lucid.app/lucidchart/dceae253-d48a-4638-9fd2-
 
 In Class Check:
 Cheryl's parts are approved and we should be able to keep re-writing data to the database as the player keeps playing the game. Gursidh and Victor should split the collidable interface, as well as working on their own classes, because Enemy and Tower will be the classes that implement this interface the most. Aric should continue his tasks but should be in charge of UI manager instead of Gursidh and Victor splitting it. Quan's tasks are approved as well.
+
+Instructions on how to play the game:
+
