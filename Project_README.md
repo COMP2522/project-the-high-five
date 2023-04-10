@@ -52,7 +52,31 @@ Bullet: Implemented the Bullet and BulletManager classes. The Bullet has methods
 
 UI: I made the user interface elements of a game. I created methods for displaying the current level number, current score, number of enemies defeated, the player's current health using red and black hearts, and the player's current coins. 
 
-In addition to the aforementioned contributions, I also created a robust suite of tests to ensure correct functionality of those classes. Furthermore, I contributed to troubleshooting wherever the game logic coincided with either the Bullets or the UI. 
+In addition to the aforementioned contributions, I also created a robust suite of tests to ensure correct functionality of those classes. Furthermore, I contributed to troubleshooting wherever the game logic coincided with either the Bullets or the UI.
+
+Quan
+
+Path: Designed a custom data structure that hold Nodes which contain x and y coordinates on the screen. This class handles the path that Enemy would follow in the Level. Implemented several methods that simplify pathing designs.
+
+Levels: I implemented Level superclass which is inherited by every Level of the Game. Level handles most of the gameplay logic: spawning Enemy, checking collision, placing Towers. 
+
+LevelManager: I designed a class which manage every levels in the game. It handles level initialization and transistion.
+
+Tile Checking System: I created a system to keep track of pernament object on the screen such as Path and Towers. This system allows the game to check Tower placement restrictions and make sure that nothing is placed in the wrong place. It also made sure that towers can be snap into desired placement.
+
+Select Tower UI: Implemented a way for players to select and place tower in their desired place. This class uses the Tile Map system to check if a spot is available to place or not for the towers.
+
+Path tracing method for Enemy: I made a tracking method to make Enemy follows the level's path. This method update the next x and y coordinate everytime the enemy has reach a specific position on the path. Accounted for direction change on the path.
+
+Enemy removal: I implemented a way for enemy to delete themselves after going out of bound. This prevent spending necessary memory and computing power for enemy that is not visible to player.
+
+Sprite Animation: Implemented methods that load and process a sprite sheet into an array of PImages. Then draw them at specific timings to create an illusion of animation. 
+
+Tower's DTS (Detect, Track and Shoot) system: I developed a way for tower to detect any enemies within shooting range and track them based on a priority system that track the one that is the closest to its goal. Furthermore, I also implemented a cooldown after each time the tower shoot to balance the gameplay. After the cooldown and the Enemy(tracked) is still inside the shooting zone, the Tower will calculate an angle in relative to the enemy position to spawn a bullet that will fly toward the enemy.
+
+Grid: Made a grid display for development purposes. This helped in placing pernament graphical object, alongside making pathing easier.
+
+Beside the contributions mentioned above, I contributed greatly on implementing the general gameplay logic. In addition, I had a heavy hand in troubleshooting and debugging other members code.
 
 Credits
 This game was created by Aric, Cheryl, Gursidh, Quan, and Victor
