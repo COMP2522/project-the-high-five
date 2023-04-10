@@ -45,14 +45,14 @@ public class EnemyManager {
    *
    * @param enemy the enemy to be added
    */
-  public void addEnemy(Enemy enemy){
+  public void addEnemy(Enemy enemy) {
     enemies.add(enemy);
   }
 
   /**
    * Removes an enemy from the ArrayList of enemies.
    */
-  public void removeEnemy(){
+  public void removeEnemy() {
     for (Enemy enemy : enemies) {
       if (enemy.getIsDead()) {
         enemies.remove(enemy);
@@ -71,7 +71,8 @@ public class EnemyManager {
   }
 
   /**
-   * Updates the state of the enemies in the game, such as their movement and collisions with bullets.
+   * Updates the state of the enemies in the game, such as their movement
+   * and collisions with bullets.
    *
    * @param bulletManager the BulletManager object used to handle bullets in the game
    */

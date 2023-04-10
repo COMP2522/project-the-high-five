@@ -9,6 +9,7 @@ public class Node {
   Node next;
   /**
    * Constructs a Node object with the x and y position of the node.
+   *
    * @param xpos the x position of the node
    * @param ypos the y position of the node
    */
@@ -19,6 +20,7 @@ public class Node {
   }
   /**
    * Returns the x position of the node.
+   *
    * @return the x position of the node
    */
   public int getXpos() {
@@ -26,6 +28,7 @@ public class Node {
   }
   /**
    * Returns the y position of the node.
+   *
    * @return the y position of the node
    */
   public int getYpos() {

@@ -1,16 +1,18 @@
 package org.bcit.comp2522.project;
 
 /**
- Level_3 class is a subclass of Level that represents the third level of the game.
- It initializes the level's components, draws the game objects on the screen,
- and checks when it is time to spawn a new enemy or to end the level.
- @author quintessentialquintuplets
- @version 1.0
+ * Level_3 class is a subclass of Level that represents the third level of the game.
+ * It initializes the level's components, draws the game objects on the screen,
+ * and checks when it is time to spawn a new enemy or to end the level.
+ *
+ * @author quintessentialquintuplets
+ * @version 1.0
  */
 public class Level_3 extends Level {
 
   /**
    * Constructs a Level_3 object.
+   *
    * @param window the window that the level is drawn on
    */
   public Level_3(Window window) {
@@ -19,8 +21,9 @@ public class Level_3 extends Level {
   }
 
   /**
-   Initializes the level by resetting the level, adding corners to the path, and setting the path on the tile map.
-   It also updates the timer and checks if it's time to spawn a new enemy.
+   * Initializes the level by resetting the level,
+   * adding corners to the path, and setting the path on the tile map.
+   * It also updates the timer and checks if it's time to spawn a new enemy.
    */
   public void init() {
     levelreset();
@@ -44,8 +47,9 @@ public class Level_3 extends Level {
   }
 
   /**
-   Draws the game objects on the screen, updates the timer and checks if it's time to spawn a new enemy.
-   It also checks if the game is over, and if all enemies are defeated.
+   * Draws the game objects on the screen, updates the timer
+   * and checks if it's time to spawn a new enemy.
+   * It also checks if the game is over, and if all enemies are defeated.
    */
   public void draw() {
     if (Player.getHealth() <= 0) {
@@ -72,19 +76,22 @@ public class Level_3 extends Level {
     // Check if it's time to spawn a new regular enemy
     if (getTimeRegularEnemy() >= 350) { // 350 frames = 5.8 seconds
       setTimeRegularEnemy(0);
-      getEnemyManager().addEnemy(new Beetle(getPath().getHead().getXpos(), getPath().getHead().getYpos(), getWindow(), 2, 2, 2, 2, this));
+      getEnemyManager().addEnemy(new Beetle(getPath().getHead().getXpos(),
+              getPath().getHead().getYpos(), getWindow(), 2, 2, 2, 2, this));
     }
 
     // Check if it's time to spawn a new fast enemy
     if (getTimeFastEnemy() >= 550) { // 550 frames = 9.2 seconds
       setTimeFastEnemy(0);
-      getEnemyManager().addEnemy(new Locust(getPath().getHead().getXpos(), getPath().getHead().getYpos(), getWindow(), 1, 4, 4, 1, this));
+      getEnemyManager().addEnemy(new Locust(getPath().getHead().getXpos(),
+              getPath().getHead().getYpos(), getWindow(), 1, 4, 4, 1, this));
     }
 
     // Check if it's time to spawn a new boss enemy
     if (getTimeBossEnemy() >= 1000) { // 1000 frames = 16.7 seconds
       setTimeBossEnemy(0);
-      getEnemyManager().addEnemy(new Bee(getPath().getHead().getXpos(), getPath().getHead().getYpos(), getWindow(), 4, 1, 1, 3, this));
+      getEnemyManager().addEnemy(new Bee(getPath().getHead().getXpos(),
+              getPath().getHead().getYpos(), getWindow(), 4, 1, 1, 3, this));
     }
 
     // towerMethods

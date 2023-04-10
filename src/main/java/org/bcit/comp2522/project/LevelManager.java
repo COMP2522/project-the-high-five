@@ -3,7 +3,8 @@ package org.bcit.comp2522.project;
 /**
  The LevelManager class is responsible for managing the levels of the game.
  It keeps track of the current level, the number of levels, and an array of Level objects.
- It also manages the timing of different enemy types, and updates the UI to display important information.
+ It also manages the timing of different enemy types,
+ and updates the UI to display important information.
  */
 public class LevelManager {
   private static int currentLevel;

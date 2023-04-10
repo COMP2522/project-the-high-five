@@ -34,15 +34,16 @@ public class Enemy extends Sprite implements Collidable, Movable {
   /**
    * Constructor for creating a new Enemy.
    *
-   * @param xpos the x-coordinate of the Enemy
-   * @param ypos the y-coordinate of the Enemy
+   * @param xpos   the x-coordinate of the Enemy
+   * @param ypos   the y-coordinate of the Enemy
    * @param window the Window that the Enemy is in
    * @param health the health of the Enemy
-   * @param vx the x-velocity of the Enemy
-   * @param vy the y-velocity of the Enemy
+   * @param vx     the x-velocity of the Enemy
+   * @param vy     the y-velocity of the Enemy
    * @param damage the damage the Enemy deals to the Player
    */
-  public Enemy(float xpos, float ypos, Window window, int health, int vx, int vy, int damage, Level level) {
+  public Enemy(float xpos, float ypos, Window window, int health,
+               int vx, int vy, int damage, Level level) {
     super(xpos, ypos, window);
     this.health = health;
     this.vx = vx;
@@ -52,17 +53,15 @@ public class Enemy extends Sprite implements Collidable, Movable {
     originalVy = vy;
     path = level.getPath();
     spriteLength = 8;
-    //enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/Clampbeetle3.png");
-    //loadSprite();
     currentNode = path.getHead();
     enemyManager = new EnemyManager(window);
   }
 
   /**
-  * Sets the size of the Enemy.
-  *
-  * @param size the health of the Enemy
-  */
+   * Sets the size of the Enemy.
+   *
+   * @param size the health of the Enemy
+   */
   public void setSize(int size) {
     this.size = size;
   }
@@ -72,13 +71,14 @@ public class Enemy extends Sprite implements Collidable, Movable {
    *
    * @return the length of Sprite
    */
-  public int getSpriteLength(){
+  public int getSpriteLength() {
     return spriteLength;
   }
 
   /**
    * Returns boolean value of whether the Enemy is dead.
-   * @return
+   *
+   * @return boolean value of whether the Enemy is dead
    */
   public boolean getIsDead() {
     return isDead;
@@ -97,14 +97,14 @@ public class Enemy extends Sprite implements Collidable, Movable {
   /**
    * Loads the sprite images for the Enemy.
    */
-  public void loadSprite(){
+  public void loadSprite() {
     int spriteWidth = 64;
     int spriteHeight = 64;
     int upY = 256;
     int downY = 192;
     int rightY = 320;
     for (int i = 0; i < spriteLength; i++) {
-      int x = i%spriteLength * spriteWidth;
+      int x = i % spriteLength * spriteWidth;
       enemySprites[i] = enemySprite.get(x, rightY, spriteWidth, spriteHeight);
       enemySpritesUP[i] = enemySprite.get(x, upY, spriteWidth, spriteHeight);
       enemySpritesDOWN[i] = enemySprite.get(x, downY, spriteWidth, spriteHeight);
@@ -147,7 +147,6 @@ public class Enemy extends Sprite implements Collidable, Movable {
     //currentNode = path.getHead();
     if (getXpos() == currentNode.getXpos() && getYpos() == currentNode.getYpos()) {
       if (currentNode.next != null) {
-        //System.out.println("next Xpos and Ypos = " + currentNode.next.getXpos() + ", " + currentNode.next.getYpos());
         if (currentNode.next.getXpos() > currentNode.getXpos()) {
           // go right, direction = 0;
           vx = originalVx;
@@ -186,19 +185,19 @@ public class Enemy extends Sprite implements Collidable, Movable {
   public boolean collide(Object other) {
     if (other instanceof Bullet bullet) {
       if (getXpos() < bullet.getXpos() + bullet.getSize()
-            && getXpos() + size > bullet.getXpos()
-            && getYpos() < bullet.getYpos() + bullet.getSize()
-            && getYpos() + size > bullet.getYpos()) {
-            health -= bullet.getDamage();
-            if (health <= 0) {
-            enemyManager.setEnemiesKilled(EnemyManager.getEnemiesKilled() + 1);
-            isDead = true;
-            Player.setCoins(Player.getCoins() + (2 + damage));
-            Player.setCoins(Player.getCoins() + damage);
-            Player.setCurrentScore(Player.getCurrentScore() +
-                    ((Player.getHealth() * damage * Player.getCoins() / 10)));
-            }
-            return true;
+              && getXpos() + size > bullet.getXpos()
+              && getYpos() < bullet.getYpos() + bullet.getSize()
+              && getYpos() + size > bullet.getYpos()) {
+        health -= bullet.getDamage();
+        if (health <= 0) {
+          enemyManager.setEnemiesKilled(EnemyManager.getEnemiesKilled() + 1);
+          isDead = true;
+          Player.setCoins(Player.getCoins() + (2 + damage));
+          Player.setCoins(Player.getCoins() + damage);
+          Player.setCurrentScore(Player.getCurrentScore()
+                  + ((Player.getHealth() * damage * Player.getCoins() / 10)));
+        }
+        return true;
       }
     }
     return false;

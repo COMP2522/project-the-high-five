@@ -5,8 +5,8 @@ package org.bcit.comp2522.project;
  */
 public interface Movable {
 
-    /**
-     * Method is called wherever an object needs its position updated.
-     */
-    void move();
+  /**
+   * Method is called wherever an object needs its position updated.
+   */
+  void move();
 }
