@@ -55,7 +55,7 @@ UI: I made the user interface elements of a game. I created methods for displayi
 In addition to the aforementioned contributions, I also created a robust suite of tests to ensure correct functionality of those classes. Furthermore, I contributed to troubleshooting wherever the game logic coincided with either the Bullets or the UI. 
 
 Credits
-This game was created by 
+This game was created by Aric, Cheryl, Gursidh, Quan, and Victor
 
 For next week, you'll want to have a clear idea of what your project is going to be. Then, in the next lab, I will help you scope your project appropriately. In this repo, write the following:
 1.	A one-liner (exactly 1 sentence) that describes your project.
