@@ -32,6 +32,28 @@ public class BulletManagerTest {
   }
 
   @Test
+  void addBulletTest2() {
+    BulletManager bulletManager = new BulletManager(window);
+    for (int i = 0; i < 10; i++) {
+      Bullet bullet = new Bullet(i * 10, i * 10, window, i);
+      bulletManager.addBullet(bullet);
+    }
+    assertEquals(10, bulletManager.bullets.size());
+  }
+
+  @Test
+  void addBulletTest3() {
+    BulletManager bulletManager = new BulletManager(window);
+    Bullet bullet1 = new Bullet(0, 0, window, 0);
+    Bullet bullet2 = new Bullet(10, 10, window, 0);
+    Bullet bullet3 = new Bullet(640, 360, window, 0);
+    bulletManager.addBullet(bullet1);
+    bulletManager.addBullet(bullet2);
+    bulletManager.addBullet(bullet3);
+    assertEquals(3, bulletManager.bullets.size());
+  }
+
+  @Test
   void addMultipleBulletsTest() {
     BulletManager bulletManager = new BulletManager(window);
     Bullet bullet1 = new Bullet(0, 0, window, 0);
