@@ -40,18 +40,6 @@ public class StateManager {
     }
 
     /**
-     * Reads the main game state from the database and updates the LevelManager with the data.
-     */
-    public void mainPull(LevelManager lm) {
-        gs = dbh.getGameState(window);
-        //LevelManager.setCurrentLevel(gs.getCurrentLevel());
-        //EnemyManager.setEnemiesKilled(gs.getEnemiesKilled());
-        //Player.setCoins(gs.getCoins());
-
-
-    }
-
-    /**
      * Reads the player's game state from the database and updates the Player and LevelManager objects with the data.
      */
     public void pull(){

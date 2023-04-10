@@ -71,7 +71,6 @@ public class ButtonHandler {
             window.setStage(2);
             Thread myThread = new Thread(() -> {
                 StateManager sm = new StateManager(window, window.getLevelManager());
-                sm.mainPull(window.getLevelManager());
                 sm.pull();
             });
             myThread.start();
