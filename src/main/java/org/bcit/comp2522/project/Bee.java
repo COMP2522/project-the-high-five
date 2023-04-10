@@ -2,40 +2,42 @@ package org.bcit.comp2522.project;
 
 /**
  * Class that represents a variant of an enemy.
+ *
  * @author quintessential quintuplets
  * @version 1.0
  */
-public class Bee extends Enemy{
+public class Bee extends Enemy {
 
   /**
    * Constructor of this class.
-   * @param x represents x position.
-   * @param y represents y position.
+   *
+   * @param x      represents x position.
+   * @param y      represents y position.
    * @param window represents the window it is displayed on.
    * @param health represents the Bee's health.
-   * @param speed represents the Bee's speed.
+   * @param speed  represents the Bee's speed.
    * @param damage represents the Bee's damage level.
    * @param reward represents the Bee's reward.
-   * @param level represents the level of game.
+   * @param level  represents the level of game.
    */
   public Bee(int x, int y, Window window, int health, int speed, int damage, int reward, Level level) {
-      super(x, y, window, health, speed, damage, reward, level);
-      enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/firewasp.png");
-      loadSpriteBee();
-      setSize(80);
+    super(x, y, window, health, speed, damage, reward, level);
+    enemySprite = window.loadImage("src/main/java/org/bcit/comp2522/project/asset/firewasp.png");
+    loadSpriteBee();
+    setSize(80);
   }
 
   /**
    * Method that controls the animation of the Bee's image.
    */
-  private void loadSpriteBee(){
+  private void loadSpriteBee() {
     int spriteWidth = 96;
     int spriteHeight = 96;
     int upY = 96;
     int downY = 0;
     int rightY = 192;
     for (int i = 0; i < getSpriteLength(); i++) {
-      int x = i%getSpriteLength() * spriteWidth;
+      int x = i % getSpriteLength() * spriteWidth;
       enemySprites[i] = enemySprite.get(x, rightY, spriteWidth, spriteHeight);
       enemySpritesUP[i] = enemySprite.get(x, upY, spriteWidth, spriteHeight);
       enemySpritesDOWN[i] = enemySprite.get(x, downY, spriteWidth, spriteHeight);
