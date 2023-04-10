@@ -32,19 +32,14 @@ public class GameState {
      * Constructor for the GameState class. Intializes the player's information and level information.
      * @param player the current player
      * @param window the game window
-     * @param lm the LevelManager object for the current level
      */
-    public GameState(Player player, Window window, LevelManager lm) {
+    public GameState(Player player, Window window) {
 
         this.player = player;
         this.health = Player.getHealth();
         this.coins = Player.getCoins();
-        this.score = Player.getCoins();
+        this.score = Player.getCurrentScore();
         this.currentLevel = LevelManager.getCurrentLevel();
-        //System.out.println(lm.getCurrentLevelObject());
-        this.timeBossEnemy = lm.getTimeBossEnemy();
-        this.timeFastEnemy = lm.getTimeFastEnemy();
-        this.timeRegularEnemy = lm.getTimeRegularEnemy();
         this.enemiesKilled = EnemyManager.getEnemiesKilled();
         //this.towers = lm.getCurrentLevelObject().getTowers();
 

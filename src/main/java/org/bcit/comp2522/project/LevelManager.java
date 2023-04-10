@@ -41,26 +41,55 @@ public class LevelManager {
 
   }
 
+  /**
+   * Gets the amount on the timer for regular enemy.
+   *
+   * @return integer for the timer of a regular enemy.
   public int getTimeRegularEnemy() {
     return timeRegularEnemy;
   }
 
+  /**
+   * Sets the amount on the timer for the regular enemy.
+   *
+   * @param timeRegularEnemy the timer for the regular enemy.
+   */
   public void setTimeRegularEnemy(int timeRegularEnemy) {
     this.timeRegularEnemy = timeRegularEnemy;
   }
 
+  /**
+   * Gets the amount of timer for the fast enemy.
+   *
+   * @return the time for the fast enemy.
+   */
   public int getTimeFastEnemy() {
     return timeFastEnemy;
   }
 
+  /**
+   * Sets the amount of timer for the fast enemy.
+   *
+   * @param timeFastEnemy integer for the amount on the timer for the fast enemy.
+   */
   public void setTimeFastEnemy(int timeFastEnemy) {
     this.timeFastEnemy = timeFastEnemy;
   }
 
+  /**
+   * Returns the amount on the timer for a boss enemy.
+   *
+   * @return the amount on the timer for a boss enemy.
+   */
   public int getTimeBossEnemy() {
     return timeBossEnemy;
   }
 
+  /**
+   * Sets the amount on the timer for a boss enemy.
+   *
+   * @param timeBossEnemy the amount on the timer for a boss enemy.
+   */
   public void setTimeBossEnemy(int timeBossEnemy) {
     this.timeBossEnemy = timeBossEnemy;
   }
@@ -86,26 +115,6 @@ public class LevelManager {
 
   }
 
-
-  public void startThread() {
-
-    if (window.getStage() == 2) {
-      Thread thread = new Thread(() -> {
-        sm.push(new GameState(Player.getInstance(), window, this));
-        while (true) {
-          synchronized (sm) {
-            sm.mainPull();
-          }
-          try {
-            Thread.sleep(1000);
-          } catch (InterruptedException e) {
-            e.printStackTrace();
-          }
-        }
-      });
-      thread.start();
-    }
-  }
 
   /**
    * Advances the game to the next level.
@@ -147,6 +156,7 @@ public class LevelManager {
   }
 
 
-
-
+  public int getTimeRegularEnemy() {
+    return timeRegularEnemy;
+  }
 }

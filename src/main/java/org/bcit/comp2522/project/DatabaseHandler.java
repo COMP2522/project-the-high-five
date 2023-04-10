@@ -10,6 +10,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
+import org.json.JSONObject;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -89,7 +90,7 @@ public class DatabaseHandler {
      * If the
      * @param gameState
      */
-    public void writeGameState(GameState gameState){
+    public void writeGameState(JSONObject jsonObject){
 
         try {
             database.createCollection("gamestate");
@@ -99,14 +100,11 @@ public class DatabaseHandler {
         UpdateOptions options = new UpdateOptions().upsert(true);
         Document gamestateDocument = new Document();
         gamestateDocument.append("player", "player");
-        gamestateDocument.append("health", gameState.getPlayerHealth());
-        gamestateDocument.append("coins", gameState.getCoins());
-        gamestateDocument.append("score", gameState.getCurrentScore());
-        gamestateDocument.append("currentLevel", gameState.getCurrentLevel());
-        gamestateDocument.append("bosstime", gameState.getTimeBossEnemy());
-        gamestateDocument.append("regtime", gameState.getTimeRegularEnemy());
-        gamestateDocument.append("fasttime", gameState.getTimeFastEnemy());
-        gamestateDocument.append("killed", gameState.getEnemiesKilled());
+        gamestateDocument.append("health",jsonObject.getInt("playerHealth"));
+        gamestateDocument.append("coins", jsonObject.getInt("numCoins"));
+        gamestateDocument.append("score", jsonObject.getInt("currentScore"));
+        gamestateDocument.append("currentLevel", jsonObject.getInt(("currentLevel")));
+        gamestateDocument.append("killed", jsonObject.getInt("killed"));
         database.getCollection("gamestate").updateOne(
                 eq("player", "player"),
                 new Document("$set", gamestateDocument),
@@ -131,18 +129,12 @@ public class DatabaseHandler {
         int coins = gamestateDocument.getInteger("coins");
         int score = gamestateDocument.getInteger("score");
         int currentLevel = gamestateDocument.getInteger("currentLevel");
-        int bosstime = gamestateDocument.getInteger("bosstime");
-        int regtime = gamestateDocument.getInteger("regtime");
-        int fasttime = gamestateDocument.getInteger("fasttime");
         int killed = gamestateDocument.getInteger("killed");
-        GameState gameState = new GameState(Player.getInstance(), window, window.getLevelManager());
+        GameState gameState = new GameState(Player.getInstance(), window);
         gameState.setHealth(health);
         gameState.setCoins(coins);
         gameState.setScore(score);
         gameState.setCurrentLevel(currentLevel);
-        gameState.setTimeBossEnemy(bosstime);
-        gameState.setTimeRegularEnemy(regtime);
-        gameState.setTimeFastEnemy(fasttime);
         gameState.setEnemiesKilled(killed);
         return gameState;
     }

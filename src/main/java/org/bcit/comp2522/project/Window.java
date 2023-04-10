@@ -52,6 +52,9 @@ public class Window extends PApplet {
 
   }
 
+
+
+
   public int getStage(){
     return stage;
   }
@@ -131,14 +134,24 @@ public class Window extends PApplet {
    * Draws objects on the game window.
    */
   public void draw() {
+
+    new Thread(() -> {
+      sm.push(FileManager.readFromFile());
+    }).start();
     switch (stage) {
       case 1:
         menu.display();
         break;
       case 2:
+
         synchronized (lock) {
           levelManager.draw();
-          levelManager.startThread();
+
+          new Thread(() -> {
+          FileManager.writeToFile(new GameState(Player.getInstance(), this));
+          FileManager.readAndLoadFromFile();
+        }).start();
+
         }
 
         break;

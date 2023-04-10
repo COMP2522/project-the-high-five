@@ -57,7 +57,9 @@ public class ButtonHandler {
 
 
         if (button.getFunction() == ButtonFunction.START && checkHover(mouseX, mouseY)) {
+            window.init();
             window.setStage(2);
+
         }
         if (button.getFunction() == ButtonFunction.HIGHSCORE && checkHover(mouseX, mouseY)) {
             window.setStage(5);
@@ -67,7 +69,7 @@ public class ButtonHandler {
             window.setStage(2);
             Thread myThread = new Thread(() -> {
                 StateManager sm = new StateManager(window, window.getLevelManager());
-                sm.mainPull();
+                sm.mainPull(window.getLevelManager());
                 sm.pull();
             });
             myThread.start();

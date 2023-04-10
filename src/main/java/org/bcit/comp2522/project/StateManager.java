@@ -1,6 +1,8 @@
 
 package org.bcit.comp2522.project;
 
+import org.json.JSONObject;
+
 /**
  * Manages the game state by reading and writing it to the database. It has reference to the current GameState and
  * DatabaseHanlder objects, as well as a Window object.
@@ -12,6 +14,9 @@ public class StateManager {
 
     private final Window window;
 
+    private GameState gs;
+
+
     /**
      * Constructor for StateManager class. Initializes the GameState, DatabaseHandler and Window objects.
      * @param window The Window object for accessing the LevelManager and updating the game display.
@@ -19,8 +24,9 @@ public class StateManager {
      */
     StateManager(Window window, LevelManager lm) {
         this.window = window;
-        gamestate = new GameState(Player.getInstance(), window, lm);
+        gamestate = new GameState(Player.getInstance(), window);
         dbh = new DatabaseHandler();
+
 
     }
 
@@ -29,19 +35,18 @@ public class StateManager {
      * Writes the given GameState to the database.
      * @param gameState the GameState object to be written to the database.
      */
-    public void push(GameState gameState) {
-        dbh.writeGameState(gameState);
+    public void push(JSONObject jsonObject) {
+        dbh.writeGameState(jsonObject);
     }
 
     /**
      * Reads the main game state from the database and updates the LevelManager with the data.
      */
-    public void mainPull() {
-        GameState gs = dbh.getGameState(window);
-        LevelManager lm = window.getLevelManager();
-        lm.setTimeBossEnemy(gs.getTimeBossEnemy());
-        lm.setTimeFastEnemy(gs.getTimeFastEnemy());
-        lm.setTimeRegularEnemy(gs.getTimeFastEnemy());
+    public void mainPull(LevelManager lm) {
+        gs = dbh.getGameState(window);
+        //LevelManager.setCurrentLevel(gs.getCurrentLevel());
+        //EnemyManager.setEnemiesKilled(gs.getEnemiesKilled());
+        //Player.setCoins(gs.getCoins());
 
 
     }
@@ -57,4 +62,8 @@ public class StateManager {
         LevelManager.setCurrentLevel(gs.getCurrentLevel());
         EnemyManager.setEnemiesKilled(gs.getEnemiesKilled());
     }
+
+
+
+
 }
