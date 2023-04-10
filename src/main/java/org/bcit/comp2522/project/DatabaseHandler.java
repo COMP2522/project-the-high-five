@@ -88,7 +88,7 @@ public class DatabaseHandler {
     /**
      * Writes the current state of the game to the "gamestate" collection in the database.
      * If the
-     * @param gameState
+     * @param jsonObject
      */
     public void writeGameState(JSONObject jsonObject){
 

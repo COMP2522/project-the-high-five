@@ -4,6 +4,11 @@ import processing.core.PImage;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the path on the map that the enemy can travel on.
+ * @author quintessential quintuplets
+ * @version 1.0
+ */
 public class Path {
   private Node head;
   private Node tail;

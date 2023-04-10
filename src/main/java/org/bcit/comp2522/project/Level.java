@@ -2,7 +2,6 @@ package org.bcit.comp2522.project;
 
 import processing.core.PImage;
 
-import java.util.ArrayList;
 
 /**
  The Level class represents a level of the game. It contains a path, tile map, enemy manager, tower manager,
@@ -19,11 +18,6 @@ public class Level {
   private EnemyManager enemyManager;
   private BulletManager bulletManager;
   private SelectTowerUI selectTowerUI;
-  public ArrayList<Tower> getTowers() {
-    return towers;
-  }
-
-  private ArrayList<Tower> towers;
 
   public TowerManager getTowerManager() {
     return towerManager;

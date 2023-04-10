@@ -120,12 +120,7 @@ public class Window extends PApplet {
     levelManager.addLevel(level_3);
     levelManager.addLevel(level_4);
     levelManager.addLevel(level_5);
-    //enemyManager = new EnemyManager(this);
-    // array of bullets
-    //bullets = new ArrayList<>();
 
-    //enemies = new ArrayList<>();
-    //towers = new ArrayList<>();
   }
 
   private static final Object lock = new Object();

@@ -63,13 +63,7 @@ public class TileMap {
       map[row][col] = 1;
       current = current.next;
     }
-//    System.out.println("Tile check:");
-//    for (int i = 0; i < 15; i++){
-//      for (int j = 0; j < 25; j++){
-//        System.out.print(map[i][j] + " ");
-//      }
-//      System.out.println();
-//    }
+
 
   }
 

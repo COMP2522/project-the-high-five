@@ -33,7 +33,7 @@ public class StateManager {
 
     /**
      * Writes the given GameState to the database.
-     * @param gameState the GameState object to be written to the database.
+     * @param jsonObject the GameState object to be written to the database.
      */
     public void push(JSONObject jsonObject) {
         dbh.writeGameState(jsonObject);
