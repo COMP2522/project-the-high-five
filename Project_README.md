@@ -50,6 +50,7 @@ Writing Game Data to File: I implemented a system that writes the JSON game data
 Reading Game Data from File: I created a system that reads the JSON game data from the local file as the game is playing. 
 
 Aric 
+
 Bullet: Implemented the Bullet and BulletManager classes. The Bullet has methods to move it and check whether it has hit a target or not. If a Bullet hits a target our goes out of bounds, the BulletManager removes it from the window. BulletManager also handles updating all the Bullets in the list. 
 
 UI: I made the user interface elements of a game. I created methods for displaying the current level number, current score, number of enemies defeated, the player's current health using red and black hearts, and the player's current coins. 
