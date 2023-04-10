@@ -2,6 +2,7 @@ package org.bcit.comp2522.project;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import processing.core.PApplet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class TowerManagerTest {
 
+  private String[] appletArgs = new String[]{"towerDefence"};
   static TowerManager towerManager;
   static Window window;
   static Tower tower;
@@ -20,6 +22,7 @@ public class TowerManagerTest {
   @BeforeEach
     void setup(){
     window = new Window();
+    PApplet.runSketch(appletArgs, window);
     towerManager = new TowerManager(window);
     tower = new Tower(0, 0, window, bulletManager);
     enemyManager = new EnemyManager(window);

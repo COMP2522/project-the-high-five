@@ -15,18 +15,24 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 public class TowerTest {
 
+  private String[] appletArgs = new String[]{"towerDefence"};
   static Window window;
   static Tower tower;
   static BulletManager bulletManager;
   // this is for loading the processing image
-  PImage towerImg;
+  private PImage towerImg;
+  private PImage towerWeapon;
+  private PImage[] towerWeapons;
 
   @BeforeEach
    void setup(){
     window = new Window();
+    PApplet.runSketch(appletArgs, window);
     bulletManager = new BulletManager(window);
+    towerImg = new PImage();
+    towerWeapon = new PImage();
+    towerWeapons = new PImage[6];
     tower = new Tower(205,400,window,bulletManager);
-    towerImg = window.loadImage("Tower 06.png");
   }
 
   @Test
