@@ -1,6 +1,7 @@
 This is a simple Tower Defense game created in Java. The objective of the game is to prevent enemies from reaching the right side of the game map by building towers that will shoot them down.
 
 Gameplay
+
 The game takes place on a 2D game map with a fixed path that the enemies will follow. The player has a set amount of money that they can use to buy and upgrade towers. The towers will automatically shoot at enemies as they move along the path. The player must strategically place their towers in order to prevent the enemies from reaching the end of the path.
 
 In addition to the basic gameplay and installation instructions, this Tower Defense game has some specific features:
