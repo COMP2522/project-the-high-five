@@ -1,7 +1,5 @@
 package org.bcit.comp2522.project;
 
-import  java.util.ArrayList;
-
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -50,16 +48,16 @@ public class Window extends PApplet {
   /**
    * Constructor for the Window the game is displayed on. Intializes userInput to a blank string.
    */
-  public Window(){
+  public Window() {
     userInput = "";
 
   }
 
-  public int getStage(){
+  public int getStage() {
     return stage;
   }
 
-  public LevelManager getLevelManager(){
+  public LevelManager getLevelManager() {
     return levelManager;
   }
 
@@ -79,6 +77,7 @@ public class Window extends PApplet {
 
   /**
    * Setter for the stage variable.
+   *
    * @param stage represents what stage the game is in.
    */
   public void setStage(int stage) {
@@ -87,17 +86,19 @@ public class Window extends PApplet {
 
   /**
    * Setter to set the value for userInput variable.
+   *
    * @param input represents what the user inputs to the game.
    */
-  public void setUserInput(String input){
+  public void setUserInput(String input) {
     this.userInput = input;
   }
 
   /**
    * Getter for the userInput variable.
+   *
    * @return the value that the user inputs.
    */
-  public String getUserInput(){
+  public String getUserInput() {
     return userInput;
   }
 
@@ -143,9 +144,9 @@ public class Window extends PApplet {
           levelManager.draw();
 
           new Thread(() -> {
-          FileManager.writeToFile(new GameState(Player.getInstance(), this));
-          FileManager.readAndLoadFromFile();
-        }).start();
+            FileManager.writeToFile(new GameState(Player.getInstance(), this));
+            FileManager.readAndLoadFromFile();
+          }).start();
 
         }
 
@@ -162,6 +163,9 @@ public class Window extends PApplet {
       case 5:
         highscoreScreen.refreshHighscores();
         highscoreScreen.display();
+        break;
+
+      default:
         break;
     }
   }
@@ -199,7 +203,7 @@ public class Window extends PApplet {
       }
 
     } else {
-      if (userInput == null){
+      if (userInput == null) {
         userInput = "";
       }
 
@@ -207,7 +211,7 @@ public class Window extends PApplet {
         userInput += key;
         //System.out.println(userInput);
       } else {
-        if (key == BACKSPACE && userInput.length() > 0){
+        if (key == BACKSPACE && userInput.length() > 0) {
           userInput = userInput.substring(0, userInput.length() - 1);
           //System.out.println(userInput);
         } else {
@@ -218,6 +222,7 @@ public class Window extends PApplet {
       }
     }
   }
+
   /**
    * Main method that runs the game.
    *
