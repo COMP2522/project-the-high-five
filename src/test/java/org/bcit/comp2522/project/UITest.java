@@ -79,7 +79,7 @@ public class UITest {
   }
 
   @Test
-  void testDisplayScore() {
+  void testDisplayScore1() {
     UI ui = new UI(window);
     Player.setCurrentScore(500); // Set the current score to 500
     String scoreText = ui.displayScore();
@@ -87,7 +87,47 @@ public class UITest {
   }
 
   @Test
-  void testDisplayEnemiesDefeated() {
+  void testDisplayScore2() {
+    UI ui = new UI(window);
+    Player.setCurrentScore(2000); // Set the current score to 500
+    String scoreText = ui.displayScore();
+    assertEquals("Score: 2000", scoreText);
+  }
+
+  @Test
+  void testDisplayScore3() {
+    UI ui = new UI(window);
+    Player.setCurrentScore(769); // Set the current score to 500
+    String scoreText = ui.displayScore();
+    assertEquals("Score: 769", scoreText);
+  }
+
+  @Test
+  void testDisplayScore4() {
+    UI ui = new UI(window);
+    Player.setCurrentScore(17); // Set the current score to 500
+    String scoreText = ui.displayScore();
+    assertEquals("Score: 17", scoreText);
+  }
+
+  @Test
+  void testDisplayScore5() {
+    UI ui = new UI(window);
+    Player.setCurrentScore(3); // Set the current score to 500
+    String scoreText = ui.displayScore();
+    assertEquals("Score: 3", scoreText);
+  }
+
+  @Test
+  void testDisplayScore6() {
+    UI ui = new UI(window);
+    Player.setCurrentScore(0); // Set the current score to 500
+    String scoreText = ui.displayScore();
+    assertEquals("Score: 0", scoreText);
+  }
+
+  @Test
+  void testDisplayEnemiesDefeated1() {
     UI ui = new UI(window);
     EnemyManager.setEnemiesKilled(10); // Set the number of enemies killed to 10
     String enemiesDefeatedText = ui.displayEnemiesDefeated();
@@ -95,11 +135,75 @@ public class UITest {
   }
 
   @Test
-  void testDisplayHP() {
+  void testDisplayEnemiesDefeated2() {
+    UI ui = new UI(window);
+    EnemyManager.setEnemiesKilled(0); // Set the number of enemies killed to 10
+    String enemiesDefeatedText = ui.displayEnemiesDefeated();
+    assertEquals("Enemies Defeated: 0", enemiesDefeatedText);
+  }
+
+  @Test
+  void testDisplayEnemiesDefeated3() {
+    UI ui = new UI(window);
+    EnemyManager.setEnemiesKilled(3); // Set the number of enemies killed to 10
+    String enemiesDefeatedText = ui.displayEnemiesDefeated();
+    assertEquals("Enemies Defeated: 3", enemiesDefeatedText);
+  }
+
+  @Test
+  void testDisplayEnemiesDefeated4() {
+    UI ui = new UI(window);
+    EnemyManager.setEnemiesKilled(4); // Set the number of enemies killed to 10
+    String enemiesDefeatedText = ui.displayEnemiesDefeated();
+    assertEquals("Enemies Defeated: 4", enemiesDefeatedText);
+  }
+
+  @Test
+  void testDisplayEnemiesDefeated5() {
+    UI ui = new UI(window);
+    EnemyManager.setEnemiesKilled(20); // Set the number of enemies killed to 10
+    String enemiesDefeatedText = ui.displayEnemiesDefeated();
+    assertEquals("Enemies Defeated: 20", enemiesDefeatedText);
+  }
+
+  @Test
+  void testDisplayHP1() {
     UI ui = new UI(window);
     Player.setHealth(75); // Set the player's health to 75
     String hpText = ui.displayHP();
     assertEquals("75", hpText);
+  }
+
+  @Test
+  void testDisplayHP2() {
+    UI ui = new UI(window);
+    Player.setHealth(1); // Set the player's health to 75
+    String hpText = ui.displayHP();
+    assertEquals("1", hpText);
+  }
+
+  @Test
+  void testDisplayHP3() {
+    UI ui = new UI(window);
+    Player.setHealth(9); // Set the player's health to 75
+    String hpText = ui.displayHP();
+    assertEquals("9", hpText);
+  }
+
+  @Test
+  void testDisplayHP4() {
+    UI ui = new UI(window);
+    Player.setHealth(7); // Set the player's health to 75
+    String hpText = ui.displayHP();
+    assertEquals("7", hpText);
+  }
+
+  @Test
+  void testDisplayHP5() {
+    UI ui = new UI(window);
+    Player.setHealth(0); // Set the player's health to 75
+    String hpText = ui.displayHP();
+    assertEquals("0", hpText);
   }
 
 //  @Test
