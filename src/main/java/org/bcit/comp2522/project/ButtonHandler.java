@@ -57,8 +57,10 @@ public class ButtonHandler {
 
 
         if (button.getFunction() == ButtonFunction.START && checkHover(mouseX, mouseY)) {
-            window.init();
+
+            //window.init();
             window.setStage(2);
+            Player.resetStats();
 
         }
         if (button.getFunction() == ButtonFunction.HIGHSCORE && checkHover(mouseX, mouseY)) {
@@ -77,8 +79,10 @@ public class ButtonHandler {
                 myThread.join();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
+
             }
-            System.out.printf("loading");
+            final int loadCoins = 75;
+            Player.setCoins(loadCoins);
         }
     }
 }

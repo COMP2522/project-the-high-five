@@ -45,6 +45,8 @@ public class Button {
     private int buttonWidth;
     private int buttonHeight;
 
+    private int buttonFontSize = 32;
+
     /**
      * Constructor for button.
      * @param window a Window object that the button will be added to
@@ -182,8 +184,10 @@ public class Button {
      * centered at the button's x and y coordinates.
      */
     public void menuButtonShape(){
-        this.buttonWidth = 400;
-        this.buttonHeight = 100;
+        int menuButtonWidth = 400;
+        this.buttonWidth = menuButtonWidth;
+        int menuButtonHeight = 100;
+        this.buttonHeight = menuButtonHeight;
         window.rectMode(window.CENTER);
         window.fill(0,0,0);
         window.rect(this.x, this.y, buttonWidth,buttonHeight);
@@ -199,7 +203,7 @@ public class Button {
         gameFont = window.createFont("" + dataPath + "/Righteous-Regular.ttf", 400);
         window.textFont(gameFont);
         window.fill(255);
-        window.textSize(16);
+        window.textSize(buttonFontSize);
         window.textAlign(window.CENTER);
         window.text(this.text, this.x, this.y);
     }

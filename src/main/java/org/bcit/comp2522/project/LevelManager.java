@@ -67,7 +67,7 @@ public class LevelManager {
       currentLevel = 0;
     } else {
       currentLevel++;
-      Player.resetStats();
+      Player.setCoins(100);
     }
     levels[currentLevel].init();
   }

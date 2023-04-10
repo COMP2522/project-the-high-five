@@ -14,13 +14,17 @@ public class Player {
     private static int coins;
    private static int health;
 
+   private static final int maxCoins = 100;
+
+   private static final int maxHealth = 10;
+
     /**
      * Constructor for the Player class. Intializes the player's attributes to their default values.
      */
     private Player() {
         currentScore = 0;
-        coins = 100;
-        health = 10;
+        coins = maxCoins;
+        health = maxHealth;
     }
 
     /**
@@ -87,6 +91,8 @@ public class Player {
      * Resets the player's coins to the default value.
      */
     public static void resetStats() {
-        Player.setCoins(100);
+        Player.setCoins(maxCoins);
+        Player.setCurrentScore(0);
+        Player.setHealth(maxHealth);
     }
 }
