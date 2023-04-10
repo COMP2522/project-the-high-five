@@ -12,9 +12,9 @@ import processing.core.PImage;
 public class UI {
   /* The width and height of the hearts in the UI. */
   private static final int ELEMENT_SIZE = 32;
-  private PImage coinImage;
-  private PImage redHeart;
-  private PImage blackHeart;
+  PImage coinImage;
+  PImage redHeart;
+  PImage blackHeart;
   private Window window;
 
   /**
@@ -37,29 +37,43 @@ public class UI {
 
   /**
    * Displays the current level number.
+   *
+   * @return The text that was displayed.
    */
-  public void displayLevelNumber() {
-    displayText("Level " + (LevelManager.getCurrentLevel() + 1), 190, 85);
+  public String displayLevelNumber() {
+    String text = "Level " + (LevelManager.getCurrentLevel() + 1);
+    displayText(text, 190, 85);
+    return text;
   }
 
   /**
    * Displays the current score.
+   *
+   * @return The text that was displayed.
    */
-  public void displayScore() {
-    displayText("Score: " + Player.getCurrentScore(), 600, 85);
+  public String displayScore() {
+    String text = "Score: " + Player.getCurrentScore();
+    displayText(text, 600, 85);
+    return text;
   }
 
   /**
    * Displays the number of enemies defeated.
+   *
+   * @return The text that was displayed.
    */
-  public void displayEnemiesDefeated() {
-    displayText("Enemies Defeated: " + EnemyManager.getEnemiesKilled(), 1050, 85);
+  public String displayEnemiesDefeated() {
+    String text = "Enemies Defeated: " + EnemyManager.getEnemiesKilled();
+    displayText(text, 1050, 85);
+    return text;
   }
 
   /**
    * Displays the player's current health using a combination of red and black hearts.
+   *
+   * @return The text that was displayed.
    */
-  public void displayHP() {
+  public String displayHP() {
     int hp = Player.getHealth();
     if (hp == 10) {
       window.image(redHeart, 967, 631, ELEMENT_SIZE, ELEMENT_SIZE);
@@ -184,14 +198,19 @@ public class UI {
       window.image(blackHeart, 1100, 667, ELEMENT_SIZE, ELEMENT_SIZE);
     }
     displayText(String.valueOf(hp), 950, 659);
+    return String.valueOf(hp);
   }
 
   /**
    * Displays the player's current coins.
+   *
+   * @return The player's current coins.
    */
-  public void displayCoins() {
-    displayText(String.valueOf(Player.getCoins()), 180, 659);
+  public String displayCoins() {
+    String text = String.valueOf(Player.getCoins());
+    displayText(text, 180, 659);
     window.image(coinImage, 210, 632, ELEMENT_SIZE, ELEMENT_SIZE);
+    return text;
   }
 
   /**
