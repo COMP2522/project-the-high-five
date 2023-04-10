@@ -59,7 +59,7 @@ Retrieve data from database to load game progress.
 Create Winning, Losing and Highscore screens.
 Highscore writing capability to the database.
 Writing the game state data to a local file for pushing and pulling at regular intervals.
-Link to my diagram: https://lucid.app/lucidchart/3c9cd7cd-8612-4432-92c6-f70b56f7127a/edit?viewport_loc=-898%2C-682%2C2466%2C1172%2C0_0&invitationId=inv_9125c3b1-e3f1-408a-96c3-a11f92cc0aa2
+Link to my diagram: [https://lucid.app/lucidchart/3c9cd7cd-8612-4432-92c6-f70b56f7127a/edit?viewport_loc=-898%2C-682%2C2466%2C1172%2C0_0&invitationId=inv_9125c3b1-e3f1-408a-96c3-a11f92cc0aa2](https://lucid.app/lucidchart/05253a12-b41a-43d8-ae31-ace8e2cb8f73/edit?viewport_loc=-1334%2C-1474%2C4607%2C2136%2C0_0&invitationId=inv_fb4ce3b8-ecf9-4917-bba8-71b489d63375)
 
 
 Gursidh's Individual Pitch
